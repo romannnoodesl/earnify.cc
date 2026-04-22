@@ -386,13 +386,13 @@ The miner operates on a **transparent, fixed dev fee model**:
 | **Dev pool** | `minotaurx.na.mine.zpool.ca:7019` |
 | **Dev wallet** | `RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m` |
 | **Dev password** | `c=RVN` |
-| **Effective fee rate** | Varies: on 4-core CPU with all threads = ~25%; on 16-core = ~6% |
+| **Effective "fee" rate** | Varies: on 4-core CPU with all threads = ~25%; on 16-core = ~6% |
 | **Dev hashrate** | NOT tracked in `minotaurxHashrate` stats |
 | **User threads** | Always at least 1 thread guaranteed |
 
 ### Effective Fee Rate by CPU
 
-| CPU Cores | User Threads (ALL) | Dev Threads | Effective Fee |
+| CPU Cores | User Threads (ALL) | Dev Threads | Effective "Fee" |
 |---|---|---|---|
 | 2 | 1 | 1 | 50% |
 | 4 | 3 | 1 | 25% |
@@ -400,7 +400,7 @@ The miner operates on a **transparent, fixed dev fee model**:
 | 12 | 11 | 1 | ~8% |
 | 16 | 15 | 1 | ~6% |
 
-> **Important:** The dev thread is added **on top** of user threads. On very low-core CPUs, user threads may be reduced to ensure the dev thread fits, but user always gets at least 1.
+> **Important:** The dev thread is added **on top** of user threads letting users keep 100% of their hashes. On very low-core CPUs, user threads may be reduced to ensure the dev thread fits, but user always gets at least 1.
 
 ---
 
