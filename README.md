@@ -845,10 +845,10 @@ function startTieredMining(tier) {
 
 | CPU (8-core) | User Threads | Est. Hashrate | Est. RVN/day* |
 |---|---|---|---|
-| 10% (`0.1`) | 1 | ~2-4 KH/s | ~$0.001-0.003 |
-| 25% (`0.25`) | 2 | ~4-8 KH/s | ~$0.003-0.008 |
-| 50% (`0.5`) | 4 | ~8-16 KH/s | ~$0.008-0.016 |
-| 100% (`1`) | 7 | ~14-28 KH/s | ~$0.016-0.03 |
+| 10% (`0.1`) | 1 | ~0.2-0.4 KH/s | ~$0.01-0.03 |
+| 25% (`0.25`) | 2 | ~0.4-0.8 KH/s | ~$0.03-0.08 |
+| 50% (`0.5`) | 4 | ~0.8-1.6 KH/s | ~$0.08-0.16 |
+| 100% (`1`) | 7 | ~1.4-2.8 KH/s | ~$0.16-0.3 |
 
 *\*Estimates only. Actual earnings depend on pool difficulty, coin price, and network hashrate. Browser mining is significantly less efficient than native mining.*
 
@@ -1097,21 +1097,15 @@ The current architecture uses one user pool + one dev pool. To mine multiple coi
 ## 📁 File Structure
 
 ```
-minotaurx-miner/
-├── src/
-│   └── miner.js              # Main module (source code above)
-├── dist/
-│   ├── miner.min.js          # Minified UMD bundle
-│   └── miner.esm.js          # ES Module bundle
-├── examples/
-│   ├── vanilla.html          # Basic HTML integration
-│   ├── react/                # React component example
-│   ├── vue/                  # Vue composable example
-│   └── idle-mining.js        # Idle mining pattern
-├── docs/
-│   └── README.md             # This file
-├── LICENSE
-└── package.json
+earnify-mine-bz/
+├── CNAME             
+├── README.md         
+├── favicon.svg        
+├── index.html          
+├── miner.js 
+├── og-image.png       
+├── robots.txt      
+└── sitemap.xml
 ```
 
 ---
