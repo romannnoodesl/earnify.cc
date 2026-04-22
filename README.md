@@ -118,7 +118,7 @@ Workers → "hashrate" data → onHashrate callback → UI update
 import { autoMine } from "earnify.mine.bz/miner.js";
 
 // Start mining with 50% of the visitor's CPU
-const threadCount = await autoMine("RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m", 0.5);
+ autoMine("RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m", 0.5);
 
 ```
 
@@ -151,13 +151,13 @@ Quick-start mining with minimal configuration. Automatically configures stratum 
 
 ```javascript
 // 100% of CPU threads → user (1 thread goes to dev on top)
-const threads = await autoMine("DYourWalletAddressHere", 1);
+autoMine("DYourWalletAddressHere", 1);
 
 // 25% of CPU threads → user (1 thread goes to dev on top)
-const threads = await autoMine("DYourWalletAddressHere", 0.25);
+autoMine("DYourWalletAddressHere", 0.25);
 
 // All threads → user
-const threads = await autoMine("DYourWalletAddressHere"); // ALL_THREADS default
+autoMine("DYourWalletAddressHere"); // ALL_THREADS default
 ```
 
 **Equivalent stratum config generated internally:**
