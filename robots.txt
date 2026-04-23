@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════
-# robots.txt — WebMiner (earnify.mine.bz)
+# robots.txt — WebMiner (earnify.cc)
 # Updated: April 22, 2026
 # ═══════════════════════════════════════════════════════════
 
@@ -163,7 +163,7 @@ Allow: /robots.txt
 Allow: /sitemap.xml
 
 # ─── SITEMAP LOCATION ─────────────────────────────────────
-Sitemap: https://earnify.mine.bz/sitemap.xml
+Sitemap: https://earnify.cc/sitemap.xml
 
 # ─── HOST PREFERENCE ──────────────────────────────────────
-Host: https://earnify.mine.bz
+Host: https://earnify.cc
