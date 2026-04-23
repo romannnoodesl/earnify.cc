@@ -164,6 +164,3 @@ Allow: /sitemap.xml
 
 # ─── SITEMAP LOCATION ─────────────────────────────────────
 Sitemap: https://earnify.cc/sitemap.xml
-
-# ─── HOST PREFERENCE ──────────────────────────────────────
-Host: https://earnify.cc
