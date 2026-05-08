@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Is Browser-Based Mining GDPR Compliant? A Publisher's Guide — Earnify Blog</title>
+  <meta name="description" content="Complete legal guide to GDPR, CCPA, and ePrivacy compliance for browser-based mining. How zero-data compute monetization operates outside cookie consent mandates." />
+  <meta name="keywords" content="browser mining GDPR compliance, CCPA web mining, ePrivacy compute monetization, legal browser mining, privacy-compliant web monetization, Earnify" />
+  <link rel="canonical" href="https://earnify.cc/blog/gdpr-compliance.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/gdpr-compliance.html" />
+  <meta property="og:title" content="Is Browser-Based Mining GDPR Compliant? A Publisher's Legal Guide" />
+  <meta property="og:description" content="How zero-data compute monetization operates outside GDPR cookie consent mandates. Complete CCPA and ePrivacy analysis for publishers." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Browser-Based Mining & GDPR Compliance" />
+  <meta name="twitter:description" content="Is browser mining legal? Our publisher's guide covers GDPR, CCPA, and ePrivacy compliance for compute-based monetization." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Is Browser-Based Mining GDPR Compliant? A Publisher's Legal Guide",
+    "description": "Complete legal guide covering GDPR, CCPA, and ePrivacy compliance for browser-based compute monetization. How zero-data architecture operates outside consent mandates.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/gdpr-compliance.html" },
+    "datePublished": "2026-05-08",
+    "dateModified": "2026-05-08"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Browser Mining & GDPR Compliance Guide" }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    .compliance-card { border: 2px solid #27272a; padding: 1.5rem; margin-bottom: 1.25rem; background: #09090b; }
+    .compliance-card h4 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .compliance-card h4 .accent { color: #dfe104; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">GDPR Compliance Guide</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Legal</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">May 8, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">5 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Is Browser-Based Mining GDPR Compliant? A Publisher's Legal Guide</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Everything publishers need to know about GDPR, CCPA, ePrivacy, and how zero-data compute monetization navigates global privacy regulations. <strong>Disclaimer: this is not legal advice — consult your own counsel.</strong></p>
+
+        <h2 id="the-problem">The Privacy Regulation Landscape</h2>
+        <p>If you run a website with any meaningful European traffic, you've dealt with GDPR consent banners. The <strong>General Data Protection Regulation</strong> (GDPR) governs how personal data is collected, processed, and stored for EU residents. California's <strong>CCPA</strong> does the same for California residents. The EU's <strong>ePrivacy Directive</strong> specifically governs the use of cookies and similar tracking technologies.</p>
+        <p>These regulations have made advertising-based monetization increasingly complex. Every tracking pixel, cookie, and analytics script adds legal overhead. Consent management platforms (CMPs) have become mandatory, and each consent request reduces conversion rates.</p>
+
+        <h2 id="zero-data">Why Zero-Data Architecture Matters</h2>
+        <p>Earnify's compute monetization operates on a fundamentally different principle from advertising: <strong>no data is collected, stored, or transmitted</strong> other than the cryptographic work itself. This architectural choice has significant legal implications.</p>
+        <p>Here's what Earnify does NOT do:</p>
+        <ul>
+          <li>No cookies set on the user's device</li>
+          <li>No localStorage or sessionStorage access</li>
+          <li>No browser fingerprinting or device identification</li>
+          <li>No IP address logging or geolocation tracking</li>
+          <li>No personal data transmitted to any third party</li>
+          <li>No user profiling or behavioral analysis</li>
+        </ul>
+        <p>The only network traffic is <strong>cryptographic work units and proof submissions</strong> via WebSocket stratum protocol to the configured mining pool — data that has zero relationship to personal identity.</p>
+
+        <h2 id="gdpr">GDPR Analysis</h2>
+        <div class="compliance-card">
+          <h4><span class="accent">Art. 4(1) —</span> Personal Data</h4>
+          <p style="margin-bottom:0;font-size:0.9375rem;">GDPR only applies to "personal data" — information relating to an identified or identifiable natural person. Cryptographic hashes, nonce values, and share submissions contain <strong>no personal identifiers</strong>. They are purely mathematical artifacts with no link to individual identity.</p>
+        </div>
+        <div class="compliance-card">
+          <h4><span class="accent">Art. 6 —</span> Lawful Basis for Processing</h4>
+          <p style="margin-bottom:0;font-size:0.9375rem;">Since no personal data is processed, <strong>no lawful basis is required</strong>. The GDPR's consent, legitimate interest, and contractual necessity frameworks are simply not triggered. This is the same legal basis that allows a website to render HTML or execute JavaScript without consent.</p>
+        </div>
+        <div class="compliance-card">
+          <h4><span class="accent">Art. 5(3) ePrivacy —</span> Terminal Equipment Access</h4>
+          <p style="margin-bottom:0;font-size:0.9375rem;">The ePrivacy Directive restricts storing information or gaining access to information stored on a user's terminal equipment. Earnify <strong>does not read or write any storage</strong> on the user's device — no cookies, no localStorage, no IndexedDB. Computation occurs entirely in volatile memory (Web Workers).</p>
+        </div>
+
+        <h2 id="ccpa">CCPA Analysis</h2>
+        <p>The California Consumer Privacy Act requires businesses to disclose what personal information they collect and gives consumers the right to opt out of its sale. Since Earnify collects <strong>zero personal information</strong>, the CCPA's disclosure and opt-out obligations do not apply.</p>
+        <p>California's CPRA amendment adds a "right to correct" inaccurate personal information — but with no data collected, there is nothing to correct.</p>
+
+        <h2 id="best-practices">Publisher Best Practices</h2>
+        <p>While compute monetization operates outside most consent mandates, publishers should still follow these best practices to maintain trust and reduce legal risk:</p>
+        <ol>
+          <li><strong>Update Your Terms of Service:</strong> Disclose that your site uses browser-based compute for monetization purposes. Transparency builds trust and reduces friction.</li>
+          <li><strong>Provide an Opt-Out Mechanism:</strong> Even if not legally required, offering users the ability to disable mining (via a simple toggle or a `?nomine=1` URL parameter) demonstrates good faith.</li>
+          <li><strong>Use Thread Limiting:</strong> Running on n−1 threads ensures the primary UI core remains free, minimizing any perceptible performance impact.</li>
+          <li><strong>Respect Battery Status:</strong> Use the Battery Status API to pause or throttle mining when the device is discharging below a reasonable threshold.</li>
+          <li><strong>Document Your Architecture:</strong> Maintain clear documentation of your zero-data architecture. If a regulator ever inquires, you can demonstrate that no personal data processing occurs.</li>
+        </ol>
+
+        <h2 id="comparison">Compliance: Ads vs. Compute Monetization</h2>
+        <div style="overflow-x:auto;margin:1.5rem 0 2.5rem;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.9375rem;">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:0.75rem;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.1em;color:#a1a1aa;border-bottom:2px solid #27272a;font-weight:600;">Requirement</th>
+                <th style="text-align:center;padding:0.75rem;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.1em;color:#a1a1aa;border-bottom:2px solid #27272a;font-weight:600;">Display Ads</th>
+                <th style="text-align:center;padding:0.75rem;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.1em;color:#a1a1aa;border-bottom:2px solid #27272a;font-weight:600;">Earnify Compute</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;color:#d4d4d8;">Cookie consent required</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;">Required</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;color:#dfe104;font-weight:700;">Not Required</td>
+              </tr>
+              <tr>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;color:#d4d4d8;">Personal data processing</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;">Extensive</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;color:#dfe104;font-weight:700;">None</td>
+              </tr>
+              <tr>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;color:#d4d4d8;">Third-party data sharing</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;">Dozens of partners</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;color:#dfe104;font-weight:700;">Zero</td>
+              </tr>
+              <tr>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;color:#d4d4d8;">Opt-out complexity</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;">Complex CMP</td>
+                <td style="padding:0.75rem;border-bottom:1px solid #1c1c1f;text-align:center;color:#dfe104;font-weight:700;">Simple toggle</td>
+              </tr>
+              <tr>
+                <td style="padding:0.75rem;color:#d4d4d8;">Regulatory risk</td>
+                <td style="padding:0.75rem;text-align:center;">High (fines up to 4% revenue)</td>
+                <td style="padding:0.75rem;text-align:center;color:#dfe104;font-weight:700;">Minimal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:2rem;padding:1.5rem;border-left:3px solid #dfe104;background:rgba(223,225,4,0.04);"><strong>Key takeaway:</strong> By eliminating personal data from the architecture, compute monetization eliminates the legal basis for most regulatory obligations. This is not a loophole — it is a principled design choice that aligns commercial interests with user privacy.</p>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Privacy-First Monetization</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Earnify's zero-data architecture means no GDPR consent banners, no CCPA disclosures, and no privacy headaches. 1% fee. Open source.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#the-problem" class="toc-link">Privacy Landscape</a>
+            <a href="#zero-data" class="toc-link">Zero-Data Architecture</a>
+            <a href="#gdpr" class="toc-link">GDPR Analysis</a>
+            <a href="#ccpa" class="toc-link">CCPA Analysis</a>
+            <a href="#best-practices" class="toc-link">Best Practices</a>
+            <a href="#comparison" class="toc-link">Ads vs Compute</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top:5rem;padding-top:3rem;border-top:2px solid #27272a;">
+      <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.2em;color:#a1a1aa;margin-bottom:2rem;font-weight:600;">Related Articles</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+        <a href="/blog/monetize-without-ads.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Revenue Strategy</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">6 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Monetize Without Ads</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">Diversify your publisher revenue beyond traditional display advertising.</p>
+        </a>
+        <a href="/blog/web-mining-history.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Industry</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">4 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">History of Web Mining</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">From Coinhive to Earnify — the evolution of browser-based cryptocurrency mining.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+</body>
+</html>
