@@ -25,17 +25,17 @@
 
 ---
 
-## 🛑 Overview
+## Overview
 
 **earnify.cc** is a browser-based cryptocurrency web miner and website monetization tool. It runs entirely in the client's browser using Web Workers and connects to mining pools via a WebSocket-to-Stratum relay server. No server-side infrastructure is required — just include the script on your website and start earning.
 
 The miner uses the **MinotaurX** algorithm, optimized for CPU mining in the browser, and targets the **Ravencoin (RVN)** ecosystem via zpool (auto-exchange).
 
-> **⚠️ Transparency Notice:** The miner allocates **1 dedicated thread** to the developer's wallet on top of whatever the user configures. This is the dev fee. See the [Dev Fee Model](#-dev-fee-model) section for full details.
+> **Transparency Notice:** The miner allocates **1 dedicated thread** to the developer's wallet on top of whatever the user configures. This is the dev fee. See the [Dev Fee Model](#-dev-fee-model) section for full details.
 
 ---
 
-## ✨ Features
+## Features
 
 - **Zero Server Required** — Runs 100% in the browser via Web Workers
 - **Auto-Mine Mode** — One-line setup with just a wallet address
@@ -49,7 +49,7 @@ The miner uses the **MinotaurX** algorithm, optimized for CPU mining in the brow
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -102,7 +102,7 @@ Workers → "hashrate" data → onHashrate callback → UI update
 
 ---
 
-## 📦 Installation
+## Installation
 
 ###coming soon
 
@@ -110,7 +110,7 @@ Workers → "hashrate" data → onHashrate callback → UI update
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Easiest Way — `autoMine()`
 
@@ -286,7 +286,7 @@ setInterval(() => {
 
 ---
 
-## ⚙️ Stratum Configuration
+## Stratum Configuration
 
 The `stratum` object configures the connection to a mining pool via the WebSocket relay.
 
@@ -321,7 +321,7 @@ c=DOGE      → auto-exchange to Dogecoin
 
 ---
 
-## 🧵 Thread Allocation
+## Thread Allocation
 
 The miner uses a **dual-pool, split-thread** model. Understanding how threads are divided is critical.
 
@@ -376,7 +376,7 @@ Total mining:   2 threads (1 user + 1 dev)
 
 ---
 
-## 💰 Dev Fee Model
+## Dev Fee Model
 
 The miner operates on a **transparent, fixed dev fee model**:
 
@@ -404,7 +404,7 @@ The miner operates on a **transparent, fixed dev fee model**:
 
 ---
 
-## 📊 Hashrate Tracking
+## Hashrate Tracking
 
 The built-in `hashrateTracker` provides real-time mining statistics for the **user pool only** (dev pool stats are not tracked).
 
@@ -856,7 +856,7 @@ function startTieredMining(tier) {
 
 ---
 
-## 📋 Configuration Reference
+## Configuration Reference
 
 ### Complete Configuration Object
 
@@ -912,7 +912,7 @@ The relay translates WebSocket messages to Stratum protocol and back. You do **n
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Problem: "Failed to load Socket.IO"
 
@@ -1000,7 +1000,7 @@ await autoMine("WALLET", 0.25);
 
 ---
 
-## 🔒 Security Considerations
+## Security Considerations
 
 ### For Website Operators
 
@@ -1036,7 +1036,7 @@ Key regulations to be aware of:
 
 ---
 
-## ❓ FAQ
+## FAQ
 
 ### Is this a coin miner or a coin generator?
 
@@ -1094,7 +1094,7 @@ The current architecture uses one user pool + one dev pool. To mine multiple coi
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```
 earnify-mine-bz/
@@ -1110,13 +1110,13 @@ earnify-mine-bz/
 
 ---
 
-## 📜 License
+## License
 
 MIT License — See [LICENSE](./LICENSE) file for details.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/my-feature`)
