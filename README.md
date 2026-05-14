@@ -2,7 +2,7 @@
 
 ### High-performance browser-based mining platform with automated rewards and real-time tracking.
 
-[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/smxH8Dqq6t)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/g2JxcVYavJ)
 [![Telegram](https://img.shields.io/badge/Telegram-Official%20Channel-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/+GtzrnpVaCRcwMWM5)
 
 ---
@@ -11,7 +11,7 @@
 
 Stay updated with releases, mining updates, feature announcements, and community discussions.
 
--  **Discord Community:** https://discord.com/invite/smxH8Dqq6t
+-  **Discord Community:** https://discord.com/invite/g2JxcVYavJ
 -  **Telegram Channel:** https://t.me/+GtzrnpVaCRcwMWM5
 
 ---
