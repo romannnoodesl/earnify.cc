@@ -8,7 +8,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -27,36 +27,46 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/#platform</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://earnify.cc/#architecture</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://earnify.cc/#economics</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://earnify.cc/#deploy</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://earnify.cc/#tutorials</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://earnify.cc/#faq</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- DEMO -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://earnify.cc/demo/</loc>
     <lastmod>2026-05-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -67,7 +77,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -103,14 +113,25 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!-- EXTERNAL RESOURCES -->
-  <!-- ═══════════════════════════════════════ -->
   <url>
-    <loc>https://github.com/romannnoodesl/earnify.cc</loc>
-    <lastmod>2026-05-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://earnify.cc/blog/browser-mining-2026-profitability.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://earnify.cc/blog/coinhive-alternatives.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://earnify.cc/blog/recover-ad-blocker-revenue.html</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
