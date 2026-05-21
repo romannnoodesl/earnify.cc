@@ -117,8 +117,6 @@ Workers → "hashrate" data → onHashrate callback → UI update
 
 ## Installation
 
-###coming soon
-
 > **Note:** Socket.IO is loaded automatically by the miner — you do **not** need to include it separately.
 
 ---
