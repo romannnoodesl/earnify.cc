@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Demo — Earnify Browser Mining</title>
+  <meta name="description" content="Try Earnify's browser-based CPU mining live. See real-time hashrate, threads, and uptime stats. No auto-start — click to begin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="theme-color" content="#09090B" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #09090b;
+      color: #fafafa;
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 2px solid #27272a;
+      background: #09090b;
+    }
+    nav .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fafafa;
+    }
+    nav .logo span { color: #dfe104; }
+    nav a:not(.logo) {
+      color: #a1a1aa;
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.15s;
+    }
+    nav a:not(.logo):hover { color: #dfe104; }
+    .nav-links { display: flex; gap: 24px; }
+
+    .warning {
+      background: #27272a;
+      border-bottom: 2px solid #dfe104;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #fafafa;
+    }
+    .warning span { color: #dfe104; }
+
+    .demo-hero {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+    .demo-hero h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .demo-hero h1 span { color: #dfe104; }
+    .demo-hero p {
+      color: #a1a1aa;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: #27272a;
+      border: 2px solid #27272a;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: #09090b;
+      padding: 24px;
+    }
+    .stat-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #a1a1aa;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .stat-card .value {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .stat-card .value .accent { color: #dfe104; }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+      padding: 24px;
+      border: 1px solid #27272a;
+      background: #18181b;
+    }
+    .controls label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #a1a1aa;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .wallet-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #27272a;
+      padding: 8px 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #fafafa;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .wallet-input:focus { border-color: #dfe104; }
+    .wallet-input::placeholder { color: #52525b; }
+    .wallet-input:disabled { opacity: 0.4; }
+    .wallet-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .wallet-row .wallet-input { flex: 1; }
+    .zpool-link {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid #27272a;
+      background: transparent;
+      color: #a1a1aa;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .zpool-link:hover {
+      border-color: #dfe104;
+      color: #dfe104;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .slider-row input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: #27272a;
+      border-radius: 2px;
+      outline: none;
+    }
+    .slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #dfe104;
+      cursor: pointer;
+      border: none;
+    }
+    .slider-row input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #dfe104;
+      cursor: pointer;
+      border: none;
+    }
+    .slider-row input[type="range"]:disabled {
+      opacity: 0.4;
+    }
+    .slider-row input[type="range"]:disabled::-webkit-slider-thumb {
+      cursor: not-allowed;
+    }
+    .slider-value {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #dfe104;
+      white-space: nowrap;
+      min-width: 70px;
+      text-align: right;
+    }
+    .slider-sub {
+      font-size: 0.75rem;
+      color: #52525b;
+      margin-top: 2px;
+    }
+
+    @media (min-width: 640px) {
+      .controls { grid-template-columns: 1fr 1fr; }
+    }
+
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #3f3f46;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .status-dot.active {
+      background: #22c55e;
+      box-shadow: 0 0 8px rgba(34,197,94,0.6);
+      animation: pulse-dot 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .toggle-btn {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 2px solid #dfe104;
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 28px;
+    }
+    .toggle-btn.idle {
+      background: transparent;
+      color: #dfe104;
+    }
+    .toggle-btn.idle:hover {
+      background: #dfe104;
+      color: #09090b;
+    }
+    .toggle-btn.mining {
+      background: #dfe104;
+      color: #09090b;
+    }
+    .toggle-btn.mining:hover {
+      background: transparent;
+      color: #dfe104;
+    }
+    .toggle-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .console {
+      background: #18181b;
+      border: 1px solid #27272a;
+      padding: 16px;
+      margin-bottom: 60px;
+    }
+    .console-header {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #a1a1aa;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .console-log {
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: #a1a1aa;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    .console-log .entry { padding: 2px 0; }
+    .console-log .entry .time { color: #52525b; margin-right: 8px; }
+    .console-log .entry .highlight { color: #dfe104; }
+
+    .seo-section {
+      border-top: 2px solid #27272a;
+      padding: 60px 0;
+    }
+    .seo-section h2 {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .seo-section h2 span { color: #dfe104; }
+    .seo-section p {
+      color: #a1a1aa;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      max-width: 720px;
+    }
+    .seo-section a {
+      color: #dfe104;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .seo-section a:hover { color: #fafafa; }
+    .seo-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .seo-links a {
+      display: inline-block;
+      padding: 10px 18px;
+      border: 1px solid #27272a;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      color: #fafafa;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .seo-links a:hover {
+      border-color: #dfe104;
+      color: #dfe104;
+    }
+
+    footer {
+      border-top: 2px solid #27272a;
+      padding: 32px 20px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #52525b;
+      margin-top: auto;
+    }
+    footer a { color: #a1a1aa; text-decoration: none; }
+    footer a:hover { color: #dfe104; }
+
+    @media (min-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+      .stat-card { padding: 28px; }
+      nav { padding: 16px 32px; }
+      .warning { padding: 12px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">Earn<span>ify</span></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/blog/">Blog</a>
+    <a href="/demo">Demo</a>
+    <a href="/#deploy">Deploy</a>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <div class="demo-hero">
+      <h1>Try <span>Browser Mining</span> Live</h1>
+      <p>See how Earnify works in real time. Click the button below to start a demo session using your device's CPU. No data collected, no tracking.</p>
+    </div>
+
+    <div class="controls">
+      <div>
+        <label for="walletInput">Wallet Address</label>
+        <div class="wallet-row">
+          <input type="text" id="walletInput" class="wallet-input" value="RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m" placeholder="Enter your wallet address…" spellcheck="false" />
+          <a href="#" class="zpool-link" id="zpoolLink" target="_blank" rel="noopener">View on zpool →</a>
+        </div>
+      </div>
+      <div>
+        <label for="cpuSlider">CPU Usage</label>
+        <div class="slider-row">
+          <input type="range" id="cpuSlider" min="10" max="100" value="50" step="5" />
+          <div>
+            <div class="slider-value" id="cpuLabel">50%</div>
+            <div class="slider-sub" id="threadLabel">~-- threads</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="label">Status</div>
+        <div class="value">
+          <span class="status-indicator">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Idle</span>
+          </span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Threads</div>
+        <div class="value"><span class="accent" id="threadsValue">0</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Hashrate</div>
+        <div class="value"><span class="accent" id="hashrateValue">0</span> <span style="font-size:0.6em;color:#a1a1aa;">H/s</span></div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Uptime</div>
+        <div class="value"><span class="accent" id="uptimeValue">00:00</span></div>
+      </div>
+    </div>
+
+    <button class="toggle-btn idle" id="toggleBtn" type="button">
+      Start Demo
+    </button>
+
+    <div class="console">
+      <div class="console-header">Event Log</div>
+      <div class="console-log" id="consoleLog"></div>
+    </div>
+
+  </div>
+</main>
+
+<section class="seo-section">
+  <div class="container">
+    <h2>What Is <span>Browser Mining</span>?</h2>
+    <p>
+      Browser mining uses Web Workers and WebAssembly to perform proof-of-work hashing
+      directly in a visitor's browser. Unlike traditional advertising, which relies on
+      tracking pixels and third-party cookies, compute-based monetization creates a direct
+      link between user engagement and revenue — no intermediaries, no data collection.
+    </p>
+    <p>
+      Earnify connects browsers to real mining pools via the Stratum protocol over
+      WebSocket. Every valid share submitted earns cryptocurrency proportional to the
+      computational work performed. With a 1% platform fee and zero data footprint, it
+      offers a privacy-first alternative to ad-supported business models.
+    </p>
+    <p>
+      The demo above uses the <strong>MinotaurX</strong> algorithm (ASIC-resistant,
+      CPU-friendly) and connects to the <strong>zpool</strong> mining pool with
+      auto-exchange to Ravencoin (RVN). It allocates 50% of your CPU threads for a
+      realistic but conservative demonstration.
+    </p>
+    <div class="seo-links">
+      <a href="/blog/browser-mining-2026-profitability.html">2026 Profitability Guide →</a>
+      <a href="/blog/coinhive-alternatives.html">Coinhive Alternatives →</a>
+      <a href="/blog/web-mining-history.html">History of Web Mining →</a>
+      <a href="/blog/monetize-without-ads.html">Monetize Without Ads →</a>
+      <a href="/blog/recover-ad-blocker-revenue.html">Recover Ad Blocker Revenue →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="/">Earnify</a> &mdash; Open-source browser-based compute monetization.
+  </div>
+</footer>
+
+<script type="module">
+  import { autoMine, stop, minotaurxHashrate } from "https://earnify.cc/miner.js";
+
+  const $ = (id) => document.getElementById(id);
+
+  const statusDot = $("statusDot");
+  const statusText = $("statusText");
+  const threadsValue = $("threadsValue");
+  const hashrateValue = $("hashrateValue");
+  const uptimeValue = $("uptimeValue");
+  const toggleBtn = $("toggleBtn");
+  const consoleLog = $("consoleLog");
+  const walletInput = $("walletInput");
+  const zpoolLink = $("zpoolLink");
+  const cpuSlider = $("cpuSlider");
+  const cpuLabel = $("cpuLabel");
+  const threadLabel = $("threadLabel");
+
+  let mining = false;
+  let activeUserThreads = 0;
+  let uptimeSeconds = 0;
+  let uptimeInterval = null;
+  let hashrateInterval = null;
+  let logEntries = [];
+
+  const maxThreads = navigator.hardwareConcurrency || 4;
+  const userAvail = Math.max(1, maxThreads - 1);
+  threadsValue.textContent = userAvail;
+
+  function estimateUserThreads(pct) {
+    const raw = Math.round(maxThreads * (pct / 100));
+    return Math.max(1, Math.min(raw, userAvail));
+  }
+
+  function updateThreadLabel() {
+    const pct = parseInt(cpuSlider.value, 10);
+    cpuLabel.textContent = `${pct}%`;
+    const est = estimateUserThreads(pct);
+    threadLabel.textContent = `~${est} thread${est > 1 ? "s" : ""}`;
+  }
+  cpuSlider.addEventListener("input", updateThreadLabel);
+  updateThreadLabel();
+
+  function updateZpoolLink() {
+    const addr = walletInput.value.trim();
+    zpoolLink.href = addr ? `https://zpool.ca/wallet/${addr}` : "#";
+  }
+  walletInput.addEventListener("input", updateZpoolLink);
+  updateZpoolLink();
+
+  function setControlsDisabled(disabled) {
+    walletInput.disabled = disabled;
+    cpuSlider.disabled = disabled;
+  }
+
+  function log(msg, highlight = false) {
+    const now = new Date();
+    const ts = now.toLocaleTimeString("en-US", { hour12: false });
+    logEntries.push({ text: msg, highlight, time: ts });
+    if (logEntries.length > 10) logEntries.shift();
+    renderLog();
+  }
+
+  function renderLog() {
+    consoleLog.innerHTML = logEntries.map(e =>
+      `<div class="entry"><span class="time">[${e.time}]</span>${e.highlight ? `<span class="highlight">${e.text}</span>` : e.text}</div>`
+    ).join("");
+    consoleLog.scrollTop = consoleLog.scrollHeight;
+  }
+
+  function setStatus(active) {
+    if (active) {
+      statusDot.className = "status-dot active";
+      statusText.textContent = "Mining";
+    } else {
+      statusDot.className = "status-dot";
+      statusText.textContent = "Idle";
+    }
+  }
+
+  function formatUptime(sec) {
+    const m = String(Math.floor(sec / 60)).padStart(2, "0");
+    const s = String(sec % 60).padStart(2, "0");
+    return `${m}:${s}`;
+  }
+
+  function setUI(idle) {
+    if (idle) {
+      toggleBtn.className = "toggle-btn idle";
+      toggleBtn.textContent = "Start Demo";
+      toggleBtn.disabled = false;
+      setControlsDisabled(false);
+      setStatus(false);
+      hashrateValue.textContent = "0";
+      uptimeValue.textContent = "00:00";
+      threadsValue.textContent = userAvail;
+      activeUserThreads = 0;
+    } else {
+      toggleBtn.className = "toggle-btn mining";
+      toggleBtn.textContent = "Stop Mining";
+      toggleBtn.disabled = false;
+      setControlsDisabled(true);
+      setStatus(true);
+    }
+  }
+
+  async function startMining() {
+    const wallet = walletInput.value.trim();
+    if (!wallet) {
+      log("Please enter a wallet address", true);
+      return;
+    }
+    const cpuPct = parseInt(cpuSlider.value, 10) / 100;
+
+    toggleBtn.disabled = true;
+    toggleBtn.textContent = "Starting…";
+    log("Initializing miner…");
+
+    try {
+      const threads = await autoMine(wallet, cpuPct);
+      mining = true;
+      activeUserThreads = threads;
+      threadsValue.textContent = threads;
+      setUI(false);
+      log(`Miner started with ${threads} user threads`, true);
+      log(`Wallet: ${wallet.slice(0, 8)}…${wallet.slice(-4)}`);
+      log(`Using ${cpuPct * 100}% CPU (${threads} thread${threads > 1 ? "s" : ""})`);
+
+      uptimeSeconds = 0;
+      uptimeInterval = setInterval(() => {
+        uptimeSeconds++;
+        uptimeValue.textContent = formatUptime(uptimeSeconds);
+      }, 1000);
+
+      hashrateInterval = setInterval(() => {
+        const khs = minotaurxHashrate.currentHashrateKHs;
+        if (khs != null && khs > 0) {
+          const hs = (khs * 1000).toFixed(0);
+          hashrateValue.textContent = hs;
+          log(`Hashrate: ${khs} KH/s (${hs} H/s)`, true);
+        }
+      }, 2000);
+
+    } catch (err) {
+      mining = false;
+      setUI(true);
+      log(`Error: ${err.message || err}`, true);
+      toggleBtn.disabled = false;
+    }
+  }
+
+  function stopMining() {
+    stop();
+    mining = false;
+
+    if (uptimeInterval) { clearInterval(uptimeInterval); uptimeInterval = null; }
+    if (hashrateInterval) { clearInterval(hashrateInterval); hashrateInterval = null; }
+
+    setUI(true);
+    log("Miner stopped", true);
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    if (mining) {
+      stopMining();
+    } else {
+      startMining();
+    }
+  });
+
+  log("Page loaded. Configure wallet & CPU, then click 'Start Demo'.");
+</script>
+</body>
+</html>
