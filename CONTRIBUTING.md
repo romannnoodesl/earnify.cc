@@ -1,6 +1,6 @@
-# 🤝 Contributing to WebMiner
+# 🤝 Contributing to Earnify.cc
 
-Thanks for wanting to contribute! WebMiner is built with vanilla HTML, CSS, and JavaScript—no frameworks, no build steps, no npm.
+Thanks for wanting to contribute! Earnify.cc is built with vanilla HTML, CSS, and JavaScript—no frameworks, no build steps, no npm.
 
 ## 🐛 Bugs & Feature Requests
 
@@ -11,10 +11,10 @@ Open a [GitHub Issue](../../issues). Please include:
 
 ## 🔒 Security Rules (Strict)
 
-Because WebMiner handles browser compute, security is critical. **We will reject any PR that includes:**
+Because Earnify handles browser compute, security is critical. **We will reject any PR that includes:**
 - `eval()`, `new Function()`, or dynamic script injection.
 - Access to `document.cookie`, `localStorage`, or `sessionStorage`.
-- DOM manipulation from the mining script (WebMiner must run silently).
+- DOM manipulation from the mining script (Earnify must run silently).
 - Outbound requests to anything other than the user-configured mining pool.
 
 ## 💻 Making Changes
