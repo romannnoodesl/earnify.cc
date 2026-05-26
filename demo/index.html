@@ -17,6 +17,8 @@
       background: #09090b;
       color: #fafafa;
       font-family: 'Space Grotesk', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -53,8 +55,7 @@
     nav a:not(.logo) {
       color: #a1a1aa;
       text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.875rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       transition: color 0.15s;
@@ -80,9 +81,9 @@
     .demo-hero h1 {
       font-size: clamp(2rem, 6vw, 3.5rem);
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.05em;
       text-transform: uppercase;
-      line-height: 1;
+      line-height: 0.85;
       margin-bottom: 12px;
     }
     .demo-hero h1 span { color: #dfe104; }
