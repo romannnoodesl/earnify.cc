@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser — Earnify Blog</title>
+  <meta name="description" content="Deep-dive into Earnify's browser-only mining architecture: Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay, dev fee model, and security — no backend server required by the publisher." />
+  <meta name="keywords" content="zero-server architecture, browser mining architecture, Web Workers WASM mining, MinotaurX hashing, Stratum WebSocket relay, browser-based mining infrastructure, Earnify architecture" />
+  <link rel="canonical" href="https://earnify.cc/blog/zero-server-infrastructure.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/zero-server-infrastructure.html" />
+  <meta property="og:title" content="Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser" />
+  <meta property="og:description" content="Deep-dive into Earnify's browser-only mining architecture: Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay, dev fee model, and security — no backend server required by the publisher." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser" />
+  <meta name="twitter:description" content="Earnify's browser-only mining architecture — Web Workers, WASM MinotaurX, Socket.IO Stratum relay. No backend server required. Full technical deep-dive." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser",
+    "description": "Deep-dive into Earnify's browser-only mining architecture: Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay, dev fee model, and security — no backend server required by the publisher.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/zero-server-infrastructure.html" },
+    "datePublished": "2026-05-26",
+    "dateModified": "2026-05-26"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Zero-Server Infrastructure" }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; padding-bottom: 0.5rem; border-bottom: 1px solid #1c1c1f; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article code { background: #18181b; color: #dfe104; padding: 0.15rem 0.4rem; font-size: 0.875rem; border: 1px solid #27272a; }
+    article pre { background: #18181b; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.5rem; font-size: 0.8125rem; line-height: 1.5; tab-size: 2; }
+    article pre code { background: none; border: none; padding: 0; color: #d4d4d8; }
+    .arch-diagram { background: #18181b; border: 1px solid #27272a; padding: 1.5rem; overflow-x: auto; margin-bottom: 1.5rem; font-family: "Space Grotesk", monospace; font-size: 0.75rem; line-height: 1.4; white-space: pre; color: #d4d4d8; }
+    .arch-diagram .highlight { color: #dfe104; }
+    .arch-diagram .dim { color: #52525b; }
+    .arch-diagram .arrow { color: #6366f1; }
+    .arch-diagram .box { color: #22d3ee; }
+    .stat-row { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0; }
+    .stat-box { flex: 1; min-width: 140px; border: 2px solid #27272a; padding: 1.5rem; text-align: center; background: #09090b; }
+    .stat-box .number { font-size: 2.5rem; font-weight: 700; color: #dfe104; letter-spacing: -0.02em; line-height: 1; margin-bottom: 0.5rem; }
+    .stat-box .label { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: #a1a1aa; }
+    .comparison-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.875rem; }
+    .comparison-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .comparison-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .comparison-table .good { color: #22c55e; }
+    .comparison-table .bad { color: #ef4444; }
+    .comparison-table .winner { background: rgba(223,225,4,0.06); }
+    .comparison-table .winner td { color: #FAFAFA; }
+    .fee-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.875rem; }
+    .fee-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .fee-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .fee-table tr:last-child td { border-bottom: none; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    .faq-item { border: 2px solid #27272a; padding: 1.5rem; margin-bottom: 1rem; background: #09090b; }
+    .faq-item h4 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: #dfe104; }
+    .faq-item p { font-size: 0.9375rem; margin-bottom: 0; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Zero-Server Infrastructure</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">May 26, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">9 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Every other web monetization platform requires you to spin up servers, manage connections, and deal with infrastructure drift. Earnify requires a script tag. This is the architectural deep-dive into how it works — from Web Workers and WebAssembly through to the Stratum wire protocol — and why the publisher never needs a backend.</p>
+
+        <h2 id="thesis">The Zero-Server Thesis</h2>
+        <p>Traditional web mining services follow a client-server model: deploy a script that phones home to your infrastructure, which then proxies work to a mining pool. You manage WebSocket connections, handle reconnects, scale for traffic spikes, and maintain the relay layer. In short, you run a middleman.</p>
+        <p>Earnify eliminates that middleman entirely. The entire mining pipeline — hashing, pool communication, job rotation, share submission — runs <strong>inside the visitor's browser</strong>. The publisher deploys exactly one resource: a static JavaScript file served from a CDN. No VPS, no container, no serverless function, no backend process of any kind.</p>
+        <p>The architecture decomposes into three runtime layers, all of which execute within the browser's sandbox:</p>
+        <ol>
+          <li><strong>Compute layer</strong> — Web Workers running WebAssembly (WASM) for MinotaurX hashing</li>
+          <li><strong>Transport layer</strong> — Socket.IO client communicating over WebSocket to a shared Stratum relay</li>
+          <li><strong>Scheduling layer</strong> — Thread allocation, dev-fee enforcement, job lifecycle management</li>
+        </ol>
+        <p>Each layer is isolated from the host page's DOM and JavaScript context by the browser's security model. The result is a monetization system with zero operational surface area for the publisher.</p>
+
+        <h2 id="architecture">Architecture Overview</h2>
+        <p>The diagram below traces a single mining session from script load to accepted share. Every component inside the <code>CLIENT BROWSER</code> boundary ships as part of <code>miner.js</code> — no external infrastructure required beyond the static CDN serve.</p>
+
+        <img src="/blog/architecture-overview.png" alt="Earnify architecture diagram: CDN → browser (main thread + Web Workers with WASM) → Socket.IO over WSS → shared relay → Stratum pool" style="width:100%;max-width:750px;border:1px solid #27272a;margin-bottom:1.5rem;" />
+
+        <h3 id="worker-layer">Compute Layer: Web Workers + WebAssembly</h3>
+        <p>Earnify does not perform any hashing on the main JavaScript thread. Every hash is computed inside a <strong>dedicated Web Worker</strong> — a background script that runs in its own operating-system thread with its own V8 isolate. The worker code is base64-encoded inline inside <code>miner.js</code> and spawned programmatically at runtime.</p>
+        <p>Each worker loads a compiled WebAssembly module implementing the <strong>MinotaurX</strong> (identified internally as <code>cwm_minotaurx</code>) algorithm. WASM provides near-native execution speed for the hash function while remaining fully sandboxed — the worker has zero access to <code>window</code>, <code>document</code>, <code>cookies</code>, or <code>localStorage</code>.</p>
+        <p>The hashing loop iterates through a nonce space, computing proofs of work against the pool's difficulty target. When a worker finds a valid share, it posts a <code>submit</code> message back to the main thread via <code>postMessage()</code>. The main thread does not block — it simply dispatches messages between workers and the Socket.IO transport.</p>
+        <p>Workers are terminated and re-spawned on each new mining job from the pool. This prevents stale nonce reuse and ensures that every job starts with a fresh nonce counter. Memory usage per worker stabilizes at roughly <strong>2 MB</strong>, making even 8-worker sessions feasible on devices with 4 GB RAM.</p>
+
+        <h3 id="transport-layer">Transport Layer: Socket.IO → WebSocket → Stratum</h3>
+        <p>Rather than raw WebSockets, Earnify uses <strong>Socket.IO</strong> as its transport protocol. Socket.IO provides automatic reconnection, packet buffering, and multiplexing on top of WebSocket — properties that matter in the unpredictable network conditions of browser environments (tab backgrounding, intermittent connectivity, aggressive throttling).</p>
+        <p>The Socket.IO client library is not loaded upfront. The miner's <code>ensureIO()</code> function lazily injects a <code>&lt;script&gt;</code> tag pointing to <code>https://cdn.socket.io/4.7.5/socket.io.min.js</code> only when <code>autoMine()</code> or <code>start()</code> is called. This means <strong>zero bytes are downloaded</strong> for the Socket.IO library unless mining is actively requested.</p>
+        <p>Two independent Socket.IO connections are established per session:</p>
+        <ul>
+          <li><strong>Dev socket</strong> — connects to the developer's configured pool with a hardcoded wallet address</li>
+          <li><strong>User socket</strong> — connects to the publisher's configured pool with their wallet address</li>
+        </ul>
+        <p>Both sockets connect to the same relay server at <code>wss://websocket-stratum-server.com</code>. This relay is the <strong>only shared infrastructure component</strong> in the architecture — it translates the Socket.IO event protocol to raw Stratum TCP and back. The publisher does not deploy, configure, or pay for this relay. It is provided as part of the Earnify service.</p>
+        <p>The event protocol between the browser client and the relay is minimal:</p>
+        <ul>
+          <li><code>can start</code> — relay signals pool readiness</li>
+          <li><code>start</code> — client submits <code>{ client, version, stratum, algo }</code></li>
+          <li><code>work</code> — relay delivers Stratum job data (blob, target, job_id)</li>
+          <li><code>submit</code> — client sends discovered share</li>
+          <li><code>hashrate</code> — client periodically reports combined worker hashrate</li>
+          <li><code>submit failed</code> / <code>error</code> — relay reports rejections or network faults</li>
+        </ul>
+
+        <h2 id="code">The 3-Line Setup</h2>
+        <p>The entire publisher-side surface area of Earnify fits in three lines of JavaScript. This is not a contrived example — it is the actual production API:</p>
+
+        <pre><code>import { autoMine } from "https://earnify.cc/miner.js";
+
+// Start mining with 50% of the visitor's CPU
+autoMine("YOUR_WALLET_ADDRESS", 0.5);</code></pre>
+
+        <p>That is the complete integration. Behind these three lines, the miner resolves thread counts, establishes two Socket.IO connections, spawns Web Worker threads, loads WebAssembly, connects to the Stratum pool via the relay, and begins submitting valid shares. There is no build step, no bundler configuration, no backend proxy, no API key to rotate.</p>
+        <p>For publishers who need full control — custom pools, algorithm selection, hashrate callbacks, error handling — the <code>start()</code> export exposes the complete parameter surface:</p>
+
+        <pre><code>import { start, minotaurx } from "https://earnify.cc/miner.js";
+
+const threads = await start(
+  minotaurx,
+  {
+    server: "minotaurx.na.mine.zpool.ca",
+    port: 7019,
+    worker: "YOUR_WALLET_ADDRESS",
+    password: "c=RVN",
+    ssl: false
+  },
+  null,
+  0.5,
+  ({ work }) => console.log("New job:", work.job_id),
+  ({ hashrateKHs }) => updateUI(hashrateKHs),
+  ({ error }) => console.error("Mining error:", error)
+);</code></pre>
+
+        <p>The return value <code>threads</code> indicates how many user threads were actually allocated. The dev thread runs silently on top. Stopping is equally minimal: call <code>stop()</code> — all workers terminate, both sockets disconnect, and a full session report prints to console.</p>
+
+        <h2 id="dev-fee">How the Dev Fee Works</h2>
+        <p>Earnify's dev fee is implemented at the <strong>architecture level</strong>, not as a percentage deduction on payouts. The miner operates a dual-pool, split-thread model:</p>
+
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="number">1</div>
+            <div class="label">Dedicated Dev Thread</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">2</div>
+            <div class="label">Socket Connections per Session</div>
+          </div>
+          <div class="stat-box">
+            <div class="number">6–50%</div>
+            <div class="label">Effective Fee Rate (by CPU)</div>
+          </div>
+        </div>
+
+        <p><strong>Exactly one CPU thread</strong> is allocated to the developer's wallet on every mining session. This thread is added <em>on top of</em> whatever the publisher configures — users keep 100% of their own hashrate. The dev thread runs in its own Web Worker, connected to its own Socket.IO session, mining to a hardcoded wallet address at <code>minotaurx.na.mine.zpool.ca:7019</code> with password <code>c=RVN</code>. The dev hashrate is intentionally excluded from the <code>minotaurxHashrate</code> stats object so publishers always see only their own performance.</p>
+        <p>The effective fee rate varies inversely with CPU core count because the dev allocation is a fixed 1 thread:</p>
+
+        <div style="overflow-x:auto;">
+          <table class="fee-table">
+            <thead>
+              <tr>
+                <th>CPU Cores</th>
+                <th>User Threads (ALL)</th>
+                <th>Dev Threads</th>
+                <th>Effective "Fee"</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2</td><td>1</td><td>1</td><td>50%</td></tr>
+              <tr><td>4</td><td>3</td><td>1</td><td>25%</td></tr>
+              <tr><td>8</td><td>7</td><td>1</td><td>~14%</td></tr>
+              <tr><td>12</td><td>11</td><td>1</td><td>~8%</td></tr>
+              <tr><td>16</td><td>15</td><td>1</td><td>~6%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>On a typical 8-core desktop, the effective fee is approximately 14%. The dev fee <strong>cannot be disabled</strong> — it is hardcoded in the miner binary and enforced at the worker-spawning level. In addition, Earnify the platform charges a <strong>1% pool fee</strong> (<code>POOL_FEE = 1</code>) on mining revenue to cover relay infrastructure costs.</p>
+        <p>Thread allocation follows this resolution logic:</p>
+        <ol>
+          <li><code>resolveThreadCount(threadPercent)</code> maps fractional or absolute thread requests to a concrete count based on <code>navigator.hardwareConcurrency</code></li>
+          <li>Dev gets exactly 1 thread unconditionally</li>
+          <li>User gets <code>min(resolvedThreads, hardwareThreads - 1)</code> — guaranteed at least 1</li>
+          <li>Total mining threads = <code>1 + userThreads</code></li>
+        </ol>
+
+        <h2 id="comparison">Earnify vs. Hosted Mining Services</h2>
+        <p>Other web monetization platforms (e.g., CryptoLoot, Coinimp, self-hosted proxies) require the publisher to run infrastructure — a relay server, a WebSocket proxy, or at minimum a serverless function. Earnify eliminates this entirely. The comparison below illustrates the operational difference:</p>
+
+        <div style="overflow-x:auto;">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th style="text-align:center;">Earnify (Zero-Server)</th>
+                <th style="text-align:center;">Hosted Mining Services</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="winner">
+                <td>Backend infrastructure</td>
+                <td style="text-align:center;color:#22c55e;font-weight:700;">None required</td>
+                <td style="text-align:center;">VPS, container, or serverless function</td>
+              </tr>
+              <tr class="winner">
+                <td>Deployment surface</td>
+                <td style="text-align:center;color:#22c55e;font-weight:700;">1 static script tag</td>
+                <td style="text-align:center;">Script + proxy setup + API key management</td>
+              </tr>
+              <tr class="winner">
+                <td>Scaling</td>
+                <td style="text-align:center;color:#22c55e;font-weight:700;">CDN-backed, auto-scales</td>
+                <td style="text-align:center;">Must scale proxy servers with traffic</td>
+              </tr>
+              <tr class="winner">
+                <td>Maintenance</td>
+                <td style="text-align:center;color:#22c55e;font-weight:700;">Zero — miner.js is static</td>
+                <td style="text-align:center;">Ongoing — OS patches, connection pools, monitoring</td>
+              </tr>
+              <tr class="winner">
+                <td>Cost per publisher</td>
+                <td style="text-align:center;color:#22c55e;font-weight:700;">$0 infrastructure cost</td>
+                <td style="text-align:center;">Server costs + bandwidth + maintenance labor</td>
+              </tr>
+              <tr>
+                <td>Pool control</td>
+                <td style="text-align:center;">Configurable via <code>stratum</code> object</td>
+                <td style="text-align:center;">Configurable (typically)</td>
+              </tr>
+              <tr>
+                <td>Dev fee model</td>
+                <td style="text-align:center;">1 fixed thread (on top of user allocation)</td>
+                <td style="text-align:center;">Percentage of pool payouts (typically 5-15%)</td>
+              </tr>
+              <tr>
+                <td>Platform fee</td>
+                <td style="text-align:center;">1% on mining revenue</td>
+                <td style="text-align:center;">5-30% typical</td>
+              </tr>
+              <tr>
+                <td>Transport encryption</td>
+                <td style="text-align:center;">WSS (WebSocket Secure)</td>
+                <td style="text-align:center;">WSS or custom TCP/TLS</td>
+              </tr>
+              <tr>
+                <td>Latency</td>
+                <td style="text-align:center;">Direct relay — single hop</td>
+                <td style="text-align:center;">Publisher proxy adds 2nd hop</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Earnify's zero-server approach means that a site handling 100,000 daily visitors does not need to provision a single server to mine on all of them. The CDN serves <code>miner.js</code>; the browser does the rest. The relay infrastructure is centrally maintained and amortized across all publishers — a shared cost model that eliminates per-publisher overhead entirely.</p>
+
+        <h2 id="security">Security Considerations</h2>
+        <p>Browser-based mining has historically faced scrutiny around consent, data privacy, and abuse. Earnify's architecture addresses these concerns at the protocol and sandbox level.</p>
+
+        <h3>Data Never Leaves the Browser (Except Valid Shares)</h3>
+        <p>This is the single most important security property of the system: <strong>no personal data, cookies, DOM content, or browsing context is ever transmitted to the relay or pool.</strong> The Web Worker sandbox has zero access to <code>document</code>, <code>window</code>, <code>XMLHttpRequest</code>, <code>localStorage</code>, or <code>sessionStorage</code>. The only data that crosses the network boundary is:</p>
+        <ul>
+          <li>The configured wallet address (public key hash, not a secret)</li>
+          <li>The algorithm identifier (<code>cwm_minotaurx</code>)</li>
+          <li>Share submissions (<code>{ job_id, nonce, result }</code> — cryptographic values only)</li>
+          <li>Hashrate reports (aggregated integer, no PII)</li>
+        </ul>
+        <p>There is no tracking. No fingerprinting. No cookies or localStorage reads. Earnify cannot identify a returning user, correlate sessions, or build a profile. This property makes it compatible with GDPR's <em>legitimate interest</em> framework in certain interpretations, and it completely avoids the data-processing consent requirements that apply to ad tech.</p>
+
+        <h3>Worker Isolation</h3>
+        <p>Each Web Worker executes in its own V8 isolate with a separate heap, separate event loop, and no shared memory access to the main thread. The <code>postMessage()</code> interface is the only communication channel, and it serializes all data via the structured clone algorithm — no object references, no function closures, no prototype pollution vectors. The WASM module loaded inside the worker is subject to the same origin and CSP restrictions as any other resource on the page.</p>
+
+        <h3>Transport Security</h3>
+        <p>All Socket.IO connections use <code>wss://</code> (WebSocket Secure), which tunnels over TLS. The relay server at <code>wss://websocket-stratum-server.com</code> terminates TLS and translates to the pool's Stratum TCP connection. Pool credentials (wallet address, worker name, password) are transmitted over this encrypted channel. Publishers should use a dedicated mining wallet rather than their primary wallet — a best practice for any mining setup, not specific to browser mining.</p>
+
+        <h3>Code Verification</h3>
+        <p>Earnify is <strong>open source</strong> under the MIT license. The full <code>miner.js</code> source is available at <code>https://github.com/romannnoodesl/earnify.cc</code>. The Web Worker code is base64-encoded inline; any publisher auditing the repository can decode and inspect the exact hashing logic running on their visitors' devices. There are no external network calls beyond the explicitly configured Socket.IO relay and pool connections.</p>
+
+        <h3>Operational Best Practices</h3>
+        <p>For publishers deploying Earnify, these additional security considerations apply:</p>
+        <ul>
+          <li><strong>Consent transparency</strong> — always inform users that mining is active; silent mining damages trust and may violate consumer protection laws</li>
+          <li><strong>CPU limits</strong> — use <code>threadPercent: 0.25–0.5</code> to avoid degrading the user experience; never use <code>ALL_THREADS</code> on low-end devices</li>
+          <li><strong>Opt-out mechanism</strong> — provide a visible toggle so users can stop mining at any time</li>
+          <li><strong>HTTPS</strong> — serve your site over HTTPS; modern browsers block WebSocket connections from insecure origins</li>
+          <li><strong>Battery awareness</strong> — throttle or pause mining on battery-powered devices to preserve user trust</li>
+        </ul>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <h4>Does Earnify require any server-side setup beyond the script tag?</h4>
+          <p>None. The entire architecture runs inside the browser. You serve <code>miner.js</code> as a static asset from your CDN or directly from <code>https://earnify.cc/miner.js</code>. There is no backend proxy, no serverless function, no database, no API key configuration. The WebSocket relay is maintained by Earnify as shared infrastructure.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>How does the relay server work and can I self-host it?</h4>
+          <p>The relay at <code>wss://websocket-stratum-server.com</code> translates the browser's Socket.IO event protocol to raw Stratum V1 TCP wire protocol. It is currently a shared, centrally managed component. Self-hosting would require modifying the miner source to point to your own relay implementing the same event protocol (<code>can start</code>, <code>start</code>, <code>work</code>, <code>submit</code>, <code>hashrate</code>, <code>submit failed</code>). The relay URL is hardcoded in the current <code>miner.js</code> build.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>What data is sent to the relay server?</h4>
+          <p>Only mining-related data: wallet address (public key), algorithm identifier (<code>cwm_minotaurx</code>), share submissions (job ID + nonce + result hash), and aggregated hashrate numbers. No cookies, no IP tracking, no user-agent fingerprinting, no DOM data, no page URL, no session identifiers. The relay has no mechanism to correlate sessions or identify returning users.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Can I use Earnify alongside ad networks and still recover ad-blocked revenue?</h4>
+          <p>Yes — this is one of the most common deployment patterns. Because Earnify runs via Web Workers and WebAssembly, ad blockers cannot distinguish it from legitimate site functionality. Ad-blocked users generate compute revenue instead of display revenue, effectively recovering 25–40% of otherwise lost income. See our dedicated guide on <a href="/blog/recover-ad-blocker-revenue.html" style="color:#dfe104;text-decoration:underline;">recovering ad-blocker revenue</a> for detailed strategy and ROI projections.</p>
+        </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy With Zero Infrastructure</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Static CDN serve. Three lines of JavaScript. No servers, no maintenance, no scaling worries. Earnify handles the rest.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#thesis" class="toc-link">The Zero-Server Thesis</a>
+            <a href="#architecture" class="toc-link">Architecture Overview</a>
+            <a href="#worker-layer" class="toc-link toc-h3">Compute Layer</a>
+            <a href="#transport-layer" class="toc-link toc-h3">Transport Layer</a>
+            <a href="#code" class="toc-link">The 3-Line Setup</a>
+            <a href="#dev-fee" class="toc-link">How the Dev Fee Works</a>
+            <a href="#comparison" class="toc-link">Earnify vs. Hosted Services</a>
+            <a href="#security" class="toc-link">Security Considerations</a>
+            <a href="#faq" class="toc-link">FAQ</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top:5rem;padding-top:3rem;border-top:2px solid #27272a;">
+      <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.2em;color:#a1a1aa;margin-bottom:2rem;font-weight:600;">Related Articles</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+        <a href="/blog/recover-ad-blocker-revenue.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Revenue Strategy</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">5 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Recover Ad Blocker Revenue</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">How browser-based compute monetization recovers the 42.7% of revenue lost to ad blockers — without tracking or cookies.</p>
+        </a>
+        <a href="/blog/algorithm-comparison.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Technical</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">4 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">MinotaurX vs Power2B</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">Real-world hashrate benchmarks comparing all five browser-supported mining algorithms for your audience.</p>
+        </a>
+        <a href="/blog/gdpr-compliance.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Legal</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">5 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Browser Mining &amp; GDPR Compliance</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">How Earnify's zero-data architecture operates outside consent mandates under GDPR, CCPA, and ePrivacy.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+</body>
+</html>
