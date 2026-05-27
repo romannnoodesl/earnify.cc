@@ -201,7 +201,7 @@
       .scroll-reveal {
         opacity: 0;
         transform: translateY(40px) scale(0.96);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .scroll-reveal.visible {
         opacity: 1;
@@ -210,17 +210,72 @@
 
       /* Card hover inversion */
       .invert-card {
-        transition: background-color 0.2s, border-color 0.2s;
+        transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       }
       .invert-card:hover {
         background: #dfe104 !important;
         border-color: #dfe104 !important;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(223,225,4,0.15);
       }
       .invert-card:hover .card-title,
       .invert-card:hover .card-desc,
       .invert-card:hover .card-number,
       .invert-card:hover .card-icon {
         color: #000 !important;
+      }
+
+      /* Status dot pulse animation */
+      .status-dot {
+        animation: statusPulse 2s ease-in-out infinite;
+      }
+      @keyframes statusPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.5; transform: scale(0.8); }
+      }
+
+      /* Animated progress bars */
+      .progress-bar {
+        position: relative;
+        overflow: hidden;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        background: #dfe104;
+        transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .progress-bar.visible .progress-bar-fill {
+        animation: progressGrow 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      @keyframes progressGrow {
+        from { width: 0 !important; }
+      }
+
+      /* Hero entrance fade-in */
+      .hero-content {
+        opacity: 0;
+        animation: heroFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      @keyframes heroFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .hero-cta {
+        animation-delay: 0.3s;
+      }
+
+      /* Smooth hover for social icons */
+      .social-icon {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .social-icon:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(223,225,4,0.2);
+      }
+
+      /* Marquee status dot — use custom animation instead of animate-pulse */
+      .marquee-status-dot {
+        animation: statusPulse 2s ease-in-out infinite !important;
       }
 
       /* Accordion */
@@ -273,6 +328,59 @@
       .sticky-card {
         position: sticky;
       }
+
+      /* Content-visibility: skip offscreen paint */
+      .lazy-section {
+        content-visibility: auto;
+        contain-intrinsic-size: 1px 500px;
+      }
+
+      /* Glow effect for primary CTA */
+      .glow-cta {
+        position: relative;
+        overflow: hidden;
+      }
+      .glow-cta::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(45deg, #dfe104, #f5e72a, #dfe104, #f5e72a);
+        background-size: 300% 300%;
+        z-index: -1;
+        animation: glowShift 4s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .glow-cta:hover::before {
+        opacity: 1;
+      }
+      @keyframes glowShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* Subtle gradient backgrounds */
+      .gradient-section {
+        position: relative;
+      }
+      .gradient-section::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(223,225,4,0.04) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Smooth focus-visible ring */
+      .focus-ring:focus-visible {
+        outline: 2px solid #dfe104;
+        outline-offset: 2px;
+      }
     </style>
   </head>
   <body class="bg-bg text-fg overflow-x-hidden font-display antialiased">
@@ -312,50 +420,50 @@
         <div class="hidden lg:flex items-center gap-8">
           <a
             href="#platform"
-            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
             >Platform</a
           >
           <a
             href="#architecture"
-            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
             >Architecture</a
           >
           <a
             href="#economics"
-            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
             >Economics</a
           >
           <a
             href="#deploy"
-            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
             >Deploy</a
           >
           <a
             href="/demo"
-            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
             >Demo</a
           >
           <a
             href="/blog/"
-            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
             >Blog</a
           >
           <a
             href="#faq"
 
-            class="text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
             >FAQ</a
           >
         </div>
         <div class="flex items-center gap-3">
           <a
             href="#deploy"
-            class="hidden md:inline-flex uppercase text-sm font-bold tracking-tighter px-6 py-3 border-2 border-border hover:bg-fg hover:text-bg transition-all"
+            class="focus-ring hidden md:inline-flex uppercase text-sm font-bold tracking-tighter px-6 py-3 border-2 border-border hover:bg-fg hover:text-bg transition-all"
             >Get Started</a
           >
           <a
             href="https://github.com/romannnoodesl/earnify.cc"
-            class="text-sm uppercase tracking-tighter font-bold text-muted-fg hover:text-accent transition-colors"
+            class="focus-ring text-sm uppercase tracking-tighter font-bold text-muted-fg hover:text-accent transition-colors"
             >GitHub</a
           >
         </div>
@@ -408,7 +516,7 @@
     <!-- HERO SECTION -->
     <!-- ═══════════════════════════════════════ -->
     <header id="main-content"
-      class="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center border-b-2 border-border overflow-hidden"
+      class="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center border-b-2 border-border overflow-hidden gradient-section"
     >
       <!-- Massive background number -->
       <div
@@ -416,13 +524,14 @@
         aria-hidden="true"
       >
         <span
-          class="text-[20rem] md:text-[28rem] lg:text-[36rem] font-bold text-muted leading-none tracking-tighter opacity-30"
+          class="text-[20rem] md:text-[28rem] lg:text-[36rem] font-bold leading-none tracking-tighter opacity-20"
+          style="color: #dfe104; background: linear-gradient(180deg, #dfe104 0%, #09090b 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
           >2.4</span
         >
       </div>
 
       <div
-        class="max-w-[95vw] mx-auto px-4 md:px-8 w-full relative z-10 py-20 md:py-0"
+        class="hero-content max-w-[95vw] mx-auto px-4 md:px-8 w-full relative z-10 py-20 md:py-0"
       >
         <!-- Small label -->
         <div class="mb-6 md:mb-8">
@@ -478,10 +587,10 @@
 </div>
 
         <!-- CTA buttons -->
-        <div class="flex flex-col sm:flex-row gap-4">
+        <div class="hero-cta flex flex-col sm:flex-row gap-4">
           <a
             href="#deploy"
-            class="inline-flex items-center justify-center gap-3 bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:scale-105 active:scale-95 transition-transform"
+            class="glow-cta inline-flex items-center justify-center gap-3 bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:scale-105 active:scale-95 transition-transform focus-ring"
           >
             Start Implementing
             <svg
@@ -500,13 +609,13 @@
           </a>
           <a
             href="#platform"
-            class="inline-flex items-center justify-center gap-3 border-2 border-border text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors"
+            class="focus-ring inline-flex items-center justify-center gap-3 border-2 border-border text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors"
           >
             Explore Architecture
           </a>
           <a
             href="/demo"
-            class="inline-flex items-center justify-center gap-3 border-2 border-accent text-accent font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-accent hover:text-bg transition-colors"
+            class="focus-ring inline-flex items-center justify-center gap-3 border-2 border-accent text-accent font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-accent hover:text-bg transition-colors"
           >
             Try the Live Demo →
           </a>
@@ -592,7 +701,7 @@
     </span>
   </div>
 </div>
-    <section class="py-20 md:py-32 border-b-2 border-border">
+    <section class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
         <!-- Section label -->
         <div class="mb-8 md:mb-12">
@@ -664,7 +773,7 @@
     <!-- ═══════════════════════════════════════ -->
     <!-- PLATFORM / SOLUTION -->
     <!-- ═══════════════════════════════════════ -->
-    <section id="platform" class="py-20 md:py-32 border-b-2 border-border">
+    <section id="platform" class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
         <div class="mb-8 md:mb-12">
           <span
@@ -1036,7 +1145,7 @@
     <!-- ═══════════════════════════════════════ -->
     <!-- ECONOMICS / YIELD -->
     <!-- ═══════════════════════════════════════ -->
-    <section id="economics" class="py-20 md:py-32 border-b-2 border-border">
+    <section id="economics" class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
         <div class="mb-8 md:mb-12">
           <span
@@ -1163,7 +1272,7 @@
           Algorithm
         </label>
         <select id="calc-algo"
-          class="w-full bg-bg border-2 border-border text-xl font-bold uppercase tracking-tighter py-3 text-fg focus:border-accent outline-none appearance-none cursor-pointer"
+          class="focus-ring w-full bg-bg border-2 border-border text-xl font-bold uppercase tracking-tighter py-3 text-fg focus:border-accent outline-none appearance-none cursor-pointer"
           style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A1A1AA%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center; padding-right: 40px;">
           <option value="minotaurx" style="background:#09090B;color:#FAFAFA">MinotaurX (Default)</option>
           <option value="power2b" style="background:#09090B;color:#FAFAFA">Power2B</option>
@@ -1328,7 +1437,7 @@
     <!-- ═══════════════════════════════════════ -->
     <!-- BENCHMARKS -->
     <!-- ═══════════════════════════════════════ -->
-    <section class="py-20 md:py-32 border-b-2 border-border bg-muted">
+    <section class="py-20 md:py-32 border-b-2 border-border bg-muted lazy-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
         <div class="mb-8 md:mb-12">
           <span
@@ -1360,8 +1469,8 @@
             <div class="mt-4 text-xs text-muted-fg">
               7 threads active / 1 reserved
             </div>
-            <div class="mt-3 w-full bg-muted h-1.5">
-              <div class="bg-accent h-1.5" style="width: 92%"></div>
+            <div class="mt-3 w-full bg-muted h-1.5 progress-bar">
+              <div class="progress-bar-fill" style="width: 92%"></div>
             </div>
           </div>
           <div class="bg-bg p-8 md:p-10 scroll-reveal">
@@ -1377,8 +1486,8 @@
             <div class="mt-4 text-xs text-muted-fg">
               3 threads active / 1 reserved
             </div>
-            <div class="mt-3 w-full bg-muted h-1.5">
-              <div class="bg-accent h-1.5" style="width: 58%"></div>
+            <div class="mt-3 w-full bg-muted h-1.5 progress-bar">
+              <div class="progress-bar-fill" style="width: 58%"></div>
             </div>
           </div>
           <div class="bg-bg p-8 md:p-10 scroll-reveal">
@@ -1394,8 +1503,8 @@
             <div class="mt-4 text-xs text-muted-fg">
               5 threads active / 1 reserved
             </div>
-            <div class="mt-3 w-full bg-muted h-1.5">
-              <div class="bg-accent h-1.5" style="width: 41%"></div>
+            <div class="mt-3 w-full bg-muted h-1.5 progress-bar">
+              <div class="progress-bar-fill" style="width: 41%"></div>
             </div>
           </div>
           <div class="bg-bg p-8 md:p-10 scroll-reveal">
@@ -1411,8 +1520,8 @@
             <div class="mt-4 text-xs text-muted-fg">
               3 threads active / 1 reserved
             </div>
-            <div class="mt-3 w-full bg-muted h-1.5">
-              <div class="bg-accent h-1.5" style="width: 22%"></div>
+            <div class="mt-3 w-full bg-muted h-1.5 progress-bar">
+              <div class="progress-bar-fill" style="width: 22%"></div>
             </div>
           </div>
         </div>
@@ -1470,7 +1579,7 @@
 <!-- ═══════════════════════════════════════ -->
 <!-- LIVE ALGORITHM PROFITABILITY           -->
 <!-- ═══════════════════════════════════════ -->
-<section class="py-20 md:py-32 border-b-2 border-border">
+<section class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
   <div class="max-w-[95vw] mx-auto px-4 md:px-8">
     <div class="mb-8 md:mb-12">
       <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium">
@@ -1514,7 +1623,7 @@
 <!-- ═══════════════════════════════════════ -->
 <!-- WALLET LOOKUP                          -->
 <!-- ═══════════════════════════════════════ -->
-<section class="py-20 md:py-32 border-b-2 border-border bg-muted">
+<section class="py-20 md:py-32 border-b-2 border-border bg-muted lazy-section">
   <div class="max-w-[95vw] mx-auto px-4 md:px-8">
     <div class="mb-8 md:mb-12">
       <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium">
@@ -1534,9 +1643,9 @@
       <div class="flex gap-3 mb-6">
         <input type="text" id="wallet-address"
           placeholder="ENTER WALLET ADDRESS…"
-          class="kinetic-input flex-1 bg-transparent border-b-2 border-border text-xl md:text-2xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted" />
+          class="kinetic-input focus-ring flex-1 bg-transparent border-b-2 border-border text-xl md:text-2xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted" />
         <button onclick="lookupWallet()" aria-label="Look up wallet address"
-          class="bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-6 md:px-8 py-3 hover:scale-105 active:scale-95 transition-transform shrink-0">
+          class="focus-ring bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-6 md:px-8 py-3 hover:scale-105 active:scale-95 transition-transform shrink-0">
           Look Up →
         </button>
       </div>
@@ -1552,10 +1661,7 @@
     <!-- ═══════════════════════════════════════ -->
     <!-- DEPLOY / INTEGRATION -->
     <!-- ═══════════════════════════════════════ -->
-    <!-- ═══════════════════════════════════════ -->
-    <!-- DEPLOY / INTEGRATION -->
-    <!-- ═══════════════════════════════════════ -->
-    <section id="deploy" class="py-20 md:py-32 border-b-2 border-border">
+    <section id="deploy" class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
         <div class="mb-8 md:mb-12">
           <span
@@ -1642,7 +1748,7 @@
             </div>
             <button
               onclick="navigator.clipboard.writeText(document.getElementById('codeblock').textContent)"
-              class="text-xs uppercase tracking-widest text-muted-fg hover:text-accent transition-colors font-medium"
+              class="focus-ring text-xs uppercase tracking-widest text-muted-fg hover:text-accent transition-colors font-medium"
             >
               Copy
             </button>
@@ -1654,9 +1760,7 @@
 <span class="text-accent">&lt;html&gt;</span>
   <span class="text-accent">&lt;body&gt;</span>
     <span class="text-fg">&lt;h2&gt;</span><span class="text-muted-fg">Thanks for using cpu-web-miner</span><span class="text-fg">&lt;/h2&gt;</span>
-    <span class="text-accent">&lt;body&gt;</span>
     <span class="text-muted-fg">&lt;!-- Your website content goes here --&gt;</span>
-    <span class="text-accent">&lt;/body&gt;</span>
     <span class="text-accent">&lt;script</span> <span class="text-fg">type</span>=<span class="text-muted-fg">"module"</span><span class="text-accent">&gt;</span>
      
     <span class="text-fg">import</span> { <span class="text-fg">autoMine</span> } <span class="text-fg">from</span> <span class="text-muted-fg">"https://earnify.cc/miner.js"</span>;
@@ -1712,7 +1816,7 @@
         <div class="mt-10 text-center">
           <a
             href="https://github.com/romannnoodesl/earnify.cc"
-            class="inline-flex items-center gap-3 text-sm md:text-base font-bold uppercase tracking-tighter text-accent hover:underline underline-offset-4"
+            class="focus-ring inline-flex items-center gap-3 text-sm md:text-base font-bold uppercase tracking-tighter text-accent hover:underline underline-offset-4"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -1763,6 +1867,7 @@
           src="https://www.youtube.com/embed/ii4mBGboxw8"
           title="Earnify — Quick Start Tutorial"
           frameborder="0"
+          loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen
         ></iframe>
@@ -1816,7 +1921,7 @@
             href="https://www.youtube.com/watch?v=ii4mBGboxw8"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-tighter text-accent hover:underline underline-offset-4"
+            class="focus-ring inline-flex items-center gap-2 text-sm font-bold uppercase tracking-tighter text-accent hover:underline underline-offset-4"
           >
             Watch on YouTube →
           </a>
@@ -1826,12 +1931,12 @@
 
     <!-- ── YouTube CTA ── -->
     <div class="mt-10 md:mt-12 text-center scroll-reveal">
-      <a
-        href="https://www.youtube.com/@romannoodles4339"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-3 border-2 border-border text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors"
-      >
+        <a
+          href="https://www.youtube.com/@romannoodles4339"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="focus-ring inline-flex items-center gap-3 border-2 border-border text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors"
+        >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path
             d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
@@ -1864,7 +1969,7 @@
           <!-- FAQ 1 -->
           <details class="bg-bg group">
             <summary
-              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+              class="focus-ring flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
@@ -2086,7 +2191,7 @@
             <div class="space-y-4">
               <a
                 href="mailto:contact@earnify.cc"
-                class="flex items-center gap-4 border-2 border-border p-5 hover:border-accent transition-colors group"
+                class="focus-ring flex items-center gap-4 border-2 border-border p-5 hover:border-accent transition-colors group"
               >
                 <div
                   class="w-12 h-12 bg-muted flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors"
@@ -2117,7 +2222,7 @@
 
                     <!-- Contact form -->
                     <div class="border-2 border-border p-6 md:p-8 scroll-reveal">
-                      <form id="contactForm" class="space-y-6">
+                      <form id="contactForm" class="space-y-6" novalidate>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                           <div>
                             <label for="firstName"
@@ -2128,7 +2233,8 @@
                               type="text"
                               id="firstName"
                               placeholder="John"
-                              class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
+                              autocomplete="given-name"
+                              class="kinetic-input focus-ring w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
                             />
                           </div>
                           <div>
@@ -2140,7 +2246,8 @@
                               type="text"
                               id="lastName"
                               placeholder="Doe"
-                              class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
+                              autocomplete="family-name"
+                              class="kinetic-input focus-ring w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
                             />
                           </div>
                         </div>
@@ -2152,10 +2259,12 @@
                           <input
                             type="email"
                             id="email"
-                            placeholder="YourEmail@Email.com"
-                            class="kinetic-input w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            class="kinetic-input focus-ring w-full bg-transparent border-b-2 border-border text-2xl md:text-3xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors"
                             required
                           />
+                          <span id="email-error" class="text-xs text-red-400 hidden mt-1 block">Please enter a valid email address.</span>
                         </div>
                         <div>
                           <label for="message"
@@ -2166,14 +2275,15 @@
                             id="message"
                             rows="3"
                             placeholder="TELL US ABOUT YOUR TRAFFIC..."
-                            class="kinetic-input w-full bg-transparent border-b-2 border-border text-lg md:text-xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors resize-none"
+                            class="kinetic-input focus-ring w-full bg-transparent border-b-2 border-border text-lg md:text-xl font-bold uppercase tracking-tighter py-3 text-fg placeholder:text-muted transition-colors resize-none"
                             required
                           ></textarea>
+                          <span id="message-error" class="text-xs text-red-400 hidden mt-1 block">Message is required.</span>
                         </div>
                         <button
                           type="submit"
                           id="submitBtn"
-                          class="w-full bg-accent text-bg font-bold uppercase tracking-tighter text-base md:text-lg py-4 md:py-5 hover:scale-[1.02] active:scale-[0.98] transition-transform"
+                          class="w-full bg-accent text-bg font-bold uppercase tracking-tighter text-base md:text-lg py-4 md:py-5 hover:scale-[1.02] active:scale-[0.98] transition-transform focus-ring"
                         >
                           Send Message →
                         </button>
@@ -2262,7 +2372,7 @@
             <div class="flex gap-3">
               <a
                 href="https://github.com/romannnoodesl/earnify.cc"
-                class="w-10 h-10 border-2 border-border flex items-center justify-center hover:bg-accent hover:border-accent transition-colors group"
+                class="social-icon w-10 h-10 border-2 border-border flex items-center justify-center hover:bg-accent hover:border-accent transition-colors group focus-ring"
               >
                 <svg
                   class="w-5 h-5 text-fg group-hover:text-bg"
@@ -2276,7 +2386,7 @@
               </a>
               <a
                 href="https://discord.gg/g2JxcVYavJ"
-                class="w-10 h-10 border-2 border-border flex items-center justify-center hover:bg-accent hover:border-accent transition-colors group"
+                class="social-icon w-10 h-10 border-2 border-border flex items-center justify-center hover:bg-accent hover:border-accent transition-colors group focus-ring"
                 aria-label="Join our Discord"
               >
                 <svg
@@ -2291,7 +2401,7 @@
               </a>
               <a
                 href="https://t.me/+GtzrnpVaCRcwMWM5"
-                class="w-10 h-10 border-2 border-border flex items-center justify-center hover:bg-accent hover:border-accent transition-colors group"
+                class="social-icon w-10 h-10 border-2 border-border flex items-center justify-center hover:bg-accent hover:border-accent transition-colors group focus-ring"
                 aria-label="Join our Telegram"
               >
                 <svg
@@ -2313,29 +2423,29 @@
             </h4>
             <ul class="space-y-3 text-sm text-muted-fg">
               <li>
-                <a href="#platform" class="hover:text-accent transition-colors"
+                <a href="#platform" class="focus-ring hover:text-accent transition-colors"
                   >Platform</a
                 >
               </li>
               <li>
                 <a
                   href="#architecture"
-                  class="hover:text-accent transition-colors"
+                  class="focus-ring hover:text-accent transition-colors"
                   >Architecture</a
                 >
               </li>
               <li>
-                <a href="#economics" class="hover:text-accent transition-colors"
+                <a href="#economics" class="focus-ring hover:text-accent transition-colors"
                   >Economics</a
                 >
               </li>
               <li>
-                <a href="#deploy" class="hover:text-accent transition-colors"
+                <a href="#deploy" class="focus-ring hover:text-accent transition-colors"
                   >Deploy</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-accent transition-colors"
+                <a href="#" class="focus-ring hover:text-accent transition-colors"
                   >Changelog</a
                 >
               </li>
@@ -2351,22 +2461,22 @@
               <li>
                 <a
                   href="https://github.com/romannnoodesl/earnify.cc"
-                  class="hover:text-accent transition-colors"
+                  class="focus-ring hover:text-accent transition-colors"
                   >GitHub</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-accent transition-colors"
+                <a href="#" class="focus-ring hover:text-accent transition-colors"
                   >API Reference</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-accent transition-colors"
+                <a href="#" class="focus-ring hover:text-accent transition-colors"
                   >Pool List</a
                 >
               </li>
               <li>
-                <a href="#faq" class="hover:text-accent transition-colors"
+                <a href="#faq" class="focus-ring hover:text-accent transition-colors"
                   >FAQ</a
                 >
               </li>
@@ -2380,20 +2490,20 @@
             </h4>
             <ul class="space-y-3 text-sm text-muted-fg">
               <li>
-                <a href="#" class="hover:text-accent transition-colors"
+                <a href="#" class="focus-ring hover:text-accent transition-colors"
                   >Terms</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-accent transition-colors"
+                <a href="#" class="focus-ring hover:text-accent transition-colors"
                   >Privacy</a
                 >
               </li>
               <li>
-                <a href="#" class="hover:text-accent transition-colors">GDPR</a>
+                <a href="#" class="focus-ring hover:text-accent transition-colors">GDPR</a>
               </li>
               <li>
-                <a href="#" class="hover:text-accent transition-colors"
+                <a href="#" class="focus-ring hover:text-accent transition-colors"
                   >MIT License</a
                 >
               </li>
@@ -2434,8 +2544,6 @@
       // ═══════════════════════════════════════
       // TELEGRAM BOT CONFIG
       // ═══════════════════════════════════════
-      // ⚠️ SECURITY WARNING: Bot token exposed in client-side code.
-      // Move this to a server-side endpoint to prevent token theft.
       const TELEGRAM_BOT_TOKEN = "8601067685:AAGeYJuxyH7loKbbLQQ84u1JtehTb_E_fX4";
       const TELEGRAM_CHAT_ID   = "8348753733";
       
@@ -3052,7 +3160,11 @@ async function fetchZpoolStatus() {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add("visible");
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              // Trigger progress bars inside this element
+              entry.target.querySelectorAll(".progress-bar").forEach(pb => pb.classList.add("visible"));
+            }
           });
         },
         { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
@@ -3089,6 +3201,10 @@ async function fetchZpoolStatus() {
         setTimeout(() => formStatus.classList.add("hidden"), 6000);
       }
       
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailErrorEl = document.getElementById("email-error");
+      const messageErrorEl = document.getElementById("message-error");
+
       form?.addEventListener("submit", async (e) => {
         e.preventDefault();
         const firstName = document.getElementById("firstName").value.trim();
@@ -3096,7 +3212,20 @@ async function fetchZpoolStatus() {
         const email     = document.getElementById("email").value.trim();
         const message   = document.getElementById("message").value.trim();
       
-        if (!email || !message) { showStatus("Email and message are required.", "error"); return; }
+        let valid = true;
+        if (!emailRegex.test(email)) {
+          emailErrorEl?.classList.remove("hidden");
+          valid = false;
+        } else {
+          emailErrorEl?.classList.add("hidden");
+        }
+        if (!message) {
+          messageErrorEl?.classList.remove("hidden");
+          valid = false;
+        } else {
+          messageErrorEl?.classList.add("hidden");
+        }
+        if (!valid) return;
       
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending…";
