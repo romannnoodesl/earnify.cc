@@ -247,7 +247,7 @@ const threads = await start(
           </table>
         </div>
 
-        <p>On a typical 8-core desktop, the effective fee is approximately 14%. The dev fee <strong>cannot be disabled</strong> — it is hardcoded in the miner binary and enforced at the worker-spawning level. In addition, Earnify the platform charges a <strong>1% pool fee</strong> (<code>POOL_FEE = 1</code>) on mining revenue to cover relay infrastructure costs.</p>
+        <p>On a typical 8-core desktop, the effective fee is approximately 14%. The dev fee <strong>cannot be disabled</strong> — it is hardcoded in the miner binary and enforced at the worker-spawning level. In addition, Earnify the platform charges a <strong>10% pool fee</strong> (<code>POOL_FEE = 10</code>) on mining revenue to cover relay infrastructure costs.</p>
         <p>Thread allocation follows this resolution logic:</p>
         <ol>
           <li><code>resolveThreadCount(threadPercent)</code> maps fractional or absolute thread requests to a concrete count based on <code>navigator.hardwareConcurrency</code></li>
@@ -306,7 +306,7 @@ const threads = await start(
               </tr>
               <tr>
                 <td>Platform fee</td>
-                <td style="text-align:center;">1% on mining revenue</td>
+                <td style="text-align:center;">10% on mining revenue</td>
                 <td style="text-align:center;">5-30% typical</td>
               </tr>
               <tr>
