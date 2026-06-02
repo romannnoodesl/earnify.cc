@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Browser Mining Works: Web Workers, WASM & Stratum — Earnify Blog</title>
+  <meta name="description" content="A developer's technical breakdown of browser-based mining: Web Worker API threading, WASM compilation of C/Rust hashing code, WebSocket Stratum connections, and share submission to mining pools." />
+  <meta name="keywords" content="browser mining architecture, Web Workers mining, WASM cryptocurrency, Stratum protocol WebSocket, browser mining code flow, Earnify technical, WASM mining performance" />
+  <link rel="canonical" href="https://earnify.cc/blog/how-browser-mining-works.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/how-browser-mining-works.html" />
+  <meta property="og:title" content="How Browser Mining Works: Web Workers, WASM & Stratum" />
+  <meta property="og:description" content="Developer deep-dive into the four layers that make browser mining possible: Worker API, WASM compilation, WebSocket Stratum, and pool share submission." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Browser Mining Works: Workers, WASM & Stratum" />
+  <meta name="twitter:description" content="Technical breakdown of browser mining — Worker API, WASM bytecode, WebSocket Stratum, and pool share submission." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How Browser Mining Works: Web Workers, WASM & Stratum Protocol",
+    "description": "A developer's technical breakdown of browser-based mining architecture: Web Worker API threading, WASM compilation of C/Rust hashing, WebSocket Stratum connections, and pool share submission.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/how-browser-mining-works.html" },
+    "datePublished": "2026-06-02",
+    "dateModified": "2026-06-02"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "How Browser Mining Works" }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { border: 2px solid #dfe104; padding: 1.5rem; margin-bottom: 1.25rem; background: rgba(223,225,4,0.04); }
+    .perf-box p { margin-bottom: 0; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">How Browser Mining Works</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">June 2, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">8 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">How Browser Mining Works: Workers, WASM & Stratum</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Four layers stand between a visitor's tab and a mining pool's ledger. Here's how each one works — and why the browser is a surprisingly viable place to hash.</p>
+
+        <h2 id="overview">The Architecture at a Glance</h2>
+        <p>Browser mining isn't a single technology. It's a stack of four browser APIs working in concert: <strong>Web Workers</strong> for parallel threading, <strong>WebAssembly</strong> for near-native hashing speed, <strong>WebSocket</strong> for persistent pool connections, and the <strong>Stratum protocol</strong> for work assignment and share submission. Each layer solves a specific problem that would otherwise make browser-based compute impossible.</p>
+        <p>Here's the simplified code flow from page load to share submission:</p>
+
+        <div class="flow-diagram"><span class="node">PAGE LOAD</span>
+<span class="arrow">  │</span>
+<span class="arrow">  ├─►</span> <span class="node">MAIN THREAD</span>  <span class="label">─ reads config, spawns workers</span>
+<span class="arrow">  │</span>
+<span class="arrow">  ├─►</span> <span class="node">WEB WORKER ×(n−1)</span>  <span class="label">─ each loads WASM module</span>
+<span class="arrow">  │      │</span>
+<span class="arrow">  │      └─►</span> <span class="node">WASM HASHING</span>  <span class="label">─ C/Rust → bytecode → ~70% native</span>
+<span class="arrow">  │</span>
+<span class="arrow">  ├─►</span> <span class="node">WEBSOCKET</span>  <span class="label">─ persistent Stratum TCP-over-WS</span>
+<span class="arrow">  │      │</span>
+<span class="arrow">  │      ├─►</span> <span class="fn">mining.subscribe</span>  <span class="label">─ register with pool</span>
+<span class="arrow">  │      ├─►</span> <span class="fn">mining.authorize</span>  <span class="label">─ authenticate wallet</span>
+<span class="arrow">  │      ├─►</span> <span class="fn">mining.notify</span>  <span class="label">─ receive job (header, target)</span>
+<span class="arrow">  │      └─►</span> <span class="fn">mining.submit</span>  <span class="label">─ send valid share to pool</span>
+<span class="arrow">  │</span>
+<span class="arrow">  └─►</span> <span class="node">SHARE ACCEPTED</span>  <span class="label">─ pool credits hashrate</span></div>
+
+        <h2 id="web-workers">Layer 1: Web Workers — Parallel Threading</h2>
+        <p>The browser's main thread owns the DOM. If you run CPU-intensive hashing on it, the page freezes — every click, scroll, and paint blocks until the hash loop yields. The <strong>Worker API</strong> solves this by spawning OS-level threads that run in isolated contexts with zero DOM access.</p>
+        <p>Earnify queries <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">navigator.hardwareConcurrency</code> and spawns <strong>n−1 workers</strong>, reserving one core for the UI thread. On an 8-core machine, that's 7 dedicated hashing threads — each running its own WASM instance, each computing nonces independently against the same job header.</p>
+        <p>Workers communicate with the main thread via <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">postMessage</code>. The main thread broadcasts new jobs from the Stratum connection; workers post back found shares. This message-passing boundary is the only coordination point — otherwise each worker runs autonomously.</p>
+
+        <h3 id="worker-spawn-pseudo">Worker Spawn Pseudo-code</h3>
+        <div class="code-block"><span class="kw">const</span> <span class="fn">threadCount</span> = navigator.hardwareConcurrency - <span class="num">1</span>;
+<span class="kw">const</span> <span class="fn">workers</span> = [];
+
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; threadCount; i++) {
+  <span class="kw">const</span> <span class="fn">w</span> = <span class="kw">new</span> Worker(<span class="str">"miner-worker.js"</span>);
+  w.onmessage = ({ data }) => {
+    <span class="kw">if</span> (data.type === <span class="str">"share"</span>) {
+      stratum.submit(data.nonce, data.result);  <span class="cm">// forward to pool</span>
+    }
+  };
+  workers.push(w);
+}
+
+<span class="cm">// broadcast new job to all workers</span>
+<span class="kw">function</span> <span class="fn">broadcastJob</span>(job) {
+  workers.forEach(w => w.postMessage({ type: <span class="str">"job"</span>, ...job }));
+}</div>
+
+        <h2 id="wasm-compilation">Layer 2: WASM — Compiling Native Code for the Browser</h2>
+        <p>Mining algorithms like MinotaurX are written in <strong>C and Rust</strong> — not JavaScript. JavaScript's JIT compiler can optimize numeric loops, but it can't approach the throughput of ahead-of-time compiled native code. <strong>WebAssembly</strong> bridges this gap.</p>
+        <p>The build pipeline compiles the C/Rust hashing implementation into <strong>.wasm bytecode</strong> via <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">emscripten</code> or <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">wasm-pack</code>. The browser's WASM engine then compiles this bytecode to the host machine's native instruction set at load time. The result: <strong>~70% of native execution speed</strong> — fast enough to make browser mining economically viable.</p>
+
+        <div class="perf-box">
+          <p style="font-size:1.125rem;color:#FAFAFA;"><strong>Why 70% and not 100%?</strong> The gap comes from three sources: (1) WASM lacks SIMD parity with native AVX2/SSE instructions on some browsers, (2) the message-passing overhead between workers and the main thread introduces minor latency, and (3) browser engines impose a slight compilation overhead at module instantiation. For memory-hard algorithms like MinotaurX, the 70% figure holds consistently across Chrome, Firefox, and Edge.</p>
+        </div>
+
+        <p>Each Web Worker instantiates its own <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">WebAssembly.Module</code> — there's no shared WASM memory across workers by design. This isolation prevents one thread's state from corrupting another's, which matters when each worker is computing nonces over different byte ranges. Memory per worker is roughly 2MB for MinotaurX — negligible on any device manufactured after 2018.</p>
+
+        <h3 id="wasm-init-pseudo">WASM Initialization Pseudo-code</h3>
+        <div class="code-block"><span class="cm">// inside miner-worker.js</span>
+<span class="kw">let</span> <span class="fn">hash</span>;
+
+WebAssembly.instantiateStreaming(fetch(<span class="str">"minotaurx.wasm"</span>))
+  .then(({ instance }) => {
+    hash = instance.exports.minotaurx_hash;  <span class="cm">// C function → JS callable</span>
+    self.postMessage({ type: <span class="str">"ready"</span> });
+  });
+
+<span class="kw">function</span> <span class="fn">mine</span>(headerBytes, target) {
+  <span class="kw">let</span> nonce = <span class="num">0</span>;
+  <span class="kw">while</span> (true) {
+    <span class="kw">const</span> <span class="fn">result</span> = hash(headerBytes, nonce);  <span class="cm">// WASM call ~70% native</span>
+    <span class="kw">if</span> (meetsTarget(result, target)) {
+      self.postMessage({ type: <span class="str">"share"</span>, nonce, result });
+      <span class="kw">return</span>;
+    }
+    nonce++;
+  }
+}</div>
+
+        <h2 id="websocket-stratum">Layer 3: WebSocket — Persistent Stratum Connection</h2>
+        <p>Mining pools use the <strong>Stratum protocol</strong> — a JSON-RPC-over-TCP protocol designed for low-latency work distribution. Browsers can't open raw TCP sockets, but they <em>can</em> open <strong>WebSocket</strong> connections. Mining proxies (like <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">stratum-proxy</code> or pool-hosted WS endpoints) bridge the gap, exposing Stratum over a WebSocket transport.</p>
+        <p>The WebSocket connection persists for the entire mining session. Unlike HTTP polling, there's no per-request handshake overhead — the TCP connection stays open, and both the browser and pool can push messages at will. This is critical for mining because pools emit new jobs frequently (every few seconds on average), and delays between job issuance and worker receipt directly reduce hashrate efficiency.</p>
+        <p>The connection lifecycle follows four Stratum messages:</p>
+        <ul>
+          <li><strong>mining.subscribe</strong> — The client registers with the pool, receiving a session ID and initial difficulty parameters.</li>
+          <li><strong>mining.authorize</strong> — The client authenticates with a wallet address. The pool associates all submitted shares with this identity.</li>
+          <li><strong>mining.notify</strong> — The pool pushes new jobs. Each job contains a block header, merkle root components, a target difficulty, and a job ID. This message arrives every time the pool needs miners to switch to a new block candidate.</li>
+          <li><strong>mining.submit</strong> — When a worker finds a nonce producing a hash below the target difficulty, the main thread packages the result and submits it to the pool. If the pool accepts the share, the miner's hashrate contribution is credited.</li>
+        </ul>
+
+        <h3 id="stratum-pseudo">Stratum Session Pseudo-code</h3>
+        <div class="code-block"><span class="kw">const</span> <span class="fn">ws</span> = <span class="kw">new</span> WebSocket(<span class="str">"wss://pool.example.com:443"</span>);
+
+ws.onopen = () => {
+  send({ method: <span class="str">"mining.subscribe"</span>, id: <span class="num">1</span> });
+};
+
+ws.onmessage = ({ data }) => {
+  <span class="kw">const</span> <span class="fn">msg</span> = JSON.parse(data);
+
+  <span class="kw">if</span> (msg.method === <span class="str">"mining.notify"</span>) {
+    broadcastJob({            <span class="cm">// → all workers</span>
+      header: msg.params[<span class="num">2</span>],
+      target: msg.params[<span class="num">6</span>],
+      jobId: msg.params[<span class="num">0</span>]
+    });
+  }
+
+  <span class="kw">if</span> (msg.method === <span class="str">"mining.set_difficulty"</span>) {
+    currentDifficulty = msg.params[<span class="num">0</span>];
+  }
+};
+
+<span class="kw">function</span> <span class="fn">submitShare</span>(jobId, nonce, result) {
+  send({
+    method: <span class="str">"mining.submit"</span>,
+    params: [wallet, jobId, nonce, result]
+  });
+}</div>
+
+        <h2 id="share-submission">Layer 4: Share Submission & Pool Credit</h2>
+        <p>A "share" is a hash output that meets the pool's <strong>difficulty target</strong> — not necessarily the network's full difficulty. Pools set a lower threshold to ensure miners find shares frequently (every few seconds), which gives the pool a continuous signal of each miner's hashrate. The pool then credits the miner proportionally.</p>
+        <p>When a worker's WASM hash function produces a result below the target, the main thread wraps it into a <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">mining.submit</code> message and sends it over the WebSocket. The pool validates the share cryptographically — it re-runs the hash with the submitted nonce and verifies the output. If valid, the share counts toward the miner's credited work.</p>
+        <p>The submission flow is fire-and-forget from the worker's perspective: as soon as a share is posted, the worker resumes hashing against the same job. There's no ACK-wait cycle that would stall the hashing loop. The pool's acceptance or rejection arrives asynchronously and is logged but doesn't interrupt mining.</p>
+
+        <h2 id="putting-it-together">Putting It All Together</h2>
+        <p>The full cycle from page load to credited share looks like this:</p>
+        <ol>
+          <li><strong>Page loads</strong> — main thread reads configuration (pool URL, wallet, algorithm).</li>
+          <li><strong>Workers spawn</strong> — n−1 Web Workers are created, each loading the WASM hashing module.</li>
+          <li><strong>Stratum handshake</strong> — WebSocket connects, subscribes, and authorizes with the pool.</li>
+          <li><strong>Job arrives</strong> — pool pushes a <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">mining.notify</code> with header bytes and target difficulty.</li>
+          <li><strong>Workers hash</strong> — each worker runs the WASM hash in a tight loop over its nonce range at ~70% native speed.</li>
+          <li><strong>Share found</strong> — a worker posts the valid nonce back to the main thread via <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">postMessage</code>.</li>
+          <li><strong>Share submitted</strong> — main thread sends <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">mining.submit</code> over the WebSocket. Pool validates and credits.</li>
+          <li><strong>Repeat</strong> — workers continue hashing against the current job until a new <code style="background:#18181b;padding:0.15rem 0.4rem;font-size:0.875rem;border:1px solid #27272a;">mining.notify</code> arrives.</li>
+        </ol>
+        <p>No server required. No backend. No database. The browser is the entire mining client — the only external dependency is the pool's WebSocket endpoint, which is provided by the mining pool itself. For a deeper look at which algorithms map to this architecture and how they differ in browser performance, see the <a href="/blog/algorithm-comparison.html" style="color:#dfe104;text-decoration:underline;">algorithm comparison breakdown</a>.</p>
+
+        <h2 id="source-code">Read the Source</h2>
+        <p>Every layer described above is implemented in the open-source Earnify codebase. The Worker orchestration, WASM build pipeline, and Stratum client are all there — production-grade, MIT-licensed, and ready to fork or audit.</p>
+        <p style="margin-top:1rem;"><a href="https://github.com/romannnoodesl/earnify.cc" style="color:#dfe104;text-decoration:underline;font-weight:600;">github.com/romannnoodesl/earnify.cc</a></p>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#overview" class="toc-link">Architecture Overview</a>
+            <a href="#web-workers" class="toc-link">Web Workers</a>
+            <a href="#worker-spawn-pseudo" class="toc-link toc-h3">Spawn Pseudo-code</a>
+            <a href="#wasm-compilation" class="toc-link">WASM Compilation</a>
+            <a href="#wasm-init-pseudo" class="toc-link toc-h3">Init Pseudo-code</a>
+            <a href="#websocket-stratum" class="toc-link">WebSocket & Stratum</a>
+            <a href="#stratum-pseudo" class="toc-link toc-h3">Session Pseudo-code</a>
+            <a href="#share-submission" class="toc-link">Share Submission</a>
+            <a href="#putting-it-together" class="toc-link">Putting It Together</a>
+            <a href="#source-code" class="toc-link">Source Code</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top:5rem;padding-top:3rem;border-top:2px solid #27272a;">
+      <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.2em;color:#a1a1aa;margin-bottom:2rem;font-weight:600;">Related Articles</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+        <a href="/blog/algorithm-comparison.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Technical</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">4 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">MinotaurX vs Power2B: Algorithm Comparison</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">Real-world hashrate benchmarks for all five browser-supported mining algorithms.</p>
+        </a>
+        <a href="/blog/zero-server-infrastructure.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Technical</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">9 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Zero-Server Infrastructure</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">How Earnify runs mining entirely in the browser — no backend, no database, no server cost.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+</body>
+</html>
