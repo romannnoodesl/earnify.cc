@@ -382,6 +382,231 @@
         outline-offset: 2px;
       }
     </style>
+
+    <style>
+      :root {
+        --accent-dim: rgba(223,225,4,0.1);
+        --accent-glow: rgba(223,225,4,0.25);
+        --glass-bg: rgba(9,9,11,0.6);
+        --glass-border: rgba(255,255,255,0.06);
+        --glass-border-hover: rgba(223,225,4,0.15);
+        --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .ambient-container {
+        position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+      }
+      .ambient-orb {
+        position: absolute; border-radius: 50%; filter: blur(100px); will-change: transform; opacity: 0.5;
+      }
+      .ambient-orb-1 {
+        width: 50vw; height: 50vw;
+        background: radial-gradient(circle, rgba(223,225,4,0.06) 0%, transparent 70%);
+        top: -15%; right: -10%;
+        animation: orbFloat1 25s ease-in-out infinite;
+      }
+      .ambient-orb-2 {
+        width: 40vw; height: 40vw;
+        background: radial-gradient(circle, rgba(168,85,247,0.04) 0%, transparent 70%);
+        bottom: -10%; left: -10%;
+        animation: orbFloat2 30s ease-in-out infinite;
+      }
+      .ambient-orb-3 {
+        width: 60vw; height: 60vw;
+        background: radial-gradient(circle, rgba(59,130,246,0.03) 0%, transparent 70%);
+        top: 40%; left: 30%;
+        animation: orbFloat3 35s ease-in-out infinite;
+      }
+      @keyframes orbFloat1 {
+        0%,100%{transform:translate(0,0)scale(1)}
+        33%{transform:translate(40px,-50px)scale(1.08)}
+        66%{transform:translate(-30px,30px)scale(0.92)}
+      }
+      @keyframes orbFloat2 {
+        0%,100%{transform:translate(0,0)scale(1)}
+        50%{transform:translate(-50px,40px)scale(1.1)}
+      }
+      @keyframes orbFloat3 {
+        0%,100%{transform:translate(0,0)scale(1)rotate(0deg)}
+        50%{transform:translate(30px,-30px)scale(1.05)rotate(180deg)}
+      }
+
+      .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        transition: all 0.5s var(--ease-out-expo);
+        position: relative;
+      }
+      .glass-card:hover {
+        border-color: var(--glass-border-hover);
+        background: rgba(9,9,11,0.7);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 60px rgba(223,225,4,0.06);
+      }
+      .glass-card .card-glow {
+        position: absolute; inset: 0; border-radius: inherit; opacity: 0;
+        transition: opacity 0.5s; pointer-events: none;
+        background: radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(223,225,4,0.06), transparent 40%);
+      }
+      .glass-card:hover .card-glow { opacity: 1; }
+
+      .glass-nav {
+        background: rgba(9,9,11,0.7);
+        backdrop-filter: blur(24px) saturate(1.5);
+        -webkit-backdrop-filter: blur(24px) saturate(1.5);
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .reveal {
+        opacity: 0;
+        transition: all 0.8s var(--ease-out-expo);
+      }
+      .reveal-up { transform: translateY(60px); }
+      .reveal-left { transform: translateX(-60px); }
+      .reveal-right { transform: translateX(60px); }
+      .reveal-scale { transform: scale(0.95); }
+      .reveal.visible {
+        opacity: 1;
+        transform: translate(0) scale(1);
+      }
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+      .reveal-delay-4 { transition-delay: 0.4s; }
+      .reveal-delay-5 { transition-delay: 0.5s; }
+      .reveal-delay-6 { transition-delay: 0.6s; }
+      .reveal-delay-7 { transition-delay: 0.7s; }
+      .reveal-delay-8 { transition-delay: 0.8s; }
+
+      .stagger-line {
+        overflow: hidden; display: block;
+      }
+      .stagger-line > span {
+        display: block; opacity: 0; transform: translateY(100%);
+        transition: all 0.8s var(--ease-out-expo);
+      }
+      .stagger-line.visible > span { opacity: 1; transform: translateY(0); }
+      .stagger-line:nth-child(1) > span { transition-delay: 0s; }
+      .stagger-line:nth-child(2) > span { transition-delay: 0.12s; }
+      .stagger-line:nth-child(3) > span { transition-delay: 0.24s; }
+      .stagger-line:nth-child(4) > span { transition-delay: 0.36s; }
+      .stagger-line:nth-child(5) > span { transition-delay: 0.48s; }
+
+      .magnetic-btn { position: relative; display: inline-flex; }
+      .magnetic-btn-inner {
+        position: relative; z-index: 1; display: inherit; align-items: inherit;
+        justify-content: inherit; gap: inherit;
+        transition: transform 0.4s var(--ease-out-expo);
+      }
+
+      .mouse-glow {
+        position: fixed; width: 500px; height: 500px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(223,225,4,0.05) 0%, transparent 60%);
+        pointer-events: none; z-index: 9998; transform: translate(-50%,-50%);
+        transition: opacity 0.4s; will-change: transform; opacity: 0;
+      }
+
+      .hero-glow {
+        position: absolute; width: 700px; height: 700px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(223,225,4,0.06) 0%, transparent 50%);
+        pointer-events: none; transform: translate(-50%,-50%);
+        will-change: transform; transition: transform 0.1s ease-out; z-index: 0;
+      }
+
+      .parallax-layer { will-change: transform; }
+
+      .counter-value { font-variant-numeric: tabular-nums; }
+
+      .arch-connector {
+        position: relative;
+      }
+      .arch-connector::after {
+        content: ''; position: absolute;
+        top: 50%; right: -1px;
+        width: 2px; height: 40%;
+        background: linear-gradient(to bottom, var(--accent-dim), transparent);
+        transform: translateY(-50%);
+      }
+      .arch-connector:last-child::after { display: none; }
+      @media (min-width: 1024px) {
+        .arch-connector::after {
+          width: 60%; height: 2px;
+          top: auto; bottom: -1px;
+          right: 0; left: auto;
+          background: linear-gradient(to right, var(--accent-dim), transparent);
+          transform: none;
+        }
+        .arch-connector:last-child::after { display: none; }
+      }
+
+      .faq-item {
+        border: 1px solid var(--glass-border);
+        transition: border-color 0.3s, background 0.3s;
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .faq-item:hover { border-color: var(--glass-border-hover); }
+      .faq-item[open] { border-color: var(--glass-border-hover); }
+      .faq-answer-wrap {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.45s var(--ease-out-expo);
+      }
+      .faq-item[open] .faq-answer-wrap { grid-template-rows: 1fr; }
+      .faq-answer-wrap > div { overflow: hidden; }
+      .faq-toggle {
+        transition: transform 0.4s var(--ease-spring);
+      }
+      .faq-item[open] .faq-toggle { transform: rotate(45deg); }
+
+      .nav-link {
+        position: relative;
+      }
+      .nav-link::after {
+        content: ''; position: absolute; bottom: -2px; left: 0;
+        width: 0; height: 2px; background: var(--color-accent, #DFE104);
+        transition: width 0.4s var(--ease-out-expo);
+      }
+      .nav-link:hover::after,
+      .nav-link.active::after { width: 100%; }
+
+      .btn-arrow {
+        transition: gap 0.3s var(--ease-out-expo);
+      }
+      .btn-arrow:hover { gap: 0.75rem; }
+      .btn-arrow svg {
+        transition: transform 0.3s var(--ease-out-expo);
+      }
+      .btn-arrow:hover svg { transform: translateX(4px); }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #FAFAFA 0%, #DFE104 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ambient-container, .mouse-glow, .hero-glow,
+        .ambient-orb, .card-glow,
+        [class*="animate-"] { display: none !important; }
+        .reveal, .stagger-line > span {
+          opacity: 1 !important; transform: none !important;
+        }
+        .glass-card { backdrop-filter: none !important; }
+        .glass-nav { backdrop-filter: none !important; }
+        .parallax-layer { transform: none !important; }
+        .faq-toggle { display: none !important; }
+      }
+
+      body {
+        background: #09090B;
+      }
+    </style>
   </head>
   <body class="bg-bg text-fg overflow-x-hidden font-display antialiased">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-accent focus:text-bg focus:px-4 focus:py-2 focus:font-bold focus:uppercase focus:tracking-wider">Skip to content</a>
@@ -403,62 +628,73 @@
       <rect width="100%" height="100%" filter="url(#noise)" />
     </svg>
 
+    <!-- Ambient Background Orbs -->
+    <div class="ambient-container" aria-hidden="true">
+      <div class="ambient-orb ambient-orb-1"></div>
+      <div class="ambient-orb ambient-orb-2"></div>
+      <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
     <!-- ═══════════════════════════════════════ -->
     <!-- NAVIGATION -->
     <!-- ═══════════════════════════════════════ -->
     <nav role="navigation"
-      class="fixed top-0 w-full z-50 border-b-2 border-border bg-bg/95 backdrop-blur-sm"
+      class="fixed top-0 w-full z-50 glass-nav"
     >
       <div
         class="max-w-[95vw] mx-auto px-4 md:px-8 h-16 md:h-20 flex justify-between items-center"
       >
-        <a href="#" class="flex items-center gap-2">
+        <a href="#" class="flex items-center gap-2 group">
           <span class="text-xl md:text-2xl font-bold tracking-tighter uppercase"
             >Earn<span class="text-accent">ify</span></span
           >
         </a>
-        <div class="hidden lg:flex items-center gap-8">
+        <div class="hidden lg:flex items-center gap-1">
           <a
             href="#platform"
-            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="nav-link focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors px-4 py-2"
+            data-section="platform"
             >Platform</a
           >
           <a
             href="#architecture"
-            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="nav-link focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors px-4 py-2"
+            data-section="architecture"
             >Architecture</a
           >
           <a
             href="#economics"
-            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="nav-link focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors px-4 py-2"
+            data-section="economics"
             >Economics</a
           >
           <a
             href="#deploy"
-            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="nav-link focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors px-4 py-2"
+            data-section="deploy"
             >Deploy</a
           >
           <a
             href="/demo"
-            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="nav-link focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors px-4 py-2"
             >Demo</a
           >
           <a
             href="/blog/"
-            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="nav-link focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors px-4 py-2"
             >Blog</a
           >
           <a
             href="#faq"
-
-            class="focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors"
+            class="nav-link focus-ring text-sm uppercase tracking-widest text-muted-fg hover:text-accent transition-colors px-4 py-2"
+            data-section="faq"
             >FAQ</a
           >
         </div>
         <div class="flex items-center gap-3">
           <a
             href="#deploy"
-            class="focus-ring hidden md:inline-flex uppercase text-sm font-bold tracking-tighter px-6 py-3 border-2 border-border hover:bg-fg hover:text-bg transition-all"
+            class="focus-ring hidden md:inline-flex uppercase text-sm font-bold tracking-tighter px-6 py-3 border border-[var(--glass-border)] hover:bg-fg hover:text-bg transition-all rounded-[var(--radius-md,8px)]"
             >Get Started</a
           >
           <a
@@ -513,59 +749,64 @@
     </div>
 
     <!-- ═══════════════════════════════════════ -->
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION — Cinematic Experience -->
     <!-- ═══════════════════════════════════════ -->
     <header id="main-content"
-      class="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center border-b-2 border-border overflow-hidden gradient-section"
+      class="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center border-b-2 border-border overflow-hidden"
     >
-      <!-- Massive background number -->
+      <!-- Hero Mouse Glow -->
+      <div class="hero-glow" id="heroGlow" aria-hidden="true"></div>
+
+      <!-- Massive background number with parallax -->
       <div
-        class="absolute -right-8 md:right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none"
+        class="parallax-layer absolute -right-8 md:right-0 top-1/2 -translate-y-1/2 select-none pointer-events-none"
+        data-parallax-speed="-0.15"
         aria-hidden="true"
       >
         <span
-          class="text-[20rem] md:text-[28rem] lg:text-[36rem] font-bold leading-none tracking-tighter opacity-20"
-          style="color: #dfe104; background: linear-gradient(180deg, #dfe104 0%, #09090b 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
+          class="text-[20rem] md:text-[28rem] lg:text-[36rem] font-bold leading-none tracking-tighter"
+          style="color: #dfe104; background: linear-gradient(180deg, rgba(223,225,4,0.15) 0%, #09090b 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
           >2.4</span
         >
       </div>
 
       <div
-        class="hero-content max-w-[95vw] mx-auto px-4 md:px-8 w-full relative z-10 py-20 md:py-0"
+        class="max-w-[95vw] mx-auto px-4 md:px-8 w-full relative z-10 py-20 md:py-0"
       >
-        <!-- Small label -->
-        <div class="mb-6 md:mb-8">
+        <!-- Small label with reveal -->
+        <div class="mb-6 md:mb-8 reveal reveal-up" style="transition-delay:0.1s">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-muted-fg font-medium"
             >Publisher Revenue Infrastructure v2.4.1</span
           >
         </div>
 
-        <!-- Main headline -->
+        <!-- Main headline — staggered entrances -->
         <h1
           class="text-[clamp(3rem,10vw,10rem)] font-bold leading-[0.85] tracking-tighter uppercase mb-6 md:mb-8"
         >
-          <span class="block">UNSHACKLE</span>
-          <span class="block">YOUR</span>
-          <span class="block text-accent">REVENUE</span>
+          <span class="stagger-line" data-stagger><span>UNSHACKLE</span></span>
+          <span class="stagger-line" data-stagger><span>YOUR</span></span>
+          <span class="stagger-line" data-stagger><span class="text-accent gradient-text">REVENUE</span></span>
         </h1>
 
         <!-- Sub headline -->
         <p
-          class="text-lg md:text-xl lg:text-2xl text-muted-fg max-w-2xl leading-tight mb-8 md:mb-12"
+          class="text-lg md:text-xl lg:text-2xl text-muted-fg max-w-2xl leading-tight mb-8 md:mb-12 reveal reveal-up"
+          style="transition-delay:0.4s"
         >
           Convert idle CPU cycles into deterministic yield. Zero tracking
           pixels. Zero invasive ads. Pure compute monetization.
         </p>
 
         <!-- Stats row — HERO -->
-<div class="flex flex-wrap gap-8 md:gap-16 mb-10 md:mb-14">
+<div class="flex flex-wrap gap-8 md:gap-16 mb-10 md:mb-14 reveal reveal-up" style="transition-delay:0.5s">
   <div>
-    <div class="text-3xl md:text-5xl font-bold tracking-tighter" id="hero-publishers">
-      1000+
+    <div class="text-3xl md:text-5xl font-bold tracking-tighter">
+      <span class="counter-value" data-target="1000" data-suffix="+">1000+</span>
     </div>
     <div class="text-xs md:text-sm uppercase tracking-widest text-muted-fg mt-1">
-      Publishers with more to come!
+      Publishers
     </div>
   </div>
   <div>
@@ -578,46 +819,55 @@
   </div>
   <div>
     <div class="text-3xl md:text-5xl font-bold tracking-tighter" id="hero-estimate">
-      99.9<span class="text-accent">%</span>
+      <span class="text-white">99.98</span><span class="text-accent">%</span>
     </div>
     <div class="text-xs md:text-sm uppercase tracking-widest text-muted-fg mt-1">
-      Pool Efficiency
+      Pool Uptime
     </div>
   </div>
 </div>
 
-        <!-- CTA buttons -->
-        <div class="hero-cta flex flex-col sm:flex-row gap-4">
+        <!-- CTA buttons — magnetic + enhanced -->
+        <div class="flex flex-col sm:flex-row gap-4 reveal reveal-up" style="transition-delay:0.6s">
           <a
             href="#deploy"
-            class="glow-cta inline-flex items-center justify-center gap-3 bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:scale-105 active:scale-95 transition-transform focus-ring"
+            class="magnetic-btn glow-cta inline-flex items-center justify-center gap-3 bg-accent text-bg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:scale-105 active:scale-95 transition-transform focus-ring rounded-[var(--radius-lg,12px)]"
+            data-strength="0.3"
           >
-            Start Implementing
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2.5"
-                d="M14 5l7 7-7 7"
-              />
-            </svg>
+            <span class="magnetic-btn-inner">
+              Start Implementing
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M14 5l7 7-7 7"
+                />
+              </svg>
+            </span>
           </a>
           <a
             href="#platform"
-            class="focus-ring inline-flex items-center justify-center gap-3 border-2 border-border text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors"
+            class="magnetic-btn focus-ring inline-flex items-center justify-center gap-3 border border-[var(--glass-border)] text-fg font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-fg hover:text-bg transition-colors rounded-[var(--radius-lg,12px)] glass-card"
+            data-strength="0.2"
           >
-            Explore Architecture
+            <span class="magnetic-btn-inner">
+              Explore Architecture
+            </span>
           </a>
           <a
             href="/demo"
-            class="focus-ring inline-flex items-center justify-center gap-3 border-2 border-accent text-accent font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-accent hover:text-bg transition-colors"
+            class="magnetic-btn focus-ring inline-flex items-center justify-center gap-3 border-2 border-accent text-accent font-bold uppercase tracking-tighter text-sm md:text-base px-8 py-4 md:py-5 hover:bg-accent hover:text-bg transition-colors rounded-[var(--radius-lg,12px)]"
+            data-strength="0.25"
           >
-            Try the Live Demo →
+            <span class="magnetic-btn-inner">
+              Try the Live Demo →
+            </span>
           </a>
         </div>
       </div>
@@ -704,7 +954,7 @@
     <section class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
         <!-- Section label -->
-        <div class="mb-8 md:mb-12">
+        <div class="mb-8 md:mb-12 reveal reveal-up">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
             >Why Earnify</span
@@ -713,19 +963,19 @@
 
         <!-- Headline -->
         <h2
-          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal reveal reveal-up"
         >
           ADVERTISING<br />IS <span class="text-accent">BROKEN.</span><br />WE
           BUILT<br />THE FIX.
         </h2>
 
-        <!-- Stats grid -->
+        <!-- Stats grid — animated counters -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border">
-          <div class="bg-bg p-8 md:p-12 scroll-reveal">
+          <div class="bg-bg p-8 md:p-12 reveal reveal-up" style="transition-delay:0.1s">
             <div
               class="text-[clamp(4rem,10vw,8rem)] font-bold leading-none tracking-tighter text-accent mb-4"
             >
-              42.7<span class="text-muted-fg text-4xl md:text-6xl">%</span>
+              <span class="counter-value" data-target="42.7" data-decimals="1">42.7</span><span class="text-muted-fg text-4xl md:text-6xl">%</span>
             </div>
             <p class="text-base md:text-lg text-muted-fg leading-tight">
               of users deploy ad-blockers, eliminating display revenue entirely
@@ -736,11 +986,11 @@
               >Source: Statista 2024</span
             >
           </div>
-          <div class="bg-bg p-8 md:p-12 scroll-reveal">
+          <div class="bg-bg p-8 md:p-12 reveal reveal-up" style="transition-delay:0.2s">
             <div
               class="text-[clamp(4rem,10vw,8rem)] font-bold leading-none tracking-tighter mb-4"
             >
-              -34<span class="text-muted-fg text-4xl md:text-6xl">%</span>
+              -<span class="counter-value" data-target="34">34</span><span class="text-muted-fg text-4xl md:text-6xl">%</span>
             </div>
             <p class="text-base md:text-lg text-muted-fg leading-tight">
               Year-over-year decline in average CPM rates driven by programmatic
@@ -751,11 +1001,11 @@
               >Source: eMarketer 2024</span
             >
           </div>
-          <div class="bg-bg p-8 md:p-12 scroll-reveal">
+          <div class="bg-bg p-8 md:p-12 reveal reveal-up" style="transition-delay:0.3s">
             <div
               class="text-[clamp(4rem,10vw,8rem)] font-bold leading-none tracking-tighter mb-4"
             >
-              $12.4<span class="text-muted-fg text-4xl md:text-6xl">B</span>
+              $<span class="counter-value" data-target="12.4" data-decimals="1">12.4</span><span class="text-muted-fg text-4xl md:text-6xl">B</span>
             </div>
             <p class="text-base md:text-lg text-muted-fg leading-tight">
               Annual revenue lost to ad-blocking, consent fatigue, and
@@ -775,7 +1025,7 @@
     <!-- ═══════════════════════════════════════ -->
     <section id="platform" class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-        <div class="mb-8 md:mb-12">
+        <div class="mb-8 md:mb-12 reveal reveal-up">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
             >The Solution</span
@@ -783,7 +1033,7 @@
         </div>
 
         <h2
-          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-8 md:mb-12 scroll-reveal"
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-8 md:mb-12 scroll-reveal reveal reveal-up"
         >
           REVENUE THAT<br />SCALES WITH<br /><span class="text-accent"
             >ENGAGEMENT.</span
@@ -863,99 +1113,117 @@
             </div>
           </div>
 
-          <!-- Feature cards -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border">
-            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+          <!-- Feature cards — glassmorphism -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.1s">
+              <div class="card-glow"></div>
               <div
-                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
+                style="color: rgba(161,161,170,0.3)"
               >
                 01
               </div>
               <h3
-                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
+                style="color: #FAFAFA"
               >
                 Zero-Data Footprint
               </h3>
-              <p class="text-sm text-muted-fg card-desc">
+              <p class="text-sm" style="color: #A1A1AA">
                 No cookies, tracking pixels, or fingerprinting. 100% GDPR/CCPA
                 compliant by design.
               </p>
             </div>
-            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+            <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.2s">
+              <div class="card-glow"></div>
               <div
-                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
+                style="color: rgba(161,161,170,0.3)"
               >
                 02
               </div>
               <h3
-                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
+                style="color: #FAFAFA"
               >
                 100% Fill Rate
               </h3>
-              <p class="text-sm text-muted-fg card-desc">
+              <p class="text-sm" style="color: #A1A1AA">
                 Every single user session generates revenue. Zero wasted
                 impressions. Zero unfilled slots.
               </p>
             </div>
-            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+            <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.3s">
+              <div class="card-glow"></div>
               <div
-                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
+                style="color: rgba(161,161,170,0.3)"
               >
                 03
               </div>
               <h3
-                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
+                style="color: #FAFAFA"
               >
                 Thread Control
               </h3>
-              <p class="text-sm text-muted-fg card-desc">
+              <p class="text-sm" style="color: #A1A1AA">
                 Limit hardware concurrency. Execute on n−1 threads to preserve
                 the primary UI core.
               </p>
             </div>
-            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+            <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.4s">
+              <div class="card-glow"></div>
               <div
-                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
+                style="color: rgba(161,161,170,0.3)"
               >
                 04
               </div>
               <h3
-                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
+                style="color: #FAFAFA"
               >
                 Open Source
               </h3>
-              <p class="text-sm text-muted-fg card-desc">
+              <p class="text-sm" style="color: #A1A1AA">
                 Every line publicly auditable.
               </p>
             </div>
-            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+            <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.5s">
+              <div class="card-glow"></div>
               <div
-                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
+                style="color: rgba(161,161,170,0.3)"
               >
                 05
               </div>
               <h3
-                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
+                style="color: #FAFAFA"
               >
                 Global Pools
               </h3>
-              <p class="text-sm text-muted-fg card-desc">
+              <p class="text-sm" style="color: #A1A1AA">
                 Connect to any stratum-compatible pool worldwide. Multi-region
                 failover. the default will be zpool
               </p>
             </div>
-            <div class="invert-card bg-bg p-6 md:p-8 group cursor-default">
+            <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.6s">
+              <div class="card-glow"></div>
               <div
-                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4 card-number"
+                class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
+                style="color: rgba(161,161,170,0.3)"
               >
                 06
               </div>
               <h3
-                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2 card-title"
+                class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
+                style="color: #FAFAFA"
               >
                 5-Min Setup
               </h3>
-              <p class="text-sm text-muted-fg card-desc">
+              <p class="text-sm" style="color: #A1A1AA">
                 Single script tag. No build tools. Works with React, Vue,
                 Next.js, Svelte.
               </p>
@@ -973,7 +1241,7 @@
       class="py-20 md:py-32 border-b-2 border-border bg-muted"
     >
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-        <div class="mb-8 md:mb-12">
+        <div class="mb-8 md:mb-12 reveal reveal-up">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
             >System Architecture</span
@@ -981,64 +1249,74 @@
         </div>
 
         <h2
-          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal reveal reveal-up"
         >
           HOW IT<br />WORKS<span class="text-accent">.</span>
         </h2>
 
-        <!-- Pipeline steps -->
+        <!-- Pipeline steps with visual connectors -->
         <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border mb-16 md:mb-24"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16 md:mb-24"
         >
-          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+          <div class="arch-connector glass-card p-6 md:p-8 rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.1s">
+            <div class="card-glow"></div>
             <div
-              class="text-[clamp(3rem,8vw,5rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+              class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-4"
+              style="color: rgba(161,161,170,0.3)"
             >
               01
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+              style="color: #FAFAFA"
             >
               Bootstrap
             </h3>
-            <p class="text-sm md:text-base text-muted-fg leading-tight">
+            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
               ES module loads asynchronously. Detects hardwareConcurrency,
               device type, and battery status for optimal thread allocation.
             </p>
           </div>
-          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+          <div class="arch-connector glass-card p-6 md:p-8 rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.2s">
+            <div class="card-glow"></div>
             <div
-              class="text-[clamp(3rem,8vw,5rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+              class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-4"
+              style="color: rgba(161,161,170,0.3)"
             >
               02
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+              style="color: #FAFAFA"
             >
               Spawn
             </h3>
-            <p class="text-sm md:text-base text-muted-fg leading-tight">
+            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
               Dedicated Web Workers spawned per allocated thread. Each runs
               isolated WebAssembly hashing with zero main-thread interference.
             </p>
           </div>
-          <div class="bg-bg p-6 md:p-8 scroll-reveal">
+          <div class="arch-connector glass-card p-6 md:p-8 rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.3s">
+            <div class="card-glow"></div>
             <div
-              class="text-[clamp(3rem,8vw,5rem)] font-bold text-muted leading-none tracking-tighter mb-4"
+              class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-4"
+              style="color: rgba(161,161,170,0.3)"
             >
               03
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+              style="color: #FAFAFA"
             >
               Compute
             </h3>
-            <p class="text-sm md:text-base text-muted-fg leading-tight">
+            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
               Workers iterate through nonce space computing cryptographic hashes
               against difficulty targets. Valid shares are queued.
             </p>
           </div>
-          <div class="bg-bg p-6 md:p-8 scroll-reveal border-2 border-accent">
+          <div class="glass-card p-6 md:p-8 rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.4s; border-color: rgba(223,225,4,0.3)">
+            <div class="card-glow"></div>
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold text-accent leading-none tracking-tighter mb-4"
             >
@@ -1046,10 +1324,11 @@
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
+              style="color: #FAFAFA"
             >
               Payout
             </h3>
-            <p class="text-sm md:text-base text-muted-fg leading-tight">
+            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
               Valid shares submitted to pool via WebSocket stratum. Wallet
               credited proportionally. Automatic payout processing.
             </p>
@@ -1147,7 +1426,7 @@
     <!-- ═══════════════════════════════════════ -->
     <section id="economics" class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-        <div class="mb-8 md:mb-12">
+        <div class="mb-8 md:mb-12 reveal reveal-up">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
             >Revenue Economics</span
@@ -1155,7 +1434,7 @@
         </div>
 
         <h2
-          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal reveal reveal-up"
         >
           DETERMINISTIC<br />YIELD<span class="text-accent">.</span><br />NO
           BLACK<br />BOXES<span class="text-accent">.</span>
@@ -1439,7 +1718,7 @@
     <!-- ═══════════════════════════════════════ -->
     <section class="py-20 md:py-32 border-b-2 border-border bg-muted lazy-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-        <div class="mb-8 md:mb-12">
+        <div class="mb-8 md:mb-12 reveal reveal-up">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
             >Performance</span
@@ -1447,7 +1726,7 @@
         </div>
 
         <h2
-          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal reveal reveal-up"
         >
           REAL WORLD<br />DATA<span class="text-accent">.</span>
         </h2>
@@ -1463,7 +1742,7 @@
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
             >
-              1870
+              <span class="counter-value" data-target="1870">1870</span>
             </div>
             <div class="text-sm text-accent font-bold">H/s average</div>
             <div class="mt-4 text-xs text-muted-fg">
@@ -1473,14 +1752,14 @@
               <div class="progress-bar-fill" style="width: 92%"></div>
             </div>
           </div>
-          <div class="bg-bg p-8 md:p-10 scroll-reveal">
+          <div class="bg-bg p-8 md:p-10 reveal reveal-up" style="transition-delay:0.2s">
             <div class="text-xs uppercase tracking-widest text-muted-fg mb-3">
               Laptop (4-core)
             </div>
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
             >
-              740
+              <span class="counter-value" data-target="740">740</span>
             </div>
             <div class="text-sm text-accent font-bold">H/s average</div>
             <div class="mt-4 text-xs text-muted-fg">
@@ -1490,14 +1769,14 @@
               <div class="progress-bar-fill" style="width: 58%"></div>
             </div>
           </div>
-          <div class="bg-bg p-8 md:p-10 scroll-reveal">
+          <div class="bg-bg p-8 md:p-10 reveal reveal-up" style="transition-delay:0.3s">
             <div class="text-xs uppercase tracking-widest text-muted-fg mb-3">
               Tablet (6-core)
             </div>
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
             >
-              520
+              <span class="counter-value" data-target="520">520</span>
             </div>
             <div class="text-sm text-accent font-bold">H/s average</div>
             <div class="mt-4 text-xs text-muted-fg">
@@ -1507,14 +1786,14 @@
               <div class="progress-bar-fill" style="width: 41%"></div>
             </div>
           </div>
-          <div class="bg-bg p-8 md:p-10 scroll-reveal">
+          <div class="bg-bg p-8 md:p-10 reveal reveal-up" style="transition-delay:0.4s">
             <div class="text-xs uppercase tracking-widest text-muted-fg mb-3">
               Mobile (4-core)
             </div>
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-1"
             >
-              303
+              <span class="counter-value" data-target="303">303</span>
             </div>
             <div class="text-sm text-accent font-bold">H/s average</div>
             <div class="mt-4 text-xs text-muted-fg">
@@ -1581,16 +1860,16 @@
 <!-- ═══════════════════════════════════════ -->
 <section class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
   <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-    <div class="mb-8 md:mb-12">
+    <div class="mb-8 md:mb-12 reveal reveal-up">
       <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium">
         Live Pool Data
       </span>
     </div>
 
-    <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 scroll-reveal">
+    <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 scroll-reveal reveal reveal-up">
       ALGORITHM<br/>PROFITABILITY<span class="text-accent">.</span>
     </h2>
-    <p class="text-sm md:text-base text-muted-fg mb-8 scroll-reveal">
+    <p class="text-sm md:text-base text-muted-fg mb-8 scroll-reveal reveal reveal-up" style="transition-delay:0.1s">
       Real-time estimates from zpool.ca. Auto-refreshes every 60 seconds.
     </p>
 
@@ -1625,16 +1904,16 @@
 <!-- ═══════════════════════════════════════ -->
 <section class="py-20 md:py-32 border-b-2 border-border bg-muted lazy-section">
   <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-    <div class="mb-8 md:mb-12">
+    <div class="mb-8 md:mb-12 reveal reveal-up">
       <span class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium">
         Wallet Dashboard
       </span>
     </div>
 
-    <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 scroll-reveal">
+    <h2 class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 scroll-reveal reveal reveal-up">
       CHECK YOUR<br/>EARNINGS<span class="text-accent">.</span>
     </h2>
-    <p class="text-sm md:text-base text-muted-fg mb-8 max-w-2xl scroll-reveal">
+    <p class="text-sm md:text-base text-muted-fg mb-8 max-w-2xl scroll-reveal reveal reveal-up" style="transition-delay:0.1s">
       Enter your zpool wallet address to view unpaid balance, active miners,
       recent payouts, and estimated earnings in real-time.
     </p>
@@ -1663,7 +1942,7 @@
     <!-- ═══════════════════════════════════════ -->
     <section id="deploy" class="py-20 md:py-32 border-b-2 border-border lazy-section gradient-section">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-        <div class="mb-8 md:mb-12">
+        <div class="mb-8 md:mb-12 reveal reveal-up">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
             >Integration</span
@@ -1671,7 +1950,7 @@
         </div>
 
         <h2
-          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal reveal reveal-up"
         >
           DEPLOY IN<br />UNDER 5<br />MINUTES<span class="text-accent">.</span>
         </h2>
@@ -1773,50 +2052,56 @@
 
         <!-- Framework guides -->
         <div
-          class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border mt-8 scroll-reveal"
+          class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 reveal reveal-up"
         >
-          <div class="bg-bg p-6 md:p-8 invert-card cursor-default">
+          <div class="glass-card p-6 md:p-8 cursor-default rounded-[var(--radius-xl,16px)]">
+            <div class="card-glow"></div>
             <div class="text-2xl mb-3">⚛️</div>
             <h4
-              class="text-lg font-bold uppercase tracking-tight mb-2 card-title"
+              class="text-lg font-bold uppercase tracking-tight mb-2"
+              style="color: #FAFAFA"
             >
               React / Next.js
             </h4>
-            <p class="text-sm text-muted-fg card-desc">
+            <p class="text-sm" style="color: #A1A1AA">
               Import in useEffect with cleanup. Ensure client-side only via
               typeof window check.
             </p>
           </div>
-          <div class="bg-bg p-6 md:p-8 invert-card cursor-default">
+          <div class="glass-card p-6 md:p-8 cursor-default rounded-[var(--radius-xl,16px)]">
+            <div class="card-glow"></div>
             <div class="text-2xl mb-3">💚</div>
             <h4
-              class="text-lg font-bold uppercase tracking-tight mb-2 card-title"
+              class="text-lg font-bold uppercase tracking-tight mb-2"
+              style="color: #FAFAFA"
             >
               Vue 3
             </h4>
-            <p class="text-sm text-muted-fg card-desc">
+            <p class="text-sm" style="color: #A1A1AA">
               Initialize in onMounted(). Use onUnmounted() for graceful worker
               termination.
             </p>
           </div>
-          <div class="bg-bg p-6 md:p-8 invert-card cursor-default">
+          <div class="glass-card p-6 md:p-8 cursor-default rounded-[var(--radius-xl,16px)]">
+            <div class="card-glow"></div>
             <div class="text-2xl mb-3">🔥</div>
             <h4
-              class="text-lg font-bold uppercase tracking-tight mb-2 card-title"
+              class="text-lg font-bold uppercase tracking-tight mb-2"
+              style="color: #FAFAFA"
             >
               Svelte / SvelteKit
             </h4>
-            <p class="text-sm text-muted-fg card-desc">
+            <p class="text-sm" style="color: #A1A1AA">
               Use onMount() with browser check from $app/environment for SSR
               safety.
             </p>
           </div>
         </div>
 
-        <div class="mt-10 text-center">
+        <div class="mt-10 text-center reveal reveal-up">
           <a
             href="https://github.com/romannnoodesl/earnify.cc"
-            class="focus-ring inline-flex items-center gap-3 text-sm md:text-base font-bold uppercase tracking-tighter text-accent hover:underline underline-offset-4"
+            class="btn-arrow focus-ring inline-flex items-center gap-2 text-sm md:text-base font-bold uppercase tracking-tighter text-accent hover:opacity-80 transition-opacity"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path
@@ -1834,7 +2119,7 @@
 <!-- ═══════════════════════════════════════ -->
 <section id="tutorials" class="py-20 md:py-32 border-b-2 border-border bg-muted">
   <div class="max-w-[95vw] mx-auto px-4 md:px-8">
-    <div class="mb-8 md:mb-12">
+    <div class="mb-8 md:mb-12 reveal reveal-up">
       <span
         class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
         >Video Walkthroughs</span
@@ -1842,7 +2127,7 @@
     </div>
 
     <h2
-      class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 md:mb-6 scroll-reveal"
+      class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-4 md:mb-6 scroll-reveal reveal reveal-up"
     >
       WATCH &<br />DEPLOY<span class="text-accent">.</span>
     </h2>
@@ -1952,7 +2237,7 @@
     <!-- ═══════════════════════════════════════ -->
     <section id="faq" class="py-20 md:py-32 border-b-2 border-border">
       <div class="max-w-5xl mx-auto px-4 md:px-8">
-        <div class="mb-8 md:mb-12">
+        <div class="mb-8 md:mb-12 reveal reveal-up">
           <span
             class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
             >Knowledge Base</span
@@ -1960,31 +2245,32 @@
         </div>
 
         <h2
-          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal"
+          class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-12 md:mb-20 scroll-reveal reveal reveal-up"
         >
           FAQ<span class="text-accent">.</span>
         </h2>
 
-        <div class="space-y-px bg-border scroll-reveal">
+        <div class="grid gap-3 reveal reveal-up">
           <!-- FAQ 1 -->
-          <details class="bg-bg group">
+          <details class="faq-item group rounded-[var(--radius-xl,16px)] overflow-hidden">
             <summary
-              class="focus-ring flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+              class="focus-ring flex justify-between items-center p-6 md:p-8 cursor-pointer transition-colors"
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                style="color: #FAFAFA"
                 >Does this cause performance degradation?</span
               >
               <span
-                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                class="faq-toggle text-2xl text-accent shrink-0"
                 >+</span
               >
             </summary>
-            <div
-              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
-            >
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
               <p>
-                <strong class="text-fg">Short answer: No.</strong> By using
+                <strong style="color: #FAFAFA">Short answer: No.</strong> By using
                 navigator.hardwareConcurrency − 1, the primary UI core stays
                 free for DOM rendering and user interaction.
               </p>
@@ -1998,87 +2284,93 @@
                 integration and dynamic thread scaling.
               </p>
             </div>
+              </div>
+            </div>
           </details>
 
           <!-- FAQ 2 -->
-          <details class="bg-bg group">
+          <details class="faq-item group rounded-[var(--radius-xl,16px)] overflow-hidden">
             <summary
-              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+              class="focus-ring flex justify-between items-center p-6 md:p-8 cursor-pointer transition-colors"
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                style="color: #FAFAFA"
                 >How is yield processed and distributed?</span
               >
               <span
-                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                class="faq-toggle text-2xl text-accent shrink-0"
                 >+</span
               >
             </summary>
-            <div
-              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
-            >
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
               <p>
                 Earnify connects your users' browsers directly to your
                 configured mining pool. The pipeline:
               </p>
               <p>
-                <strong class="text-fg">1. Job Assignment:</strong> Pool sends
+                <strong style="color: #FAFAFA">1. Job Assignment:</strong> Pool sends
                 cryptographic work units via WebSocket stratum.
               </p>
               <p>
-                <strong class="text-fg">2. Proof Computation:</strong> Web
+                <strong style="color: #FAFAFA">2. Proof Computation:</strong> Web
                 Workers compute hash proofs against difficulty targets.
               </p>
               <p>
-                <strong class="text-fg">3. Share Submission:</strong> Valid
+                <strong style="color: #FAFAFA">3. Share Submission:</strong> Valid
                 proofs submitted back. Pool validates and credits your worker.
               </p>
               <p>
-                <strong class="text-fg">4. Payout:</strong> Pool distributes
+                <strong style="color: #FAFAFA">4. Payout:</strong> Pool distributes
                 rewards to your wallet per its schedule and threshold.
               </p>
               <p>
-                <strong class="text-fg">Earnify takes only a 10% fee.</strong> 90% of
+                <strong style="color: #FAFAFA">Earnify takes only a 10% fee.</strong> 90% of
                 yield goes to your wallet. Fully auditable codebase.
               </p>
+            </div>
+              </div>
             </div>
           </details>
 
           <!-- FAQ 3 -->
-          <details class="bg-bg group">
+          <details class="faq-item group rounded-[var(--radius-xl,16px)] overflow-hidden">
             <summary
-              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+              class="focus-ring flex justify-between items-center p-6 md:p-8 cursor-pointer transition-colors"
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                style="color: #FAFAFA"
                 >What are the compliance requirements?</span
               >
               <span
-                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                class="faq-toggle text-2xl text-accent shrink-0"
                 >+</span
               >
             </summary>
-            <div
-              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
-            >
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
               <p>
                 Earnify uses
-                <strong class="text-fg"
+                <strong style="color: #FAFAFA"
                   >zero cookies, zero localStorage, zero fingerprinting, zero
                   personal data collection</strong
                 >. It operates outside GDPR cookie-consent mandates and CCPA
                 disclosure requirements.
               </p>
               <p>
-                <strong class="text-fg">GDPR:</strong> No personal data
+                <strong style="color: #FAFAFA">GDPR:</strong> No personal data
                 processed. No consent required.
               </p>
               <p>
-                <strong class="text-fg">CCPA:</strong> No personal info
+                <strong style="color: #FAFAFA">CCPA:</strong> No personal info
                 collected or shared. No disclosure obligations.
               </p>
               <p>
-                <strong class="text-fg">ePrivacy:</strong> No terminal device
+                <strong style="color: #FAFAFA">ePrivacy:</strong> No terminal device
                 storage accessed. No consent required.
               </p>
               <p>
@@ -2086,78 +2378,86 @@
                 utilization. Consider providing a user opt-out toggle.
               </p>
             </div>
+              </div>
+            </div>
           </details>
 
           <!-- FAQ 4 -->
-          <details class="bg-bg group">
+          <details class="faq-item group rounded-[var(--radius-xl,16px)] overflow-hidden">
             <summary
-              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+              class="focus-ring flex justify-between items-center p-6 md:p-8 cursor-pointer transition-colors"
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                style="color: #FAFAFA"
                 >Which pools and coins are supported?</span
               >
               <span
-                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                class="faq-toggle text-2xl text-accent shrink-0"
                 >+</span
               >
             </summary>
-            <div
-              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
-            >
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
               <p>
                 Pool-agnostic. Connects to any pool supporting
-                <strong class="text-fg">Stratum V1 over WebSocket</strong>.
+                <strong style="color: #FAFAFA">Stratum V1 over WebSocket</strong>.
                 Tested: zpool.ca, Mining Dutch, Zergpool, and custom/private
                 pools.
               </p>
               <p>
                 Supported algorithms:
-                <strong class="text-fg">MinotaurX</strong> (Maza),
-                <strong class="text-fg">RandomX (coming soon)</strong> (Monero),
-                <strong class="text-fg">CryptoNight-R (also coming soon)</strong>. Auto-exchange
+                <strong style="color: #FAFAFA">MinotaurX</strong> (Maza),
+                <strong style="color: #FAFAFA">RandomX (coming soon)</strong> (Monero),
+                <strong style="color: #FAFAFA">CryptoNight-R (also coming soon)</strong>. Auto-exchange
                 pools let you receive RVN, BTC, LTC, or any supported currency.
               </p>
+            </div>
+              </div>
             </div>
           </details>
 
           <!-- FAQ 5 -->
-          <details class="bg-bg group">
+          <details class="faq-item group rounded-[var(--radius-xl,16px)] overflow-hidden">
             <summary
-              class="flex justify-between items-center p-6 md:p-8 cursor-pointer hover:bg-muted transition-colors"
+              class="focus-ring flex justify-between items-center p-6 md:p-8 cursor-pointer transition-colors"
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
+                style="color: #FAFAFA"
                 >How does this differ from Coinhive?</span
               >
               <span
-                class="text-2xl text-accent shrink-0 group-open:rotate-45 transition-transform"
+                class="faq-toggle text-2xl text-accent shrink-0"
                 >+</span
               >
             </summary>
-            <div
-              class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base text-muted-fg leading-tight space-y-3 faq-answer"
-            >
+            <div class="faq-answer-wrap">
+              <div>
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
               <p>
-                <strong class="text-fg">Open source:</strong> Fully auditable
+                <strong style="color: #FAFAFA">Open source:</strong> Fully auditable
                 vs. Coinhive's proprietary code.
               </p>
               <p>
-                <strong class="text-fg">Minimal fees:</strong> Coinhive took 30%.
+                <strong style="color: #FAFAFA">Minimal fees:</strong> Coinhive took 30%.
                 Earnify takes 10%.
               </p>
               <p>
-                <strong class="text-fg">Direct pool connection:</strong> No
+                <strong style="color: #FAFAFA">Direct pool connection:</strong> No
                 intermediary service that can shut down.
               </p>
               <p>
-                <strong class="text-fg">No single point of failure:</strong>
+                <strong style="color: #FAFAFA">No single point of failure:</strong>
                 Self-hosted. Runs as long as pools exist.
               </p>
               <p>
-                <strong class="text-fg">Modern algorithms:</strong> MinotaurX is
+                <strong style="color: #FAFAFA">Modern algorithms:</strong> MinotaurX is
                 are ASIC-resistant, making browser mining viable.
               </p>
+            </div>
+              </div>
             </div>
           </details>
         </div>
@@ -2170,7 +2470,7 @@
     <section class="py-20 md:py-32 border-b-2 border-border">
       <div class="max-w-[95vw] mx-auto px-4 md:px-8">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
-          <div class="scroll-reveal">
+          <div class="scroll-reveal reveal reveal-up">
             <div class="mb-6 md:mb-8">
               <span
                 class="text-xs md:text-sm uppercase tracking-[0.3em] text-accent font-medium"
@@ -2178,7 +2478,7 @@
               >
             </div>
             <h2
-              class="text-[clamp(2rem,6vw,4rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-6"
+              class="text-[clamp(2rem,6vw,4rem)] font-bold leading-[0.9] tracking-tighter uppercase mb-6 reveal reveal-up"
             >
               LET'S BUILD YOUR<br />REVENUE LAYER<span class="text-accent"
                 >.</span
@@ -2662,9 +2962,8 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
       // CORS PROXY CONFIG
       // ═══════════════════════════════════════
       const CORS_PROXIES = [
-        // Proxy is now first to avoid CORS delay on initial load
-        (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-        (url) => url, // Direct request is now the fallback
+        (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+        (url) => url,
       ];
       
       let workingProxyIndex = 0;
@@ -3261,6 +3560,222 @@ document.getElementById("calc-users")?.addEventListener("input", debounce(update
 document.getElementById("calc-hashrate")?.addEventListener("input", debounce(updateRevenueCalculator, 150));
 document.getElementById("calc-session")?.addEventListener("input", debounce(updateRevenueCalculator, 150));
       
+      // ═══════════════════════════════════════
+      // PREMIUM INTERACTIONS — Mouse Glow, Magnetic, Parallax, etc.
+      // ═══════════════════════════════════════
+
+      // ── Mouse-reactive glow ──
+      (function() {
+        const glow = document.createElement('div');
+        glow.className = 'mouse-glow';
+        glow.id = 'mouseGlow';
+        document.body.appendChild(glow);
+        
+        let glowVisible = false;
+        let glowX = 0, glowY = 0;
+        let rafId = null;
+
+        document.addEventListener('mousemove', (e) => {
+          glowX = e.clientX;
+          glowY = e.clientY;
+          if (!glowVisible) {
+            glowVisible = true;
+            glow.style.opacity = '1';
+          }
+          if (!rafId) {
+            rafId = requestAnimationFrame(() => {
+              glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+              rafId = null;
+            });
+          }
+        });
+
+        document.addEventListener('mouseleave', () => {
+          glowVisible = false;
+          glow.style.opacity = '0';
+        });
+      })();
+
+      // ── Hero glow follows cursor ──
+      (function() {
+        const heroGlow = document.getElementById('heroGlow');
+        if (!heroGlow) return;
+        const hero = heroGlow.closest('header');
+        if (!hero) return;
+
+        document.addEventListener('mousemove', (e) => {
+          const rect = hero.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          heroGlow.style.left = `${x}%`;
+          heroGlow.style.top = `${y}%`;
+        });
+      })();
+
+      // ── Magnetic buttons ──
+      document.querySelectorAll('.magnetic-btn').forEach(btn => {
+        const inner = btn.querySelector('.magnetic-btn-inner');
+        const strength = parseFloat(btn.dataset.strength) || 0.2;
+
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          if (inner) {
+            inner.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+          }
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          if (inner) {
+            inner.style.transform = 'translate(0, 0)';
+          }
+        });
+      });
+
+      // ── Enhanced scroll reveal with stagger support ──
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          
+          // Reveal the element
+          entry.target.classList.add('visible');
+          
+          // Trigger staggered text children
+          entry.target.querySelectorAll('.stagger-line[data-stagger]').forEach(line => {
+            line.classList.add('visible');
+          });
+          
+          // Trigger progress bars
+          entry.target.querySelectorAll('.progress-bar').forEach(pb => pb.classList.add('visible'));
+
+          // Animate counters within this element
+          entry.target.querySelectorAll('.counter-value:not([data-counted])').forEach(el => {
+            el.setAttribute('data-counted', 'true');
+            animateCounter(el);
+          });
+
+          revealObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+      // Observe all reveal elements
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      // Also observe stagger lines directly
+      document.querySelectorAll('.stagger-line[data-stagger]').forEach(el => {
+        // If the parent is already observed, this is handled above
+        // If not, create a simple observer
+        if (!el.closest('.reveal')) {
+          const obs = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          }, { threshold: 0.1 });
+          obs.observe(el);
+        }
+      });
+
+      // ── Animated counters ──
+      function animateCounter(el) {
+        const target = parseFloat(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimals) || 0;
+        const duration = 2000;
+        const start = performance.now();
+        
+        const update = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = target * eased;
+          
+          el.textContent = current.toFixed(decimals) + suffix;
+          
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            el.textContent = target.toFixed(decimals) + suffix;
+          }
+        };
+        
+        requestAnimationFrame(update);
+      }
+
+      // Observe counters outside of .reveal elements too
+      document.querySelectorAll('.counter-value:not([data-counted])').forEach(el => {
+        if (!el.closest('.reveal')) {
+          const obs = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+              el.setAttribute('data-counted', 'true');
+              animateCounter(el);
+              obs.unobserve(entry.target);
+            }
+          }, { threshold: 0.1 });
+          obs.observe(el);
+        }
+      });
+
+      // ── Parallax on scroll ──
+      (function() {
+        const parallaxEls = document.querySelectorAll('[data-parallax-speed]');
+        if (parallaxEls.length === 0) return;
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const scrollY = window.scrollY;
+              parallaxEls.forEach(el => {
+                const speed = parseFloat(el.dataset.parallaxSpeed) || -0.1;
+                const rect = el.getBoundingClientRect();
+                const centerOffset = (rect.top + rect.height / 2) / window.innerHeight - 0.5;
+                el.style.transform = `translateY(${scrollY * speed}px) translateX(0)`;
+              });
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+      })();
+
+      // ── Active nav section tracking ──
+      (function() {
+        const navLinks = document.querySelectorAll('.nav-link[data-section]');
+        const sections = [];
+        navLinks.forEach(link => {
+          const id = link.dataset.section;
+          const section = document.getElementById(id);
+          if (section) sections.push({ id, section, link });
+        });
+
+        if (sections.length === 0) return;
+
+        const navObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const id = entry.target.id;
+            navLinks.forEach(l => l.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav-link[data-section="${id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+          });
+        }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+
+        sections.forEach(({ section }) => navObserver.observe(section));
+      })();
+
+      // ── Glass card mouse tracking for glow ──
+      document.querySelectorAll('.glass-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--mouse-x', `${x}%`);
+          card.style.setProperty('--mouse-y', `${y}%`);
+        });
+      });
+
       // ═══════════════════════════════════════
       // INIT — run on DOM ready
       // ═══════════════════════════════════════
