@@ -2153,7 +2153,7 @@
           title="Earnify — Quick Start Tutorial"
           frameborder="0"
           loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
       </div>
@@ -2962,6 +2962,7 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
       // CORS PROXY CONFIG
       // ═══════════════════════════════════════
       const CORS_PROXIES = [
+        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
         (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
         (url) => url,
       ];
