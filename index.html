@@ -2853,6 +2853,9 @@
       const ZPOOL_BASE       = "https://www.zpool.ca/api";
       const DEFAULT_WALLET   = "RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m";
       const REFRESH_INTERVAL = 60000; // 60 seconds
+      // Set PROXY_URL to your deployed proxy (e.g. "https://earnify-proxy.onrender.com")
+      // Deploy the proxy from proxy/proxy.js to any free Node.js host.
+      const PROXY_URL        = "https://proxy.romannoodles88.workers.dev";
       
       // ★ HARD-CODED POOL FEE — override API value
       const POOL_FEE = 10; // percent
@@ -3015,6 +3018,26 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
       // API FETCHERS
       // ═══════════════════════════════════════
       
+      async function fetchZpoolData(path) {
+        if (PROXY_URL) {
+          try {
+            const res = await fetch(`${PROXY_URL}${path}`, {
+              method: "GET",
+              headers: { "Accept": "application/json" },
+              signal: AbortSignal.timeout(15000),
+            });
+            if (res.ok) {
+              const data = await res.json();
+              console.log("[Proxy] Direct fetch successful");
+              return data;
+            }
+          } catch (e) {
+            console.warn("[Proxy] Self-hosted proxy failed, trying fallback:", e.message);
+          }
+        }
+        return await fetchJSON(`${ZPOOL_BASE}${path}`);
+      }
+      
       async function fetchBTCPrice() {
         // CoinGecko allows direct browser requests - no CORS proxy needed!
         // Only use proxy as fallback if direct fails
@@ -3069,7 +3092,7 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
       }
       
 async function fetchZpoolStatus() {
-  const data = await fetchJSON(`${ZPOOL_BASE}/status`);
+  const data = await fetchZpoolData("/status");
   if (data) {
     // Pre-parse supported algos so UI functions don't have to
     for (const key of SUPPORTED_ALGOS) {
@@ -3086,13 +3109,13 @@ async function fetchZpoolStatus() {
 }
       
       async function fetchZpoolCurrencies() {
-        const data = await fetchJSON(`${ZPOOL_BASE}/currencies`);
+        const data = await fetchZpoolData("/currencies");
         if (data) zpoolCurrencies = data;
         return zpoolCurrencies;
       }
       
       async function fetchWallet(address) {
-        return await fetchJSON(`${ZPOOL_BASE}/walletEX?address=${address}`);
+        return await fetchZpoolData(`/walletEX?address=${address}`);
       }
       
       // ═══════════════════════════════════════
