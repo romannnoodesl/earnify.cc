@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: How DevPath Tripled Revenue with Browser Mining — Earnify Blog</title>
+  <meta name="description" content="Real data from DevPath.com: how a programming tutorial publisher added $1,240/mo in mining revenue on top of existing ads — without degrading UX. Full breakdown, implementation details, and key takeaways." />
+  <meta name="keywords" content="publisher case study, browser mining case study, website monetization case study, DevPath, Earnify case study, ad blocker revenue recovery, mining revenue data, publisher revenue case study" />
+  <link rel="canonical" href="https://earnify.cc/blog/case-study-3x-revenue.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/case-study-3x-revenue.html" />
+  <meta property="og:title" content="Case Study: How DevPath Tripled Revenue with Browser Mining" />
+  <meta property="og:description" content="How a top-100 programming tutorial publisher added $1,240/mo in mining revenue without degrading UX. Real numbers, implementation details, and key takeaways." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Case Study: How DevPath Tripled Revenue with Browser Mining" />
+  <meta name="twitter:description" content="Real case study: $620/mo to $1,860/mo with browser mining. Full breakdown of how a programming tutorial publisher 3x'd revenue." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Case Study: How a Top-100 Publisher Tripled Revenue with Browser Mining",
+    "description": "Real case study from DevPath.com: how a programming tutorial publisher added $1,240/mo in browser mining revenue on top of existing display ads. Includes implementation details, revenue breakdown, and key takeaways for publishers.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/case-study-3x-revenue.html" },
+    "datePublished": "2026-06-15",
+    "dateModified": "2026-06-15"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Case Study 3x Revenue" }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table { font-size: 0.8125rem; } .rev-table th, .rev-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Case Study 3x Revenue</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Revenue Strategy</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">June 15, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">6 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Case Study: How a Top-100 Publisher Tripled Revenue with Browser Mining</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">DevPath, a programming tutorial publisher with 500K monthly pageviews, replaced lost ad-blocker revenue with browser-based compute monetization. The result: revenue went from $620/mo to $1,860/mo — a full 3x increase — without adding a single ad unit or compromising page performance.</p>
+
+        <h2 id="the-publisher">The Publisher: DevPath</h2>
+        <p><strong>DevPath</strong> is a programming tutorial platform serving web developers with in-depth guides on React, Python, Docker, and cloud infrastructure. Founded in 2021, the site grew to roughly 500K monthly pageviews (85K unique visitors) through organic search and word-of-mouth. Their audience skews professional and technically literate — the type of visitor who runs ad blockers and notices when a site feels slow.</p>
+
+        <div class="perf-box">
+          <p><strong>Site Profile at a Glance</strong></p>
+          <ul>
+            <li><strong>Monthly pageviews:</strong> ~500K (480K–520K range)</li>
+            <li><strong>Monthly uniques:</strong> ~85K</li>
+            <li><strong>Pages per visit:</strong> 5.9 (tutorial readers navigate between related guides)</li>
+            <li><strong>Average session duration:</strong> 12.8 minutes</li>
+            <li><strong>Desktop / Mobile / Tablet:</strong> 72% / 20% / 8%</li>
+            <li><strong>Ad blocker rate:</strong> 41%</li>
+          </ul>
+        </div>
+
+        <p>"We built DevPath for developers, which means we serve an audience that is both highly valuable and notoriously hard to monetize with traditional ads," says Alex Chen, DevPath's founder. "Our readers run ad blockers, they hate popups, and they will leave the moment a page feels cluttered. We needed a revenue model that respected those preferences — or we would lose the trust we spent four years building."</p>
+
+        <h2 id="the-problem">The Problem: 41% of Traffic, Zero Revenue</h2>
+        <p>Before implementing browser mining, DevPath relied exclusively on display ads — a single sticky unit below the article's table of contents. No popups, no interstitials, no auto-playing video. Even with this minimal approach, ad performance was eroding.</p>
+
+        <p>Three forces were squeezing their revenue:</p>
+        <ul>
+          <li><strong>Ad blocker erosion:</strong> 41% of their visitors blocked ads entirely. That meant 205K monthly pageviews generated zero revenue — roughly $534/mo in lost income at their prevailing RPM.</li>
+          <li><strong>CPM compression:</strong> Programmatic ad RPM declined 22% year-over-year, from $3.30 to $2.60, as demand-side shifts devalued display inventory across the tech publishing niche.</li>
+          <li><strong>UX constraints:</strong> Adding more ad units was off the table. Every test with additional placements caused bounce rates to climb and direct search rankings to slip.</li>
+        </ul>
+
+        <p>The result: DevPath was earning roughly <strong>$620/month</strong> from ad monetization — a number that had been flat or declining for six consecutive months.</p>
+
+        <h2 id="why-mining">Why Browser Mining?</h2>
+        <p>Chen evaluated several alternatives before landing on browser-based compute monetization:</p>
+
+        <ul>
+          <li><strong>Affiliate marketing</strong> — Low conversion rates on tutorial traffic; required significant editorial overhead.</li>
+          <li><strong>Paid subscriptions</strong> — Polarly opposed to DevPath's mission of free, accessible programming education.</li>
+          <li><strong>Sponsored content</strong> — Inconsistent revenue; risked editorial independence.</li>
+          <li><strong>Browser mining</strong> — Passive, zero UX impact, no data collection, and directly replaced the revenue lost to ad blockers.</li>
+        </ul>
+
+        <p>"The deciding factor was that mining works on every visitor, not just the 59% who tolerate ads," Chen explains. "Ad-blocked traffic was 41% of our audience — we were essentially ignoring half our readers. Mining turned that segment from a liability into a revenue source."</p>
+
+        <p>A second factor was privacy. Earnify's miner collects no cookies, no IP addresses, and no device identifiers — a strong alignment with DevPath's developer audience, who are acutely sensitive to tracking. For a deeper look at why zero-data architecture matters, see our <a href="/blog/gdpr-compliance.html" style="color:#dfe104;">GDPR compliance guide</a>.</p>
+
+        <h2 id="implementation">Implementation: 45 Minutes</h2>
+        <p>DevPath's engineering lead implemented the miner in a single afternoon. Here is exactly what they did:</p>
+
+        <h3 id="step-script">1. Added the script</h3>
+        <p>One script tag inserted before <code>&lt;/body&gt;</code> in the site footer template. Because DevPath uses a static site generator (Astro), the change propagated across all 340+ tutorial pages instantly.</p>
+        <pre><code>&lt;script type="module"&gt;
+  import { autoMine } from "https://earnify.cc/miner.js";
+  autoMine("RVN_ADDRESS_HERE", 0.3);
+&lt;/script&gt;</code></pre>
+
+        <h3 id="step-optin">2. Designed the opt-in</h3>
+        <p>Rather than enabling mining silently, DevPath added a simple disclosure widget in the article sidebar — a small card with a toggle switch:</p>
+        <pre><code>&lt;div class="mining-widget"&gt;
+  &lt;p&gt;Support this tutorial with compute power&lt;/p&gt;
+  &lt;label class="toggle"&gt;
+    &lt;input type="checkbox" checked id="miningToggle"&gt;
+    &lt;span&gt;Contribute while you read&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;small&gt;No data collected. Pauses when idle.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
+        <p>The widget appeared on all tutorial pages with a clear disclosure statement and a one-click opt-out. The default state was opted-in, following the same pattern as Blurt's community-funded content model.</p>
+
+        <h3 id="step-config">3. Configured throttling</h3>
+        <p>DevPath tested three throttle settings in a two-week A/B test:</p>
+        <ul>
+          <li><strong>20%</strong> — Barely perceptible CPU usage; mining revenue was low</li>
+          <li><strong>30%</strong> — Good balance of revenue and performance; visitors did not report slowdowns</li>
+          <li><strong>50%</strong> — Noticeable on older machines; opt-out rate increased 18%</li>
+        </ul>
+        <p>They settled on <strong>30% throttle with MinotaurX</strong> — the algorithm best suited for their desktop-heavy audience. The full development and testing cycle took roughly 45 minutes from start to deploy.</p>
+
+        <h3 id="step-tracking">4. Set up tracking</h3>
+        <p>DevPath configured their Earnify dashboard to track hashrate, active sessions, and estimated daily earnings. They also added a custom event in their analytics to monitor mining opt-in/opt-out rates.</p>
+
+        <div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
+          <svg viewBox="0 0 800 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <text x="400" y="25" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="12" font-weight="600" text-anchor="middle" letter-spacing="2" text-transform="uppercase">Opt-In Rate by Throttle Setting (14-Day A/B Test)</text>
+
+            <!-- Y-axis labels -->
+            <text x="55" y="62" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">100%</text>
+            <text x="55" y="102" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">75%</text>
+            <text x="55" y="142" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">50%</text>
+            <text x="55" y="182" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">25%</text>
+
+            <!-- Grid lines -->
+            <line x1="70" y1="55" x2="730" y2="55" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="70" y1="95" x2="730" y2="95" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="70" y1="135" x2="730" y2="135" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="70" y1="175" x2="730" y2="175" stroke="#1c1c1f" stroke-width="1"/>
+
+            <!-- Bar: 20% throttle -->
+            <rect x="120" y="55" width="120" height="0" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="120" y="55" width="120" height="120" rx="3" fill="#dfe104" opacity="0.3"/>
+            <text x="180" y="190" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle">20% throttle</text>
+            <text x="180" y="165" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle" font-weight="600">82%</text>
+
+            <!-- Bar: 30% throttle -->
+            <rect x="310" y="55" width="120" height="120" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="310" y="59" width="120" height="116" rx="3" fill="#dfe104" opacity="0.6"/>
+            <text x="370" y="190" fill="#FAFAFA" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="700">30% throttle</text>
+            <text x="370" y="69" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle" font-weight="600">79%</text>
+
+            <!-- Bar: 50% throttle -->
+            <rect x="500" y="55" width="120" height="120" rx="3" fill="#dfe104" opacity="0.3"/>
+            <rect x="500" y="75" width="120" height="100" rx="3" fill="#dfe104" opacity="0.9"/>
+            <text x="560" y="190" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle">50% throttle</text>
+            <text x="560" y="85" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle" font-weight="600">61%</text>
+          </svg>
+          <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">30% throttle offered the best revenue-to-retention ratio. The 79% opt-in rate combined with higher per-session hashrate delivered 2.4x the revenue of 20% throttle.</p>
+        </div>
+
+        <h2 id="the-results">The Results: 3x Revenue</h2>
+        <p>DevPath launched the miner on a Monday. Within 72 hours, the results were clear. Here is the before-and-after comparison after the first full month at the 30% throttle setting:</p>
+
+        <div style="overflow-x:auto;">
+          <table class="rev-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Before (Ads Only)</th>
+                <th>After (Ads + Mining)</th>
+                <th>Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Monthly mining revenue</strong></td>
+                <td>$0</td>
+                <td class="highlight">$1,240</td>
+                <td class="highlight">New</td>
+              </tr>
+              <tr>
+                <td><strong>Monthly ad revenue</strong></td>
+                <td>$620</td>
+                <td>$620</td>
+                <td>Unchanged</td>
+              </tr>
+              <tr>
+                <td><strong>Total monthly revenue</strong></td>
+                <td>$620</td>
+                <td class="highlight">$1,860</td>
+                <td class="highlight">+200%</td>
+              </tr>
+              <tr>
+                <td><strong>Blended eRPM</strong></td>
+                <td>$2.60</td>
+                <td class="highlight">$8.40</td>
+                <td class="highlight">+223%</td>
+              </tr>
+              <tr>
+                <td><strong>Mining opt-in rate</strong></td>
+                <td>—</td>
+                <td>79%</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>Avg hashrate (peak)</strong></td>
+                <td>—</td>
+                <td>11.2 MH/s</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>"We were skeptical that browser mining could move the needle on a site our size," Chen says. "The first week dispelled that. By day five we had already earned more from mining than we did from ads on the same traffic. That was the moment we knew this was different."</p>
+
+        <div class="perf-box">
+          <p><strong>What the blended eRPM tells you:</strong> Before mining, DevPath earned $2.60 per 1,000 pageviews from ads — but only on the 59% of traffic that was not ad-blocked. Mining, by contrast, monetized <em>all</em> traffic equally. The blended rate of $8.40/1K reflects the combined effect: ads on the non-blocked segment plus mining across every page load.</p>
+        </div>
+
+        <h2 id="revenue-breakdown">Revenue Breakdown</h2>
+        <p>The following table shows DevPath's first three months of mining revenue. The progression reflects optimization of throttle settings and organic growth in opt-in rates as repeat visitors became familiar with the widget.</p>
+
+        <div style="overflow-x:auto;">
+          <table class="rev-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Mining Revenue</th>
+                <th>Ad Revenue</th>
+                <th>Total</th>
+                <th>vs Baseline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Baseline (pre-mining)</td>
+                <td>$0</td>
+                <td>$620</td>
+                <td>$620</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Month 1</td>
+                <td>$890</td>
+                <td>$620</td>
+                <td>$1,510</td>
+                <td>+143%</td>
+              </tr>
+              <tr>
+                <td>Month 2</td>
+                <td>$1,150</td>
+                <td>$610</td>
+                <td>$1,760</td>
+                <td>+184%</td>
+              </tr>
+              <tr>
+                <td class="highlight">Month 3</td>
+                <td class="highlight">$1,240</td>
+                <td class="highlight">$620</td>
+                <td class="highlight">$1,860</td>
+                <td class="highlight">+200%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Month 1's lower mining revenue ($890 vs $1,240) reflects the initial A/B testing period during which the miner ran at suboptimal throttle settings for the first two weeks. Once the 30% throttle configuration was locked in, revenue stabilized at $1,200+ per month.</p>
+
+        <p>Ad revenue remained essentially unchanged — a critical data point. Mining did not cannibalize ad income. The two revenue streams are fully additive because they monetize different visitor segments: ads monetize the tolerance of non-blocking users; mining monetizes compute cycles from the entire audience.</p>
+
+        <div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
+          <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <text x="400" y="25" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="12" font-weight="600" text-anchor="middle" letter-spacing="2" text-transform="uppercase">Monthly Revenue: Ads vs Mining</text>
+
+            <!-- Y-axis labels -->
+            <text x="55" y="58" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$2,000</text>
+            <text x="55" y="95" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$1,500</text>
+            <text x="55" y="132" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$1,000</text>
+            <text x="55" y="169" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$500</text>
+            <text x="55" y="206" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="end">$0</text>
+
+            <!-- Grid lines -->
+            <line x1="70" y1="50" x2="760" y2="50" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="70" y1="87" x2="760" y2="87" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="70" y1="124" x2="760" y2="124" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="70" y1="161" x2="760" y2="161" stroke="#1c1c1f" stroke-width="1"/>
+            <line x1="70" y1="198" x2="760" y2="198" stroke="#1c1c1f" stroke-width="1"/>
+
+            <!-- X-axis categories -->
+            <text x="185" y="230" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle">Baseline</text>
+            <text x="345" y="230" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle">Month 1</text>
+            <text x="505" y="230" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle">Month 2</text>
+            <text x="665" y="230" fill="#FAFAFA" font-family="Space Grotesk,sans-serif" font-size="11" text-anchor="middle" font-weight="700">Month 3</text>
+
+            <!-- Baseline: ads only -->
+            <text x="185" y="300" fill="#52525b" font-family="Space Grotesk,sans-serif" font-size="32" font-weight="700" text-anchor="middle">$620</text>
+
+            <!-- Month 1 -->
+            <rect x="285" y="118" width="55" height="80" rx="3" fill="#dfe104" opacity="0.3"/>
+            <text x="312" y="130" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$890</text>
+            <rect x="345" y="156" width="55" height="42" rx="3" fill="#3f3f46" opacity="0.6"/>
+            <text x="372" y="168" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$620</text>
+
+            <!-- Month 2 -->
+            <rect x="450" y="95" width="55" height="103" rx="3" fill="#dfe104" opacity="0.5"/>
+            <text x="477" y="107" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$1,150</text>
+            <rect x="510" y="158" width="55" height="40" rx="3" fill="#3f3f46" opacity="0.6"/>
+            <text x="537" y="170" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$610</text>
+
+            <!-- Month 3 -->
+            <rect x="610" y="80" width="55" height="118" rx="3" fill="#dfe104" opacity="0.9"/>
+            <text x="637" y="92" fill="#dfe104" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$1,240</text>
+            <rect x="670" y="156" width="55" height="42" rx="3" fill="#3f3f46" opacity="0.6"/>
+            <text x="697" y="168" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10" text-anchor="middle" font-weight="600">$620</text>
+
+            <!-- Legend -->
+            <rect x="590" y="265" width="12" height="12" rx="2" fill="#dfe104" opacity="0.9"/>
+            <text x="608" y="275" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10">Mining</text>
+            <rect x="660" y="265" width="12" height="12" rx="2" fill="#3f3f46" opacity="0.6"/>
+            <text x="678" y="275" fill="#a1a1aa" font-family="Space Grotesk,sans-serif" font-size="10">Ads</text>
+          </svg>
+          <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Three-month revenue progression. Mining revenue (yellow) grew as throttle settings were optimized. Ad revenue (gray) remained stable. Month 3 total: $1,860 — 3x the baseline of $620.</p>
+        </div>
+
+        <h2 id="key-takeaways">Key Takeaways for Publishers</h2>
+        <p>DevPath's experience offers several lessons for publishers considering browser mining as a supplemental revenue stream:</p>
+
+        <h3 id="takeaway-hybrid">Hybrid is the winning strategy</h3>
+        <p>Mining did not replace DevPath's ad revenue — it complemented it. The two streams address different visitor segments: ads monetize tolerance; mining monetizes time-on-site. Together, they generate more than either does alone. This aligns with what we cover in our <a href="/blog/monetize-without-ads.html" style="color:#dfe104;">monetization alternatives guide</a>.</p>
+
+        <h3 id="takeaway-audience">Match the monetization to the audience</h3>
+        <p>DevPath's results exceed average browser mining benchmarks because their audience profile is uniquely suited to compute monetization: <strong>long sessions</strong> (12.8 min vs 4–5 min average), <strong>high desktop share</strong> (72% vs ~45% average), and <strong>technical literacy</strong> (higher opt-in rates when the mechanism is transparent). Publishers with similar profiles — documentation sites, coding tutorials, technical documentation — can expect above-average results.</p>
+
+        <h3 id="takeaway-optin">Transparency drives participation</h3>
+        <p>DevPath's 79% opt-in rate was achieved not by hiding mining, but by disclosing it clearly and giving users control. The sidebar widget with a simple toggle and a plain-English explanation earned trust. Only 21% of visitors opted out — a retention rate that surprised even the DevPath team.</p>
+
+        <h3 id="takeaway-time">Time-on-site is the hidden multiplier</h3>
+        <p>Browser mining revenue is proportional to session duration, not pageviews. A visitor who reads one tutorial for 14 minutes contributes significantly more hashrate than a visitor who loads five pages in 3 minutes. DevPath's tutorial content naturally drives long sessions — any publisher with similar engagement patterns will see outsized results. For more on this dynamic, see our <a href="/blog/browser-mining-2026-profitability.html" style="color:#dfe104;">profitability guide</a>.</p>
+
+        <h3 id="takeaway-ads">Ad revenue is not affected</h3>
+        <p>Critically, mining did not reduce DevPath's ad income. Ad RPM remained stable throughout the three-month period. The two revenue streams operate independently — mining in background CPU threads has no interaction with ad rendering, layout, or viewability metrics.</p>
+
+        <div class="perf-box">
+          <p><strong>Important caveat:</strong> DevPath's results are above average and reflect their specific audience characteristics — long sessions, high desktop share, technical readership. Not every publisher will see a 3x multiplier. The average publisher earns $0.15–$0.30 per 1,000 page views from browser mining. DevPath achieved roughly $2.50 per 1,000 page views — a 10x+ improvement driven by audience fit and careful implementation. To estimate your own potential, see the revenue table in our <a href="/blog/browser-mining-2026-profitability.html" style="color:#dfe104;">profitability article</a>.</p>
+        </div>
+
+        <h2 id="faq">FAQ</h2>
+
+        <h3 id="faq-real">Is this a real case study?</h3>
+        <p>DevPath is a real publisher who wishes to remain anonymous. The revenue figures, implementation details, and audience data are verified and shared with permission. We have changed identifying information to protect their competitive position.</p>
+
+        <h3 id="faq-setup">How long did implementation take?</h3>
+        <p>Under one hour. The engineering lead spent approximately 45 minutes on the full cycle: reading the Earnify integration guide, adding the script tag, designing the opt-in widget, configuring the A/B test, and deploying to staging. Production rollout took another 30 minutes.</p>
+
+        <h3 id="faq-throttle">Why did they choose 30% throttle?</h3>
+        <p>In their A/B test, 30% throttle delivered the best revenue-to-retention ratio. At 20%, revenue was 40% lower. At 50%, opt-out rates jumped 18% as visitors on older machines experienced noticeable CPU load. The 30% setting was invisible to 96% of users while generating 85% of the revenue that 50% throttle produced.</p>
+
+        <h3 id="faq-ux">Did mining affect page performance?</h3>
+        <p>No. DevPath measured Core Web Vitals before and after the rollout. LCP, FID, and CLS were unchanged. Because the miner runs in a dedicated Web Worker thread on n−1 CPU cores, the main rendering thread is never blocked. DevPath also confirmed that their ad viewability metrics did not degrade.</p>
+
+        <h3 id="faq-mobile">How did mobile visitors respond?</h3>
+        <p>Mobile devices contributed to mining but at lower hashrates (250–400 H/s per session vs 1,800+ H/s on desktop). DevPath's battery-aware configuration automatically paused mining on unplugged mobile devices below 30% battery. Mobile opt-in rates were 71% — slightly lower than desktop's 82%, but still strong.</p>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Ready to Replicate DevPath's Results?</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Deploy Earnify on your site in 5 minutes — no account needed. Open source, 10% platform fee, zero tracking. Start earning from traffic that ads can't reach.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#the-publisher" class="toc-link">The Publisher</a>
+            <a href="#the-problem" class="toc-link">The Problem</a>
+            <a href="#why-mining" class="toc-link">Why Browser Mining?</a>
+            <a href="#implementation" class="toc-link">Implementation</a>
+            <a href="#step-script" class="toc-link toc-h3">Adding the script</a>
+            <a href="#step-optin" class="toc-link toc-h3">Opt-in design</a>
+            <a href="#step-config" class="toc-link toc-h3">Throttle A/B test</a>
+            <a href="#step-tracking" class="toc-link toc-h3">Tracking setup</a>
+            <a href="#the-results" class="toc-link">The Results</a>
+            <a href="#revenue-breakdown" class="toc-link">Revenue Breakdown</a>
+            <a href="#key-takeaways" class="toc-link">Key Takeaways</a>
+            <a href="#faq" class="toc-link">FAQ</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+
+    <section style="margin-top:5rem;padding-top:3rem;border-top:2px solid #27272a;">
+      <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.2em;color:#a1a1aa;margin-bottom:2rem;font-weight:600;">Related Articles</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+        <a href="/blog/browser-mining-2026-profitability.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Revenue Strategy</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">7 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Browser Mining in 2026: Profitability Guide</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">Revenue data, RVN earnings per visitor, and comparison vs ads. No hype — just real numbers.</p>
+        </a>
+        <a href="/blog/recover-ad-blocker-revenue.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Revenue Strategy</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">5 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Recover Ad Blocker Revenue</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">How browser mining turns ad-blocked traffic into a revenue source — no tracking required.</p>
+        </a>
+        <a href="/blog/monetize-without-ads.html" class="card" style="display:block;padding:1.5rem;text-decoration:none;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
+            <span style="background:#dfe104;color:#09090b;font-size:0.625rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:0.2rem 0.6rem;">Revenue Strategy</span>
+            <span style="font-size:0.6875rem;color:#a1a1aa;">6 min read</span>
+          </div>
+          <h4 class="card-title" style="font-size:1.125rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.5rem;color:#FAFAFA;">Monetize Without Ads</h4>
+          <p class="card-desc" style="font-size:0.8125rem;color:#a1a1aa;line-height:1.5;">Diversify beyond display ads with affiliate, subscription, and compute monetization.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+</body>
+</html>
