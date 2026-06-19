@@ -1,0 +1,7 @@
+Contact: mailto:contact@earnify.cc
+Expires: 2027-06-19T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://earnify.cc/.well-known/security.txt
+Policy: https://earnify.cc/SECURITY.md
+Encryption: https://earnify.cc/security.txt.asc
+Acknowledgments: https://earnify.cc/SECURITY.md
