@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
   <!-- ═══════════════════════════════════════ -->
   <!-- PRIMARY PAGE -->
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -20,6 +21,16 @@
       <image:loc>https://earnify.cc/favicon.svg</image:loc>
       <image:title>Earnify Logo</image:title>
     </image:image>
+    <video:video>
+      <video:thumbnail_loc>https://earnify.cc/og-image.png</video:thumbnail_loc>
+      <video:title>Earnify — Quick Start Tutorial</video:title>
+      <video:description>Complete walkthrough from creating your RavenCoin wallet to seeing your first shares submitted to the pool. Covers script tag integration, thread configuration, and real-time monitoring.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=ii4mBGboxw8</video:content_loc>
+      <video:player_loc allow_embed="yes">https://www.youtube.com/embed/ii4mBGboxw8</video:player_loc>
+      <video:duration>300</video:duration>
+      <video:publication_date>2026-05-21</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
   </url>
 
   <!-- ═══════════════════════════════════════ -->
@@ -37,9 +48,14 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-06-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Earnify Blog — Publisher Monetization Insights</image:title>
+      <image:caption>Expert guides on website monetization, browser-based compute, privacy compliance, and ad-free revenue strategies.</image:caption>
+    </image:image>
   </url>
 
   <!-- ═══════════════════════════════════════ -->
@@ -50,6 +66,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>How to Monetize Your Website Without Ads</image:title>
+      <image:caption>Learn the most effective ways to generate revenue from your website without relying on invasive display advertising or tracking cookies.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -57,6 +78,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>MinotaurX vs Power2B — Algorithm Comparison</image:title>
+      <image:caption>Technical comparison of mining algorithms for browser-based compute with real-world hashrate benchmarks.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -64,6 +90,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Browser-Based Mining GDPR Compliance — Legal Guide</image:title>
+      <image:caption>Complete legal guide covering GDPR, CCPA, and ePrivacy compliance for browser-based compute monetization.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -71,6 +102,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>The History of Web Mining — From Coinhive to Earnify</image:title>
+      <image:caption>Complete evolution of browser-based cryptocurrency mining from Coinhive's 2017 dominance to modern open-source architecture.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -78,6 +114,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Browser Mining 2026 Profitability — Revenue Data</image:title>
+      <image:caption>Honest browser mining revenue data for 2026: RVN earnings per visitor, comparison vs ads, and a 5-minute setup guide.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -85,6 +126,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Coinhive Alternatives 2026 — Best Browser Mining Solutions</image:title>
+      <image:caption>Compare the top Coinhive alternatives for 2026 — Earnify, CryptoLoot, Coinimp, and more with real features, fees, and privacy analysis.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -92,6 +138,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Recover Revenue Lost to Ad Blockers with Browser Mining</image:title>
+      <image:caption>Ad blockers cost publishers up to 42.7% of display revenue. Learn how browser-based compute recovers that lost income.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -99,6 +150,11 @@
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Zero-Server Infrastructure — Earnify Architecture</image:title>
+      <image:caption>Deep-dive into Earnify's browser-only mining architecture: Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -106,6 +162,11 @@
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Browser Mining for Freelancers &amp; Agencies</image:title>
+      <image:caption>Why freelancers and agency owners should add Earnify browser mining to every client site — and how to propose it with confidence.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -113,6 +174,11 @@
     <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>How Browser-Based Mining Works — Technical Guide</image:title>
+      <image:caption>End-to-end technical explanation — stratum protocol, Web Workers, WASM, pool integration, and reward distribution.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -120,6 +186,11 @@
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Case Study — Publisher 3x Revenue with Browser Mining</image:title>
+      <image:caption>Real publisher case study — 3x revenue by layering opt-in browser mining alongside existing ad monetization.</image:caption>
+    </image:image>
   </url>
 
   <url>
@@ -127,6 +198,45 @@
     <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Mining Opt-In UX Design — Best Practices</image:title>
+      <image:caption>UX patterns, dark patterns to avoid, and A/B-tested opt-in designs that maximize mining consent rates ethically.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- XML / TEXT RESOURCES -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://earnify.cc/llms.txt</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://earnify.cc/rss.xml</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://earnify.cc/opensearch.xml</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- UTILITY PAGES -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://earnify.cc/404.html</loc>
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>

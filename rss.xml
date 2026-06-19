@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Earnify Blog — Publisher Monetization Insights &amp; Guides</title>
+    <link>https://earnify.cc/blog/</link>
+    <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://earnify.cc/favicon.svg</url>
+      <title>Earnify Blog</title>
+      <link>https://earnify.cc/blog/</link>
+    </image>
+
+    <item>
+      <title>Mining Opt-In UX Design: Best Practices for Higher Consent Rates</title>
+      <link>https://earnify.cc/blog/mining-opt-in-ux-design.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/mining-opt-in-ux-design.html</guid>
+      <pubDate>Tue, 17 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[UX patterns, dark patterns to avoid, and A/B-tested opt-in designs that maximize mining consent rates ethically.]]></description>
+    </item>
+
+    <item>
+      <title>Case Study: How One Publisher 3x'd Revenue by Adding Browser Mining</title>
+      <link>https://earnify.cc/blog/case-study-3x-revenue.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/case-study-3x-revenue.html</guid>
+      <pubDate>Sun, 15 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Real publisher case study — 3x revenue by layering opt-in browser mining alongside existing ad monetization.]]></description>
+    </item>
+
+    <item>
+      <title>How Browser-Based Mining Works: A Complete Technical Guide</title>
+      <link>https://earnify.cc/blog/how-browser-mining-works.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/how-browser-mining-works.html</guid>
+      <pubDate>Mon, 02 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[End-to-end technical explanation — stratum protocol, Web Workers, WASM, pool integration, and reward distribution.]]></description>
+    </item>
+
+    <item>
+      <title>Browser Mining for Freelancers &amp; Agencies</title>
+      <link>https://earnify.cc/blog/elevator-pitch-browser-mining.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/elevator-pitch-browser-mining.html</guid>
+      <pubDate>Sun, 01 Jun 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Why freelancers and agency owners should add browser mining to client sites — and how to propose it with confidence.]]></description>
+    </item>
+
+    <item>
+      <title>Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser</title>
+      <link>https://earnify.cc/blog/zero-server-infrastructure.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/zero-server-infrastructure.html</guid>
+      <pubDate>Mon, 26 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Architecture deep-dive — Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay, dev fee model, and security.]]></description>
+    </item>
+
+    <item>
+      <title>Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide)</title>
+      <link>https://earnify.cc/blog/browser-mining-2026-profitability.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-2026-profitability.html</guid>
+      <pubDate>Wed, 21 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Honest browser mining revenue data for 2026: RVN earnings per visitor, comparison vs ads, and a 5-minute setup guide. No hype, just real numbers.]]></description>
+    </item>
+
+    <item>
+      <title>How to Recover Revenue Lost to Ad Blockers with Browser Mining</title>
+      <link>https://earnify.cc/blog/recover-ad-blocker-revenue.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/recover-ad-blocker-revenue.html</guid>
+      <pubDate>Sun, 18 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Ad blockers cost publishers up to 42.7% of display revenue. Learn how browser-based compute monetization recovers that lost income.]]></description>
+    </item>
+
+    <item>
+      <title>Coinhive Alternatives: Best Browser Mining Solutions for 2026</title>
+      <link>https://earnify.cc/blog/coinhive-alternatives.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/coinhive-alternatives.html</guid>
+      <pubDate>Sun, 18 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Compare the top Coinhive alternatives for 2026 — Earnify, CryptoLoot, Coinimp, and more — with real features, fees, and privacy analysis.]]></description>
+    </item>
+
+    <item>
+      <title>How to Monetize Your Website Without Ads: A Guide for Publishers</title>
+      <link>https://earnify.cc/blog/monetize-without-ads.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/monetize-without-ads.html</guid>
+      <pubDate>Thu, 08 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Learn the most effective ways to generate revenue from your website without relying on invasive display advertising or tracking cookies.]]></description>
+    </item>
+
+    <item>
+      <title>MinotaurX vs Power2B: Which Algorithm Is Most Profitable for Browser Mining?</title>
+      <link>https://earnify.cc/blog/algorithm-comparison.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/algorithm-comparison.html</guid>
+      <pubDate>Thu, 08 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Technical comparison of mining algorithms for browser-based compute with real-world hashrate benchmarks.]]></description>
+    </item>
+
+    <item>
+      <title>Is Browser-Based Mining GDPR Compliant? A Publisher's Legal Guide</title>
+      <link>https://earnify.cc/blog/gdpr-compliance.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/gdpr-compliance.html</guid>
+      <pubDate>Thu, 08 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Complete legal guide covering GDPR, CCPA, and ePrivacy compliance for browser-based compute monetization.]]></description>
+    </item>
+
+    <item>
+      <title>The History of Web Mining: From Coinhive to Earnify</title>
+      <link>https://earnify.cc/blog/web-mining-history.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/web-mining-history.html</guid>
+      <pubDate>Thu, 08 May 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[The complete evolution of browser-based cryptocurrency mining from Coinhive's 2017 dominance to modern open-source architecture.]]></description>
+    </item>
+
+  </channel>
+</rss>

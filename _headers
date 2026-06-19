@@ -1,0 +1,44 @@
+# Cache-Control headers for static assets
+# Cloudflare Pages / Netlify compatible _headers format
+
+# HTML — short cache (content changes)
+/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+/demo/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+/blog/index.html
+  Cache-Control: public, max-age=3600, must-revalidate
+/blog/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+/404.html
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# JavaScript — immutable with hash in filename would be ideal, moderate cache for now
+/miner.js
+  Cache-Control: public, max-age=86400, must-revalidate
+/miner.min.js
+  Cache-Control: public, max-age=86400, must-revalidate
+/sw.js
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Images & icons — long cache (immutable content)
+/*.png
+  Cache-Control: public, max-age=604800, immutable
+/*.svg
+  Cache-Control: public, max-age=604800, immutable
+/*.ico
+  Cache-Control: public, max-age=604800, immutable
+
+# XML / text files — moderate cache
+/sitemap.xml
+  Cache-Control: public, max-age=3600, must-revalidate
+/rss.xml
+  Cache-Control: public, max-age=3600, must-revalidate
+/robots.txt
+  Cache-Control: public, max-age=86400, must-revalidate
+/llms.txt
+  Cache-Control: public, max-age=86400, must-revalidate
+/manifest.json
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# Fonts — long cache (Google Fonts are already cached by Google's CDN)

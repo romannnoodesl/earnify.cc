@@ -1,0 +1,16 @@
+/* TEAM */
+Developer: Roman Noodles
+Contact: contact [at] earnify.cc
+GitHub: https://github.com/romannnoodesl
+YouTube: https://www.youtube.com/@romannoodles4339
+
+/* SITE */
+Last update: 2026-06-19
+Language: English
+Standards: HTML5, CSS3, JavaScript ES Modules, WebAssembly
+Components: Tailwind CSS, Socket.IO, Web Workers, Stratum V1
+Hosting: GitHub Pages
+Domain: earnify.cc
+
+/* THANKS */
+Open source contributors, zpool.ca for pool infrastructure, the WebAssembly community, and every publisher who chose compute over ads.

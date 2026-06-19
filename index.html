@@ -105,6 +105,63 @@
     }
     </script>
 
+    <!-- Organization schema for Knowledge Graph -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Earnify",
+      "url": "https://earnify.cc",
+      "logo": "https://earnify.cc/favicon.svg",
+      "description": "Open-source browser-based CPU mining for web publishers. Monetize traffic without ads or tracking.",
+      "email": "contact@earnify.cc",
+      "sameAs": [
+        "https://github.com/romannnoodesl/earnify.cc",
+        "https://discord.gg/g2JxcVYavJ",
+        "https://www.youtube.com/@romannoodles4339",
+        "https://t.me/+GtzrnpVaCRcwMWM5"
+      ]
+    }
+    </script>
+
+    <!-- WebSite + SearchAction schema for Sitelinks Search Box -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Earnify",
+      "url": "https://earnify.cc",
+      "description": "Browser-based CPU mining for publishers. No ads. No tracking. Open source.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://earnify.cc/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- VideoObject schema for YouTube tutorial -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "name": "Earnify — Quick Start Tutorial",
+      "description": "Complete walkthrough from creating your RavenCoin wallet to seeing your first shares submitted to the pool. Covers script tag integration, thread configuration, and real-time monitoring in the browser console.",
+      "thumbnailUrl": "https://earnify.cc/og-image.png",
+      "uploadDate": "2026-05-21",
+      "duration": "PT5M",
+      "contentUrl": "https://www.youtube.com/watch?v=ii4mBGboxw8",
+      "embedUrl": "https://www.youtube.com/embed/ii4mBGboxw8",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Earnify"
+      }
+    }
+    </script>
+
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -112,6 +169,9 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.json" />
+<link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+<link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
 <meta name="theme-color" content="#09090B" />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
@@ -3832,5 +3892,10 @@ document.getElementById("calc-session")?.addEventListener("input", debounce(upda
         }
       });
       </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
   </body>
 </html>

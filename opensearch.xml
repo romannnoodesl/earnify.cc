@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>Earnify</ShortName>
+  <Description>Search Earnify — browser-based CPU mining for publishers</Description>
+  <Tags>browser mining webminer publisher revenue</Tags>
+  <Contact>contact@earnify.cc</Contact>
+  <Url type="text/html" template="https://earnify.cc/?s={searchTerms}"/>
+  <LongName>Earnify Search</LongName>
+  <Image height="96" width="96" type="image/png">https://earnify.cc/favicon-96x96.png</Image>
+  <Image height="16" width="16" type="image/x-icon">https://earnify.cc/favicon.ico</Image>
+  <Image height="any" width="any" type="image/svg+xml">https://earnify.cc/favicon.svg</Image>
+  <InputEncoding>UTF-8</InputEncoding>
+  <AdultContent>false</AdultContent>
+  <Language>en-us</Language>
+  <OutputEncoding>UTF-8</OutputEncoding>
+</OpenSearchDescription>

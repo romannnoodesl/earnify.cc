@@ -161,6 +161,13 @@ Allow: /og-image.png
 Allow: /apple-touch-icon.png
 Allow: /robots.txt
 Allow: /sitemap.xml
+Allow: /llms.txt
+Allow: /rss.xml
+Allow: /opensearch.xml
+Allow: /manifest.json
+Allow: /sw.js
+Allow: /humans.txt
+Allow: /.well-known/security.txt
 
 # ─── SITEMAP LOCATION ─────────────────────────────────────
 Sitemap: https://earnify.cc/sitemap.xml
