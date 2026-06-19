@@ -10,6 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <link rel="canonical" href="https://earnify.cc/demo/" />
   <meta name="keywords" content="Earnify demo, browser mining live, CPU mining test, webminer playground, browser mining demo no install, test browser mining, CPU hashrate test" />
@@ -713,5 +717,10 @@
 
   log("Page loaded. Configure wallet & CPU, then click 'Start Demo'.");
 </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
 </body>
 </html>
