@@ -1,0 +1,10 @@
+{
+  "name": "earnify.cc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Earnify — Browser-based cryptocurrency mining for website publishers",
+  "dependencies": {
+    "openai": "^4.0.0"
+  }
+}
