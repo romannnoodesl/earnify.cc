@@ -5,7 +5,7 @@
       "slug": "browser-mining-vs-display-ads",
       "category": "Revenue Strategy",
       "description": "Side-by-side revenue comparison of browser mining and display ads — RPM, fill rates, user experience, and long-term earnings per unique visitor.",
-      "used": false
+      "used": true
     },
     {
       "title": "How to Add Earnify to Your WordPress Site in 5 Minutes",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 0
+  "nextTopicIndex": 1
 }

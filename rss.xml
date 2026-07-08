@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2026 02:54:17 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,15 @@
       <link>https://earnify.cc/blog/</link>
     </image>
 
+    
     <item>
+      <title>Browser Mining vs Display Ads: Revenue Per Visitor Compared</title>
+      <link>https://earnify.cc/blog/browser-mining-vs-display-ads.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-vs-display-ads.html</guid>
+      <pubDate>Wed, 08 Jul 2026 02:54:17 GMT</pubDate>
+      <description><![CDATA[A data-driven comparison of browser-based crypto mining and traditional display advertising revenue per visitor. Learn which monetization method earns more and when to use each.]]></description>
+    </item>
+<item>
       <title>Mining Opt-In UX Design: Best Practices for Higher Consent Rates</title>
       <link>https://earnify.cc/blog/mining-opt-in-ux-design.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/mining-opt-in-ux-design.html</guid>

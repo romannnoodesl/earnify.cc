@@ -9,7 +9,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -48,7 +48,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -206,25 +206,38 @@
   </url>
 
   <!-- ═══════════════════════════════════════ -->
+
+  <url>
+    <loc>https://earnify.cc/blog/browser-mining-vs-display-ads.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Browser Mining vs Display Ads: Revenue Per Visitor Compared</image:title>
+      <image:caption>A data-driven comparison of browser-based crypto mining and traditional display advertising revenue per visitor. Learn which monetization method earns more and when to use each.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/llms.txt</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/rss.xml</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/opensearch.xml</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -234,7 +247,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/404.html</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-07-08</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
