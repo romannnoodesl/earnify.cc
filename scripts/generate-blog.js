@@ -63,22 +63,30 @@ The blog targets website publishers, developers, freelancers, agencies, and cryp
   const userPrompt = `Write a complete blog post about: "${topic.title}"
 
 Requirements:
-1. Write the blog content as HTML (not markdown). Use semantic HTML tags: <h2>, <h3>, <p>, <ul>, <ol>, <li>, <strong>, <em>, <code>, <blockquote>.
+1. Write the blog content as HTML (not markdown). Use rich formatting with the available components listed below.
 2. Every <h2> and <h3> must have an id attribute for the table of contents (use lowercase kebab-case).
 3. Aim for 1200-1800 words (roughly 6-8 minute read).
 4. Include 3-5 H2 sections and 2-3 H3 subsections.
 5. Reference Earnify naturally where relevant (don't force it).
 6. Include specific numbers, benchmarks, or data points where possible.
 7. End with a clear call-to-action related to earnify.
-8. Do NOT include any <html>, <head>, <body>, <nav>, <style>, or <script> tags. Only output the article content that goes INSIDE the <article> tag.
-9. Do NOT include the breadcrumb, table of contents, or related articles sections.
-10. Return ONLY a JSON object with this exact structure (no markdown fences):
+8. Link to related Earnify blog posts where relevant using <a> tags with style="color:#dfe104;text-decoration:underline;" and href like "/blog/slug.html".
+9. Do NOT include any <html>, <head>, <body>, <nav>, <style>, or <script> tags. Only output the article content that goes INSIDE the <article> tag.
+10. Do NOT include the breadcrumb, table of contents, or related articles sections.
+
+Available visual components (use these to make posts look professional and data-rich):
+- TABLES: Use <table class="rev-table"> for revenue/data tables and <table class="cmp-table"> for comparison tables. Table cells can use class="highlight" (yellow bg), class="winner" (green), class="check" (green text), class="cross" (red text), or class="warn" (orange text).
+- CALLOUT BOXES: Use <div class="perf-box"> for key statistics, definitions, and important takeaways.
+- CODE BLOCKS: For multi-line code, use <div class="code-block">. For syntax highlighting inside code blocks, wrap keywords in <span class="kw">, function names in <span class="fn">, strings in <span class="str">, numbers in <span class="num">, and comments in <span class="cm">. For inline code, use <code>.
+- FLOW DIAGRAMS: Use <div class="flow-diagram"> for ASCII-style architecture/flow diagrams (monospace text).
+- SVG CHARTS: Include in-line SVG bar charts where data visualization adds value, wrapped in <div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;"> with a caption <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">.
+11. Return ONLY a JSON object with this exact structure (no markdown fences):
 {
   "title": "The blog post title",
   "description": "A 150-160 character meta description for SEO",
   "category": "${topic.category}",
   "readTime": "X min read",
-  "content": "The full HTML article content (h2/h3/p/ul/ol elements only)",
+  "content": "The full HTML article content including tables, code blocks, charts, and callout boxes",
   "toc": [{"id": "section-id", "label": "Section Label", "h3": false}],
   "structuredData": {"headline": "...", "description": "..."}
 }`;
@@ -193,6 +201,22 @@ function buildHTML(post, topic, date) {
     article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
     article li { margin-bottom: 0.5rem; }
     article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
     .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
     .code-block .kw { color: #dfe104; }
     .code-block .fn { color: #FAFAFA; }
@@ -203,12 +227,13 @@ function buildHTML(post, topic, date) {
     .flow-diagram .node { color: #dfe104; font-weight: 700; }
     .flow-diagram .arrow { color: #52525b; }
     .flow-diagram .label { color: #a1a1aa; }
-    .perf-box { border: 2px solid #dfe104; padding: 1.5rem; margin-bottom: 1.25rem; background: rgba(223,225,4,0.04); }
-    .perf-box p { margin-bottom: 0; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
     .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
     .card:hover { background: #dfe104; border-color: #dfe104; }
     .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
     @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
   </style>
 </head>
 <body>
