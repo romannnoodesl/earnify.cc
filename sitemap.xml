@@ -219,6 +219,19 @@
     </image:image>
   </url>
 
+
+  <url>
+    <loc>https://earnify.cc/blog/earnify-wordpress-setup.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>How to Add Earnify to Your WordPress Site in 5 Minutes</image:title>
+      <image:caption>Step-by-step guide to integrating Earnify&apos;s browser-based crypto mining on your WordPress site. No plugins, no backend changes—just one script tag and 5 minutes.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>

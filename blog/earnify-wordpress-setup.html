@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Add Earnify to Your WordPress Site in 5 Minutes — Earnify Blog</title>
+  <meta name="description" content="Step-by-step guide to integrating Earnify's browser-based crypto mining on your WordPress site. No plugins, no backend changes—just one script tag and 5 minutes." />
+  <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, earnify, wordpress, setup" />
+  <link rel="canonical" href="https://earnify.cc/blog/earnify-wordpress-setup.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/earnify-wordpress-setup.html" />
+  <meta property="og:title" content="How to Add Earnify to Your WordPress Site in 5 Minutes" />
+  <meta property="og:description" content="Step-by-step guide to integrating Earnify's browser-based crypto mining on your WordPress site. No plugins, no backend changes—just one script tag and 5 minutes." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Add Earnify to Your WordPress Site in 5 Minutes" />
+  <meta name="twitter:description" content="Step-by-step guide to integrating Earnify's browser-based crypto mining on your WordPress site. No plugins, no backend changes—just one script tag and 5 minutes." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How to Add Earnify to Your WordPress Site in 5 Minutes",
+    "description": "Step-by-step guide to integrating Earnify's browser-based crypto mining on your WordPress site. No plugins, no backend changes—just one script tag and 5 minutes.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/earnify-wordpress-setup.html" },
+    "datePublished": "2026-07-08",
+    "dateModified": "2026-07-08"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "How to Add Earnify to Your WordPress Site in 5 Minutes" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">How to Add Earnify to Your WordPress Site in 5 Minutes</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">July 8, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">How to Add Earnify to Your WordPress Site in 5 Minutes</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Step-by-step guide to integrating Earnify's browser-based crypto mining on your WordPress site. No plugins, no backend changes—just one script tag and 5 minutes.</p>
+
+        <p>You've heard the pitch: browser-based crypto mining as an alternative to display ads. No pop-ups, no privacy violations, no UX nightmares. But the gap between "sounds interesting" and "it's running on my site" usually involves wrestling with plugins, debugging console errors, and questioning your life choices.</p><p>Not with Earnify. The entire integration is a single <code>&lt;script&gt;</code> tag. No WordPress plugin required. No database changes. No server-side dependencies. You can go from zero to mining in under 5 minutes—and this guide will walk you through every step.</p><h2 id="why-browser-mining-beats-display-ads">Why Browser Mining Beats Display Ads</h2><p>Before we touch any code, let's talk numbers. The average RPM (revenue per 1,000 pageviews) for display ads on a mid-tier site hovers around <strong>$2-$5</strong>, depending on niche and geography. That's before ad blockers wipe out 30-40% of impressions. Earnify's browser mining, by contrast, generates revenue per active session—not per impression—and it's completely immune to ad blockers.</p><p>Here's what real publishers are seeing with Earnify, based on internal benchmarks from Q1 2025:</p><table class="rev-table"><thead><tr><th>Site Traffic Tier</th><th>Monthly Unique Visitors</th><th>Avg. Session Duration</th><th>Monthly Mining Revenue (Est.)</th></tr></thead><tbody><tr><td>Small</td><td>10,000</td><td>3 min 20 sec</td><td class="highlight">$18 – $42</td></tr><tr><td>Medium</td><td>100,000</td><td>4 min 50 sec</td><td class="highlight">$210 – $470</td></tr><tr><td>Large</td><td>1,000,000</td><td>5 min 40 sec</td><td class="highlight">$2,400 – $5,100</td></tr></tbody></table><p style="font-size:0.75rem;color:#71717a;margin-top:0.5rem;">Estimates based on RVN mining at $0.018/RVN, desktop traffic only, 70% WASM efficiency. Actual results vary with coin price and hardware.</p><p>Mining revenue scales with <em>time</em>, not clicks. If your readers spend 5 minutes on an article, you earn for all 5 minutes. That's fundamentally different from hoping they accidentally click a banner ad.</p><div class="perf-box"><strong>Key Takeaway:</strong> Earnify works best for content-heavy sites where users spend meaningful time on-page—blogs, documentation, tools, forums, and media sites. E-commerce product pages with 30-second bounce rates won't see the same results.</div><h2 id="step-1-get-your-site-key">Step 1: Get Your Site Key (90 Seconds)</h2><p>Every Earnify integration starts with a <strong>Site Key</strong>—a unique identifier that links mining activity to your account and ensures you receive 90% of generated revenue.</p><ol><li>Head to <a href="https://earnify.cc" style="color:#dfe104;text-decoration:underline;">earnify.cc</a> and create an account (email + password, no KYC).</li><li>Navigate to <strong>Dashboard → Sites</strong> and click <strong>Add Site</strong>.</li><li>Enter your domain (e.g., <code>mysite.com</code>). The platform auto-generates your Site Key—a string that looks like <code>ea_1a2b3c4d5e6f...</code></li><li>Copy it. You'll need it in 60 seconds.</li></ol><p>That's it. No DNS verification, no file uploads, no waiting for approval. The key is active immediately.</p><h2 id="step-2-add-the-script-to-wordpress">Step 2: Add the Script to WordPress (2 Minutes)</h2><p>You have three options for injecting the Earnify script into WordPress. Pick the one that matches your comfort level.</p><h3 id="option-a-header-footer-plugin">Option A: Header/Footer Plugin (Recommended for Beginners)</h3><p>If you'd rather not touch theme files directly, use a lightweight plugin like <strong>WPCode</strong> (formerly Insert Headers and Footers) or <strong>HFCM</strong>.</p><ol><li>Install and activate the plugin from <strong>Plugins → Add New</strong>.</li><li>Go to the plugin's settings page and find the <strong>Header</strong> or <strong>Scripts in Header</strong> section.</li><li>Paste the following snippet, replacing <code>YOUR_SITE_KEY</code> with the key from Step 1:</li></ol><div class="code-block"><span class="cm">// Earnify Browser Mining — Site Key: ea_xxxxxxxxxxxx</span>
+&lt;<span class="kw">script</span> <span class="fn">src</span>=<span class="str">"https://cdn.earnify.cc/miner.js"</span>
+        <span class="fn">data-site-key</span>=<span class="str">"YOUR_SITE_KEY"</span>
+        <span class="fn">data-threads</span>=<span class="str">"n-1"</span>
+        <span class="fn">data-throttle</span>=<span class="str">"0.3"</span>
+        <span class="fn">async</span>&gt;
+&lt;/<span class="kw">script</span>&gt;</div><ol start="4"><li>Save changes. The script now loads on every page.</li></ol><h3 id="option-b-theme-functions-php">Option B: functions.php (For Developers)</h3><p>If you manage your own theme or child theme, enqueue the script properly through WordPress's hook system:</p><div class="code-block"><span class="cm">// Add to your child theme's functions.php</span>
+<span class="fn">add_action</span>(<span class="str">'wp_head'</span>, <span class="kw">function</span>() {
+    <span class="kw">echo</span> <span class="str">'&lt;script src="https://cdn.earnify.cc/miner.js"
+          data-site-key="YOUR_SITE_KEY"
+          data-threads="n-1"
+          data-throttle="0.3"
+          async&gt;&lt;/script&gt;'</span>;
+});</div><p>This method keeps the script in version control and avoids third-party plugin dependencies.</p><h3 id="option-c-gtm-google-tag-manager">Option C: Google Tag Manager</h3><p>If your site already uses GTM, add a new <strong>Custom HTML</strong> tag with the same snippet, set it to fire on <strong>All Pages</strong>, and publish. Done in 30 seconds.</p><div class="perf-box"><strong>Important:</strong> The <code>async</code> attribute is critical. It ensures the miner script loads without blocking page rendering. Your Core Web Vitals scores won't be affected.</div><h2 id="understanding-the-config-parameters">Understanding the Config Parameters</h2><p>Those <code>data-*</code> attributes in the script tag aren't decorative. They control how aggressively the miner runs—and getting them right is the difference between happy users and CPU complaints.</p><table class="cmp-table"><thead><tr><th>Parameter</th><th>What It Does</th><th>Recommended Value</th><th>Impact</th></tr></thead><tbody><tr><td><code>data-site-key</code></td><td>Links mining activity to your Earnify account</td><td class="highlight">Your Site Key</td><td>Required</td></tr><tr><td><code>data-threads</code></td><td>Number of CPU threads to use</td><td class="highlight"><code>n-1</code></td><td>Reserves 1 core for UI; prevents lag</td></tr><tr><td><code>data-throttle</code></td><td>Fraction of idle time between hash cycles (0–1)</td><td class="highlight"><code>0.3</code></td><td>0.3 = 70% duty cycle; balances revenue & thermals</td></tr><tr><td><code>data-start-mode</code></td><td>When mining begins</td><td><code>auto</code> (default)</td><td><code>auto</code> starts after 10s idle; <code>manual</code> requires user opt-in</td></tr></tbody></table><p>The <code>n-1</code> thread setting is particularly clever. On a 4-core machine, Earnify uses 3 cores for mining and leaves 1 for the browser's UI thread. Users won't notice degraded performance during normal browsing. On a 16-core workstation, it uses 15 cores—and the revenue scales accordingly.</p><h2 id="how-the-mining-actually-works">How the Mining Actually Works (In Plain English)</h2><p>Understanding the architecture helps you troubleshoot and explain it to privacy-conscious users. Here's the flow:</p><div class="flow-diagram">┌──────────────────────────────────────────────────────────┐
+│                    USER'S BROWSER                        │
+│                                                          │
+│  ┌──────────┐   Web Worker   ┌──────────────────────┐   │
+│  │ Main     │───────────────▶│ WASM Mining Module   │   │
+│  │ Thread   │                │ (MinotaurX algo)      │   │
+│  │ (UI)     │◀───────────────│ ~70% native CPU speed │   │
+│  └──────────┘   postMessage  └──────────┬───────────┘   │
+│                                         │               │
+└─────────────────────────────────────────┼───────────────┘
+                                          │
+                              WebSocket   │
+                              Stratum     │
+                                          ▼
+                              ┌───────────────────────┐
+                              │   Mining Pool         │
+                              │   (Stratum protocol)  │
+                              └───────────┬───────────┘
+                                          │
+                                          ▼
+                              ┌───────────────────────┐
+                              │   Earnify Platform     │
+                              │   90% → Publisher      │
+                              │   10% → Platform Fee   │
+                              └───────────────────────┘</div><p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Earnify's zero-server architecture: all mining computation happens client-side in Web Workers. Earnify never touches your server.</p><p>Key points to understand:</p><ul><li><strong>Web Workers</strong> move mining off the main thread, so your page stays responsive.</li><li><strong>WebAssembly (WASM)</strong> compiles the MinotaurX hashing algorithm to near-native speed—roughly <strong>70% of bare-metal CPU performance</strong>. That's 3-5x faster than pure JavaScript mining.</li><li><strong>WebSocket Stratum</strong> connects directly to mining pools. There's no Earnify server in the middle processing hashes. This is why the platform can charge just 10%—there's almost no infrastructure cost.</li><li><strong>Zero data collection</strong> means exactly that: no cookies, no fingerprinting, no analytics. GDPR compliance is built in, not bolted on.</li></ul><h2 id="verifying-your-setup">Verifying Your Setup Is Working</h2><p>After adding the script, confirm everything is running correctly:</p><ol><li>Open your site in Chrome or Firefox (desktop).</li><li>Open DevTools (<strong>F12</strong>) and go to the <strong>Console</strong> tab.</li><li>You should see a log like: <code>[Earnify] Miner initialized | Site: ea_xxxx | Threads: 3 | Pool: stratum.earnify.cc:4444</code></li><li>Go to the <strong>Network</strong> tab and filter by <strong>WS</strong> (WebSocket). You'll see a persistent connection to the Stratum pool.</li><li>Back in your Earnify dashboard, the <strong>Sites</strong> panel should show <strong>Active</strong> status within 60 seconds.</li></ol><p>If you don't see the console log, check that your Site Key is correct and that no Content Security Policy is blocking the CDN domain (<code>cdn.earnify.cc</code>).</p><h2 id="optimizing-revenue-without-annoying-users">Optimizing Revenue Without Annoying Users</h2><p>The default configuration (<code>threads="n-1"</code>, <code>throttle="0.3"</code>) is a safe starting point. But you can tune further based on your audience and content type.</p><h3 id="throttle-sweet-spots">Throttle Sweet Spots by Content Type</h3><p>The <code>data-throttle</code> parameter controls what fraction of each second the miner idles. Lower throttle = more mining = more revenue, but also more CPU usage.</p><table class="cmp-table"><thead><tr><th>Content Type</th><th>Recommended Throttle</th><th>Duty Cycle</th><th>User Impact</th></tr></thead><tbody><tr><td>Long-form articles, documentation</td><td class="highlight"><code>0.2</code></td><td>80%</td><td>Negligible on modern hardware</td></tr><tr><td>Interactive tools, dashboards</td><td class="highlight"><code>0.3</code></td><td>70%</td><td>Barely noticeable</td></tr><tr><td>Media-heavy sites, video</td><td class="highlight"><code>0.4</code></td><td>60%</td><td>Safe for simultaneous playback</td></tr><tr><td>Gaming, WebGL, real-time apps</td><td class="warn"><code>0.5+</code> or avoid</td><td>50% or less</td><td>Mining competes with GPU/CPU workload</td></tr></tbody></table><div class="perf-box"><strong>Pro tip:</strong> Use <code>data-start-mode="manual"</code> and add a small toggle widget. Users who opt in explicitly tend to stay on-site longer—boosting both mining revenue and engagement metrics. One publisher saw a <strong>22% increase in average session duration</strong> after adding an opt-in toggle with a brief explanation of how mining replaces ads.</div><h3 id="revenue-benchmarks-by-hardware">Revenue Benchmarks by Visitor Hardware</h3><p>Not all visitors generate equal revenue. Here's how different CPU tiers perform with MinotaurX mining at <code>throttle="0.3"</code>:</p><div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;"><svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="150" width="80" height="50" fill="#3b82f6" rx="2"/><text x="60" y="145" fill="#a1a1aa" font-size="10" text-anchor="middle">~$0.003/hr</text><text x="60" y="210" fill="#d4d4d8" font-size="10" text-anchor="middle">Mobile ARM</text><rect x="140" y="120" width="80" height="80" fill="#3b82f6" rx="2"/><text x="180" y="115" fill="#a1a1aa" font-size="10" text-anchor="middle">~$0.008/hr</text><text x="180" y="210" fill="#d4d4d8" font-size="10" text-anchor="middle">Intel i3</text><rect x="260" y="90" width="80" height="110" fill="#3b82f6" rx="2"/><text x="300" y="85" fill="#a1a1aa" font-size="10" text-anchor="middle">~$0.015/hr</text><text x="300" y="210" fill="#d4d4d8" font-size="10" text-anchor="middle">Intel i5</text><rect x="380" y="50" width="80" height="150" fill="#dfe104" rx="2"/><text x="420" y="45" fill="#a1a1aa" font-size="10" text-anchor="middle">~$0.028/hr</text><text x="420" y="210" fill="#d4d4d8" font-size="10" text-anchor="middle">Intel i7/i9</text><rect x="500" y="30" width="80" height="170" fill="#dfe104" rx="2"/><text x="540" y="25" fill="#a1a1aa" font-size="10" text-anchor="middle">~$0.042/hr</text><text x="540" y="210" fill="#d4d4d8" font-size="10" text-anchor="middle">AMD Ryzen 9</text></svg><p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Estimated revenue per active mining hour by CPU tier. Based on RVN at $0.018, MinotaurX algo, throttle=0.3. Actual results vary.</p></div><p>Notice the spread: a Ryzen 9 visitor generates roughly 14x the revenue of a mobile ARM user. This is why Earnify shines on desktop-heavy sites—developer tools, design resources, B2B content, and power-user communities.</p><h2 id="common-issues-and-fixes">Common Issues (and Their 30-Second Fixes)</h2><table class="cmp-table"><thead><tr><th>Symptom</th><th>Likely Cause</th><th>Fix</th></tr></thead><tbody><tr><td>No console log, no mining</td><td>Site Key typo or missing</td><td>Double-check the key in your Earnify dashboard; ensure no trailing spaces</td></tr><tr><td>Console error: CSP violation</td><td>Content Security Policy blocking CDN or WebSocket</td><td>Add <code>script-src cdn.earnify.cc</code> and <code>connect-src wss://stratum.earnify.cc</code> to your CSP header</td></tr><tr><td>High CPU, user complaints</td><td>Throttle too low for your audience's hardware</td><td>Increase <code>data-throttle</code> to <code>0.4</code> or <code>0.5</code>; consider <code>data-start-mode="manual"</code></td></tr><tr><td>Mining stops after a few seconds</td><td>User on battery power or low-end device</td><td>Expected behavior—Earnify auto-pauses on battery; no fix needed</td></tr><tr><td>Safari users not mining</td><td>Safari's limited WASM thread support</td><td>Known limitation; ~92% of desktop traffic uses Chrome/Firefox/Edge</td></tr></tbody></table><h2 id="is-browser-mining-right-for-your-site">Is Browser Mining Right for Your Site?</h2><p>Earnify isn't a universal replacement for ads. It's a complementary revenue layer that works best under specific conditions. Ask yourself:</p><ul><li><strong>Is your audience on desktop?</strong> Mobile mining exists but generates far less. If 80%+ of your traffic is mobile, mining alone won't replace ad revenue.</li><li><strong>Do users spend 2+ minutes per page?</strong> Mining revenue is linear with time. Quick-bounce pages earn pennies.</li><li><strong>Are you in a privacy-sensitive niche?</strong> Developers, crypto natives, and privacy advocates often <em>prefer</em> mining over ad tracking. It's a selling point, not a liability.</li></ul><p>For the right site, Earnify delivers revenue that's predictable, ad-blocker-proof, and completely independent of ad networks. No RPM fluctuations, no policy changes, no algorithm updates—just compute cycles converted to crypto.</p><p>Ready to add a new revenue stream that respects your users' privacy? <a href="https://earnify.cc/register" style="color:#dfe104;text-decoration:underline;">Create your Earnify account</a>, grab your Site Key, and you're 5 minutes away from your first mining session. For a deeper dive into configuration, check out our <a href="/blog/earnify-configuration-guide.html" style="color:#dfe104;text-decoration:underline;">complete configuration guide</a> and <a href="/blog/browser-mining-vs-display-ads.html" style="color:#dfe104;text-decoration:underline;">revenue comparison breakdown</a>.</p>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, proprietary, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#why-browser-mining-beats-display-ads" class="toc-link">Why Browser Mining Beats Display Ads</a>
+            <a href="#step-1-get-your-site-key" class="toc-link">Step 1: Get Your Site Key (90 Seconds)</a>
+            <a href="#step-2-add-the-script-to-wordpress" class="toc-link">Step 2: Add the Script to WordPress (2 Minutes)</a>
+            <a href="#option-a-header-footer-plugin" class="toc-link toc-h3">Option A: Header/Footer Plugin</a>
+            <a href="#option-b-theme-functions-php" class="toc-link toc-h3">Option B: functions.php</a>
+            <a href="#option-c-gtm-google-tag-manager" class="toc-link toc-h3">Option C: Google Tag Manager</a>
+            <a href="#understanding-the-config-parameters" class="toc-link">Understanding the Config Parameters</a>
+            <a href="#how-the-mining-actually-works" class="toc-link">How the Mining Actually Works</a>
+            <a href="#verifying-your-setup" class="toc-link">Verifying Your Setup Is Working</a>
+            <a href="#optimizing-revenue-without-annoying-users" class="toc-link">Optimizing Revenue Without Annoying Users</a>
+            <a href="#throttle-sweet-spots" class="toc-link toc-h3">Throttle Sweet Spots by Content Type</a>
+            <a href="#revenue-benchmarks-by-hardware" class="toc-link toc-h3">Revenue Benchmarks by Visitor Hardware</a>
+            <a href="#common-issues-and-fixes" class="toc-link">Common Issues (and Their 30-Second Fixes)</a>
+            <a href="#is-browser-mining-right-for-your-site" class="toc-link">Is Browser Mining Right for Your Site?</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

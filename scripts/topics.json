@@ -12,7 +12,7 @@
       "slug": "earnify-wordpress-setup",
       "category": "Technical",
       "description": "Step-by-step guide to integrating Earnify browser mining into any WordPress site using a single script tag — no plugins required.",
-      "used": false
+      "used": true
     },
     {
       "title": "The Environmental Impact of Browser Mining: Fact vs Fiction",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 1
+  "nextTopicIndex": 2
 }

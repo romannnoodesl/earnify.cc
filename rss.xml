@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Jul 2026 02:54:17 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2026 03:05:33 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -16,7 +16,15 @@
     </image>
 
     
+    
     <item>
+      <title>How to Add Earnify to Your WordPress Site in 5 Minutes</title>
+      <link>https://earnify.cc/blog/earnify-wordpress-setup.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/earnify-wordpress-setup.html</guid>
+      <pubDate>Wed, 08 Jul 2026 03:05:33 GMT</pubDate>
+      <description><![CDATA[Step-by-step guide to integrating Earnify's browser-based crypto mining on your WordPress site. No plugins, no backend changes—just one script tag and 5 minutes.]]></description>
+    </item>
+<item>
       <title>Browser Mining vs Display Ads: Revenue Per Visitor Compared</title>
       <link>https://earnify.cc/blog/browser-mining-vs-display-ads.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-vs-display-ads.html</guid>
