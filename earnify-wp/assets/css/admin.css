@@ -1,0 +1,156 @@
+.ewp-wrap {
+	max-width: 720px;
+}
+
+.ewp-wrap .form-table th {
+	width: 200px;
+	padding-top: 16px;
+}
+
+.ewp-wrap .form-table td {
+	padding-top: 16px;
+}
+
+.ewp-wrap .form-table select {
+	min-width: 240px;
+}
+
+/* Toggle switch */
+
+.ewp-toggle {
+	position: relative;
+	display: inline-block;
+	width: 52px;
+	height: 28px;
+}
+
+.ewp-toggle input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.ewp-toggle-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background-color: #ccc;
+	border-radius: 28px;
+	transition: background-color 0.2s ease;
+}
+
+.ewp-toggle-slider::before {
+	content: "";
+	position: absolute;
+	height: 22px; width: 22px;
+	left: 3px; bottom: 3px;
+	background-color: #fff;
+	border-radius: 50%;
+	transition: transform 0.2s ease;
+}
+
+.ewp-toggle input:checked + .ewp-toggle-slider {
+	background-color: #2271b1;
+}
+
+.ewp-toggle input:checked + .ewp-toggle-slider::before {
+	transform: translateX(24px);
+}
+
+.ewp-toggle input:focus + .ewp-toggle-slider {
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2271b1;
+}
+
+/* Range slider */
+
+.ewp-range {
+	width: 220px;
+	vertical-align: middle;
+}
+
+.ewp-range-value {
+	display: inline-block;
+	min-width: 40px;
+	font-weight: 600;
+	font-size: 15px;
+	margin-left: 8px;
+	vertical-align: middle;
+}
+
+/* Wallet link */
+
+.ewp-wallet-link {
+	display: inline-block;
+	margin-left: 8px;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+.ewp-wallet-link:hover {
+	text-decoration: underline;
+}
+
+/* Status banners */
+
+.ewp-status {
+	padding: 14px 18px;
+	margin: 10px 0 20px;
+	border-left: 4px solid;
+	border-radius: 4px;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.ewp-status strong {
+	display: block;
+	margin-bottom: 2px;
+}
+
+.ewp-status--active {
+	background: #edfaef;
+	border-color: #00a32a;
+	color: #1e4620;
+}
+
+.ewp-status--warning {
+	background: #fcf9e8;
+	border-color: #dba617;
+	color: #5e4c08;
+}
+
+.ewp-status--inactive {
+	background: #f0f0f1;
+	border-color: #8c8f94;
+	color: #3c434a;
+}
+
+/* Info card */
+
+.ewp-card {
+	margin-top: 30px;
+	padding: 20px 24px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.ewp-card h2 {
+	margin-top: 0;
+	font-size: 16px;
+}
+
+.ewp-card ol {
+	margin-left: 18px;
+	margin-bottom: 14px;
+}
+
+.ewp-card ol li {
+	margin-bottom: 6px;
+}
+
+.ewp-card p {
+	margin: 0;
+	font-size: 13px;
+	color: #50575e;
+}
