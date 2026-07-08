@@ -1,0 +1,145 @@
+{
+  "topics": [
+    {
+      "title": "Browser Mining vs Display Ads: Revenue Per Visitor Compared",
+      "slug": "browser-mining-vs-display-ads",
+      "category": "Revenue Strategy",
+      "description": "Side-by-side revenue comparison of browser mining and display ads — RPM, fill rates, user experience, and long-term earnings per unique visitor.",
+      "used": false
+    },
+    {
+      "title": "How to Add Earnify to Your WordPress Site in 5 Minutes",
+      "slug": "earnify-wordpress-setup",
+      "category": "Technical",
+      "description": "Step-by-step guide to integrating Earnify browser mining into any WordPress site using a single script tag — no plugins required.",
+      "used": false
+    },
+    {
+      "title": "The Environmental Impact of Browser Mining: Fact vs Fiction",
+      "slug": "browser-mining-environmental-impact",
+      "category": "Industry",
+      "description": "Separating FUD from facts — how browser mining compares to proof-of-work, proof-of-stake, and traditional ad-tech energy consumption.",
+      "used": false
+    },
+    {
+      "title": "Cryptojacking vs Legitimate Browser Mining: How to Tell the Difference",
+      "slug": "cryptojacking-vs-legitimate-mining",
+      "category": "Industry",
+      "description": "The key differences between malicious cryptojacking and consent-based browser mining — and why opt-in architecture matters.",
+      "used": false
+    },
+    {
+      "title": "How to Pitch Browser Mining to Your Clients: A Sales Framework",
+      "slug": "pitch-browser-mining-to-clients",
+      "category": "Revenue Strategy",
+      "description": "A proven sales framework for agencies and freelancers to introduce browser mining as a revenue stream to website owners.",
+      "used": false
+    },
+    {
+      "title": "Browser Mining Performance: Desktop vs Mobile vs Tablet",
+      "slug": "browser-mining-performance-devices",
+      "category": "Technical",
+      "description": "Real hashrate benchmarks across device types — how CPU architecture, thermal throttling, and browser limits affect mining output.",
+      "used": false
+    },
+    {
+      "title": "The Publisher's Guide to Passive Revenue Streams in 2026",
+      "slug": "passive-revenue-streams-publishers-2026",
+      "category": "Revenue Strategy",
+      "description": "Beyond ads and subscriptions — affiliate, compute, donations, and hybrid models that are actually working for publishers in 2026.",
+      "used": false
+    },
+    {
+      "title": "How Earnify Handles Pool Failover and Connection Resilience",
+      "slug": "earnify-pool-failover-resilience",
+      "category": "Technical",
+      "description": "Deep-dive into automatic pool switching, reconnection logic, and how Earnify maintains uptime when mining pools go down.",
+      "used": false
+    },
+    {
+      "title": "Browser Mining and User Trust: Building an Ethical Monetization Model",
+      "slug": "browser-mining-user-trust-ethics",
+      "category": "Revenue Strategy",
+      "description": "Why transparent, opt-in mining builds more user trust than tracking-based advertising — and how to communicate it to your audience.",
+      "used": false
+    },
+    {
+      "title": "Monetizing Niche Websites: When Browser Mining Outperforms Ads",
+      "slug": "monetizing-niche-websites-browser-mining",
+      "category": "Revenue Strategy",
+      "description": "Why low-traffic niche sites often earn more from browser mining than display ads — with real RPM data across 12 content verticals.",
+      "used": false
+    },
+    {
+      "title": "Understanding Mining Algorithms: MinotaurX, RandomX, and KHeavyHash Explained",
+      "slug": "mining-algorithms-explained",
+      "category": "Technical",
+      "description": "Technical breakdown of the three main browser-minable algorithms — how they work, which coins use them, and how they perform in WASM.",
+      "used": false
+    },
+    {
+      "title": "How to A/B Test Browser Mining Opt-In Widgets for Maximum Participation",
+      "slug": "ab-test-mining-opt-in-widgets",
+      "category": "Revenue Strategy",
+      "description": "A practical guide to running A/B tests on mining consent widgets — metrics to track, variants to try, and common pitfalls to avoid.",
+      "used": false
+    },
+    {
+      "title": "The Rise of Compute Monetization: Why the Ad Model Is Dying",
+      "slug": "rise-of-compute-monetization",
+      "category": "Industry",
+      "description": "How ad fatigue, privacy regulations, and browser changes are pushing publishers toward compute-based revenue — and why it's accelerating in 2026.",
+      "used": false
+    },
+    {
+      "title": "Earnify vs CryptoLoot vs Coinimp: A 2026 Feature Comparison",
+      "slug": "earnify-vs-cryptoimp-vs-coinimp",
+      "category": "Industry",
+      "description": "Head-to-head feature comparison of the three main browser mining platforms — fees, privacy, performance, and developer experience.",
+      "used": false
+    },
+    {
+      "title": "How to Use Browser Mining to Fund Open Source Projects",
+      "slug": "browser-mining-fund-open-source",
+      "category": "Revenue Strategy",
+      "description": "A guide for open source maintainers to add browser mining as a non-intrusive funding mechanism on documentation and demo pages.",
+      "used": false
+    },
+    {
+      "title": "Browser Mining on Safari: Current Limitations and Workarounds",
+      "slug": "browser-mining-safari-limitations",
+      "category": "Technical",
+      "description": "Safari's WebKit engine has stricter Worker limits — here's how browser mining performs on Safari and what workarounds exist.",
+      "used": false
+    },
+    {
+      "title": "Calculating Your Browser Mining ROI: A Publisher's Spreadsheet",
+      "slug": "calculating-browser-mining-roi",
+      "category": "Revenue Strategy",
+      "description": "A step-by-step ROI calculation framework — traffic, uptime, hashrate, coin price, and break-even analysis for publisher sites.",
+      "used": false
+    },
+    {
+      "title": "Privacy-First Monetization: Why Zero-Data Architecture Wins in 2026",
+      "slug": "privacy-first-zero-data-monetization",
+      "category": "Legal",
+      "description": "How zero-data browser mining avoids GDPR, CCPA, and ePrivacy compliance headaches — and why regulators are taking notice.",
+      "used": false
+    },
+    {
+      "title": "Browser Mining for News Publishers: A Revenue Recovery Strategy",
+      "slug": "browser-mining-news-publishers",
+      "category": "Revenue Strategy",
+      "description": "How news sites are using browser mining to recover revenue lost to ad blockers and declining CPMs — with real case studies.",
+      "used": false
+    },
+    {
+      "title": "The Technical Architecture Behind Earnify's 10% Fee Model",
+      "slug": "earnify-fee-model-architecture",
+      "category": "Technical",
+      "description": "How Earnify's dev fee is implemented at the protocol level — transparent, auditable, and built into the mining loop itself.",
+      "used": false
+    }
+  ],
+  "nextTopicIndex": 0
+}
