@@ -1,0 +1,40 @@
+name: Weekly Blog Post Generator
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate blog post
+        run: node scripts/generate-blog.js
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+
+      - name: Update RSS, sitemap, and blog index
+        run: node scripts/update-feeds.js
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/ rss.xml sitemap.xml scripts/topics.json scripts/last-generated.json
+          git diff --cached --quiet || git commit -m "blog: add new weekly post [automated]"
+          git push
