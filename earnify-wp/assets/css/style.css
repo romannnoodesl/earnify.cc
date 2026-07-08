@@ -1,0 +1,46 @@
+.ewp-notice {
+	position: fixed;
+	bottom: 16px;
+	right: 16px;
+	z-index: 99998;
+	background: #1e1e2e;
+	color: #cdd6f4;
+	padding: 12px 18px;
+	border-radius: 8px;
+	font-size: 13px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	max-width: 340px;
+	line-height: 1.4;
+}
+
+.ewm-notice a {
+	color: #89b4fa;
+}
+
+.ewm-notice button {
+	background: #45475a;
+	color: #cdd6f4;
+	border: none;
+	border-radius: 4px;
+	padding: 4px 12px;
+	cursor: pointer;
+	font-size: 12px;
+	white-space: nowrap;
+}
+
+.ewm-notice button:hover {
+	background: #585b70;
+}
+
+@media (max-width: 480px) {
+	.ewp-notice {
+		left: 10px;
+		right: 10px;
+		bottom: 10px;
+		max-width: none;
+		font-size: 12px;
+	}
+}
