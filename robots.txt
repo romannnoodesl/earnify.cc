@@ -137,10 +137,8 @@ Allow: /
 # ─── GENERAL RULES (CATCH-ALL) ────────────────────────────
 User-agent: *
 Allow: /
-
 # ─── BLOCKED PATHS ────────────────────────────────────────
 # Common junk paths that scanners probe
-
 Disallow: /wp-admin/
 Disallow: /wp-login.php
 Disallow: /xmlrpc.php
@@ -150,10 +148,8 @@ Disallow: /admin/
 Disallow: /cgi-bin/
 Disallow: /api/telegram/
 Disallow: /*?ref=*
-
 # ─── EXPLICITLY ALLOWED ASSETS ────────────────────────────
 # Ensure crawlers can always reach these
-
 Allow: /favicon.svg
 Allow: /favicon.png
 Allow: /favicon.ico
