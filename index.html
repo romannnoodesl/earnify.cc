@@ -452,6 +452,18 @@
         --glass-border-hover: rgba(223,225,4,0.15);
         --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
         --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        --color-fg: #FAFAFA;
+        --color-muted-fg: #B4B4BC;
+        --color-muted: rgba(161,161,170,0.3);
+        --color-bg: #09090B;
+        --color-border: #27272A;
+        --color-accent: #DFE104;
+        --color-muted-bg: #18181B;
+        --radius-xs: 4px;
+        --radius-sm: 6px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
       }
 
       .ambient-container {
@@ -519,6 +531,80 @@
         -webkit-backdrop-filter: blur(24px) saturate(1.5);
         border-bottom: 1px solid var(--glass-border);
       }
+
+      /* Mobile nav */
+      .mobile-nav-btn { display: none; }
+      .mobile-nav-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(9,9,11,0.95);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.25rem;
+        z-index: 49;
+      }
+      .mobile-nav-dropdown.open { display: flex; }
+      .mobile-nav-dropdown a {
+        display: block;
+        padding: 0.75rem 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.875rem;
+        color: var(--color-muted-fg);
+        text-decoration: none;
+        transition: color 0.2s;
+        border-radius: var(--radius-sm);
+      }
+      .mobile-nav-dropdown a:hover { color: var(--color-accent); }
+      .mobile-nav-line {
+        width: 24px;
+        height: 2px;
+        background: var(--color-fg);
+        transition: transform 0.3s, opacity 0.3s;
+        transform-origin: center;
+      }
+      .mobile-nav-btn.open .mobile-nav-line:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+      .mobile-nav-btn.open .mobile-nav-line:nth-child(2) { opacity: 0; }
+      .mobile-nav-btn.open .mobile-nav-line:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+      @media (max-width: 1023px) {
+        .mobile-nav-btn {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          padding: 8px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          z-index: 50;
+        }
+      }
+
+      /* Sticky deploy CTA */
+      .sticky-deploy-cta {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 48;
+        background: rgba(9,9,11,0.9);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--glass-border);
+        padding: 0.75rem 1rem;
+        transform: translateY(100%);
+        transition: transform 0.4s var(--ease-out-expo);
+      }
+      .sticky-deploy-cta.visible { transform: translateY(0); }
 
       .reveal {
         opacity: 0;
@@ -702,13 +788,21 @@
       class="fixed top-0 w-full z-50 glass-nav"
     >
       <div
-        class="max-w-[95vw] mx-auto px-4 md:px-8 h-16 md:h-20 flex justify-between items-center"
+        class="max-w-[95vw] mx-auto px-4 md:px-8 h-16 md:h-20 flex justify-between items-center relative"
       >
         <a href="#" class="flex items-center gap-2 group">
           <span class="text-xl md:text-2xl font-bold tracking-tighter uppercase"
             >Earn<span class="text-accent">ify</span></span
           >
         </a>
+
+        <!-- Hamburger button -->
+        <button class="mobile-nav-btn lg:hidden" id="mobileNavBtn" aria-label="Toggle menu" aria-expanded="false">
+          <span class="mobile-nav-line"></span>
+          <span class="mobile-nav-line"></span>
+          <span class="mobile-nav-line"></span>
+        </button>
+
         <div class="hidden lg:flex items-center gap-1">
           <a
             href="#platform"
@@ -762,6 +856,17 @@
             class="focus-ring text-sm uppercase tracking-tighter font-bold text-muted-fg hover:text-accent transition-colors"
             >GitHub</a
           >
+        </div>
+
+        <!-- Mobile dropdown -->
+        <div class="mobile-nav-dropdown lg:hidden" id="mobileNavDropdown">
+          <a href="#platform" data-section="platform">Platform</a>
+          <a href="#architecture" data-section="architecture">Architecture</a>
+          <a href="#economics" data-section="economics">Economics</a>
+          <a href="#deploy" data-section="deploy">Deploy</a>
+          <a href="/demo">Demo</a>
+          <a href="/blog/">Blog</a>
+          <a href="#faq" data-section="faq">FAQ</a>
         </div>
       </div>
     </nav>
@@ -879,10 +984,10 @@
   </div>
   <div>
     <div class="text-3xl md:text-5xl font-bold tracking-tighter" id="hero-estimate">
-      <span class="text-white">99.98</span><span class="text-accent">%</span>
+      <span class="text-white text-2xl md:text-3xl">~</span><span class="text-accent">---</span><span class="text-muted-fg text-xl md:text-2xl">/mo*</span>
     </div>
     <div class="text-xs md:text-sm uppercase tracking-widest text-muted-fg mt-1">
-      Pool Uptime
+      Est Revenue &mdash; 1,000 Daily Active Users
     </div>
   </div>
 </div>
@@ -1179,17 +1284,17 @@
               <div class="card-glow"></div>
               <div
                 class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
-                style="color: rgba(161,161,170,0.3)"
+                style="color: var(--color-muted)"
               >
                 01
               </div>
               <h3
                 class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
               >
                 Zero-Data Footprint
               </h3>
-              <p class="text-sm" style="color: #A1A1AA">
+              <p class="text-sm" style="color: var(--color-muted-fg)">
                 No cookies, tracking pixels, or fingerprinting. 100% GDPR/CCPA
                 compliant by design.
               </p>
@@ -1198,17 +1303,17 @@
               <div class="card-glow"></div>
               <div
                 class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
-                style="color: rgba(161,161,170,0.3)"
+                style="color: var(--color-muted)"
               >
                 02
               </div>
               <h3
                 class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
               >
                 100% Fill Rate
               </h3>
-              <p class="text-sm" style="color: #A1A1AA">
+              <p class="text-sm" style="color: var(--color-muted-fg)">
                 Every single user session generates revenue. Zero wasted
                 impressions. Zero unfilled slots.
               </p>
@@ -1217,17 +1322,17 @@
               <div class="card-glow"></div>
               <div
                 class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
-                style="color: rgba(161,161,170,0.3)"
+                style="color: var(--color-muted)"
               >
                 03
               </div>
               <h3
                 class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
               >
                 Thread Control
               </h3>
-              <p class="text-sm" style="color: #A1A1AA">
+              <p class="text-sm" style="color: var(--color-muted-fg)">
                 Limit hardware concurrency. Execute on n−1 threads to preserve
                 the primary UI core.
               </p>
@@ -1236,17 +1341,17 @@
               <div class="card-glow"></div>
               <div
                 class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
-                style="color: rgba(161,161,170,0.3)"
+                style="color: var(--color-muted)"
               >
                 04
               </div>
               <h3
                 class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
               >
                 Open Source
               </h3>
-              <p class="text-sm" style="color: #A1A1AA">
+              <p class="text-sm" style="color: var(--color-muted-fg)">
                 Every line publicly auditable.
               </p>
             </div>
@@ -1254,36 +1359,36 @@
               <div class="card-glow"></div>
               <div
                 class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
-                style="color: rgba(161,161,170,0.3)"
+                style="color: var(--color-muted)"
               >
                 05
               </div>
               <h3
                 class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
               >
                 Global Pools
               </h3>
-              <p class="text-sm" style="color: #A1A1AA">
+              <p class="text-sm" style="color: var(--color-muted-fg)">
                 Connect to any stratum-compatible pool worldwide. Multi-region
-                failover. the default will be zpool
+                failover. Default pool: zpool.ca
               </p>
             </div>
             <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.6s">
               <div class="card-glow"></div>
               <div
                 class="text-5xl md:text-6xl font-bold text-muted leading-none mb-4"
-                style="color: rgba(161,161,170,0.3)"
+                style="color: var(--color-muted)"
               >
                 06
               </div>
               <h3
                 class="text-lg md:text-xl font-bold uppercase tracking-tight mb-2"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
               >
                 5-Min Setup
               </h3>
-              <p class="text-sm" style="color: #A1A1AA">
+              <p class="text-sm" style="color: var(--color-muted-fg)">
                 Single script tag. No build tools. Works with React, Vue,
                 Next.js, Svelte.
               </p>
@@ -1322,17 +1427,17 @@
             <div class="card-glow"></div>
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-4"
-              style="color: rgba(161,161,170,0.3)"
+              style="color: var(--color-muted)"
             >
               01
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
-              style="color: #FAFAFA"
+              style="color: var(--color-fg)"
             >
               Bootstrap
             </h3>
-            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
+            <p class="text-sm md:text-base leading-tight" style="color: var(--color-muted-fg)">
               ES module loads asynchronously. Detects hardwareConcurrency,
               device type, and battery status for optimal thread allocation.
             </p>
@@ -1341,17 +1446,17 @@
             <div class="card-glow"></div>
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-4"
-              style="color: rgba(161,161,170,0.3)"
+              style="color: var(--color-muted)"
             >
               02
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
-              style="color: #FAFAFA"
+              style="color: var(--color-fg)"
             >
               Spawn
             </h3>
-            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
+            <p class="text-sm md:text-base leading-tight" style="color: var(--color-muted-fg)">
               Dedicated Web Workers spawned per allocated thread. Each runs
               isolated WebAssembly hashing with zero main-thread interference.
             </p>
@@ -1360,17 +1465,17 @@
             <div class="card-glow"></div>
             <div
               class="text-[clamp(3rem,8vw,5rem)] font-bold leading-none tracking-tighter mb-4"
-              style="color: rgba(161,161,170,0.3)"
+              style="color: var(--color-muted)"
             >
               03
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
-              style="color: #FAFAFA"
+              style="color: var(--color-fg)"
             >
               Compute
             </h3>
-            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
+            <p class="text-sm md:text-base leading-tight" style="color: var(--color-muted-fg)">
               Workers iterate through nonce space computing cryptographic hashes
               against difficulty targets. Valid shares are queued.
             </p>
@@ -1384,11 +1489,11 @@
             </div>
             <h3
               class="text-xl md:text-2xl font-bold uppercase tracking-tight mb-3"
-              style="color: #FAFAFA"
+              style="color: var(--color-fg)"
             >
               Payout
             </h3>
-            <p class="text-sm md:text-base leading-tight" style="color: #A1A1AA">
+            <p class="text-sm md:text-base leading-tight" style="color: var(--color-muted-fg)">
               Valid shares submitted to pool via WebSocket stratum. Wallet
               credited proportionally. Automatic payout processing.
             </p>
@@ -2092,18 +2197,18 @@
               Copy
             </button>
           </div>
-          <pre
+<pre
             class="p-6 md:p-8 overflow-x-auto text-sm md:text-base leading-relaxed font-mono"
             id="codeblock"
           ><code><span class="text-accent">&lt;!DOCTYPE html&gt;</span>
 <span class="text-accent">&lt;html&gt;</span>
   <span class="text-accent">&lt;body&gt;</span>
-    <span class="text-fg">&lt;h2&gt;</span><span class="text-muted-fg">Thanks for using cpu-web-miner</span><span class="text-fg">&lt;/h2&gt;</span>
-    <span class="text-muted-fg">&lt;!-- Your website content goes here --&gt;</span>
+    <span class="text-fg">&lt;h1&gt;</span><span class="text-muted-fg">My Awesome Website</span><span class="text-fg">&lt;/h1&gt;</span>
+    <span class="text-muted-fg">&lt;!-- Your content here --&gt;</span>
     <span class="text-accent">&lt;script</span> <span class="text-fg">type</span>=<span class="text-muted-fg">"module"</span><span class="text-accent">&gt;</span>
-     
+
     <span class="text-fg">import</span> { <span class="text-fg">autoMine</span> } <span class="text-fg">from</span> <span class="text-muted-fg">"https://earnify.cc/miner.js"</span>;
-      <span class="text-muted-fg">// Your RavenCoin Address     percent of users pc, 0.1 = 1%, 1 = 100%</span>
+      <span class="text-muted-fg">// Wallet address   % of user CPU (0.1 = 10%, 1 = 100%)</span>
       <span class="text-fg">autoMine</span>(<span class="text-muted-fg">"RXi399jsFYHLeqFhJWiNETySj5nvt2ryqj"</span>, <span class="text-accent">0.2</span>);
     <span class="text-accent">&lt;/script&gt;</span>
   <span class="text-accent">&lt;/body&gt;</span>
@@ -2116,42 +2221,48 @@
         >
           <div class="glass-card p-6 md:p-8 cursor-default rounded-[var(--radius-xl,16px)]">
             <div class="card-glow"></div>
-            <div class="text-2xl mb-3">⚛️</div>
+            <div class="text-2xl mb-3">
+              <svg class="w-7 h-7" style="color:var(--color-muted)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
             <h4
               class="text-lg font-bold uppercase tracking-tight mb-2"
-              style="color: #FAFAFA"
+              style="color: var(--color-fg)"
             >
               React / Next.js
             </h4>
-            <p class="text-sm" style="color: #A1A1AA">
+            <p class="text-sm" style="color: var(--color-muted-fg)">
               Import in useEffect with cleanup. Ensure client-side only via
               typeof window check.
             </p>
           </div>
           <div class="glass-card p-6 md:p-8 cursor-default rounded-[var(--radius-xl,16px)]">
             <div class="card-glow"></div>
-            <div class="text-2xl mb-3">💚</div>
+            <div class="text-2xl mb-3">
+              <svg class="w-7 h-7" style="color:var(--color-muted)" viewBox="0 0 24 24" fill="currentColor"><path d="M24 1.61h-9.94L12 5.16 9.94 1.61H0l12 20.78L24 1.61zM12 14.08L5.16 2.23h4.43L12 6.41l2.41-4.18h4.43L12 14.08z"/></svg>
+            </div>
             <h4
               class="text-lg font-bold uppercase tracking-tight mb-2"
-              style="color: #FAFAFA"
+              style="color: var(--color-fg)"
             >
               Vue 3
             </h4>
-            <p class="text-sm" style="color: #A1A1AA">
+            <p class="text-sm" style="color: var(--color-muted-fg)">
               Initialize in onMounted(). Use onUnmounted() for graceful worker
               termination.
             </p>
           </div>
           <div class="glass-card p-6 md:p-8 cursor-default rounded-[var(--radius-xl,16px)]">
             <div class="card-glow"></div>
-            <div class="text-2xl mb-3">🔥</div>
+            <div class="text-2xl mb-3">
+              <svg class="w-7 h-7" style="color:var(--color-muted)" viewBox="0 0 24 24" fill="currentColor"><path d="M10.52 4.68c-1.25.7-2.45 1.34-3.69 2.01-.49.31-.72.86-.57 1.41.15.56.61.99 1.18 1.1 1.87.36 3.76.67 5.64.97l.01.01c.71.14 1.33-.31 1.47-1.02.14-.71-.31-1.33-1.02-1.47-1.61-.27-3.22-.54-4.86-.86.06-.03.15-.05.36-.16.62-.34 1.24-.67 1.88-.98.12-.07.22-.11.28-.13 1.17-.55 1.83-.06 2.09.33.24.36.35 1.01-.09 1.89l.98.59c.57-.91.82-1.83.53-2.76-.3-.93-1.11-1.53-2.15-1.44zm6.25 4.11c-.42.11-.86.22-1.29.34-1.08.3-1.72 1.38-1.41 2.46.3 1.08 1.38 1.72 2.46 1.41 1.33-.37 2.66-.7 3.96-1.04l.03-.01c.71-.2 1.12-.91.93-1.62-.2-.71-.91-1.12-1.62-.93-1.5.43-3 .81-4.53 1.2-.08.02-.17.05-.27.09-.33.09-.51.02-.57-.04-.11-.13-.15-.38.11-.86l-.98-.62c-.37.78-.31 1.42-.1 1.88.18.41.55.73 1.02.82"/></svg>
+            </div>
             <h4
               class="text-lg font-bold uppercase tracking-tight mb-2"
-              style="color: #FAFAFA"
+              style="color: var(--color-fg)"
             >
               Svelte / SvelteKit
             </h4>
-            <p class="text-sm" style="color: #A1A1AA">
+            <p class="text-sm" style="color: var(--color-muted-fg)">
               Use onMount() with browser check from $app/environment for SSR
               safety.
             </p>
@@ -2253,7 +2364,7 @@
             </li>
             <li class="flex items-center gap-2">
               <span class="text-accent font-bold shrink-0">03</span>
-              <span>Showing off cool stuff</span>
+              <span>Configuring thread count &amp; performance settings</span>
             </li>
             <li class="flex items-center gap-2">
               <span class="text-accent font-bold shrink-0">04</span>
@@ -2318,7 +2429,7 @@
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
                 >Does this cause performance degradation?</span
               >
               <span
@@ -2328,9 +2439,9 @@
             </summary>
             <div class="faq-answer-wrap">
               <div>
-                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: var(--color-muted-fg)">
               <p>
-                <strong style="color: #FAFAFA">Short answer: No.</strong> By using
+                <strong style="color: var(--color-fg)">Short answer: No.</strong> By using
                 navigator.hardwareConcurrency − 1, the primary UI core stays
                 free for DOM rendering and user interaction.
               </p>
@@ -2355,7 +2466,7 @@
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
                 >How is yield processed and distributed?</span
               >
               <span
@@ -2365,29 +2476,29 @@
             </summary>
             <div class="faq-answer-wrap">
               <div>
-                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: var(--color-muted-fg)">
               <p>
                 Earnify connects your users' browsers directly to your
                 configured mining pool. The pipeline:
               </p>
               <p>
-                <strong style="color: #FAFAFA">1. Job Assignment:</strong> Pool sends
+                <strong style="color: var(--color-fg)">1. Job Assignment:</strong> Pool sends
                 cryptographic work units via WebSocket stratum.
               </p>
               <p>
-                <strong style="color: #FAFAFA">2. Proof Computation:</strong> Web
+                <strong style="color: var(--color-fg)">2. Proof Computation:</strong> Web
                 Workers compute hash proofs against difficulty targets.
               </p>
               <p>
-                <strong style="color: #FAFAFA">3. Share Submission:</strong> Valid
+                <strong style="color: var(--color-fg)">3. Share Submission:</strong> Valid
                 proofs submitted back. Pool validates and credits your worker.
               </p>
               <p>
-                <strong style="color: #FAFAFA">4. Payout:</strong> Pool distributes
+                <strong style="color: var(--color-fg)">4. Payout:</strong> Pool distributes
                 rewards to your wallet per its schedule and threshold.
               </p>
               <p>
-                <strong style="color: #FAFAFA">Earnify takes only a 10% fee.</strong> 90% of
+                <strong style="color: var(--color-fg)">Earnify takes only a 10% fee.</strong> 90% of
                 yield goes to your wallet. Fully auditable codebase.
               </p>
             </div>
@@ -2402,7 +2513,7 @@
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
                 >What are the compliance requirements?</span
               >
               <span
@@ -2412,25 +2523,25 @@
             </summary>
             <div class="faq-answer-wrap">
               <div>
-                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: var(--color-muted-fg)">
               <p>
                 Earnify uses
-                <strong style="color: #FAFAFA"
+                <strong style="color: var(--color-fg)"
                   >zero cookies, zero localStorage, zero fingerprinting, zero
                   personal data collection</strong
                 >. It operates outside GDPR cookie-consent mandates and CCPA
                 disclosure requirements.
               </p>
               <p>
-                <strong style="color: #FAFAFA">GDPR:</strong> No personal data
+                <strong style="color: var(--color-fg)">GDPR:</strong> No personal data
                 processed. No consent required.
               </p>
               <p>
-                <strong style="color: #FAFAFA">CCPA:</strong> No personal info
+                <strong style="color: var(--color-fg)">CCPA:</strong> No personal info
                 collected or shared. No disclosure obligations.
               </p>
               <p>
-                <strong style="color: #FAFAFA">ePrivacy:</strong> No terminal device
+                <strong style="color: var(--color-fg)">ePrivacy:</strong> No terminal device
                 storage accessed. No consent required.
               </p>
               <p>
@@ -2449,7 +2560,7 @@
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
                 >Which pools and coins are supported?</span
               >
               <span
@@ -2459,18 +2570,18 @@
             </summary>
             <div class="faq-answer-wrap">
               <div>
-                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: var(--color-muted-fg)">
               <p>
                 Pool-agnostic. Connects to any pool supporting
-                <strong style="color: #FAFAFA">Stratum V1 over WebSocket</strong>.
+                <strong style="color: var(--color-fg)">Stratum V1 over WebSocket</strong>.
                 Tested: zpool.ca, Mining Dutch, Zergpool, and custom/private
                 pools.
               </p>
               <p>
                 Supported algorithms:
-                <strong style="color: #FAFAFA">MinotaurX</strong> (Maza),
-                <strong style="color: #FAFAFA">RandomX (coming soon)</strong> (Monero),
-                <strong style="color: #FAFAFA">CryptoNight-R (also coming soon)</strong>. Auto-exchange
+                <strong style="color: var(--color-fg)">MinotaurX</strong> (Maza),
+                <strong style="color: var(--color-fg)">RandomX (coming soon)</strong> (Monero),
+                <strong style="color: var(--color-fg)">CryptoNight-R (also coming soon)</strong>. Auto-exchange
                 pools let you receive RVN, BTC, LTC, or any supported currency.
               </p>
             </div>
@@ -2485,7 +2596,7 @@
             >
               <span
                 class="text-lg md:text-xl font-bold uppercase tracking-tight pr-4"
-                style="color: #FAFAFA"
+                style="color: var(--color-fg)"
                 >How does this differ from Coinhive?</span
               >
               <span
@@ -2495,26 +2606,26 @@
             </summary>
             <div class="faq-answer-wrap">
               <div>
-                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: #A1A1AA">
+                <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: var(--color-muted-fg)">
               <p>
-                <strong style="color: #FAFAFA">Open source:</strong> Fully auditable
+                <strong style="color: var(--color-fg)">Open source:</strong> Fully auditable
                 vs. Coinhive's proprietary code.
               </p>
               <p>
-                <strong style="color: #FAFAFA">Minimal fees:</strong> Coinhive took 30%.
+                <strong style="color: var(--color-fg)">Minimal fees:</strong> Coinhive took 30%.
                 Earnify takes 10%.
               </p>
               <p>
-                <strong style="color: #FAFAFA">Direct pool connection:</strong> No
+                <strong style="color: var(--color-fg)">Direct pool connection:</strong> No
                 intermediary service that can shut down.
               </p>
               <p>
-                <strong style="color: #FAFAFA">No single point of failure:</strong>
+                <strong style="color: var(--color-fg)">No single point of failure:</strong>
                 Self-hosted. Runs as long as pools exist.
               </p>
               <p>
-                <strong style="color: #FAFAFA">Modern algorithms:</strong> MinotaurX is
-                are ASIC-resistant, making browser mining viable.
+                <strong style="color: var(--color-fg)">Modern algorithms:</strong> MinotaurX is
+                ASIC-resistant, making browser mining viable.
               </p>
             </div>
               </div>
@@ -2712,6 +2823,24 @@
     </section>
 
     <!-- ═══════════════════════════════════════ -->
+    <!-- STICKY DEPLOY CTA -->
+    <!-- ═══════════════════════════════════════ -->
+    <div class="sticky-deploy-cta" id="stickyDeployCta" aria-hidden="true">
+      <div class="max-w-[95vw] mx-auto flex items-center justify-between gap-4">
+        <span class="text-sm font-bold uppercase tracking-tighter hidden sm:inline">
+          Ready to monetize? <span class="text-muted-fg">Deploy in under 5 minutes.</span>
+        </span>
+        <a
+          href="#deploy"
+          class="focus-ring inline-flex items-center gap-2 bg-accent text-bg font-bold uppercase tracking-tighter text-sm px-6 py-2.5 hover:scale-105 active:scale-95 transition-transform rounded-[var(--radius-md)]"
+        >
+          Get Started
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════ -->
     <!-- FOOTER -->
     <!-- ═══════════════════════════════════════ -->
     <footer class="border-t-2 border-border bg-bg">
@@ -2804,11 +2933,6 @@
                   >Deploy</a
                 >
               </li>
-              <li>
-                <a href="#" class="focus-ring hover:text-accent transition-colors"
-                  >Changelog</a
-                >
-              </li>
             </ul>
           </div>
 
@@ -2826,13 +2950,13 @@
                 >
               </li>
               <li>
-                <a href="#" class="focus-ring hover:text-accent transition-colors"
-                  >API Reference</a
+                <a href="/blog/" class="focus-ring hover:text-accent transition-colors"
+                  >Blog</a
                 >
               </li>
               <li>
-                <a href="#" class="focus-ring hover:text-accent transition-colors"
-                  >Pool List</a
+                <a href="/demo" class="focus-ring hover:text-accent transition-colors"
+                  >Live Demo</a
                 >
               </li>
               <li>
@@ -2850,21 +2974,13 @@
             </h4>
             <ul class="space-y-3 text-sm text-muted-fg">
               <li>
-                <a href="#" class="focus-ring hover:text-accent transition-colors"
-                  >Terms</a
-                >
-              </li>
-              <li>
-                <a href="#" class="focus-ring hover:text-accent transition-colors"
-                  >Privacy</a
-                >
-              </li>
-              <li>
-                <a href="#" class="focus-ring hover:text-accent transition-colors">GDPR</a>
-              </li>
-              <li>
-                <a href="#" class="focus-ring hover:text-accent transition-colors"
+                <a href="/LICENSE" class="focus-ring hover:text-accent transition-colors"
                   >MIT License</a
+                >
+              </li>
+              <li>
+                <a href="https://github.com/romannnoodesl/earnify.cc" class="focus-ring hover:text-accent transition-colors"
+                  >Open Source</a
                 >
               </li>
             </ul>
@@ -3216,11 +3332,18 @@ async function fetchZpoolStatus() {
   const el = document.getElementById("hero-hashrate");
   if (el) el.innerHTML = `${hr.value}<span class="text-accent">${hr.unit}</span>`;
 
-  // Remove the efficiency calculation and replace with a static status badge
+  // Revenue estimate for 1,000 daily active users
+  // Model: 1K DAU x 45 min avg session, 80% of traffic within 8-hour peak window
+  const concurrentUsers = (1000 * 45 * 0.8) / (8 * 60); // 75 concurrent
+  const avgHsPerUser = 2000;
+  const totalHs = concurrentUsers * avgHsPerUser; // 150,000 H/s
+  const rev    = calcRevenue(totalHs, "minotaurx");
+  const feeMult = 1 - (POOL_FEE / 100);
+  const netMonthly = rev.usdMonth * feeMult;
+
   const elEst = document.getElementById("hero-estimate");
   if (elEst) {
-    elEst.innerHTML = `<span class="text-white">99.98</span><span class="text-accent">%</span>`;
-
+    elEst.innerHTML = `<span class="text-white text-2xl md:text-3xl">~</span><span class="text-accent">${formatUSD(netMonthly)}</span><span class="text-muted-fg text-xl md:text-2xl">/mo*</span>`;
   }
 }
       // UPDATE — MARQUEE TICKER
@@ -3564,6 +3687,52 @@ async function fetchZpoolStatus() {
       window.addEventListener("scroll", () => {
         nav?.classList.toggle("shadow-lg", window.scrollY > 50);
       });
+
+      // ═══════════════════════════════════════
+      // MOBILE NAV TOGGLE
+      // ═══════════════════════════════════════
+      (function() {
+        const btn = document.getElementById("mobileNavBtn");
+        const dropdown = document.getElementById("mobileNavDropdown");
+        if (!btn || !dropdown) return;
+
+        btn.addEventListener("click", () => {
+          const open = dropdown.classList.toggle("open");
+          btn.classList.toggle("open");
+          btn.setAttribute("aria-expanded", open);
+        });
+
+        dropdown.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            dropdown.classList.remove("open");
+            btn.classList.remove("open");
+            btn.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.remove("open");
+            btn.classList.remove("open");
+            btn.setAttribute("aria-expanded", "false");
+          }
+        });
+      })();
+
+      // ═══════════════════════════════════════
+      // STICKY DEPLOY CTA
+      // ═══════════════════════════════════════
+      (function() {
+        const stickyCta = document.getElementById("stickyDeployCta");
+        if (!stickyCta) return;
+        const heroSection = document.querySelector("header#main-content");
+
+        window.addEventListener("scroll", () => {
+          if (!heroSection) return;
+          const heroBottom = heroSection.getBoundingClientRect().bottom;
+          stickyCta.classList.toggle("visible", heroBottom < 0);
+        });
+      })();
       
       // ═══════════════════════════════════════
       // CONTACT FORM → TELEGRAM
