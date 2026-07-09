@@ -19,7 +19,7 @@
       "slug": "browser-mining-environmental-impact",
       "category": "Industry",
       "description": "Separating FUD from facts — how browser mining compares to proof-of-work, proof-of-stake, and traditional ad-tech energy consumption.",
-      "used": false
+      "used": true
     },
     {
       "title": "Cryptojacking vs Legitimate Browser Mining: How to Tell the Difference",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 2
+  "nextTopicIndex": 3
 }

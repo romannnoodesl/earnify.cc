@@ -232,6 +232,19 @@
     </image:image>
   </url>
 
+
+  <url>
+    <loc>https://earnify.cc/blog/browser-mining-environmental-impact.html</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>The Environmental Impact of Browser Mining: Fact vs Fiction</image:title>
+      <image:caption>Does browser-based crypto mining destroy the planet? We analyze real energy data, compare browser mining to traditional mining and ad tech, and separate fact from fiction.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>
