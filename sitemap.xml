@@ -245,6 +245,19 @@
     </image:image>
   </url>
 
+
+  <url>
+    <loc>https://earnify.cc/blog/cryptojacking-vs-legitimate-mining.html</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Cryptojacking vs Legitimate Browser Mining: How to Tell the Difference</image:title>
+      <image:caption>Learn the key differences between malicious cryptojacking and legitimate browser-based cryptocurrency mining. Discover how publishers can ethically monetize traffic with Earnify&apos;s transparent, consent-based solution.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>

@@ -26,7 +26,7 @@
       "slug": "cryptojacking-vs-legitimate-mining",
       "category": "Industry",
       "description": "The key differences between malicious cryptojacking and consent-based browser mining — and why opt-in architecture matters.",
-      "used": false
+      "used": true
     },
     {
       "title": "How to Pitch Browser Mining to Your Clients: A Sales Framework",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 3
+  "nextTopicIndex": 4
 }

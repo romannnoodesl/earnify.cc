@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Jul 2026 03:42:09 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 13 Jul 2026 02:27:41 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -18,7 +18,15 @@
     
     
     
+    
     <item>
+      <title>Cryptojacking vs Legitimate Browser Mining: How to Tell the Difference</title>
+      <link>https://earnify.cc/blog/cryptojacking-vs-legitimate-mining.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/cryptojacking-vs-legitimate-mining.html</guid>
+      <pubDate>Mon, 13 Jul 2026 02:27:41 GMT</pubDate>
+      <description><![CDATA[Learn the key differences between malicious cryptojacking and legitimate browser-based cryptocurrency mining. Discover how publishers can ethically monetize traffic with Earnify's transparent, consent-based solution.]]></description>
+    </item>
+<item>
       <title>The Environmental Impact of Browser Mining: Fact vs Fiction</title>
       <link>https://earnify.cc/blog/browser-mining-environmental-impact.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-environmental-impact.html</guid>
