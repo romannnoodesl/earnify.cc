@@ -33,7 +33,7 @@
       "slug": "pitch-browser-mining-to-clients",
       "category": "Revenue Strategy",
       "description": "A proven sales framework for agencies and freelancers to introduce browser mining as a revenue stream to website owners.",
-      "used": false
+      "used": true
     },
     {
       "title": "Browser Mining Performance: Desktop vs Mobile vs Tablet",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 4
+  "nextTopicIndex": 5
 }
