@@ -40,7 +40,7 @@
       "slug": "browser-mining-performance-devices",
       "category": "Technical",
       "description": "Real hashrate benchmarks across device types — how CPU architecture, thermal throttling, and browser limits affect mining output.",
-      "used": false
+      "used": true
     },
     {
       "title": "The Publisher's Guide to Passive Revenue Streams in 2026",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 5
+  "nextTopicIndex": 6
 }

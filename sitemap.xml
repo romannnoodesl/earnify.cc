@@ -271,6 +271,19 @@
     </image:image>
   </url>
 
+
+  <url>
+    <loc>https://earnify.cc/blog/browser-mining-performance-devices.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Browser Mining Performance: Desktop vs Mobile vs Tablet</image:title>
+      <image:caption>Comprehensive benchmarks and revenue analysis of browser-based crypto mining across desktops, tablets, and smartphones. Learn why desktop visitors drive 5x more earnings and how to optimize for every device.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>
