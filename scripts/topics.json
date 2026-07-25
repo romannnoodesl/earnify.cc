@@ -47,7 +47,7 @@
       "slug": "passive-revenue-streams-publishers-2026",
       "category": "Revenue Strategy",
       "description": "Beyond ads and subscriptions — affiliate, compute, donations, and hybrid models that are actually working for publishers in 2026.",
-      "used": false
+      "used": true
     },
     {
       "title": "How Earnify Handles Pool Failover and Connection Resilience",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 6
+  "nextTopicIndex": 7
 }
