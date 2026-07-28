@@ -54,7 +54,7 @@
       "slug": "earnify-pool-failover-resilience",
       "category": "Technical",
       "description": "Deep-dive into automatic pool switching, reconnection logic, and how Earnify maintains uptime when mining pools go down.",
-      "used": false
+      "used": true
     },
     {
       "title": "Browser Mining and User Trust: Building an Ethical Monetization Model",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 7
+  "nextTopicIndex": 8
 }

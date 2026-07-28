@@ -1,9 +1,9 @@
 {
-  "slug": "passive-revenue-streams-publishers-2026",
-  "title": "The Publisher's Guide to Passive Revenue Streams in 2026",
-  "description": "Discover proven passive revenue streams for publishers in 2026, including display ads, affiliate marketing, browser mining, and more. Learn how to stack and optimize for maximum yield.",
-  "category": "Revenue Strategy",
+  "slug": "earnify-pool-failover-resilience",
+  "title": "How Earnify Handles Pool Failover and Connection Resilience",
+  "description": "Explore how Earnify's browser-based mining platform maintains uptime through automatic pool failover, WebSocket reconnection, and zero-server architecture for publishers.",
+  "category": "Technical",
   "readTime": "7 min read",
-  "date": "2026-07-25",
-  "rssDate": "Sat, 25 Jul 2026 02:20:10 GMT"
+  "date": "2026-07-28",
+  "rssDate": "Tue, 28 Jul 2026 02:10:46 GMT"
 }
