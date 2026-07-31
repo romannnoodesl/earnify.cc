@@ -61,7 +61,7 @@
       "slug": "browser-mining-user-trust-ethics",
       "category": "Revenue Strategy",
       "description": "Why transparent, opt-in mining builds more user trust than tracking-based advertising — and how to communicate it to your audience.",
-      "used": false
+      "used": true
     },
     {
       "title": "Monetizing Niche Websites: When Browser Mining Outperforms Ads",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 8
+  "nextTopicIndex": 9
 }
