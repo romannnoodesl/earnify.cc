@@ -17,7 +17,7 @@
 /miner.js
   Cache-Control: public, max-age=86400, must-revalidate
 /miner.min.js
-  Cache-Control: public, max-age=86400, must-revalidate
+  Cache-Control: public, max-age=604800, must-revalidate
 /sw.js
   Cache-Control: public, max-age=3600, must-revalidate
 

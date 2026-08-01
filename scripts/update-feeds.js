@@ -14,8 +14,7 @@ function updateRSS(meta) {
   const rssPath = join(ROOT, "rss.xml");
   let rss = readFileSync(rssPath, "utf-8");
 
-  const newItem = `
-    <item>
+  const newItem = `    <item>
       <title>${escapeXML(meta.title)}</title>
       <link>https://earnify.cc/blog/${meta.slug}.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/${meta.slug}.html</guid>
@@ -64,8 +63,8 @@ function updateSitemap(meta) {
   }
 
   sitemap = sitemap.replace(
-    /<lastmod>2026-06-19<\/lastmod>/g,
-    `<lastmod>${today}</lastmod>`
+    /(<loc>https:\/\/earnify\.cc\/blog\/<\/loc>\s*<lastmod>)[^<]*(<\/lastmod>)/,
+    `$1${today}$2`
   );
 
   writeFileSync(sitemapPath, sitemap);
@@ -101,17 +100,17 @@ function updateBlogIndex(meta) {
         "description": "${escapeJSON(meta.description)}"
       }`;
 
-  const lastBlogPost = html.lastIndexOf('"@type": "BlogPosting"');
-  if (lastBlogPost !== -1) {
-    const afterLastPost = html.indexOf("}", lastBlogPost) + 1;
-    const nextLine = html.indexOf("\n", afterLastPost);
-    const trimmedLine = html.indexOf("\n", nextLine + 1);
-    html =
-      html.slice(0, trimmedLine + 1) +
-      "      " +
-      newSchemaEntry +
-      ",\n" +
-      html.slice(trimmedLine + 1);
+  const blogPostIndex = html.indexOf('"blogPost": [');
+  if (blogPostIndex !== -1) {
+    const closeBracket = html.indexOf('\n    ]', blogPostIndex);
+    if (closeBracket !== -1) {
+      html =
+        html.slice(0, closeBracket) +
+        ",\n      " +
+        newSchemaEntry +
+        "\n" +
+        html.slice(closeBracket);
+    }
   }
 
   html = html.replace(

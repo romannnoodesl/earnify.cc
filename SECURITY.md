@@ -37,7 +37,7 @@ If you discover a security vulnerability within Earnify, please report it respon
 ### How to Report
 
 1. **Preferred Method:** Use the [GitHub Security Advisory "Report a Vulnerability" tab](../../security/advisories/new) for this repository.
-2. **Alternative:** Send an email to [contactearnify@proton.me](*Replace this with your actual security email address*).
+2. **Alternative:** Send an email to [contactearnify@proton.me.
 
 Please include the following information in your report:
 
@@ -90,4 +90,4 @@ We appreciate the security research community. If you responsibly disclose a val
 - Thank you publicly in our changelog (optional).
 - List you in our [Security Hall of Fame](#) *(if you choose to create one)*.
 
-Thank you for helping keep WebMiner and the open-source community safe.
+Thank you for helping keep Earnify and the open-source community safe.

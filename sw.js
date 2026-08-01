@@ -1,4 +1,4 @@
-const CACHE = "earnify-v1";
+const CACHE = "earnify-v2";
 const ASSETS = [
   "/",
   "/index.html",

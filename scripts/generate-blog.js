@@ -41,12 +41,12 @@ function slugToTitle(slug) {
     .join(" ");
 }
 
-async function generateBlogPost(topic) {
+async function generateBlogPost(topic, retries = 3) {
   const systemPrompt = `You are an expert technical writer for Earnify (Earnify.cc), a browser-based cryptocurrency mining platform for website publishers. You write SEO-optimized blog posts about browser mining, website monetization, crypto, and publisher revenue strategies.
 
 Your tone is authoritative, technical but accessible, and data-driven. You use real numbers, specific examples, and actionable advice. You never use hype or clickbait.
 
-earnify is a proprietary browser-based mining solution. Key facts:
+earnify is an open-source browser-based mining solution. Key facts:
 - 10% platform fee, 90% to publisher
 - Supports MinotaurX
 - Zero-server architecture: all mining happens in the browser via Web Workers + WASM
@@ -91,19 +91,35 @@ Available visual components (use these to make posts look professional and data-
   "structuredData": {"headline": "...", "description": "..."}
 }`;
 
-  const response = await client.chat.completions.create({
-    model: MODEL,
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user", content: userPrompt },
-    ],
-    temperature: 0.7,
-    max_tokens: 8000,
-    response_format: { type: "json_object" },
-  });
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const response = await client.chat.completions.create({
+        model: MODEL,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
+        ],
+        temperature: 0.7,
+        max_tokens: 8000,
+        response_format: { type: "json_object" },
+      });
 
-  const content = response.choices[0].message.content;
-  return JSON.parse(content);
+      const content = response?.choices?.[0]?.message?.content;
+      if (!content || typeof content !== "string") {
+        throw new Error("Empty or invalid API response content");
+      }
+      return JSON.parse(content);
+    } catch (err) {
+      if (attempt < retries) {
+        const delay = Math.pow(2, attempt) * 2000 + Math.random() * 1000;
+        console.warn(`API attempt ${attempt + 1} failed: ${err.message}. Retrying in ${Math.round(delay)}ms...`);
+        await new Promise((r) => setTimeout(r, delay));
+      } else {
+        throw err;
+      }
+    }
+  }
+  throw new Error("Unexpected: retry loop exhausted");
 }
 
 function buildHTML(post, topic, date) {
@@ -273,7 +289,7 @@ function buildHTML(post, topic, date) {
 
         <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
           <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
-          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, proprietary, 10% fee.</p>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
           <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
         </div>
       </article>
@@ -317,8 +333,8 @@ async function main() {
 
   const unusedTopics = topicsData.topics.filter((t) => !t.used);
   if (unusedTopics.length === 0) {
-    console.error("No unused topics left. Add more topics to scripts/topics.json");
-    process.exit(1);
+    console.log("No unused topics left. Add more topics to scripts/topics.json");
+    process.exit(0);
   }
 
   const topic = unusedTopics[0];
@@ -330,14 +346,14 @@ async function main() {
   const now = new Date();
   const html = buildHTML(post, topic, now);
 
-  const outPath = join(ROOT, "blog", `${topic.slug}.html`);
-  writeFileSync(outPath, html);
-  console.log(`Written to: blog/${topic.slug}.html`);
-
   topic.used = true;
   topicsData.nextTopicIndex++;
   saveTopics(topicsData);
   console.log("Topics file updated");
+
+  const outPath = join(ROOT, "blog", `${topic.slug}.html`);
+  writeFileSync(outPath, html);
+  console.log(`Written to: blog/${topic.slug}.html`);
 
   const meta = {
     slug: topic.slug,

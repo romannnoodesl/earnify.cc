@@ -1,9 +1,13 @@
-name: Weekly Blog Post Generator
+name: Blog Post Generator (Every 3 Days)
 
 on:
   schedule:
     - cron: "0 0 */3 * *"
   workflow_dispatch:
+
+concurrency:
+  group: blog-generator
+  cancel-in-progress: false
 
 permissions:
   contents: write
