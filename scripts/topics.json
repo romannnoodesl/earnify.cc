@@ -68,7 +68,7 @@
       "slug": "monetizing-niche-websites-browser-mining",
       "category": "Revenue Strategy",
       "description": "Why low-traffic niche sites often earn more from browser mining than display ads — with real RPM data across 12 content verticals.",
-      "used": false
+      "used": true
     },
     {
       "title": "Understanding Mining Algorithms: MinotaurX, RandomX, and KHeavyHash Explained",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 9
+  "nextTopicIndex": 10
 }

@@ -48,7 +48,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -320,6 +320,19 @@
       <image:loc>https://earnify.cc/og-image.png</image:loc>
       <image:title>Browser Mining and User Trust: Building an Ethical Monetization Model</image:title>
       <image:caption>Learn how to build an ethical browser mining monetization model that respects user trust, boosts revenue, and eliminates intrusive ads. Real data, benchmarks, and Earnify implementation guide.</image:caption>
+    </image:image>
+  </url>
+
+
+  <url>
+    <loc>https://earnify.cc/blog/monetizing-niche-websites-browser-mining.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Monetizing Niche Websites: When Browser Mining Outperforms Ads</image:title>
+      <image:caption>Discover when browser-based crypto mining can outperform traditional ad revenue for niche websites. Real data, benchmarks, and Earnify&apos;s implementation guide.</image:caption>
     </image:image>
   </url>
 
