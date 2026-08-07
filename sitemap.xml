@@ -48,7 +48,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -333,6 +333,19 @@
       <image:loc>https://earnify.cc/og-image.png</image:loc>
       <image:title>Monetizing Niche Websites: When Browser Mining Outperforms Ads</image:title>
       <image:caption>Discover when browser-based crypto mining can outperform traditional ad revenue for niche websites. Real data, benchmarks, and Earnify&apos;s implementation guide.</image:caption>
+    </image:image>
+  </url>
+
+
+  <url>
+    <loc>https://earnify.cc/blog/mining-algorithms-explained.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Understanding Mining Algorithms: MinotaurX, RandomX, and KHeavyHash Explained</image:title>
+      <image:caption>A technical deep dive into three popular CPU-mineable algorithms—MinotaurX, RandomX, and KHeavyHash—covering performance, hardware requirements, and how they impact browser-based mining.</image:caption>
     </image:image>
   </url>
 

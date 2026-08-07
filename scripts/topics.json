@@ -75,7 +75,7 @@
       "slug": "mining-algorithms-explained",
       "category": "Technical",
       "description": "Technical breakdown of the three main browser-minable algorithms — how they work, which coins use them, and how they perform in WASM.",
-      "used": false
+      "used": true
     },
     {
       "title": "How to A/B Test Browser Mining Opt-In Widgets for Maximum Participation",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 10
+  "nextTopicIndex": 11
 }
