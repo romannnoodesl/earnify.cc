@@ -82,7 +82,7 @@
       "slug": "ab-test-mining-opt-in-widgets",
       "category": "Revenue Strategy",
       "description": "A practical guide to running A/B tests on mining consent widgets — metrics to track, variants to try, and common pitfalls to avoid.",
-      "used": false
+      "used": true
     },
     {
       "title": "The Rise of Compute Monetization: Why the Ad Model Is Dying",
@@ -141,5 +141,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 11
+  "nextTopicIndex": 12
 }

@@ -48,7 +48,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -346,6 +346,19 @@
       <image:loc>https://earnify.cc/og-image.png</image:loc>
       <image:title>Understanding Mining Algorithms: MinotaurX, RandomX, and KHeavyHash Explained</image:title>
       <image:caption>A technical deep dive into three popular CPU-mineable algorithms—MinotaurX, RandomX, and KHeavyHash—covering performance, hardware requirements, and how they impact browser-based mining.</image:caption>
+    </image:image>
+  </url>
+
+
+  <url>
+    <loc>https://earnify.cc/blog/ab-test-mining-opt-in-widgets.html</loc>
+    <lastmod>2026-08-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>How to A/B Test Browser Mining Opt-In Widgets for Maximum Participation</image:title>
+      <image:caption>Learn a data-driven framework for A/B testing your browser mining opt-in widgets. Discover the 6 variables that move the needle, real publisher benchmarks, and how Earnify&apos;s zero-data architecture makes testing simple.</image:caption>
     </image:image>
   </url>
 

@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Aug 2026 02:29:23 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 01:24:41 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-            <item>
+                <item>
+      <title>How to A/B Test Browser Mining Opt-In Widgets for Maximum Participation</title>
+      <link>https://earnify.cc/blog/ab-test-mining-opt-in-widgets.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/ab-test-mining-opt-in-widgets.html</guid>
+      <pubDate>Mon, 10 Aug 2026 01:24:41 GMT</pubDate>
+      <description><![CDATA[Learn a data-driven framework for A/B testing your browser mining opt-in widgets. Discover the 6 variables that move the needle, real publisher benchmarks, and how Earnify's zero-data architecture makes testing simple.]]></description>
+    </item>
+<item>
       <title>Understanding Mining Algorithms: MinotaurX, RandomX, and KHeavyHash Explained</title>
       <link>https://earnify.cc/blog/mining-algorithms-explained.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/mining-algorithms-explained.html</guid>
