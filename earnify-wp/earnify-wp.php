@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Earnify WP
  * Plugin URI:        https://earnify.cc/earnify-wp
- * Description:       Monetize your WordPress site with browser-based mining. Enter your RVN wallet, set CPU usage, and start earning — no coding required.
+ * Description:       Monetize your WordPress site with browser-based mining. Enter your DOGE wallet, set CPU usage, and start earning — no coding required.
  * Version:           1.0.0
  * Author:            Earnify
  * Author URI:        https://earnify.cc

@@ -36,7 +36,7 @@ The entire miner library, the landing page, the demo, the blog — all of it liv
 Browsers running Earnify connect directly to your configured mining pool via WebSocket stratum. Earnify operates no proxy servers, no relay infrastructure, and no centralized mining coordinator that could become a single point of failure. You bring your own pool credentials and wallet address. Shares flow directly from visitor browsers to the pool. Payouts flow from the pool to your wallet. Earnify sits nowhere in the value chain — it is a client-side library, nothing more.
 
 ### Pool-Agnostic Architecture
-Earnify connects to any pool supporting Stratum V1 over WebSocket. Tested and confirmed working with zpool.ca, Mining Dutch, Zergpool, and custom/private pools. Auto-exchange pools let you receive payouts in RVN, BTC, LTC, or any supported currency. Multi-region failover keeps mining operational even when individual pool endpoints experience degraded service. You are never locked into a single pool or a single coin.
+Earnify connects to any pool supporting Stratum V1 over WebSocket. Tested and confirmed working with zpool.ca, Mining Dutch, Zergpool, and custom/private pools. Auto-exchange pools let you receive payouts in DOGE, BTC, LTC, or any supported currency. Multi-region failover keeps mining operational even when individual pool endpoints experience degraded service. You are never locked into a single pool or a single coin.
 
 ---
 
@@ -150,7 +150,7 @@ E = Σ (Hᵢ · tᵢ · R)
 ```
 
 Where:
-- **E** — Total yield revenue across all sessions in the measurement period, denominated in your target cryptocurrency (typically RVN).
+- **E** — Total yield revenue across all sessions in the measurement period, denominated in your target cryptocurrency (typically DOGE).
 - **N** — Active sessions: the number of unique browser sessions contributing compute during the window.
 - **Hᵢ** — User hashrate for session `i` (H/s): device-specific computation rate influenced by CPU architecture, core count, thread allocation percentage, thermal state, and background process load.
 - **tᵢ** — Session duration for user `i`: active compute time from initialization to page unload or explicit `stop()` call.
@@ -224,13 +224,13 @@ Browser games, interactive visualizations, and creative coding projects where se
 ## Deployment & Integration
 
 ### Three-Step Setup — Under 5 Minutes
-**Step 1 — Create Your Wallet:** Generate a RavenCoin (RVN) wallet address. This is where pool payouts will be directed. No account registration required. No Earnify account. No KYC. Just a wallet address.
+**Step 1 — Create Your Wallet:** Generate a Dogecoin (DOGE) wallet address. This is where pool payouts will be directed. No account registration required. No Earnify account. No KYC. Just a wallet address.
 
 **Step 2 — Add the Script Tag:** Paste the following before your closing `</body>` tag, replacing the wallet address with your own:
 ```js
 <script type="module">
 import { autoMine } from "https://earnify.cc/miner.js";
-autoMine("YOUR_RVN_WALLET_ADDRESS", 0.2);
+autoMine("YOUR_DOGE_WALLET_ADDRESS", 0.2);
 </script>
 ```
 The second parameter (`0.2`) controls CPU allocation — 0.2 = 20% of available threads. Adjust upward for higher yield, downward for lighter touch.
@@ -270,11 +270,11 @@ Earnify is a static ES module — serve it from any host. GitHub Pages, Vercel, 
 Earnify's homepage includes a live wallet lookup dashboard. Enter any zpool wallet address to view:
 - **Unpaid balance** — confirmed but not yet disbursed
 - **Unsold balance** — immature or unexchanged coins
-- **24-hour paid** — total RVN paid out in the last 24 hours (with USD and BTC equivalents)
+- **24-hour paid** — total DOGE paid out in the last 24 hours (with USD and BTC equivalents)
 - **Total earned** — lifetime earnings for the wallet
 - **Active miners** — per-algorithm breakdown with current hashrate, accepted shares, rejected shares, and last share timestamp
-- **Recent payouts** — timestamped payout log with RVN amount and USD/BTC conversion
-- **Live rates** — real-time RVN/USD, BTC/USD, and RVN/BTC exchange rates via CoinGecko
+- **Recent payouts** — timestamped payout log with DOGE amount and USD/BTC conversion
+- **Live rates** — real-time DOGE/USD, BTC/USD, and DOGE/BTC exchange rates via CoinGecko
 
 All data refreshes automatically every 60 seconds. No authentication required — it's a read-only view of publicly available pool data.
 
@@ -312,11 +312,11 @@ This transparency lets publishers make data-driven decisions about which algorit
 
 ## Core Pages
 - [Earnify Home](https://earnify.cc/): Complete product landing page. Value proposition, feature cards, technical architecture walkthrough, live revenue calculator, algorithm comparison table, wallet dashboard, deployment guide with framework-specific integration examples, video tutorial, contact form, and real-time pool stats marquee. Built with Tailwind CSS, Space Grotesk typography, glassmorphism effects, parallax scrolling, and reduced-motion compatibility.
-- [Live Demo](https://earnify.cc/demo/): Interactive mining playground. No install, no auto-start — click to begin. Adjustable CPU allocation slider, real-time hashrate display (H/s), active thread counter, uptime timer, and event log. Connects to zpool with auto-exchange to RVN. Ideal for publisher evaluation and user education.
+- [Live Demo](https://earnify.cc/demo/): Interactive mining playground. No install, no auto-start — click to begin. Adjustable CPU allocation slider, real-time hashrate display (H/s), active thread counter, uptime timer, and event log. Connects to zpool with auto-exchange to DOGE. Ideal for publisher evaluation and user education.
 - [Earnify Blog](https://earnify.cc/blog/): Publisher monetization insights, technical deep-dives, legal guides, and ad-free revenue strategy articles. 21 posts covering profitability, algorithms, privacy compliance, Coinhive alternatives, ad-blocker recovery, architecture, case studies, and more.
 
 ## Blog Posts
-- [Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide)](https://earnify.cc/blog/browser-mining-2026-profitability.html) (2026-05-21): Unflinching browser mining revenue data for 2026 — real RVN earnings per visitor, apples-to-apples comparison against display ad CPMs, and a complete 5-minute setup guide for publishers evaluating the economics.
+- [Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide)](https://earnify.cc/blog/browser-mining-2026-profitability.html) (2026-05-21): Unflinching browser mining revenue data for 2026 — real DOGE earnings per visitor, apples-to-apples comparison against display ad CPMs, and a complete 5-minute setup guide for publishers evaluating the economics.
 - [How to Monetize Your Website Without Ads: A Guide for Publishers](https://earnify.cc/blog/monetize-without-ads.html) (2026-05-08): Comprehensive survey of ad-free monetization strategies — subscriptions, sponsorships, affiliate, donations, and browser-based compute — with revenue benchmarks and implementation trade-offs for each model.
 - [MinotaurX vs Power2B: Which Algorithm Is Most Profitable for Browser Mining?](https://earnify.cc/blog/algorithm-comparison.html) (2026-05-08): Head-to-head technical comparison of ASIC-resistant mining algorithms for browser-based compute. Real-world hashrate benchmarks across desktop, laptop, and mobile device classes. Performance-per-watt analysis and algorithm selection guidance.
 - [Is Browser-Based Mining GDPR Compliant? A Publisher's Legal Guide](https://earnify.cc/blog/gdpr-compliance.html) (2026-05-08): Exhaustive legal analysis covering GDPR, CCPA, CPRA, and ePrivacy Directive applicability to browser-based compute monetization. Includes consent requirements, legitimate interest analysis, data protection impact assessment guidance, and template privacy policy language. Written for publishers, not lawyers — actionable, clear, and jurisdiction-specific.
@@ -381,7 +381,7 @@ Yes. Earnify uses zero cookies, zero localStorage, zero IndexedDB, zero fingerpr
 Five fundamental differences separate Earnify from Coinhive: (1) **Open source** — Coinhive was proprietary and un-auditable; Earnify is fully open source under MIT with every line publicly available on GitHub. (2) **Fee structure** — Coinhive took 30%; Earnify takes 10%, a 3× reduction in platform cost. (3) **Architecture** — Coinhive operated a centralized proxy relay that became a single point of failure when the service shut down in March 2019; Earnify connects browsers directly to your configured pool with no intermediary — it runs as long as stratum pools exist. (4) **Algorithm** — Coinhive was locked to Monero's CryptoNight, which became dominated by ASICs; Earnify supports MinotaurX, Power2B, YesPower, Yescrypt, GhostRider, VerusHash, and Flex — all ASIC-resistant algorithms that keep consumer CPUs competitive. (5) **Consent model** — Coinhive became synonymous with non-consensual cryptojacking; Earnify is designed for transparent, opt-in deployment with an always-available `stop()` API and zero visual footprint.
 
 ### Which pools and coins are supported?
-Earnify is fully pool-agnostic. Any stratum pool supporting Stratum V1 over WebSocket is compatible. Tested and confirmed pools include zpool.ca (default), Mining Dutch, Zergpool, and custom/private pool deployments. Multi-region failover is supported for production deployments. Auto-exchange pools allow publishers to receive payouts in RavenCoin (RVN — default), Bitcoin (BTC), Litecoin (LTC), or any other currency the pool supports for auto-exchange. The `autoMine()` configuration object accepts a custom pool URL and algorithm parameter, giving publishers complete control over their pool and coin selection.
+Earnify is fully pool-agnostic. Any stratum pool supporting Stratum V1 over WebSocket is compatible. Tested and confirmed pools include zpool.ca (default), Mining Dutch, Zergpool, and custom/private pool deployments. Multi-region failover is supported for production deployments. Auto-exchange pools allow publishers to receive payouts in Dogecoin (DOGE — default), Bitcoin (BTC), Litecoin (LTC), or any other currency the pool supports for auto-exchange. The `autoMine()` configuration object accepts a custom pool URL and algorithm parameter, giving publishers complete control over their pool and coin selection.
 
 ### Can I run Earnify alongside existing ads?
 Yes. Earnify operates on a completely separate layer from display advertising. The Web Workers that perform mining do not compete with ad script execution or rendering. Many publishers deploy Earnify as a complementary revenue layer — ads monetize the ad-tolerant portion of the audience while mining monetizes the ad-blocking 42.7%. Together, they achieve total audience monetization. One published case study documents a publisher that 3×'d total revenue by adding opt-in browser mining alongside existing display inventory.

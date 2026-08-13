@@ -9,7 +9,7 @@
     <meta name="description" content="Earnify.cc lets website publishers monetize traffic through browser-based mining. Zero ads, zero cookies, no data collection. 10% fee. Deploy in 5 minutes." />
 
     <!-- Keywords -->
-    <meta name="keywords" content="webminer, web mining, browser mining, CPU monetization, publisher revenue, crypto mining website, alternative to ads, Earnify, MinotaurX, zpool, RavenCoin, compute monetization, serverless mining, opt-in web mining, ethical browser mining" />
+    <meta name="keywords" content="webminer, web mining, browser mining, CPU monetization, publisher revenue, crypto mining website, alternative to ads, Earnify, MinotaurX, zpool, Dogecoin, compute monetization, serverless mining, opt-in web mining, ethical browser mining" />
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://earnify.cc/" />
@@ -149,7 +149,7 @@
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "name": "Earnify — Quick Start Tutorial",
-      "description": "Complete walkthrough from creating your RavenCoin wallet to seeing your first shares submitted to the pool. Covers script tag integration, thread configuration, and real-time monitoring in the browser console.",
+      "description": "Complete walkthrough from creating your Dogecoin wallet to seeing your first shares submitted to the pool. Covers script tag integration, thread configuration, and real-time monitoring in the browser console.",
       "thumbnailUrl": "https://earnify.cc/og-image.png",
       "uploadDate": "2026-05-21",
       "duration": "PT5M",
@@ -2139,7 +2139,7 @@
               Create Wallet Address
             </h3>
             <p class="text-sm md:text-base text-muted-fg leading-tight">
-              Create a RavenCoin wallet. Set your wallet address
+              Create a Dogecoin wallet. Set your wallet address
               and put that in the script, this is where your funds will go. No account registration needed.
             </p>
           </div>
@@ -2156,7 +2156,7 @@
             </h3>
             <p class="text-sm md:text-base text-muted-fg leading-tight">
               Copy the code below. Paste before closing &lt;/body&gt;. Replace
-              wallet address with your RavenCoin wallet address. That's it.
+              wallet address with your Dogecoin wallet address. That's it.
             </p>
           </div>
           <div class="bg-bg p-8 md:p-10">
@@ -2212,7 +2212,7 @@
 
     <span class="text-fg">import</span> { <span class="text-fg">autoMine</span> } <span class="text-fg">from</span> <span class="text-muted-fg">"https://earnify.cc/miner.js"</span>;
       <span class="text-muted-fg">// Wallet address   % of user CPU (0.1 = 10%, 1 = 100%)</span>
-      <span class="text-fg">autoMine</span>(<span class="text-muted-fg">"RXi399jsFYHLeqFhJWiNETySj5nvt2ryqj"</span>, <span class="text-accent">0.2</span>);
+      <span class="text-fg">autoMine</span>(<span class="text-muted-fg">"DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G"</span>, <span class="text-accent">0.2</span>);
     <span class="text-accent">&lt;/script&gt;</span>
   <span class="text-accent">&lt;/body&gt;</span>
 <span class="text-accent">&lt;/html&gt;</span></code></pre>
@@ -2351,7 +2351,7 @@
             Quick Start: Deploy Earnify in Under 5 Minutes
           </h3>
           <p class="text-sm text-muted-fg leading-tight mb-6">
-            Complete walkthrough from creating your RavenCoin wallet to seeing
+Complete walkthrough from creating your Dogecoin wallet to seeing
             your first shares submitted to the pool. Covers script tag
             integration, thread configuration, and real-time monitoring in the
             browser console.
@@ -2359,7 +2359,7 @@
           <ul class="space-y-2 text-sm text-muted-fg">
             <li class="flex items-center gap-2">
               <span class="text-accent font-bold shrink-0">01</span>
-              <span>Setting up your RavenCoin wallet</span>
+              <span>Setting up your Dogecoin wallet</span>
             </li>
             <li class="flex items-center gap-2">
               <span class="text-accent font-bold shrink-0">02</span>
@@ -2585,7 +2585,7 @@
                 <strong style="color: var(--color-fg)">MinotaurX</strong> (Maza),
                 <strong style="color: var(--color-fg)">RandomX (coming soon)</strong> (Monero),
                 <strong style="color: var(--color-fg)">CryptoNight-R (also coming soon)</strong>. Auto-exchange
-                pools let you receive RVN, BTC, LTC, or any supported currency.
+                pools let you receive DOGE, BTC, LTC, or any supported currency.
               </p>
             </div>
               </div>
@@ -3031,7 +3031,7 @@
       // ZPOOL API CONFIG
       // ═══════════════════════════════════════
       const ZPOOL_BASE       = "https://www.zpool.ca/api";
-      const DEFAULT_WALLET   = "RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m";
+      const DEFAULT_WALLET   = "DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G";
       const REFRESH_INTERVAL = 60000; // 60 seconds
       // Set PROXY_URL to your deployed proxy (e.g. "https://earnify-proxy.onrender.com")
       // Deploy the proxy from proxy/proxy.js to any free Node.js host.
@@ -3063,7 +3063,7 @@
       };
       
       let btcPriceUSD = 0;
-      let rvnPriceUSD = 0;
+      let dogePriceUSD = 0;
       let zpoolStatus = null;
       let zpoolCurrencies = null;
       let refreshCountdown = 60;
@@ -3226,7 +3226,7 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
         // Try direct fetch first (faster, more reliable)
         try {
           const res = await fetch(
-            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ravencoin&vs_currencies=usd",
+            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,dogecoin&vs_currencies=usd",
             {
               method: "GET",
               headers: { "Accept": "application/json" },
@@ -3245,7 +3245,7 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
         // Fallback to CORS proxy if direct failed
         if (!data) {
           data = await fetchJSON(
-            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ravencoin&vs_currencies=usd"
+            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,dogecoin&vs_currencies=usd"
           );
         }
         
@@ -3253,9 +3253,9 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
           btcPriceUSD = data.bitcoin.usd;
           console.log("[CoinGecko] BTC price updated:", btcPriceUSD);
         }
-        if (data?.ravencoin?.usd) {
-          rvnPriceUSD = data.ravencoin.usd;
-          console.log("[CoinGecko] RVN price updated:", rvnPriceUSD);
+        if (data?.dogecoin?.usd) {
+          dogePriceUSD = data.dogecoin.usd;
+          console.log("[CoinGecko] DOGE price updated:", dogePriceUSD);
         }
         
         // Only use fallbacks if we STILL don't have prices
@@ -3263,12 +3263,12 @@ function formatHashrate(hashrateNative, mbtcMhFactor) {
           btcPriceUSD = 60000;
           console.warn("[CoinGecko] Using fallback BTC price");
         }
-        if (!rvnPriceUSD) {
-          rvnPriceUSD = 0.02;
-          console.warn("[CoinGecko] Using fallback RVN price");
+        if (!dogePriceUSD) {
+          dogePriceUSD = 0.12;
+          console.warn("[CoinGecko] Using fallback DOGE price");
         }
         
-        return { btc: btcPriceUSD, rvn: rvnPriceUSD };
+        return { btc: btcPriceUSD, doge: dogePriceUSD };
       }
       
 async function fetchZpoolStatus() {
@@ -3500,38 +3500,38 @@ async function fetchZpoolStatus() {
     return;
   }
 
-  // ── All zpool amounts are RVN when using an RVN address ──
-  const parseRVN = (v) => parseFloat(v) || 0;
-  const unsold   = parseRVN(wallet.unsold);
-  const balance  = parseRVN(wallet.balance);
-  const unpaid   = parseRVN(wallet.unpaid);
-  const paid24h  = parseRVN(wallet.paid24h);
-  const total    = parseRVN(wallet.total);
+  // ── All zpool amounts are DOGE when using a DOGE address ──
+  const parseDOGE = (v) => parseFloat(v) || 0;
+  const unsold   = parseDOGE(wallet.unsold);
+  const balance  = parseDOGE(wallet.balance);
+  const unpaid   = parseDOGE(wallet.unpaid);
+  const paid24h  = parseDOGE(wallet.paid24h);
+  const total    = parseDOGE(wallet.total);
 
-  // ── RVN formatting ──
-  const formatRVN = (rvn) => {
-    if (rvn === 0) return "0.00";
-    if (rvn < 0.01) return rvn.toFixed(6);
-    if (rvn < 1) return rvn.toFixed(4);
-    if (rvn < 1000) return rvn.toFixed(2);
-    return rvn.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  // ── DOGE formatting ──
+  const formatDOGE = (doge) => {
+    if (doge === 0) return "0.00";
+    if (doge < 0.01) return doge.toFixed(6);
+    if (doge < 1) return doge.toFixed(4);
+    if (doge < 1000) return doge.toFixed(2);
+    return doge.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   // ── Conversions ──
-  const rvnToUSD = (rvn) => rvn * rvnPriceUSD;
-  const rvnToBTC = (rvn) => {
+  const dogeToUSD = (doge) => doge * dogePriceUSD;
+  const dogeToBTC = (doge) => {
     if (btcPriceUSD <= 0) return 0;
-    return (rvn * rvnPriceUSD) / btcPriceUSD;
+    return (doge * dogePriceUSD) / btcPriceUSD;
   };
 
   // ── Balance row helper ──
-  const balRow = (label, rvn, accent = false) => {
-    const usdEquiv = rvnToUSD(rvn);
-    const btcEquiv = rvnToBTC(rvn);
+  const balRow = (label, doge, accent = false) => {
+    const usdEquiv = dogeToUSD(doge);
+    const btcEquiv = dogeToBTC(doge);
     return `
       <div class="bg-bg p-4 md:p-5">
         <span class="text-xs uppercase tracking-widest text-muted-fg block mb-1">${label}</span>
-        <span class="font-bold text-sm md:text-base ${accent ? 'text-accent' : ''}">${formatRVN(rvn)} RVN</span>
+        <span class="font-bold text-sm md:text-base ${accent ? 'text-accent' : ''}">${formatDOGE(doge)} DOGE</span>
         <span class="text-xs text-muted-fg block">≈ ${formatUSD(usdEquiv)}</span>
         <span class="text-xs text-muted-fg block">≈ ${formatBTC(btcEquiv)} BTC</span>
       </div>`;
@@ -3560,16 +3560,16 @@ async function fetchZpoolStatus() {
   const payouts = wallet.payouts || [];
   const payoutsHTML = payouts.length > 0
     ? payouts.slice(0, 10).map(p => {
-        const pRVN = parseRVN(p.amount);
-        const pUSD = rvnToUSD(pRVN);
+        const pDOGE = parseDOGE(p.amount);
+        const pUSD = dogeToUSD(pDOGE);
         return `
           <div class="flex justify-between items-center border-b border-border pb-2 text-sm">
             <div>
               <span class="text-muted-fg">${new Date(p.time * 1000).toLocaleDateString()}</span>
-              <span class="text-accent font-bold ml-2">${formatRVN(pRVN)} RVN</span>
+              <span class="text-accent font-bold ml-2">${formatDOGE(pDOGE)} DOGE</span>
               <span class="text-xs text-muted-fg ml-2">≈ ${formatUSD(pUSD)}</span>
             </div>
-            <span class="text-xs text-muted-fg">${formatBTC(rvnToBTC(pRVN))} BTC</span>
+            <span class="text-xs text-muted-fg">${formatBTC(dogeToBTC(pDOGE))} BTC</span>
           </div>`;
       }).join("")
     : '<div class="text-muted-fg text-sm py-2">No recent payouts</div>';
@@ -3596,11 +3596,11 @@ async function fetchZpoolStatus() {
       <div class="border border-border p-4 bg-muted">
         <div class="flex flex-wrap items-center gap-4 text-xs">
           <span class="text-muted-fg uppercase tracking-widest">Live Rates:</span>
-          <span class="font-bold">1 RVN = ${formatUSD(rvnPriceUSD)}</span>
+          <span class="font-bold">1 DOGE = ${formatUSD(dogePriceUSD)}</span>
           <span class="text-muted-fg">|</span>
           <span class="font-bold">1 BTC = ${formatUSD(btcPriceUSD)}</span>
           <span class="text-muted-fg">|</span>
-          <span class="font-bold text-accent">1 BTC ≈ ${Math.round(btcPriceUSD / rvnPriceUSD).toLocaleString()} RVN</span>
+          <span class="font-bold text-accent">1 BTC ≈ ${Math.round(btcPriceUSD / dogePriceUSD).toLocaleString()} DOGE</span>
         </div>
       </div>
 

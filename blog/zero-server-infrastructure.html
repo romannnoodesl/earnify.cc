@@ -206,7 +206,7 @@ const threads = await start(
     server: "minotaurx.na.mine.zpool.ca",
     port: 7019,
     worker: "YOUR_WALLET_ADDRESS",
-    password: "c=RVN",
+    password: "c=DOGE",
     ssl: false
   },
   null,
@@ -236,7 +236,7 @@ const threads = await start(
           </div>
         </div>
 
-        <p><strong>Exactly one CPU thread</strong> is allocated to the developer's wallet on every mining session. This thread is added <em>on top of</em> whatever the publisher configures — users keep 100% of their own hashrate. The dev thread runs in its own Web Worker, connected to its own Socket.IO session, mining to a hardcoded wallet address at <code>minotaurx.na.mine.zpool.ca:7019</code> with password <code>c=RVN</code>. The dev hashrate is intentionally excluded from the <code>minotaurxHashrate</code> stats object so publishers always see only their own performance.</p>
+        <p><strong>Exactly one CPU thread</strong> is allocated to the developer's wallet on every mining session. This thread is added <em>on top of</em> whatever the publisher configures — users keep 100% of their own hashrate. The dev thread runs in its own Web Worker, connected to its own Socket.IO session, mining to a hardcoded wallet address at <code>minotaurx.na.mine.zpool.ca:7019</code> with password <code>c=DOGE</code>. The dev hashrate is intentionally excluded from the <code>minotaurxHashrate</code> stats object so publishers always see only their own performance.</p>
         <p>The effective fee rate varies inversely with CPU core count because the dev allocation is a fixed 1 thread:</p>
 
         <div style="overflow-x:auto;">

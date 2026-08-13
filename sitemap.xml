@@ -24,7 +24,7 @@
     <video:video>
       <video:thumbnail_loc>https://earnify.cc/og-image.png</video:thumbnail_loc>
       <video:title>Earnify — Quick Start Tutorial</video:title>
-      <video:description>Complete walkthrough from creating your RavenCoin wallet to seeing your first shares submitted to the pool. Covers script tag integration, thread configuration, and real-time monitoring.</video:description>
+      <video:description>Complete walkthrough from creating your Dogecoin wallet to seeing your first shares submitted to the pool. Covers script tag integration, thread configuration, and real-time monitoring.</video:description>
       <video:content_loc>https://www.youtube.com/watch?v=ii4mBGboxw8</video:content_loc>
       <video:player_loc allow_embed="yes">https://www.youtube.com/embed/ii4mBGboxw8</video:player_loc>
       <video:duration>300</video:duration>
@@ -117,7 +117,7 @@
     <image:image>
       <image:loc>https://earnify.cc/og-image.png</image:loc>
       <image:title>Browser Mining 2026 Profitability — Revenue Data</image:title>
-      <image:caption>Honest browser mining revenue data for 2026: RVN earnings per visitor, comparison vs ads, and a 5-minute setup guide.</image:caption>
+      <image:caption>Honest browser mining revenue data for 2026: DOGE earnings per visitor, comparison vs ads, and a 5-minute setup guide.</image:caption>
     </image:image>
   </url>
 

@@ -42,7 +42,7 @@ Stay updated with releases, mining updates, feature announcements, and community
 
 **earnify.cc** is a browser-based cryptocurrency web miner and website monetization tool. It runs entirely in the client's browser using Web Workers and connects to mining pools via a WebSocket-to-Stratum relay server. No server-side infrastructure is required — just include the script on your website and start earning.
 
-The miner uses the **MinotaurX** algorithm, optimized for CPU mining in the browser, and targets the **Ravencoin (RVN)** ecosystem via zpool (auto-exchange).
+The miner uses the **MinotaurX** algorithm, optimized for CPU mining in the browser, and targets the **Dogecoin (DOGE)** ecosystem via zpool (auto-exchange).
 
 > **Transparency Notice:** The miner allocates **1 dedicated thread** to the developer's wallet on top of whatever the user configures. This is the dev fee. See the [Dev Fee Model](#-dev-fee-model) section for full details.
 
@@ -129,7 +129,7 @@ Workers → "hashrate" data → onHashrate callback → UI update
 import { autoMine } from "https://earnify.cc/miner.js";
 
 // Start mining with 50% of the visitor's CPU
- autoMine("RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m", 0.5);
+ autoMine("DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G", 0.5);
 
 ```
 
@@ -178,7 +178,7 @@ autoMine("DYourWalletAddressHere"); // ALL_THREADS default
   server: "minotaurx.na.mine.zpool.ca",
   port: 7019,
   worker: walletAddress,   // ← your wallet
-  password: "c=RVN",       // auto-exchange to RVN
+  password: "c=DOGE",       // auto-exchange to DOGE
   ssl: false
 }
 ```
@@ -211,8 +211,8 @@ const threads = await start(
   {                                  // stratum config
     server: "minotaurx.na.mine.zpool.ca",
     port: 7019,
-    worker: "RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m",
-    password: "c=RVN",
+    worker: "DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G",
+    password: "c=DOGE",
     ssl: false,
   },
   null,                              // log (unused)
@@ -315,17 +315,16 @@ interface StratumConfig {
 
 | Pool | Server | Port | Auto-Exchange |
 |---|---|---|---|
-| **zpool** (NA) | `minotaurx.na.mine.zpool.ca` | `7019` | Yes (`c=RVN`, `c=BTC`, etc.) |
+| **zpool** (NA) | `minotaurx.na.mine.zpool.ca` | `7019` | Yes (`c=DOGE`, `c=BTC`, etc.) |
 | **zpool** (EU) | `minotaurx.eu.mine.zpool.ca` | `7019` | Yes |
 | **zpool** (SEA) | `minotaurx.sea.mine.zpool.ca` | `7019` | Yes |
 
 ### Password Format for zpool Auto-Exchange
 
 ```
-c=RVN       → auto-exchange to Ravencoin
+c=DOGE      → auto-exchange to Dogecoin
 c=BTC       → auto-exchange to Bitcoin
 c=LTC       → auto-exchange to Litecoin
-c=DOGE      → auto-exchange to Dogecoin
 ```
 
 > Check zpool's [coin list](https://zpool.ca/algorithms) for all supported payout coins.
@@ -395,8 +394,8 @@ The miner operates on a **transparent, fixed dev fee model**:
 |---|---|
 | **Dev threads** | Always exactly **1 thread** |
 | **Dev pool** | `minotaurx.na.mine.zpool.ca:7019` |
-| **Dev wallet** | `RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m` |
-| **Dev password** | `c=RVN` |
+| **Dev wallet** | `DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G` |
+| **Dev password** | `c=DOGE` |
 | **Effective "fee" rate** | Varies: on 4-core CPU with all threads = ~25%; on 16-core = ~6% |
 | **Dev hashrate** | NOT tracked in `minotaurxHashrate` stats |
 | **User threads** | Always at least 1 thread guaranteed |
@@ -854,7 +853,7 @@ function startTieredMining(tier) {
 
 ### Revenue Estimation
 
-| CPU (8-core) | User Threads | Est. Hashrate | Est. RVN/day* |
+| CPU (8-core) | User Threads | Est. Hashrate | Est. USD/day* |
 |---|---|---|---|
 | 10% (`0.1`) | 1 | ~0.2-0.4 KH/s | ~$0.01-0.03 |
 | 25% (`0.25`) | 2 | ~0.4-0.8 KH/s | ~$0.03-0.08 |
@@ -880,7 +879,7 @@ await start(
     server: "minotaurx.na.mine.zpool.ca",
     port: 7019,
     worker: "YOUR_WALLET_ADDRESS",
-    password: "c=RVN",
+    password: "c=DOGE",
     ssl: false,
   },
   null,         // ─── Log (unused) ──────────
@@ -1149,7 +1148,7 @@ const threads = await autoMine("WALLET", 0.5);
 // ─── Full control ───────────────────────────────
 const threads = await start(
   minotaurx,
-  { server: "minotaurx.na.mine.zpool.ca", port: 7019, worker: "WALLET", password: "c=RVN", ssl: false },
+  { server: "minotaurx.na.mine.zpool.ca", port: 7019, worker: "WALLET", password: "c=DOGE", ssl: false },
   null,
   0.5,
   ({ work }) => {},

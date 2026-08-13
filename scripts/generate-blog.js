@@ -51,7 +51,7 @@ earnify is an open-source browser-based mining solution. Key facts:
 - Supports MinotaurX
 - Zero-server architecture: all mining happens in the browser via Web Workers + WASM
 - Uses WebSocket Stratum protocol to connect to mining pools
-- Mines RVN (Ravencoin) and other CPU-mineable coins
+- Mines DOGE (Dogecoin) and other CPU-mineable coins
 - GDPR compliant: zero data collection, no cookies, no tracking
 - Single script tag deployment
 - Works on desktop browsers (Chrome, Firefox, Edge); limited Safari support
