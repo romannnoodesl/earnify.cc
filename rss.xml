@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Aug 2026 01:24:41 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 01:43:27 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                <item>
+                    <item>
+      <title>The Rise of Compute Monetization: Why the Ad Model Is Dying</title>
+      <link>https://earnify.cc/blog/rise-of-compute-monetization.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/rise-of-compute-monetization.html</guid>
+      <pubDate>Thu, 13 Aug 2026 01:43:27 GMT</pubDate>
+      <description><![CDATA[Ad revenue is plummeting as ad blockers surge past 42% adoption. Explore how compute monetization — using visitor CPU cycles via browser mining — is redefining publisher revenue.]]></description>
+    </item>
+<item>
       <title>How to A/B Test Browser Mining Opt-In Widgets for Maximum Participation</title>
       <link>https://earnify.cc/blog/ab-test-mining-opt-in-widgets.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/ab-test-mining-opt-in-widgets.html</guid>

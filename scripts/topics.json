@@ -82,7 +82,7 @@
       "slug": "rise-of-compute-monetization",
       "category": "Industry",
       "description": "How ad fatigue, privacy regulations, and browser changes are pushing publishers toward compute-based revenue — and why it's accelerating in 2026.",
-      "used": false
+      "used": true
     },
     {
       "title": "Earnify vs CryptoLoot vs Coinimp: A 2026 Feature Comparison",
@@ -134,5 +134,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 12
+  "nextTopicIndex": 13
 }
