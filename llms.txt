@@ -335,7 +335,6 @@ This transparency lets publishers make data-driven decisions about which algorit
 - [How to Pitch Browser Mining to Your Clients: A Sales Framework](https://earnify.cc/blog/pitch-browser-mining-to-clients.html) (2026-07-16): A proven sales framework for agencies and freelancers to introduce browser mining as a revenue stream to website owners.
 - [Browser Mining Performance: Desktop vs Mobile vs Tablet](https://earnify.cc/blog/browser-mining-performance-devices.html) (2026-07-22): Real hashrate benchmarks across device types — how CPU architecture, thermal throttling, and browser limits affect mining output.
 - [The Publisher's Guide to Passive Revenue Streams in 2026](https://earnify.cc/blog/passive-revenue-streams-publishers-2026.html) (2026-07-25): Discover proven passive revenue streams for publishers in 2026, including display ads, affiliate marketing, browser mining, and more.
-- [How Earnify Handles Pool Failover and Connection Resilience](https://earnify.cc/blog/earnify-pool-failover-resilience.html) (2026-07-28): Deep-dive into automatic pool switching, reconnection logic, and how Earnify maintains uptime when mining pools go down.
 - [Browser Mining and User Trust: Building an Ethical Monetization Model](https://earnify.cc/blog/browser-mining-user-trust-ethics.html) (2026-07-31): Why transparent, opt-in mining builds more user trust than tracking-based advertising — and how to communicate it to your audience.
 
 ## Developer Resources

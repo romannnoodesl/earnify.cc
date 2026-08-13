@@ -299,19 +299,6 @@
 
 
   <url>
-    <loc>https://earnify.cc/blog/earnify-pool-failover-resilience.html</loc>
-    <lastmod>2026-07-28</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://earnify.cc/og-image.png</image:loc>
-      <image:title>How Earnify Handles Pool Failover and Connection Resilience</image:title>
-      <image:caption>Explore how Earnify&apos;s browser-based mining platform maintains uptime through automatic pool failover, WebSocket reconnection, and zero-server architecture for publishers.</image:caption>
-    </image:image>
-  </url>
-
-
-  <url>
     <loc>https://earnify.cc/blog/browser-mining-user-trust-ethics.html</loc>
     <lastmod>2026-07-31</lastmod>
     <changefreq>monthly</changefreq>
