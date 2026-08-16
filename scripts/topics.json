@@ -89,7 +89,7 @@
       "slug": "earnify-vs-cryptoimp-vs-coinimp",
       "category": "Industry",
       "description": "Head-to-head feature comparison of the three main browser mining platforms — fees, privacy, performance, and developer experience.",
-      "used": false
+      "used": true
     },
     {
       "title": "How to Use Browser Mining to Fund Open Source Projects",
@@ -134,5 +134,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 13
+  "nextTopicIndex": 14
 }

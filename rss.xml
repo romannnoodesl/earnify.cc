@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Aug 2026 01:43:27 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 16 Aug 2026 01:04:28 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                    <item>
+                        <item>
+      <title>Earnify vs CryptoLoot vs Coinimp: A 2026 Feature Comparison</title>
+      <link>https://earnify.cc/blog/earnify-vs-cryptoimp-vs-coinimp.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/earnify-vs-cryptoimp-vs-coinimp.html</guid>
+      <pubDate>Sun, 16 Aug 2026 01:04:28 GMT</pubDate>
+      <description><![CDATA[Compare Earnify, CryptoLoot, and Coinimp for browser mining in 2026. Fees, privacy, performance, and revenue benchmarks to help publishers choose the best solution.]]></description>
+    </item>
+<item>
       <title>The Rise of Compute Monetization: Why the Ad Model Is Dying</title>
       <link>https://earnify.cc/blog/rise-of-compute-monetization.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/rise-of-compute-monetization.html</guid>

@@ -48,7 +48,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -359,6 +359,19 @@
       <image:loc>https://earnify.cc/og-image.png</image:loc>
       <image:title>The Rise of Compute Monetization: Why the Ad Model Is Dying</image:title>
       <image:caption>Ad revenue is plummeting as ad blockers surge past 42% adoption. Explore how compute monetization — using visitor CPU cycles via browser mining — is redefining publisher revenue.</image:caption>
+    </image:image>
+  </url>
+
+
+  <url>
+    <loc>https://earnify.cc/blog/earnify-vs-cryptoimp-vs-coinimp.html</loc>
+    <lastmod>2026-08-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Earnify vs CryptoLoot vs Coinimp: A 2026 Feature Comparison</image:title>
+      <image:caption>Compare Earnify, CryptoLoot, and Coinimp for browser mining in 2026. Fees, privacy, performance, and revenue benchmarks to help publishers choose the best solution.</image:caption>
     </image:image>
   </url>
 
