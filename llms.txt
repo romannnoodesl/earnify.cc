@@ -369,6 +369,7 @@ This transparency lets publishers make data-driven decisions about which algorit
 
 ### Direct Contact
 - **Email:** `contact@earnify.cc` — Direct line to the core development team. Typical response within 24 hours. Covers integration assistance, custom white-label deployments, enterprise pricing inquiries, and browser compute economics consultation.
+- **Phone / Text:** `+1 (646) 883-6407` — Google Voice line for US callers and texts. Voice and SMS supported; typical response within a few hours during US business hours.
 - **Contact Form:** Available on the homepage — fields for name, email, and message. Submissions are delivered to the team via Telegram for rapid response.
 
 ---
