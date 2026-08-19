@@ -1170,4 +1170,26 @@ minotaurxHashrate.maxHashrateKHs;
 
 ---
 
+## SEO & GEO Operations
+
+### Google Search Console
+1. Verify ownership (HTML tag method): replace `REPLACE_WITH_YOUR_GSC_TOKEN` in `index.html` with the token Search Console gives you, commit, then click Verify. (DNS TXT verification also works.)
+2. Submit the sitemap: `https://earnify.cc/sitemap.xml`.
+
+### Bing Webmaster Tools
+- Verified via `BingSiteAuth.xml` at the site root. Submit `https://earnify.cc/sitemap.xml` in Bing Webmaster Tools.
+
+### IndexNow (instant Bing/Edge indexing)
+- Key file: `5dc532e98f46c3ddcbd4f5df7c71e9c4.txt` (and `IndexNow_<key>.txt`) at the site root.
+- `scripts/update-feeds.js` automatically pings `api.indexnow.org` after each blog publish — no manual action needed.
+
+### AI / LLM crawlers (GEO)
+- All major AI crawlers (GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, CCBot, Applebot-Extended, YouBot, Amazonbot, Bytespider) are explicitly allowed in `robots.txt`.
+- `llms.txt` at the site root is the machine-readable guide for LLM crawlers — keep it in sync when pages change.
+
+### New blog posts
+1. Add topic to `scripts/topics.json` (`"used": false`).
+2. Run `node scripts/generate-blog.js && node scripts/update-feeds.js` (or push and let the GitHub Actions workflow run).
+
+
 *Built with ⛏ for the decentralized web.*

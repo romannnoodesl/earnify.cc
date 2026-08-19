@@ -5,6 +5,29 @@ import { fileURLToPath } from "url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 
+const INDEXNOW_KEY = "5dc532e98f46c3ddcbd4f5df7c71e9c4";
+const SITE = "https://earnify.cc";
+
+async function pingIndexNow(slug) {
+  try {
+    const url = `${SITE}/blog/${slug}.html`;
+    const payload = {
+      host: "earnify.cc",
+      key: INDEXNOW_KEY,
+      keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`,
+      urlList: [url, `${SITE}/`, `${SITE}/sitemap.xml`],
+    };
+    const res = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(payload),
+    });
+    console.log(`IndexNow ping: HTTP ${res.status}`, res.ok ? "" : await res.text().catch(() => ""));
+  } catch (err) {
+    console.warn("IndexNow ping failed (non-fatal):", err.message);
+  }
+}
+
 function loadMeta() {
   const raw = readFileSync(join(__dirname, "last-generated.json"), "utf-8");
   return JSON.parse(raw);
@@ -62,10 +85,20 @@ function updateSitemap(meta) {
     sitemap = sitemap.replace(closingTag, newUrl + "\n\n" + closingTag);
   }
 
-  sitemap = sitemap.replace(
-    /(<loc>https:\/\/earnify\.cc\/blog\/<\/loc>\s*<lastmod>)[^<]*(<\/lastmod>)/,
-    `$1${today}$2`
-  );
+  const refreshLastmod = [
+    "<loc>https://earnify.cc/</loc>",
+    "<loc>https://earnify.cc/demo/</loc>",
+    "<loc>https://earnify.cc/llms.txt</loc>",
+    "<loc>https://earnify.cc/rss.xml</loc>",
+    "<loc>https://earnify.cc/opensearch.xml</loc>",
+  ];
+  for (const loc of refreshLastmod) {
+    const escaped = loc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    sitemap = sitemap.replace(
+      new RegExp(`(${escaped}\\s*<lastmod>)[^<]*(</lastmod>)`),
+      `$1${today}$2`
+    );
+  }
 
   writeFileSync(sitemapPath, sitemap);
   console.log("Updated sitemap.xml");
@@ -165,6 +198,7 @@ function main() {
   updateRSS(meta);
   updateSitemap(meta);
   updateBlogIndex(meta);
+  pingIndexNow(meta.slug);
 
   console.log("All feeds updated successfully");
 }

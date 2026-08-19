@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Complete Guide to Browser Mining for Publishers (2026)</title>
+  <meta name="description" content="Everything website publishers need to know about browser mining in 2026: what it is, how it works, what it earns, how to deploy it in 5 minutes, and legal/privacy considerations — with real revenue data and benchmarks." />
+  <meta name="keywords" content="browser mining guide, web mining guide, browser mining 2026, how to monetize website without ads, browser mining for publishers, Earnify guide, coinhive alternative 2026" />
+  <link rel="canonical" href="https://earnify.cc/guide/browser-mining/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/guide/browser-mining/" />
+  <meta property="og:title" content="The Complete Guide to Browser Mining for Publishers (2026)" />
+  <meta property="og:description" content="What browser mining is, how it works, real revenue data, deployment in 5 minutes, privacy compliance, and the full library of Earnify guides." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Complete Guide to Browser Mining (2026)" />
+  <meta name="twitter:description" content="What browser mining is, the real revenue numbers, 5-minute deployment, and privacy compliance — with every related Earnify guide linked." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "The Complete Guide to Browser Mining for Publishers (2026)",
+    "description": "What browser mining is, how it works, real revenue data, 5-minute deployment, and privacy compliance for website publishers.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/guide/browser-mining/" },
+    "datePublished": "2026-08-19",
+    "dateModified": "2026-08-19",
+    "inLanguage": "en"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Browser Mining Guide", "item": "https://earnify.cc/guide/browser-mining/" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is browser mining still profitable in 2026?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, for publishers with engaged desktop audiences. Modern ASIC-resistant algorithms like MinotaurX keep consumer CPUs competitive, and a 10,000-DAU site can generate roughly $1–$4 per 100 visitor-hours depending on hardware, session length and coin price." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is browser mining legal?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Browser mining is legal when it is transparent and consent-based. Coinhive-era cryptojacking — mining without user knowledge — is what regulators and browsers penalize. Earnify is designed for opt-in, disclosed deployment and processes zero personal data, keeping it outside GDPR consent mandates." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does browser mining slow down my website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Earnify reserves n−1 CPU cores so the UI thread stays free, runs hash kernels in Web Workers via WASM, and measures under 2% main-thread overhead — Lighthouse and Core Web Vitals are unaffected." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Earnify cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Earnify is free to use (MIT-licensed open source). The platform deducts a flat 10% dev fee on submitted shares; the remaining 90% of yield is paid directly from the pool to your own wallet." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.7; }
+    ::selection { background: #dfe104; color: #000; }
+    a { color: #dfe104; }
+    .wrap { max-width: 880px; margin: 0 auto; padding: 6.5rem 1.5rem 4rem; }
+    .nav { display: flex; gap: 1.5rem; margin-bottom: 3rem; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .nav a { color: #a1a1aa; text-decoration: none; }
+    .nav a:hover { color: #dfe104; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 1.25rem; }
+    h2 { font-size: 1.4rem; text-transform: uppercase; letter-spacing: -0.01em; margin: 3rem 0 1rem; color: #dfe104; }
+    h3 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.02em; margin: 2rem 0 0.75rem; color: #FAFAFA; }
+    p { color: #d4d4d8; margin-bottom: 1.25rem; font-size: 1.0625rem; }
+    ul { color: #d4d4d8; margin: 0 0 1.5rem 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    li a { text-decoration: none; }
+    li a:hover { text-decoration: underline; }
+    .lede { font-size: 1.25rem; color: #a1a1aa; border-bottom: 2px solid #27272a; padding-bottom: 2rem; margin-bottom: 2rem; }
+    .sum { background: #0c0c0f; border: 1px solid #27272a; padding: 1.5rem; margin: 2rem 0; }
+    .sum strong { color: #dfe104; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0 2.5rem; }
+    .stat { border: 1px solid #27272a; background: #0c0c0f; padding: 1.25rem; }
+    .stat b { font-size: 1.6rem; color: #dfe104; display: block; }
+    .stat span { font-size: 0.75rem; color: #a1a1aa; text-transform: uppercase; letter-spacing: 0.08em; }
+    .cta { margin: 2.5rem 0; padding: 2rem; border: 2px solid #dfe104; text-align: center; }
+    .btn { display: inline-block; background: #dfe104; color: #09090b; font-weight: 700; text-transform: uppercase; padding: 1rem 2rem; text-decoration: none; }
+    .btn:hover { background: #c9cc04; }
+    .meta { font-size: 0.75rem; color: #52525b; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/guide/browser-mining/" style="color:#dfe104;">Guide</a>
+      <a href="/how-it-works/">How It Works</a>
+      <a href="/demo/">Demo</a>
+    </nav>
+
+    <h1>The Complete Guide to Browser Mining for Publishers</h1>
+    <p class="lede">Browser mining is when a website uses a visitor's CPU, via Web Workers and WebAssembly, to compute proof-of-work hashes for a mining pool — and the publisher earns cryptocurrency. This guide covers what it is, whether it still works in 2026, how much it pays, and how to deploy it in five minutes.</p>
+
+    <div class="sum">
+      <strong>Key facts for 2026</strong><br />
+      42.7% of users block ads (Statista 2024). Display CPMs keep falling. Browser mining by contrast has a 100% fill rate, is immune to ad blockers, and pays 90% of yield directly to your wallet via a flat 10% fee. MinotaurX keeps consumer CPUs profitable in-browser.
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><b>5 min</b><span>Average deployment time</span></div>
+      <div class="stat"><b>10%</b><span>Flat platform fee (90% to you)</span></div>
+      <div class="stat"><b>n−1</b><span>CPU cores used, UI core always free</span></div>
+      <div class="stat"><b>0</b><span>Data collected, cookies, or accounts</span></div>
+    </div>
+
+    <h2>What Is Browser Mining?</h2>
+    <p>Browser mining is similar to classic crypto mining — devices compete to solve proof-of-work puzzles — except the work happens inside a web page. A script loads a WebAssembly hashing kernel, spawns Web Workers, receives jobs from a pool over the Stratum protocol, and submits valid shares. Valid shares are credited to workers connected to the pool, and payouts go to the publisher's wallet. See the full <a href="/how-it-works/">technical pipeline here</a>.</p>
+
+    <h2>Is It Still Profitable in 2026?</h2>
+    <p>Yes, when expectations are level. A desktop session on MinotaurX produces roughly <strong>250–400 H/s per core</strong>, a laptop <strong>~300 H/s</strong>, a mobile browser noticeably less — which is why <a href="/blog/browser-mining-performance-devices.html">desktop audiences earn about 5× more than mobile</a>. Modeled against current difficulty and DOGE prices, publishers earn roughly <strong>$1–$4 / month per 100 visitor-hours</strong>. For the full numbers, read <a href="/blog/browser-mining-2026-profitability.html">Browser Mining in 2026: Is It Still Profitable?</a> and <a href="/blog/browser-mining-vs-display-ads.html">Browser Mining vs Display Ads</a>.</p>
+
+    <h2>Deploy in 5 Minutes</h2>
+    <p>Generate a Dogecoin wallet, paste one script tag, done:</p>
+    <p style="font-family:'SF Mono',monospace;background:#18181b;border:1px solid #27272a;padding:1.25rem;overflow-x:auto;">&lt;script type="module"&gt;<br/>&nbsp;&nbsp;import { autoMine } from "https://earnify.cc/miner.js";<br/>&nbsp;&nbsp;autoMine("YOUR_DOGE_WALLET", 0.2);<br/>&lt;/script&gt;</p>
+    <p>Framework-specific patterns (React, Vue, Svelte, WordPress) and advanced configuration live in the <a href="/blog/browser-mining-2026-profitability.html">setup guide</a> and the <a href="/blog/earnify-wordpress-setup.html">WordPress guide</a>.</p>
+
+    <div class="cta">
+      <p style="margin-bottom:1.25rem;">See it running before you commit.</p>
+      <a class="btn" href="/demo/">Try the Live Demo</a>
+    </div>
+
+    <h2>Privacy and Legality</h2>
+    <p>Legitimate browser mining is opt-in, transparent, and disclosed. Earnify processes zero personal data (no cookies, no fingerprinting), operates outside GDPR consent mandates, and always exposes a <code>stop()</code> API. For the legal deep-dive see <a href="/blog/gdpr-compliance.html">Is Browser-Based Mining GDPR Compliant?</a>, and to tell good actors from scams read <a href="/blog/cryptojacking-vs-legitimate-mining.html">Cryptojacking vs Legitimate Mining</a>.</p>
+
+    <h2>The Full Earnify Library</h2>
+
+    <h3>Start here</h3>
+    <ul>
+      <li><a href="/blog/how-browser-mining-works.html">How Browser Mining Works: Web Workers, WASM &amp; Stratum</a></li>
+      <li><a href="/blog/zero-server-infrastructure.html">Zero-Server Infrastructure: How Earnify Runs Entirely in the Browser</a></li>
+      <li><a href="/blog/browser-mining-2026-profitability.html">Browser Mining in 2026: Is It Still Profitable?</a></li>
+      <li><a href="/blog/monetize-without-ads.html">How to Monetize Your Website Without Ads</a></li>
+    </ul>
+
+    <h3>Revenue &amp; strategy</h3>
+    <ul>
+      <li><a href="/blog/browser-mining-vs-display-ads.html">Browser Mining vs Display Ads: Revenue Per Visitor</a></li>
+      <li><a href="/blog/passive-revenue-streams-publishers-2026.html">The Publisher's Guide to Passive Revenue Streams in 2026</a></li>
+      <li><a href="/blog/monetizing-niche-websites-browser-mining.html">Monetizing Niche Websites: When Mining Beats Ads</a></li>
+      <li><a href="/blog/recover-ad-blocker-revenue.html">Recovering Revenue Lost to Ad Blockers</a></li>
+      <li><a href="/blog/case-study-3x-revenue.html">Case Study: Tripled Revenue with Browser Mining</a></li>
+      <li><a href="/blog/browser-mining-fund-open-source.html">Funding Open Source Projects with Browser Mining</a></li>
+      <li><a href="/blog/mining-opt-in-ux-design.html">Opt-In UX Design That Hits 80%+ Participation</a></li>
+      <li><a href="/blog/ab-test-mining-opt-in-widgets.html">A/B Testing Opt-In Widgets</a></li>
+      <li><a href="/blog/elevator-pitch-browser-mining.html">Browser Mining for Freelancers &amp; Agencies</a></li>
+      <li><a href="/blog/pitch-browser-mining-to-clients.html">How to Pitch Browser Mining to Clients</a></li>
+      <li><a href="/blog/rise-of-compute-monetization.html">The Rise of Compute Monetization</a></li>
+    </ul>
+
+    <h3>Technical &amp; algorithms</h3>
+    <ul>
+      <li><a href="/blog/algorithm-comparison.html">MinotaurX vs Power2B: Algorithm Comparison</a></li>
+      <li><a href="/blog/mining-algorithms-explained.html">MinotaurX, RandomX, KHeavyHash Explained</a></li>
+      <li><a href="/blog/browser-mining-performance-devices.html">Desktop vs Mobile vs Tablet benchmarks</a></li>
+      <li><a href="/blog/earnify-wordpress-setup.html">Add Earnify to WordPress in 2 Minutes</a></li>
+    </ul>
+
+    <h3>Industry &amp; ethics</h3>
+    <ul>
+      <li><a href="/blog/web-mining-history.html">The History of Web Mining: Coinhive to Earnify</a></li>
+      <li><a href="/blog/coinhive-alternatives.html">Coinhive Alternatives for 2026</a></li>
+      <li><a href="/blog/earnify-vs-cryptoimp-vs-coinimp.html">Earnify vs CryptoLoot vs Coinimp</a></li>
+      <li><a href="/blog/browser-mining-environmental-impact.html">The Environmental Impact of Browser Mining</a></li>
+      <li><a href="/blog/browser-mining-user-trust-ethics.html">Building an Ethical Monetization Model</a></li>
+      <li><a href="/blog/cryptojacking-vs-legitimate-mining.html">Cryptojacking vs Legit Mining</a></li>
+      <li><a href="/blog/gdpr-compliance.html">GDPR / CCPA Compliance for Publishers</a></li>
+    </ul>
+
+    <p class="meta">Guide compiled by the Earnify team · Updated August 2026</p>
+  </div>
+</body>
+</html>

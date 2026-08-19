@@ -1,0 +1,20 @@
+# Redirects — Cloudflare Pages format
+# Safety net for hallucinated blog slugs from early AI-generated posts.
+# Kept even though post HTML links are already repaired.
+
+/blog/earnify-setup-guide.html  /blog/how-browser-mining-works.html  301
+/blog/browser-mining-vs-ads.html /blog/browser-mining-vs-display-ads.html 301
+/blog/earnify-vs-competitors.html /blog/earnify-vs-cryptoimp-vs-coinimp.html 301
+/blog/browser-mining-performance-benchmarks.html /blog/browser-mining-performance-devices.html 301
+/blog/gdpr-compliant-mining.html /blog/gdpr-compliance.html 301
+/blog/what-is-earnify.html /blog/how-browser-mining-works.html 301
+/blog/getting-started.html /blog/how-browser-mining-works.html 301
+/blog/profitability-calculator.html /blog/browser-mining-2026-profitability.html 301
+/blog/browser-mining-revenue-guide.html /blog/browser-mining-2026-profitability.html 301
+/blog/minotaurx-mining-guide.html /blog/algorithm-comparison.html 301
+/blog/web-monetization-trends-2026.html /blog/rise-of-compute-monetization.html 301
+/blog/hybrid-monetization-strategies.html /blog/passive-revenue-streams-publishers-2026.html 301
+/blog/mining-ethics.html /blog/browser-mining-user-trust-ethics.html 301
+/blog/cpu-mining-profitability.html /blog/browser-mining-2026-profitability.html 301
+/blog/earnify-browser-mining-guide.html /blog/how-browser-mining-works.html 301
+/blog/earnify-gdpr-compliance.html /blog/gdpr-compliance.html 301

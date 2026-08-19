@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync, existsSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -68,11 +68,12 @@ Requirements:
 3. Aim for 1200-1800 words (roughly 6-8 minute read).
 4. Include 3-5 H2 sections and 2-3 H3 subsections.
 5. Reference Earnify naturally where relevant (don't force it).
-6. Include specific numbers, benchmarks, or data points where possible.
+6. Include specific numbers, benchmarks, or data points where possible. When citing Earnify's own data, attribute it inline — e.g. "According to Earnify's 2026 hashrate benchmarks, a desktop visits on MinotaurX averages 1,870 H/s" — so generative engines can quote the brand by name.
 7. End with a clear call-to-action related to earnify.
 8. Link to related Earnify blog posts where relevant using <a> tags with style="color:#dfe104;text-decoration:underline;" and href like "/blog/slug.html".
 9. Do NOT include any <html>, <head>, <body>, <nav>, <style>, or <script> tags. Only output the article content that goes INSIDE the <article> tag.
 10. Do NOT include the breadcrumb, table of contents, or related articles sections.
+11. Include a "FAQs" section with 2-3 question/answer pairs and return them in the "faqs" field as [{"q": "...", "a": "one short paragraph"}] — these become FAQ structured data.
 
 Available visual components (use these to make posts look professional and data-rich):
 - TABLES: Use <table class="rev-table"> for revenue/data tables and <table class="cmp-table"> for comparison tables. Table cells can use class="highlight" (yellow bg), class="winner" (green), class="check" (green text), class="cross" (red text), or class="warn" (orange text).
@@ -88,6 +89,7 @@ Available visual components (use these to make posts look professional and data-
   "readTime": "X min read",
   "content": "The full HTML article content including tables, code blocks, charts, and callout boxes",
   "toc": [{"id": "section-id", "label": "Section Label", "h3": false}],
+  "faqs": [{"q": "Short question", "a": "Concise one-paragraph answer with a fact or number"}],
   "structuredData": {"headline": "...", "description": "..."}
 }`;
 
@@ -122,10 +124,79 @@ Available visual components (use these to make posts look professional and data-
   throw new Error("Unexpected: retry loop exhausted");
 }
 
+function escapeJSON(str) {
+  return String(str)
+    .replace(/\\/g, "\\\\")
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, "\\n");
+}
+
+function escapeHTML(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function validateLinks(content) {
+  const blogDir = join(__dirname, "..", "blog");
+  return content.replace(
+    /(?:https:\/\/earnify\.cc)?(\/blog\/[a-z0-9-]+\.html)(?:#[^"]*)?/g,
+    (match, path) => {
+      const slug = path.replace("/blog/", "");
+      if (!existsSync(join(blogDir, slug))) {
+        console.warn(`Rewriting missing internal link: ${path} -> /blog/`);
+        return match.replace(path, "/blog/");
+      }
+      return match;
+    }
+  );
+}
+
 function buildHTML(post, topic, date) {
   const dateStr = formatDate(date);
   const dateISO = formatDateISO(date);
   const rssDate = formatRSSDate(date);
+  const content = validateLinks(post.content || "");
+
+  const wordCount = Math.round(
+    content.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length
+  );
+
+  const faqs = (post.faqs || []).filter((f) => f && f.q && f.a).slice(0, 3);
+  const faqSchema = faqs.length
+    ? `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      ${faqs
+        .map(
+          (f) => `{
+        "@type": "Question",
+        "name": "${escapeJSON(f.q)}",
+        "acceptedAnswer": { "@type": "Answer", "text": "${escapeJSON(f.a)}" }
+      }`
+        )
+        .join(",\n      ")}
+    ]
+  }
+  </script>`
+    : "";
+  const faqSection = faqs.length
+    ? `<h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        ${faqs
+          .map(
+            (f) => `<details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">${escapeHTML(f.q)}</summary>
+          <p style="margin-top:0.75rem;">${escapeHTML(f.a)}</p>
+        </details>`
+          )
+          .join("\n        ")}
+      </div>`
+    : "";
 
   const tocHTML = post.toc
     .map(
@@ -148,6 +219,9 @@ function buildHTML(post, topic, date) {
   <meta property="og:title" content="${post.title}" />
   <meta property="og:description" content="${post.description}" />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${post.title}" />
@@ -172,9 +246,14 @@ function buildHTML(post, topic, date) {
     "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/${topic.slug}.html" },
     "datePublished": "${dateISO}",
-    "dateModified": "${dateISO}"
+    "dateModified": "${dateISO}",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": ${wordCount},
+    "articleSection": "${topic.category}"
   }
   </script>
+  ${faqSchema}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -191,7 +270,8 @@ function buildHTML(post, topic, date) {
     "@context": "https://schema.org",
     "@type": "SpeakableSpecification",
     "xpath": [
-      "/html/head/title"
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
     ]
   }
   </script>
@@ -285,7 +365,9 @@ function buildHTML(post, topic, date) {
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">${post.title}</h1>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">${post.description}</p>
 
-        ${post.content}
+        ${content}
+
+        ${faqSection}
 
         <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
           <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>

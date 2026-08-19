@@ -3,6 +3,9 @@
 
 https://earnify.cc
 
+about: Earnify is an open-source browser mining platform that lets website publishers monetize traffic by converting idle visitor CPU cycles into cryptocurrency. A single script tag connects browsers directly to mining pools over the Stratum protocol; 90% of yield is paid straight to the publisher's Dogecoin wallet, with a flat 10% platform fee. Zero cookies, zero user data, zero tracking.
+preferred_language: English
+
 ---
 
 ## Why Earnify Exists
@@ -313,7 +316,12 @@ This transparency lets publishers make data-driven decisions about which algorit
 ## Core Pages
 - [Earnify Home](https://earnify.cc/): Complete product landing page. Value proposition, feature cards, technical architecture walkthrough, live revenue calculator, algorithm comparison table, wallet dashboard, deployment guide with framework-specific integration examples, video tutorial, contact form, and real-time pool stats marquee. Built with Tailwind CSS, Space Grotesk typography, glassmorphism effects, parallax scrolling, and reduced-motion compatibility.
 - [Live Demo](https://earnify.cc/demo/): Interactive mining playground. No install, no auto-start — click to begin. Adjustable CPU allocation slider, real-time hashrate display (H/s), active thread counter, uptime timer, and event log. Connects to zpool with auto-exchange to DOGE. Ideal for publisher evaluation and user education.
-- [Earnify Blog](https://earnify.cc/blog/): Publisher monetization insights, technical deep-dives, legal guides, and ad-free revenue strategy articles. 21 posts covering profitability, algorithms, privacy compliance, Coinhive alternatives, ad-blocker recovery, architecture, case studies, and more.
+- [Earnify Blog](https://earnify.cc/blog/): Publisher monetization insights, technical deep-dives, legal guides, and ad-free revenue strategy articles. 26 posts covering profitability, algorithms, privacy compliance, Coinhive alternatives, ad-blocker recovery, architecture, case studies, and more.
+- [Complete Guide to Browser Mining](https://earnify.cc/guide/browser-mining/): Pillar guide for publishers — what browser mining is, 2026 profitability data, 5-minute deployment, privacy/legality, and links to every related article.
+- [How Earnify Works](https://earnify.cc/how-it-works/): The four-stage pipeline — bootstrap, Web Worker spawn, WASM compute, payout — plus performance and privacy guarantees.
+- [Browser Mining Statistics & Benchmarks](https://earnify.cc/stats/): Linkable data hub: device hashrate benchmarks, revenue-per-visitor tables, ad-blocker economics, and the Earnify fee model with sources.
+- [About Earnify](https://earnify.cc/about/): Mission, principles, contact, and community channels.
+- [Privacy Policy](https://earnify.cc/privacy/): Zero-data policy — GDPR, CCPA, and ePrivacy analysis.
 
 ## Blog Posts
 - [Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide)](https://earnify.cc/blog/browser-mining-2026-profitability.html) (2026-05-21): Unflinching browser mining revenue data for 2026 — real DOGE earnings per visitor, apples-to-apples comparison against display ad CPMs, and a complete 5-minute setup guide for publishers evaluating the economics.

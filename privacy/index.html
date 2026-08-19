@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Earnify</title>
+  <meta name="description" content="Earnify's privacy policy: the mining library processes zero personal data — no cookies, no localStorage, no fingerprinting, no accounts. GDPR, CCPA, and ePrivacy analysis included." />
+  <meta name="keywords" content="Earnify privacy policy, browser mining privacy, GDPR browser mining, zero data collection, no cookies mining" />
+  <link rel="canonical" href="https://earnify.cc/privacy/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://earnify.cc/privacy/" />
+  <meta property="og:title" content="Privacy Policy — Earnify" />
+  <meta property="og:description" content="Earnify collects nothing: no cookies, no data, no accounts. Full policy and GDPR/CCPA analysis." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Privacy Policy — Earnify" />
+  <meta name="twitter:description" content="Zero data, zero cookies, zero tracking. The full Earnify privacy policy." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy Policy",
+    "url": "https://earnify.cc/privacy/",
+    "description": "Earnify processes zero personal data. This policy documents that commitment.",
+    "isPartOf": { "@type": "WebSite", "name": "Earnify", "url": "https://earnify.cc" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://earnify.cc/privacy/" }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.7; }
+    ::selection { background: #dfe104; color: #000; }
+    a { color: #dfe104; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 6.5rem 1.5rem 4rem; }
+    .nav { display: flex; gap: 1.5rem; margin-bottom: 3rem; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .nav a { color: #a1a1aa; text-decoration: none; }
+    .nav a:hover { color: #dfe104; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 1.25rem; }
+    h2 { font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0; margin: 2.5rem 0 0.75rem; color: #dfe104; }
+    p { color: #d4d4d8; margin-bottom: 1.25rem; font-size: 1.0625rem; }
+    ul { color: #d4d4d8; margin: 0 0 1.5rem 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    .lede { font-size: 1.25rem; color: #a1a1aa; border-bottom: 2px solid #27272a; padding-bottom: 2rem; margin-bottom: 2rem; }
+    .meta { font-size: 0.75rem; color: #52525b; text-transform: uppercase; letter-spacing: 0.12em; margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/privacy/" style="color:#dfe104;">Privacy</a>
+    </nav>
+
+    <h1>Privacy Policy</h1>
+    <p class="lede">Earnify collects no personal data — on this website, in the demo, or in the miner library you embed. This policy explains what we process, why, and the regulatory analysis behind it.</p>
+
+    <h2>1. What We Collect On This Website</h2>
+    <p>Nothing requiring consent. This site uses no analytics cookies, no advertising pixels, and no third-party trackers. Hosting providers (GitHub Pages / Cloudflare Pages) may log standard connection metadata (IP address, user agent, request logs) for security and rate limiting, the same as any web server. That data is not accessed, monetized, or augmented with cross-site information. The contact form delivers messages to the team via Telegram; only the information you type is transmitted.</p>
+
+    <h2>2. The Mining Library</h2>
+    <p>Earnify's miner (miner.js / miner.min.js) is designed around one rule: process no personal data. Concretely:</p>
+    <ul>
+      <li><strong>No cookies</strong> — nothing is stored on or read from the visitor's device.</li>
+      <li><strong>No localStorage, no IndexedDB, no Cache API</strong> — the miner never touches storage.</li>
+      <li><strong>No fingerprinting</strong> — no canvas, no user agent collection, no device identification.</li>
+      <li><strong>No user identifiers</strong> — the Stratum protocol carries only a worker label you configure (e.g., your wallet address).</li>
+      <li><strong>Ephemeral execution</strong> — Web Workers exist only for the page session; nothing persists.</li>
+    </ul>
+
+    <h2>3. GDPR / CCPA Analysis</h2>
+    <p>Under GDPR Article 4(1), personal data is any information relating to an identified or identifiable natural person; the mining integration collects, stores, and transmits none. Under CCPA/CPRA, a business that does not collect, share, or sell personal information has no disclosure or opt-out obligations for the integration. Under the ePrivacy Directive, the integration stores nothing on, and accesses nothing from, terminal equipment — so no cookie banners are required for the miner itself. We are not a law firm, and publishers should always review their own configurations with their counsel.</p>
+
+    <h2>4. Opting Out</h2>
+    <p>Publishers who embed Earnify provide their own opt-out UI; the library exports a <code>stop()</code> method to terminate mining instantly. End users can also disable JavaScript or Web Workers on any page to prevent mining entirely.</p>
+
+    <h2>5. Contact</h2>
+    <p>Questions about this policy: <a href="mailto:contact@earnify.cc">contact@earnify.cc</a> or the Secure channel at <a href="https://github.com/romannnoodesl/earnify.cc">github.com/romannnoodesl/earnify.cc</a>.</p>
+
+    <p class="meta">Effective: August 2026 · Last updated: August 19, 2026</p>
+  </div>
+</body>
+</html>
