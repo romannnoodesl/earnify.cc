@@ -37,10 +37,16 @@ function updateRSS(meta) {
   const rssPath = join(ROOT, "rss.xml");
   let rss = readFileSync(rssPath, "utf-8");
 
+  const guid = `https://earnify.cc/blog/${meta.slug}.html`;
+  if (rss.includes(`>${guid}</guid>`)) {
+    console.log("rss.xml already contains this post — skipping");
+    return false;
+  }
+
   const newItem = `    <item>
       <title>${escapeXML(meta.title)}</title>
-      <link>https://earnify.cc/blog/${meta.slug}.html</link>
-      <guid isPermaLink="true">https://earnify.cc/blog/${meta.slug}.html</guid>
+      <link>${guid}</link>
+      <guid isPermaLink="true">${guid}</guid>
       <pubDate>${meta.rssDate}</pubDate>
       <description><![CDATA[${meta.description}]]></description>
     </item>`;
@@ -57,16 +63,23 @@ function updateRSS(meta) {
 
   writeFileSync(rssPath, rss);
   console.log("Updated rss.xml");
+  return true;
 }
 
 function updateSitemap(meta) {
   const sitemapPath = join(ROOT, "sitemap.xml");
   let sitemap = readFileSync(sitemapPath, "utf-8");
 
+  const loc = `https://earnify.cc/blog/${meta.slug}.html`;
+  if (sitemap.includes(`<loc>${loc}</loc>`)) {
+    console.log("sitemap.xml already contains this post — skipping");
+    return false;
+  }
+
   const today = meta.date;
   const newUrl = `
   <url>
-    <loc>https://earnify.cc/blog/${meta.slug}.html</loc>
+    <loc>${loc}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -92,8 +105,8 @@ function updateSitemap(meta) {
     "<loc>https://earnify.cc/rss.xml</loc>",
     "<loc>https://earnify.cc/opensearch.xml</loc>",
   ];
-  for (const loc of refreshLastmod) {
-    const escaped = loc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  for (const refreshLoc of refreshLastmod) {
+    const escaped = refreshLoc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     sitemap = sitemap.replace(
       new RegExp(`(${escaped}\\s*<lastmod>)[^<]*(</lastmod>)`),
       `$1${today}$2`
@@ -102,13 +115,17 @@ function updateSitemap(meta) {
 
   writeFileSync(sitemapPath, sitemap);
   console.log("Updated sitemap.xml");
+  return true;
 }
 
 function updateBlogIndex(meta) {
   const indexPath = join(ROOT, "blog", "index.html");
   let html = readFileSync(indexPath, "utf-8");
+  let insertedCard = false;
 
-  const newCard = `
+  const cardHref = `href="/blog/${meta.slug}.html"`;
+  if (!html.includes(cardHref)) {
+    const newCard = `
       <!-- Card: ${escapeHTML(meta.title)} -->
       <a href="/blog/${meta.slug}.html" class="article-card" style="display:flex;flex-direction:column;padding:1.75rem;text-decoration:none;">
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem;margin-bottom:0.75rem;">
@@ -120,12 +137,15 @@ function updateBlogIndex(meta) {
         <span class="ac-meta" style="font-size:0.6875rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;margin-top:1rem;">${formatDisplayDate(meta.date)}</span>
       </a>`;
 
-  const firstCardComment = "<!-- Card: Case Study 3x Revenue -->";
-  if (html.includes(firstCardComment)) {
-    html = html.replace(firstCardComment, newCard + "\n\n      " + firstCardComment);
-  }
+    const firstCardComment = "<!-- Card: Case Study 3x Revenue -->";
+    if (!html.includes(firstCardComment)) {
+      console.warn(`Anchor "${firstCardComment}" not found in blog/index.html — skipping card insertion`);
+    } else {
+      html = html.replace(firstCardComment, newCard + "\n\n      " + firstCardComment);
+      insertedCard = true;
+    }
 
-  const newSchemaEntry = `{
+    const newSchemaEntry = `{
         "@type": "BlogPosting",
         "headline": "${escapeJSON(meta.title)}",
         "url": "https://earnify.cc/blog/${meta.slug}.html",
@@ -133,32 +153,31 @@ function updateBlogIndex(meta) {
         "description": "${escapeJSON(meta.description)}"
       }`;
 
-  const blogPostIndex = html.indexOf('"blogPost": [');
-  if (blogPostIndex !== -1) {
-    const closeBracket = html.indexOf('\n    ]', blogPostIndex);
-    if (closeBracket !== -1) {
-      html =
-        html.slice(0, closeBracket) +
-        ",\n      " +
-        newSchemaEntry +
-        "\n" +
-        html.slice(closeBracket);
+    const blogPostIndex = html.indexOf('"blogPost": [');
+    if (blogPostIndex !== -1) {
+      const closeBracket = html.indexOf('\n    ]', blogPostIndex);
+      if (closeBracket !== -1) {
+        html =
+          html.slice(0, closeBracket) +
+          ",\n      " +
+          newSchemaEntry +
+          "\n" +
+          html.slice(closeBracket);
+      }
     }
+  } else {
+    console.log("blog/index.html already contains this post — skipping card");
   }
 
+  const cardCount = (html.match(/<!-- Card: /g) || []).length;
   html = html.replace(
-    /<div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;color:#dfe104;">\d+<\/div>\s*<div style="font-size:0\.6875rem[^"]*">Articles Published<\/div>/,
-    (match) => {
-      const currentCount = parseInt(match.match(/>(\d+)</)[1]);
-      return match.replace(
-        new RegExp(`>${currentCount}<`),
-        `>${currentCount + 1}<`
-      );
-    }
+    /<div style="font-size:2rem;font-weight:700;letter-spacing:-0\.02em;color:#dfe104;">\d+<\/div>\s*<div style="font-size:0\.6875rem;text-transform:uppercase;letter-spacing:0\.1em;color:#a1a1aa;margin-top:0\.25rem;">Articles Published<\/div>/,
+    `<div style="font-size:2rem;font-weight:700;letter-spacing:-0.02em;color:#dfe104;">${cardCount}</div>\n        <div style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.1em;color:#a1a1aa;margin-top:0.25rem;">Articles Published</div>`
   );
 
   writeFileSync(indexPath, html);
-  console.log("Updated blog/index.html");
+  console.log(`blog/index.html processed (${insertedCard ? "card inserted" : "card already present"}, articles: ${cardCount})`);
+  return insertedCard;
 }
 
 function formatDisplayDate(isoDate) {
@@ -195,11 +214,16 @@ function main() {
   const meta = loadMeta();
   console.log(`Updating feeds for: "${meta.title}"`);
 
-  updateRSS(meta);
-  updateSitemap(meta);
-  updateBlogIndex(meta);
-  pingIndexNow(meta.slug);
+  const rssChanged = updateRSS(meta);
+  const sitemapChanged = updateSitemap(meta);
+  const indexChanged = updateBlogIndex(meta);
 
+  if (!rssChanged && !sitemapChanged && !indexChanged) {
+    console.log("Post already present in all feeds — nothing to do");
+    return;
+  }
+
+  pingIndexNow(meta.slug);
   console.log("All feeds updated successfully");
 }
 

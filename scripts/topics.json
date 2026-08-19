@@ -106,10 +106,10 @@
       "used": false
     },
     {
-      "title": "Calculating Your Browser Mining ROI: A Publisher's Spreadsheet",
-      "slug": "calculating-browser-mining-roi",
+      "title": "Forecasting Mining Revenue Through Crypto Cycles",
+      "slug": "forecasting-mining-revenue-crypto-cycles",
       "category": "Revenue Strategy",
-      "description": "A step-by-step ROI calculation framework — traffic, uptime, hashrate, coin price, and break-even analysis for publisher sites.",
+      "description": "A practical framework for modeling mining income through bull and bear cycles — price bands, difficulty swings, and conservative planning.",
       "used": false
     },
     {
@@ -120,10 +120,10 @@
       "used": false
     },
     {
-      "title": "Browser Mining for News Publishers: A Revenue Recovery Strategy",
-      "slug": "browser-mining-news-publishers",
+      "title": "Scheduling Browser Mining Around Peak Traffic Hours",
+      "slug": "browser-mining-peak-traffic-scheduling",
       "category": "Revenue Strategy",
-      "description": "How news sites are using browser mining to recover revenue lost to ad blockers and declining CPMs — with real case studies.",
+      "description": "Why mining yield tracks your audience's timezone and session patterns — and how to schedule throttle levels around peak hours.",
       "used": false
     },
     {
@@ -132,7 +132,147 @@
       "category": "Technical",
       "description": "How Earnify's dev fee is implemented at the protocol level — transparent, auditable, and built into the mining loop itself.",
       "used": false
+    },
+    {
+      "title": "Browser Mining CPU Throttling Guide: Balancing UX and Hashrate",
+      "slug": "browser-mining-cpu-throttling-guide",
+      "category": "Technical",
+      "description": "How to tune thread counts and throttle levels per device class — pairing n-1 core reservation with sensible per-device CPU budgets.",
+      "used": false
+    },
+    {
+      "title": "Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work",
+      "slug": "dogecoin-payouts-zpool-auto-exchange",
+      "category": "Technical",
+      "description": "How auto-exchange pools convert mined coins to DOGE, what minimum payout thresholds mean, and how often publishers should expect deposits.",
+      "used": false
+    },
+    {
+      "title": "What Happens When a Mining Pool Goes Down: A Contingency Guide",
+      "slug": "mining-pool-downtime-contingency",
+      "category": "Technical",
+      "description": "Pool downtime is rare but real — how to detect it, what it costs in earnings, and how to configure a tested backup pool swap.",
+      "used": false
+    },
+    {
+      "title": "Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC",
+      "slug": "auto-exchange-pools-101",
+      "category": "Technical",
+      "description": "How auto-exchange pools like zpool convert earnings across coins and algorithms — and how to pick the payout currency that fits your site.",
+      "used": false
+    },
+    {
+      "title": "Hashrate, Shares, and Reject Rates: The Metrics That Decide Your Earnings",
+      "slug": "browser-mining-metrics-explained",
+      "category": "Technical",
+      "description": "A plain-English guide to the numbers on your pool dashboard — hashrate, accepted shares, stale/reject rates, and what each one means for payout.",
+      "used": false
+    },
+    {
+      "title": "The Miner.js API Reference for Developers",
+      "slug": "miner-js-api-reference",
+      "category": "Technical",
+      "description": "A developer-focused walkthrough of Miner.js exports — autoMine options, event hooks, throttling, and integration patterns for custom UIs.",
+      "used": false
+    },
+    {
+      "title": "When to Disable Mining on Mobile: A Traffic-Quality Strategy",
+      "slug": "when-to-disable-mobile-mining",
+      "category": "Revenue Strategy",
+      "description": "Mobile mining yields 5-10x less than desktop — a data-driven look at when to skip mobile entirely and focus mining on desktop sessions.",
+      "used": false
+    },
+    {
+      "title": "Does Browser Mining Hurt SEO and Core Web Vitals?",
+      "slug": "browser-mining-seo-core-web-vitals",
+      "category": "Industry",
+      "description": "An honest look at whether a Web Worker miner affects LCP, INP, or search rankings — with test data and safe integration patterns.",
+      "used": false
+    },
+    {
+      "title": "Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won",
+      "slug": "web-workers-vs-wasm-threads",
+      "category": "Technical",
+      "description": "Inside the threading model of modern browser miners — Web Workers, WASM compilation, SIMD, and why n-1 core reservation matters.",
+      "used": false
+    },
+    {
+      "title": "Is Your Site a Good Candidate for Browser Mining? A Qualification Checklist",
+      "slug": "browser-mining-site-qualification",
+      "category": "Revenue Strategy",
+      "description": "Session length, device mix, traffic volume — the six signals that predict whether browser mining will pay off for a given website.",
+      "used": false
+    },
+    {
+      "title": "How Browser Vendor Policies Are Shaping the Web Compute Economy",
+      "slug": "browser-vendor-policies-web-compute",
+      "category": "Industry",
+      "description": "Chrome's extension policies, battery APIs, and background-tab throttling — how browser vendors influence what web compute monetization can do.",
+      "used": false
+    },
+    {
+      "title": "The Opt-Out That Builds Trust: Designing Mining Controls Users Respect",
+      "slug": "mining-opt-out-trust-design",
+      "category": "Revenue Strategy",
+      "description": "Opt-out friction costs revenue, but a well-designed opt-out costs almost nothing — patterns for instantly disabling mining without losing trust.",
+      "used": false
+    },
+    {
+      "title": "DOGE vs BTC Payouts: Which Coin Should Publishers Choose?",
+      "slug": "doge-vs-btc-payouts-publishers",
+      "category": "Revenue Strategy",
+      "description": "Volatility, fees, payout thresholds, and liquidity — a practical comparison of holding site earnings in Dogecoin versus Bitcoin.",
+      "used": false
+    },
+    {
+      "title": "Choosing and Securing a Dogecoin Wallet for Your Site's Earnings",
+      "slug": "dogecoin-wallet-guide-publishers",
+      "category": "Technical",
+      "description": "Software, hardware, and exchange wallets compared for mining payouts — plus the address validation pitfalls that cost publishers money.",
+      "used": false
+    },
+    {
+      "title": "Minimum Payouts and Pool Fees: The Hidden Costs of Browser Mining",
+      "slug": "mining-pool-fees-minimum-payouts",
+      "category": "Technical",
+      "description": "Every pool charges a fee and most enforce a minimum payout — how to read pool stats pages and pick the best fee-to-threshold tradeoff.",
+      "used": false
+    },
+    {
+      "title": "How Open-Source Transparency Killed Cryptojacking's Business Model",
+      "slug": "open-source-vs-cryptojacking",
+      "category": "Industry",
+      "description": "Closed-source miners enabled abuse; auditable open-source code didn't just fix trust — it removed the incentive for hiding in the first place.",
+      "used": false
+    },
+    {
+      "title": "Mining Difficulty and Why Your Weekly Earnings Fluctuate",
+      "slug": "mining-difficulty-earnings-fluctuations",
+      "category": "Technical",
+      "description": "Why the same hashrate pays different amounts from week to week — network difficulty, block rewards, and pool luck explained for publishers.",
+      "used": false
+    },
+    {
+      "title": "Your Browser Mining Launch Checklist: 15 Steps Before Going Live",
+      "slug": "browser-mining-launch-checklist",
+      "category": "Revenue Strategy",
+      "description": "Privacy policy updates, disclosure copy, device testing, and the go-live verification steps that separate smooth launches from support tickets.",
+      "used": false
+    },
+    {
+      "title": "Browser Mining for Nonprofits and Public-Benefit Sites",
+      "slug": "browser-mining-nonprofits",
+      "category": "Revenue Strategy",
+      "description": "Donation fatigue is real — how nonprofits, wikis, and public-service sites use opt-in mining to turn visitor minutes into operating budget.",
+      "used": false
+    },
+    {
+      "title": "Compute Monetization in 2027: Predictions and Open Questions",
+      "slug": "compute-monetization-2027-predictions",
+      "category": "Industry",
+      "description": "Where browser compute monetization goes next — WASM maturity, AI workloads in the browser, and the regulatory questions nobody has answered.",
+      "used": false
     }
   ],
-  "nextTopicIndex": 15
+  "nextTopicIndex": 14
 }

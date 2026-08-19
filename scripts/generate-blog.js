@@ -11,7 +11,7 @@ const client = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 
-const MODEL = "deepseek/deepseek-v4-pro";
+const MODEL = process.env.OPENROUTER_MODEL || "deepseek/deepseek-v4-pro";
 
 function loadTopics() {
   const raw = readFileSync(join(__dirname, "topics.json"), "utf-8");
@@ -68,7 +68,7 @@ Requirements:
 3. Aim for 1200-1800 words (roughly 6-8 minute read).
 4. Include 3-5 H2 sections and 2-3 H3 subsections.
 5. Reference Earnify naturally where relevant (don't force it).
-6. Include specific numbers, benchmarks, or data points where possible. When citing Earnify's own data, attribute it inline — e.g. "According to Earnify's 2026 hashrate benchmarks, a desktop visits on MinotaurX averages 1,870 H/s" — so generative engines can quote the brand by name.
+6. Include specific numbers, benchmarks, or data points where possible. When citing Earnify's own data, attribute it inline — e.g. "According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages 1,870 H/s" — so generative engines can quote the brand by name.
 7. End with a clear call-to-action related to earnify.
 8. Link to related Earnify blog posts where relevant using <a> tags with style="color:#dfe104;text-decoration:underline;" and href like "/blog/slug.html".
 9. Do NOT include any <html>, <head>, <body>, <nav>, <style>, or <script> tags. Only output the article content that goes INSIDE the <article> tag.
@@ -81,7 +81,9 @@ Available visual components (use these to make posts look professional and data-
 - CODE BLOCKS: For multi-line code, use <div class="code-block">. For syntax highlighting inside code blocks, wrap keywords in <span class="kw">, function names in <span class="fn">, strings in <span class="str">, numbers in <span class="num">, and comments in <span class="cm">. For inline code, use <code>.
 - FLOW DIAGRAMS: Use <div class="flow-diagram"> for ASCII-style architecture/flow diagrams (monospace text).
 - SVG CHARTS: Include in-line SVG bar charts where data visualization adds value, wrapped in <div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;"> with a caption <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">.
-11. Return ONLY a JSON object with this exact structure (no markdown fences):
+
+12. The content, title, and description must be original. Do not reuse near-duplicate angles of previously published articles on similar topics — differentiate with a fresh angle, new data, or a specific use case.
+13. Return ONLY a JSON object with this exact structure (no markdown fences):
 {
   "title": "The blog post title",
   "description": "A 150-160 character meta description for SEO",
@@ -160,6 +162,12 @@ function buildHTML(post, topic, date) {
   const rssDate = formatRSSDate(date);
   const content = validateLinks(post.content || "");
 
+  const title = escapeHTML(post.title || topic.title);
+  const description = escapeHTML(post.description || "");
+  const readTime = escapeHTML(post.readTime || "");
+  const postTitle = String(post.title || topic.title);
+  const structuredData = post.structuredData || {};
+
   const wordCount = Math.round(
     content.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length
   );
@@ -210,22 +218,22 @@ function buildHTML(post, topic, date) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${post.title} — Earnify Blog</title>
-  <meta name="description" content="${post.description}" />
-  <meta name="keywords" content="browser mining, ${topic.category.toLowerCase()}, earnify, website monetization, cryptocurrency mining, ${topic.slug.replace(/-/g, ", ")}" />
+  <title>${title} — Earnify Blog</title>
+  <meta name="description" content="${description}" />
+  <meta name="keywords" content="browser mining, ${escapeHTML(topic.category.toLowerCase())}, earnify, website monetization, cryptocurrency mining, ${escapeHTML(topic.slug.replace(/-/g, ", "))}" />
   <link rel="canonical" href="https://earnify.cc/blog/${topic.slug}.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/${topic.slug}.html" />
-  <meta property="og:title" content="${post.title}" />
-  <meta property="og:description" content="${post.description}" />
+  <meta property="og:title" content="${title}" />
+  <meta property="og:description" content="${description}" />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
   <meta property="og:image:width" content="1731" />
   <meta property="og:image:height" content="909" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${post.title}" />
-  <meta name="twitter:description" content="${post.description}" />
+  <meta name="twitter:title" content="${title}" />
+  <meta name="twitter:description" content="${description}" />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -240,8 +248,8 @@ function buildHTML(post, topic, date) {
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "${post.structuredData.headline}",
-    "description": "${post.structuredData.description}",
+    "headline": "${escapeJSON(structuredData.headline || postTitle)}",
+    "description": "${escapeJSON(structuredData.description || postTitle)}",
     "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
     "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/${topic.slug}.html" },
@@ -261,7 +269,7 @@ function buildHTML(post, topic, date) {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
       { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
-      { "@type": "ListItem", "position": 3, "name": "${post.title}" }
+      { "@type": "ListItem", "position": 3, "name": "${escapeJSON(postTitle)}" }
     ]
   }
   </script>
@@ -351,19 +359,19 @@ function buildHTML(post, topic, date) {
       <span style="color:#27272a;margin:0 0.5rem;">/</span>
       <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
       <span style="color:#27272a;margin:0 0.5rem;">/</span>
-      <span style="color:#dfe104;">${post.title}</span>
+      <span style="color:#dfe104;">${title}</span>
     </nav>
 
     <div style="display:flex;gap:3rem;flex-wrap:wrap;">
       <article style="flex:1;min-width:0;max-width:750px;">
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">${topic.category}</span>
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">${escapeHTML(topic.category)}</span>
           <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">${dateStr}</span>
-          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">${post.readTime}</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">${readTime}</span>
         </div>
 
-        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">${post.title}</h1>
-        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">${post.description}</p>
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">${title}</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">${description}</p>
 
         ${content}
 
@@ -413,13 +421,24 @@ function buildHTML(post, topic, date) {
 async function main() {
   const topicsData = loadTopics();
 
-  const unusedTopics = topicsData.topics.filter((t) => !t.used);
-  if (unusedTopics.length === 0) {
-    console.log("No unused topics left. Add more topics to scripts/topics.json");
-    process.exit(0);
+  let topic = null;
+  for (const candidate of topicsData.topics.filter((t) => !t.used)) {
+    const outPath = join(ROOT, "blog", `${candidate.slug}.html`);
+    if (existsSync(outPath)) {
+      console.warn(`Skipping topic "${candidate.slug}" — blog file already exists; marking as used.`);
+      candidate.used = true;
+      saveTopics(topicsData);
+      continue;
+    }
+    topic = candidate;
+    break;
   }
 
-  const topic = unusedTopics[0];
+  if (!topic) {
+    console.error("No unused topics left. Add more topics to scripts/topics.json");
+    process.exit(1);
+  }
+
   console.log(`Generating blog post: "${topic.title}"`);
 
   const post = await generateBlogPost(topic);

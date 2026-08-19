@@ -40,5 +40,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add blog/ rss.xml sitemap.xml scripts/topics.json scripts/last-generated.json
-          git diff --cached --quiet || git commit -m "blog: add new weekly post [automated]"
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "blog: add new post [automated]"
+          git pull --rebase
           git push
