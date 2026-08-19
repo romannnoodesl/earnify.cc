@@ -1173,8 +1173,7 @@ minotaurxHashrate.maxHashrateKHs;
 ## SEO & GEO Operations
 
 ### Google Search Console
-1. Verify ownership (HTML tag method): replace `REPLACE_WITH_YOUR_GSC_TOKEN` in `index.html` with the token Search Console gives you, commit, then click Verify. (DNS TXT verification also works.)
-2. Submit the sitemap: `https://earnify.cc/sitemap.xml`.
+- Already verified. Submit the sitemap at: `https://earnify.cc/sitemap.xml`.
 
 ### Bing Webmaster Tools
 - Verified via `BingSiteAuth.xml` at the site root. Submit `https://earnify.cc/sitemap.xml` in Bing Webmaster Tools.
