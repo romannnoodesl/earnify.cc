@@ -96,7 +96,7 @@
       "slug": "browser-mining-fund-open-source",
       "category": "Revenue Strategy",
       "description": "A guide for open source maintainers to add browser mining as a non-intrusive funding mechanism on documentation and demo pages.",
-      "used": false
+      "used": true
     },
     {
       "title": "Browser Mining on Safari: Current Limitations and Workarounds",
@@ -134,5 +134,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 14
+  "nextTopicIndex": 15
 }

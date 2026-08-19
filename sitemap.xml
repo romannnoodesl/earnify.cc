@@ -48,7 +48,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/blog/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -372,6 +372,19 @@
       <image:loc>https://earnify.cc/og-image.png</image:loc>
       <image:title>Earnify vs CryptoLoot vs Coinimp: A 2026 Feature Comparison</image:title>
       <image:caption>Compare Earnify, CryptoLoot, and Coinimp for browser mining in 2026. Fees, privacy, performance, and revenue benchmarks to help publishers choose the best solution.</image:caption>
+    </image:image>
+  </url>
+
+
+  <url>
+    <loc>https://earnify.cc/blog/browser-mining-fund-open-source.html</loc>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>How to Use Browser Mining to Fund Open Source Projects</image:title>
+      <image:caption>Discover how open source maintainers can monetize project websites with ethical browser mining. Compare revenue models, see real numbers, and integrate Earnify in 5 minutes.</image:caption>
     </image:image>
   </url>
 
