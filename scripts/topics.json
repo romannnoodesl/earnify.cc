@@ -103,7 +103,7 @@
       "slug": "browser-mining-safari-limitations",
       "category": "Technical",
       "description": "Safari's WebKit engine has stricter Worker limits — here's how browser mining performs on Safari and what workarounds exist.",
-      "used": false
+      "used": true
     },
     {
       "title": "Forecasting Mining Revenue Through Crypto Cycles",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 14
+  "nextTopicIndex": 15
 }

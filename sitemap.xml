@@ -9,7 +9,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -38,7 +38,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/demo/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -426,25 +426,38 @@
     <priority>0.4</priority>
   </url>
 
+
+  <url>
+    <loc>https://earnify.cc/blog/browser-mining-safari-limitations.html</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Browser Mining on Safari: Current Limitations and Workarounds</image:title>
+      <image:caption>Safari&apos;s WebAssembly thread limits and aggressive power throttling cut browser mining hashrates. Learn the numbers, workarounds, and how to optimize your Earnify setup.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/llms.txt</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/rss.xml</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/opensearch.xml</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Aug 2026 01:01:34 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 22 Aug 2026 01:04:42 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                            <item>
+                                <item>
+      <title>Browser Mining on Safari: Current Limitations and Workarounds</title>
+      <link>https://earnify.cc/blog/browser-mining-safari-limitations.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-safari-limitations.html</guid>
+      <pubDate>Sat, 22 Aug 2026 01:04:42 GMT</pubDate>
+      <description><![CDATA[Safari's WebAssembly thread limits and aggressive power throttling cut browser mining hashrates. Learn the numbers, workarounds, and how to optimize your Earnify setup.]]></description>
+    </item>
+<item>
       <title>How to Use Browser Mining to Fund Open Source Projects</title>
       <link>https://earnify.cc/blog/browser-mining-fund-open-source.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-fund-open-source.html</guid>

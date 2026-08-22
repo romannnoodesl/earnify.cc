@@ -1,9 +1,9 @@
 {
-  "slug": "browser-mining-fund-open-source",
-  "title": "How to Use Browser Mining to Fund Open Source Projects",
-  "description": "Discover how open source maintainers can monetize project websites with ethical browser mining. Compare revenue models, see real numbers, and integrate Earnify in 5 minutes.",
-  "category": "Revenue Strategy",
+  "slug": "browser-mining-safari-limitations",
+  "title": "Browser Mining on Safari: Current Limitations and Workarounds",
+  "description": "Safari's WebAssembly thread limits and aggressive power throttling cut browser mining hashrates. Learn the numbers, workarounds, and how to optimize your Earnify setup.",
+  "category": "Technical",
   "readTime": "7 min read",
-  "date": "2026-08-19",
-  "rssDate": "Wed, 19 Aug 2026 01:01:34 GMT"
+  "date": "2026-08-22",
+  "rssDate": "Sat, 22 Aug 2026 01:04:42 GMT"
 }
