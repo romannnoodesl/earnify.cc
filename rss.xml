@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Aug 2026 01:04:42 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 25 Aug 2026 01:11:17 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                <item>
+                                    <item>
+      <title>Forecasting Mining Revenue Through Crypto Cycles: A Publisher&apos;s Guide to Sustainable Earnings</title>
+      <link>https://earnify.cc/blog/forecasting-mining-revenue-crypto-cycles.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/forecasting-mining-revenue-crypto-cycles.html</guid>
+      <pubDate>Tue, 25 Aug 2026 01:11:17 GMT</pubDate>
+      <description><![CDATA[Learn how to forecast browser-based crypto mining revenue across bull and bear markets using hashrate benchmarks, difficulty models, and price scenarios.]]></description>
+    </item>
+<item>
       <title>Browser Mining on Safari: Current Limitations and Workarounds</title>
       <link>https://earnify.cc/blog/browser-mining-safari-limitations.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-safari-limitations.html</guid>

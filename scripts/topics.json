@@ -110,7 +110,7 @@
       "slug": "forecasting-mining-revenue-crypto-cycles",
       "category": "Revenue Strategy",
       "description": "A practical framework for modeling mining income through bull and bear cycles — price bands, difficulty swings, and conservative planning.",
-      "used": false
+      "used": true
     },
     {
       "title": "Privacy-First Monetization: Why Zero-Data Architecture Wins in 2026",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 15
+  "nextTopicIndex": 16
 }

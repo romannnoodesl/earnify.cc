@@ -9,7 +9,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -38,7 +38,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/demo/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -439,25 +439,38 @@
     </image:image>
   </url>
 
+
+  <url>
+    <loc>https://earnify.cc/blog/forecasting-mining-revenue-crypto-cycles.html</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Forecasting Mining Revenue Through Crypto Cycles: A Publisher&apos;s Guide to Sustainable Earnings</image:title>
+      <image:caption>Learn how to forecast browser-based crypto mining revenue across bull and bear markets using hashrate benchmarks, difficulty models, and price scenarios.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/llms.txt</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/rss.xml</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/opensearch.xml</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
