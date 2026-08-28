@@ -117,7 +117,7 @@
       "slug": "privacy-first-zero-data-monetization",
       "category": "Legal",
       "description": "How zero-data browser mining avoids GDPR, CCPA, and ePrivacy compliance headaches — and why regulators are taking notice.",
-      "used": false
+      "used": true
     },
     {
       "title": "Scheduling Browser Mining Around Peak Traffic Hours",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 16
+  "nextTopicIndex": 17
 }
