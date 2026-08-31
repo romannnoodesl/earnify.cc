@@ -124,7 +124,7 @@
       "slug": "browser-mining-peak-traffic-scheduling",
       "category": "Revenue Strategy",
       "description": "Why mining yield tracks your audience's timezone and session patterns — and how to schedule throttle levels around peak hours.",
-      "used": false
+      "used": true
     },
     {
       "title": "The Technical Architecture Behind Earnify's 10% Fee Model",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 17
+  "nextTopicIndex": 18
 }

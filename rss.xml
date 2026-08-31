@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Aug 2026 08:52:24 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 31 Aug 2026 03:20:38 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                        <item>
+                                            <item>
+      <title>Scheduling Browser Mining Around Peak Traffic Hours: Maximizing Revenue Without Hurting UX</title>
+      <link>https://earnify.cc/blog/browser-mining-peak-traffic-scheduling.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-peak-traffic-scheduling.html</guid>
+      <pubDate>Mon, 31 Aug 2026 03:20:38 GMT</pubDate>
+      <description><![CDATA[Learn how to schedule browser-based crypto mining to avoid peak traffic slowdowns and maximize DOGE earnings. Data-driven strategies for publishers using Earnify.]]></description>
+    </item>
+<item>
       <title>Privacy-First Monetization: Why Zero-Data Architecture Wins in 2026</title>
       <link>https://earnify.cc/blog/privacy-first-zero-data-monetization.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/privacy-first-zero-data-monetization.html</guid>
