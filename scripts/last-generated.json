@@ -1,9 +1,9 @@
 {
-  "slug": "browser-mining-peak-traffic-scheduling",
-  "title": "Scheduling Browser Mining Around Peak Traffic Hours: Maximizing Revenue Without Hurting UX",
-  "description": "Learn how to schedule browser-based crypto mining to avoid peak traffic slowdowns and maximize DOGE earnings. Data-driven strategies for publishers using Earnify.",
-  "category": "Revenue Strategy",
+  "slug": "earnify-fee-model-architecture",
+  "title": "How Zero-Server Architecture Enables Earnify's 10% Fee Model: A Technical Deep Dive",
+  "description": "Earnify's 10% fee isn't a gimmick—it's a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers' pockets.",
+  "category": "Technical",
   "readTime": "7 min read",
-  "date": "2026-08-31",
-  "rssDate": "Mon, 31 Aug 2026 03:20:38 GMT"
+  "date": "2026-09-01",
+  "rssDate": "Tue, 01 Sep 2026 03:22:29 GMT"
 }

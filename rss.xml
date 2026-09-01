@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 Aug 2026 03:20:38 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2026 03:22:29 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                            <item>
+                                                <item>
+      <title>How Zero-Server Architecture Enables Earnify&apos;s 10% Fee Model: A Technical Deep Dive</title>
+      <link>https://earnify.cc/blog/earnify-fee-model-architecture.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/earnify-fee-model-architecture.html</guid>
+      <pubDate>Tue, 01 Sep 2026 03:22:29 GMT</pubDate>
+      <description><![CDATA[Earnify's 10% fee isn't a gimmick—it's a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers' pockets.]]></description>
+    </item>
+<item>
       <title>Scheduling Browser Mining Around Peak Traffic Hours: Maximizing Revenue Without Hurting UX</title>
       <link>https://earnify.cc/blog/browser-mining-peak-traffic-scheduling.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-peak-traffic-scheduling.html</guid>

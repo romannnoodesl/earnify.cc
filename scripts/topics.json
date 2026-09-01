@@ -131,7 +131,7 @@
       "slug": "earnify-fee-model-architecture",
       "category": "Technical",
       "description": "How Earnify's dev fee is implemented at the protocol level — transparent, auditable, and built into the mining loop itself.",
-      "used": false
+      "used": true
     },
     {
       "title": "Browser Mining CPU Throttling Guide: Balancing UX and Hashrate",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 18
+  "nextTopicIndex": 19
 }
