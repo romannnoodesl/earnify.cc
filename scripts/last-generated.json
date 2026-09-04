@@ -1,9 +1,9 @@
 {
-  "slug": "earnify-fee-model-architecture",
-  "title": "How Zero-Server Architecture Enables Earnify's 10% Fee Model: A Technical Deep Dive",
-  "description": "Earnify's 10% fee isn't a gimmick—it's a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers' pockets.",
+  "slug": "browser-mining-cpu-throttling-guide",
+  "title": "Browser Mining CPU Throttling Guide: Balancing UX and Hashrate",
+  "description": "Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers.",
   "category": "Technical",
   "readTime": "7 min read",
-  "date": "2026-09-01",
-  "rssDate": "Tue, 01 Sep 2026 03:22:29 GMT"
+  "date": "2026-09-04",
+  "rssDate": "Fri, 04 Sep 2026 02:46:07 GMT"
 }

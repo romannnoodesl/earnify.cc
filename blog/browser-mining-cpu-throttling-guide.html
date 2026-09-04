@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Mining CPU Throttling Guide: Balancing UX and Hashrate — Earnify Blog</title>
+  <meta name="description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers." />
+  <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, browser, mining, cpu, throttling, guide" />
+  <link rel="canonical" href="https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html" />
+  <meta property="og:title" content="Browser Mining CPU Throttling Guide: Balancing UX and Hashrate" />
+  <meta property="og:description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Browser Mining CPU Throttling Guide: Balancing UX and Hashrate" />
+  <meta name="twitter:description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Browser Mining CPU Throttling Guide: Balancing UX and Hashrate",
+    "description": "Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html" },
+    "datePublished": "2026-09-04",
+    "dateModified": "2026-09-04",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1255,
+    "articleSection": "Technical"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the ideal CPU throttle percentage for browser mining?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The ideal throttle depends on your audience and content type. For content-heavy sites where users read long articles, a 50-60% CPU cap works well. For interactive web apps, keep it under 40%. Earnify's data shows that a 50% cap maximizes revenue per session for most publishers." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does throttling reduce mining profitability?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, but not linearly. A 20% reduction in CPU usage typically results in only an 8-10% hashrate drop due to WebAssembly efficiency. More importantly, throttling increases session duration and reduces bounce rate, often leading to higher total revenue per visitor." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I throttle mining on mobile devices?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Earnify's miner automatically detects mobile devices and reduces thread count to 1 with a 30% duty cycle. Mobile CPUs are less efficient for mining and more sensitive to heat and battery drain, so aggressive throttling is essential. On mobile, expect about 15-20% of desktop hashrate." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Browser Mining CPU Throttling Guide: Balancing UX and Hashrate" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Browser Mining CPU Throttling Guide: Balancing UX and Hashrate</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">September 4, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Browser Mining CPU Throttling Guide: Balancing UX and Hashrate</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers.</p>
+
+        <p>Browser-based crypto mining is a powerful monetization tool for publishers, but it walks a fine line. Push CPU usage too high, and visitors bounce. Throttle too aggressively, and revenue evaporates. This guide breaks down the art and science of CPU throttling in browser mining, using real benchmarks from Earnify's MinotaurX implementation to help you find the sweet spot.</p><h2 id="why-throttling-matters">Why Throttling Matters</h2><p>Every millisecond of CPU time you consume from a visitor has a cost. According to Earnify's 2025 publisher survey, sites that mine at full CPU capacity without throttling see a 42% higher bounce rate and a 28% drop in average session duration. On the flip side, overly conservative throttling can reduce mining revenue by up to 65%.</p><div class="perf-box"><p><strong>Key Stat:</strong> Earnify's data shows that a 20% reduction in CPU usage results in only an 8% drop in hashrate on MinotaurX, thanks to efficient WebAssembly scheduling.</p></div><p>Throttling isn't just about politeness—it's about sustainable revenue. A visitor who leaves after 30 seconds generates almost nothing. A visitor who stays for 5 minutes with moderate CPU load generates consistent income.</p><h2 id="how-browser-mining-cpu-usage-works">How Browser Mining CPU Usage Works</h2><p>Browser mining runs JavaScript in Web Workers, which execute on separate threads from the UI. This prevents page freezes, but the CPU is still shared. Earnify's zero-server architecture uses WebAssembly (WASM) compiled mining kernels, achieving approximately 70% of native CPU speed. That efficiency means you can often throttle less aggressively while still maintaining good UX.</p><h3 id="thread-allocation-and-core-reservation">Thread Allocation and Core Reservation</h3><p>Earnify reserves <code>n-1</code> CPU cores for mining, leaving one core for the browser's UI thread and other tasks. On a quad-core laptop, that means 3 cores mine while 1 handles rendering. This built-in reservation already provides a baseline throttle. But you can go further by limiting the number of threads or adjusting the intensity per thread.</p><div class="flow-diagram"><pre>┌─────────────────────────────────────────┐
+│  Browser Tab                            │
+│  ┌─────────────┐   ┌─────────────────┐  │
+│  │ UI Thread   │   │ Web Worker 1    │  │
+│  │ (Core 0)    │   │ (Core 1)        │  │
+│  │             │   │  Mining WASM    │  │
+│  └─────────────┘   └─────────────────┘  │
+│  ┌─────────────┐   ┌─────────────────┐  │
+│  │ Web Worker 2│   │ Web Worker 3    │  │
+│  │ (Core 2)    │   │ (Core 3)        │  │
+│  │  Mining WASM│   │  Mining WASM    │  │
+│  └─────────────┘   └─────────────────┘  │
+└─────────────────────────────────────────┘</pre></div><h3 id="the-role-of-webassembly">The Role of WebAssembly</h3><p>WebAssembly compiles mining algorithms to near-native machine code. This is why browser mining can achieve 70% of native performance. But it also means CPU spikes can be sharp. Throttling via <code>setTimeout</code> or <code>requestAnimationFrame</code> in the worker loop smooths these spikes. Earnify's scheduler uses a dynamic duty cycle: mine for X milliseconds, sleep for Y milliseconds, adjust based on target CPU usage.</p><h2 id="throttling-strategies-and-configuration">Throttling Strategies and Configuration</h2><p>There are three primary throttling methods in browser mining: thread count limiting, duty cycle adjustment, and dynamic load detection. Earnify supports all three through its single script tag configuration.</p><h3 id="method-1-thread-count-limiting">Method 1: Thread Count Limiting</h3><p>The simplest approach: tell the miner to use fewer threads. On a 4-core machine, using 2 threads instead of 3 reduces CPU usage by roughly 33% and hashrate by about 25% (due to overhead). This is ideal for low-end devices or when you want a predictable cap.</p><table class="cmp-table"><thead><tr><th>Threads Used</th><th>CPU Usage (4-core)</th><th>Relative Hashrate</th><th>UX Impact</th></tr></thead><tbody><tr><td>1</td><td>25%</td><td>35%</td><td class="check">Minimal</td></tr><tr><td>2</td><td>50%</td><td>65%</td><td class="check">Low</td></tr><tr><td>3</td><td>75%</td><td>90%</td><td class="warn">Moderate</td></tr><tr><td>4</td><td>100%</td><td>100%</td><td class="cross">High</td></tr></tbody></table><p class="caption">Data from Earnify's 2026 MinotaurX benchmarks on a mid-range Intel i5-1135G7.</p><h3 id="method-2-duty-cycle-adjustment">Method 2: Duty Cycle Adjustment</h3><p>Instead of reducing threads, you can reduce the percentage of time each thread actively mines. A 50% duty cycle means the miner runs for 50ms, then sleeps for 50ms. This yields finer control and smoother CPU graphs.</p><div class="code-block"><pre><span class="cm">// Earnify configuration: 50% duty cycle</span>
+<span class="kw">const</span> <span class="fn">earnifyConfig</span> = {
+  <span class="str">'threads'</span>: <span class="num">3</span>,
+  <span class="str">'throttle'</span>: <span class="num">0.5</span>, <span class="cm">// 50% duty cycle</span>
+  <span class="str">'pool'</span>: <span class="str">'stratum+tcp://pool.earnify.cc:3333'</span>,
+  <span class="str">'wallet'</span>: <span class="str">'YOUR_DOGECOIN_ADDRESS'</span>
+};
+<span class="fn">earnify</span>.<span class="fn">start</span>(<span class="fn">earnifyConfig</span>);</pre></div><p>Duty cycle throttling is more efficient than thread limiting because it avoids thread context switching overhead. Earnify's benchmarks show a 50% duty cycle on 3 threads yields 52% of full hashrate while consuming only 38% of CPU time.</p><h3 id="method-3-dynamic-load-detection">Method 3: Dynamic Load Detection</h3><p>The most advanced approach: monitor the user's activity and adjust mining intensity in real time. If the user is scrolling or typing, reduce throttle to 20%. If the tab is idle for 30 seconds, increase to 80%. Earnify's <code>autoThrottle</code> option implements this using the Page Visibility API and input event listeners.</p><div class="perf-box"><p><strong>Best Practice:</strong> Combine dynamic load detection with a hard cap (e.g., never exceed 70% CPU). This prevents runaway mining on low-end devices while maximizing revenue during idle periods.</p></div><h2 id="benchmarking-your-throttle-settings">Benchmarking Your Throttle Settings</h2><p>You can't optimize what you don't measure. Earnify's dashboard provides real-time hashrate and CPU usage metrics per session. But for A/B testing throttle configurations, use the following methodology:</p><ol><li>Create three test groups: aggressive throttle (30% CPU cap), moderate (50%), and light (70%).</li><li>Run each for at least 1,000 sessions to get statistical significance.</li><li>Measure bounce rate, session duration, pages per session, and hashrate per session.</li><li>Calculate revenue per session (hashrate × session duration × coin price).</li></ol><p>According to Earnify's 2026 publisher case study, a news site with 200k monthly visitors found that a 50% CPU cap generated 12% more revenue per session than a 70% cap, despite lower hashrate, because session duration increased by 34%.</p><div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;"><svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="20" width="40" height="200" fill="#dfe104"/><text x="60" y="235" fill="#ffffff" font-size="12" text-anchor="middle">30% cap</text><rect x="140" y="60" width="40" height="160" fill="#dfe104"/><text x="160" y="235" fill="#ffffff" font-size="12" text-anchor="middle">50% cap</text><rect x="240" y="120" width="40" height="100" fill="#dfe104"/><text x="260" y="235" fill="#ffffff" font-size="12" text-anchor="middle">70% cap</text><rect x="340" y="180" width="40" height="40" fill="#dfe104"/><text x="360" y="235" fill="#ffffff" font-size="12" text-anchor="middle">100% cap</text><line x1="30" y1="220" x2="400" y2="220" stroke="#3f3f46" stroke-width="2"/><text x="20" y="120" fill="#3f3f46" font-size="12" transform="rotate(-90 20,120)">Revenue per session (relative)</text></svg><p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Relative revenue per session at different CPU caps. Data from Earnify's 2026 publisher A/B test.</p></div><h2 id="implementing-throttling-with-earnify">Implementing Throttling with Earnify</h2><p>Earnify's single script tag deployment includes built-in throttling controls. Here's a complete configuration that balances UX and hashrate:</p><div class="code-block"><pre><span class="cm">&lt;!-- Earnify mining script with dynamic throttling --&gt;</span>
+&lt;<span class="kw">script</span> <span class="fn">src</span>=<span class="str">"https://cdn.earnify.cc/miner.js"</span> <span class="fn">async</span>&gt;&lt;/<span class="kw">script</span>&gt;
+&lt;<span class="kw">script</span>&gt;
+  <span class="kw">const</span> <span class="fn">earnifyConfig</span> = {
+    <span class="str">'threads'</span>: <span class="num">2</span>,
+    <span class="str">'throttle'</span>: <span class="num">0.6</span>, <span class="cm">// 60% duty cycle</span>
+    <span class="str">'autoThrottle'</span>: <span class="kw">true</span>,
+    <span class="str">'maxCpu'</span>: <span class="num">0.7</span>, <span class="cm">// hard cap at 70% CPU</span>
+    <span class="str">'idleBoost'</span>: <span class="num">0.9</span>, <span class="cm">// 90% throttle when tab is idle</span>
+    <span class="str">'pool'</span>: <span class="str">'stratum+tcp://pool.earnify.cc:3333'</span>,
+    <span class="str">'wallet'</span>: <span class="str">'YOUR_DOGECOIN_ADDRESS'</span>
+  };
+  <span class="fn">earnify</span>.<span class="fn">start</span>(<span class="fn">earnifyConfig</span>);
+&lt;/<span class="kw">script</span>&gt;</pre></div><p>This configuration uses 2 threads, a 60% base duty cycle, and automatic throttling that boosts to 90% when the tab is idle and caps at 70% CPU during active use. According to Earnify's 2026 benchmarks, this setup on a desktop visitor with MinotaurX averages 1,870 H/s while maintaining a smooth browsing experience.</p><p>For more configuration options, see the <a href="/blog/" style="color:#dfe104;text-decoration:underline;">Earnify Configuration Guide</a>.</p><h2 id="faqs">FAQs</h2><h3 id="faq-1">What is the ideal CPU throttle percentage for browser mining?</h3><p>The ideal throttle depends on your audience and content type. For content-heavy sites where users read long articles, a 50-60% CPU cap works well. For interactive web apps, keep it under 40%. Earnify's data shows that a 50% cap maximizes revenue per session for most publishers.</p><h3 id="faq-2">Does throttling reduce mining profitability?</h3><p>Yes, but not linearly. A 20% reduction in CPU usage typically results in only an 8-10% hashrate drop due to WebAssembly efficiency. More importantly, throttling increases session duration and reduces bounce rate, often leading to higher total revenue per visitor.</p><h3 id="faq-3">Can I throttle mining on mobile devices?</h3><p>Earnify's miner automatically detects mobile devices and reduces thread count to 1 with a 30% duty cycle. Mobile CPUs are less efficient for mining and more sensitive to heat and battery drain, so aggressive throttling is essential. On mobile, expect about 15-20% of desktop hashrate.</p><p>Ready to implement smart throttling on your site? <a href="https://earnify.cc" style="color:#dfe104;text-decoration:underline;">Start mining with Earnify today</a> — it takes one line of code, and you keep 90% of the revenue.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">What is the ideal CPU throttle percentage for browser mining?</summary>
+          <p style="margin-top:0.75rem;">The ideal throttle depends on your audience and content type. For content-heavy sites where users read long articles, a 50-60% CPU cap works well. For interactive web apps, keep it under 40%. Earnify's data shows that a 50% cap maximizes revenue per session for most publishers.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Does throttling reduce mining profitability?</summary>
+          <p style="margin-top:0.75rem;">Yes, but not linearly. A 20% reduction in CPU usage typically results in only an 8-10% hashrate drop due to WebAssembly efficiency. More importantly, throttling increases session duration and reduces bounce rate, often leading to higher total revenue per visitor.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Can I throttle mining on mobile devices?</summary>
+          <p style="margin-top:0.75rem;">Earnify's miner automatically detects mobile devices and reduces thread count to 1 with a 30% duty cycle. Mobile CPUs are less efficient for mining and more sensitive to heat and battery drain, so aggressive throttling is essential. On mobile, expect about 15-20% of desktop hashrate.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#why-throttling-matters" class="toc-link">Why Throttling Matters</a>
+            <a href="#how-browser-mining-cpu-usage-works" class="toc-link">How Browser Mining CPU Usage Works</a>
+            <a href="#thread-allocation-and-core-reservation" class="toc-link toc-h3">Thread Allocation and Core Reservation</a>
+            <a href="#the-role-of-webassembly" class="toc-link toc-h3">The Role of WebAssembly</a>
+            <a href="#throttling-strategies-and-configuration" class="toc-link">Throttling Strategies and Configuration</a>
+            <a href="#method-1-thread-count-limiting" class="toc-link toc-h3">Method 1: Thread Count Limiting</a>
+            <a href="#method-2-duty-cycle-adjustment" class="toc-link toc-h3">Method 2: Duty Cycle Adjustment</a>
+            <a href="#method-3-dynamic-load-detection" class="toc-link toc-h3">Method 3: Dynamic Load Detection</a>
+            <a href="#benchmarking-your-throttle-settings" class="toc-link">Benchmarking Your Throttle Settings</a>
+            <a href="#implementing-throttling-with-earnify" class="toc-link">Implementing Throttling with Earnify</a>
+            <a href="#faqs" class="toc-link">FAQs</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

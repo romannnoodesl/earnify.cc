@@ -138,7 +138,7 @@
       "slug": "browser-mining-cpu-throttling-guide",
       "category": "Technical",
       "description": "How to tune thread counts and throttle levels per device class — pairing n-1 core reservation with sensible per-device CPU budgets.",
-      "used": false
+      "used": true
     },
     {
       "title": "Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 19
+  "nextTopicIndex": 20
 }

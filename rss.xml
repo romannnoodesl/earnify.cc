@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Sep 2026 03:22:29 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2026 02:46:07 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                <item>
+                                                    <item>
+      <title>Browser Mining CPU Throttling Guide: Balancing UX and Hashrate</title>
+      <link>https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html</guid>
+      <pubDate>Fri, 04 Sep 2026 02:46:07 GMT</pubDate>
+      <description><![CDATA[Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers.]]></description>
+    </item>
+<item>
       <title>How Zero-Server Architecture Enables Earnify&apos;s 10% Fee Model: A Technical Deep Dive</title>
       <link>https://earnify.cc/blog/earnify-fee-model-architecture.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/earnify-fee-model-architecture.html</guid>
