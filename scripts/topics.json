@@ -145,7 +145,7 @@
       "slug": "dogecoin-payouts-zpool-auto-exchange",
       "category": "Technical",
       "description": "How auto-exchange pools convert mined coins to DOGE, what minimum payout thresholds mean, and how often publishers should expect deposits.",
-      "used": false
+      "used": true
     },
     {
       "title": "What Happens When a Mining Pool Goes Down: A Contingency Guide",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 20
+  "nextTopicIndex": 21
 }

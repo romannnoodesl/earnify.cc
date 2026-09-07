@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work — Earnify Blog</title>
+  <meta name="description" content="Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts." />
+  <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, dogecoin, payouts, zpool, auto, exchange" />
+  <link rel="canonical" href="https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html" />
+  <meta property="og:title" content="Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work" />
+  <meta property="og:description" content="Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work" />
+  <meta name="twitter:description" content="Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work",
+    "description": "Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html" },
+    "datePublished": "2026-09-07",
+    "dateModified": "2026-09-07",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1771,
+    "articleSection": "Technical"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long until I see my first Dogecoin payout after deploying Earnify?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For a site with 500–1,000 daily visitors and 60-second mining sessions, expect 2–4 weeks to accumulate the typical 50–100 DOGE minimum payout. High-traffic sites (5,000+ daily visitors) may see daily or weekly payouts. The bottleneck is rarely Earnify—it's crossing zpool's auto-exchange threshold and payout minimum sequentially." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I lower the DOGE payout minimum on zpool?",
+        "acceptedAnswer": { "@type": "Answer", "text": "zpool's payout minimums are set globally per coin and cannot be changed per-user. For DOGE, the default is typically 50–100 DOGE. Some alternative pools support lower minimums (e.g., 10 DOGE), but often with higher percentage fees. Check zpool's live minimum on your dashboard before switching pools, as it adjusts periodically with network conditions." }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does my zpool dashboard show zero DOGE even though Earnify is mining actively?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your miners are producing shares on the MinotaurX algorithm, which credits raw Pulsar (PLSR) or similar coins—not DOGE. Until those coins accumulate past zpool's auto-exchange threshold (often 5–50 raw coins depending on the asset), they won't convert to DOGE and won't appear in your DOGE balance. Check the 'immature' or 'unexchanged' section of your zpool dashboard to confirm mining is working." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">September 7, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts.</p>
+
+        <h2 id="why-dogecoin-payouts">Why Dogecoin Payouts Are Different from Direct Mining</h2><p>When a website visitor mines cryptocurrency through a browser-based solution like Earnify, the underlying mining pool rarely pays out in the coin being mined. Instead, most pools use an <strong>auto-exchange mechanism</strong> that converts whatever algorithm-specific coin your miners produce into a single payout currency—often Dogecoin (DOGE), Litecoin (LTC), or Bitcoin (BTC).</p><p>This is especially true on <strong>zpool</strong>, one of the most popular multi-algorithm profit-switching pools used by browser mining platforms. zpool supports dozens of algorithms including <strong>MinotaurX</strong>—the primary algorithm Earnify hashes against. But MinotaurX doesn't mine Dogecoin directly. It mines coins like <a href="/blog/" style="color:#dfe104;text-decoration:underline;">Pulsar (PLSR) and other CPU-optimized chain forks</a>, which zpool then auto-exchanges to DOGE on your behalf.</p><div class="perf-box"><strong>Key Insight:</strong> When you configure Earnify with a Dogecoin payout address, you're not mining DOGE. You're mining MinotaurX coins that zpool instantly sells for DOGE at market rate—minus exchange fees. This distinction matters because it affects payout frequency, minimum thresholds, and the effective exchange rate you receive.</div><p>According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages <strong>1,870 H/s</strong> per thread. That raw hashrate translates into a constantly fluctuating DOGE reward stream governed by zpool's auto-exchange rules. Understanding those rules is the difference between seeing regular payouts and wondering why your balance sits unclaimed for weeks.</p><h2 id="zpool-auto-exchange">How zpool's Auto-Exchange Engine Converts MinotaurX Coins to DOGE</h2><p>zpool operates what it calls an "auto-exchange" system. Here's the simplified flow from browser miner to Dogecoin wallet:</p><div class="flow-diagram"><pre style="font-family:monospace;white-space:pre;">
+[Browser Miner]
+    │  MinotaurX shares via Stratum (WSS)
+    ▼
+[Earnify Web Worker]
+    │  Aggregated shares, no server relay
+    ▼
+[zpool Stratum Server]
+    │  Validates shares, credits raw coin balance
+    ▼
+[zpool Exchange Engine]
+    │  Every ~5 min: checks immature/minable balances
+    │  Sells raw coin on supported exchange
+    │  Buys DOGE at current market rate
+    │  Credits DOGE to your zpool account balance
+    ▼
+[zpool Payout System]
+    │  Checks if DOGE balance ≥ payout threshold
+    │  Runs nightly payout cycle (~00:00 UTC)
+    ▼
+[Your DOGE Wallet]
+</pre></div><p>Two critical parameters govern when you actually receive DOGE: the <strong>auto-exchange threshold</strong> and the <strong>payout minimum</strong>. They're related but distinct—and confusing them is the #1 reason publishers think their mining isn't working.</p><h3 id="exchange-threshold-explained">The Auto-Exchange Threshold: When Your Raw Coins Become DOGE</h3><p>The auto-exchange threshold is the minimum value of raw mined coins that zpool requires before it will execute an exchange to your target currency. For most coins on zpool, this threshold ranges between <strong>0.001 and 0.01 of the raw coin</strong>—but it varies dramatically by coin liquidity and exchange availability.</p><p>Here's where it gets practical. Let's say you're mining Pulsar (PLSR) via MinotaurX. If PLSR is trading at 0.00000003 BTC per coin, and zpool's auto-exchange threshold for PLSR is 10 PLSR, you need to accumulate roughly <strong>0.00000030 BTC worth of PLSR</strong> before exchange triggers. At an average visitor hashrate of 1,870 H/s, that might take:</p><table class="cmp-table"><thead><tr><th>Traffic Volume</th><th>Avg. Daily Hashrate</th><th>Est. Time to Reach PLSR Threshold</th></tr></thead><tbody><tr><td>100 daily visitors (30s avg session)</td><td>~15.58 kH/day</td><td class="warn">3–5 days</td></tr><tr><td>500 daily visitors (45s avg session)</td><td>~116.8 kH/day</td><td>12–24 hours</td></tr><tr><td>2,000 daily visitors (60s avg session)</td><td>~623 kH/day</td><td class="winner">2–4 hours</td></tr></tbody></table><p class="table-caption">Estimates based on Earnify's 2026 benchmark of 1,870 H/s per MinotaurX thread on desktop Chrome, 1 reserved core for UI. Mobile and Safari throughput may be lower.</p><p>Until your raw coin balance crosses the auto-exchange threshold, it sits in a "immature" or "unexchanged" state. <strong>It will not appear in your DOGE balance</strong>, which is why checking your zpool dashboard immediately after deploying Earnify often shows zeros—the coins haven't exchanged yet.</p><h3 id="payout-minimum-doge">The Payout Minimum: Your DOGE Withdrawal Gate</h3><p>Once auto-exchange completes and your balance shows DOGE, a second threshold applies: the <strong>payout minimum</strong>. For Dogecoin on zpool, the default minimum payout is typically <strong>50–100 DOGE</strong> (zpool adjusts this periodically based on network fees and pool load).</p><p>50 DOGE sounds modest—roughly 2–4 USD depending on market conditions—but for a small publisher, reaching it takes consistent traffic. Here's a realistic breakdown using Earnify's deployment data from publisher onboarding cases in early 2026:</p><table class="rev-table"><thead><tr><th>Publisher Type</th><th>Monthly Visitors</th><th>Avg. Session (s)</th><th>Est. Monthly DOGE</th><th>Time to First Payout</th></tr></thead><tbody><tr><td>Niche blog</td><td>3,000</td><td>45</td><td class="highlight">~22 DOGE</td><td>2–3 months</td></tr><tr><td>Content hub</td><td>20,000</td><td>90</td><td class="highlight">~180 DOGE</td><td>2–3 weeks</td></tr><tr><td>Gaming wiki</td><td>100,000</td><td>180</td><td class="highlight">~900 DOGE</td><td>3–5 days</td></tr><tr><td>Streaming site</td><td>500,000</td><td>300</td><td class="highlight">~4,500 DOGE</td><td class="winner">Daily</td></tr></tbody></table><p class="table-caption">DOGE estimates assume $0.04/DOGE market price and Earnify's 1,870 H/s desktop benchmark. Actual yields vary with difficulty, coin prices, and pool luck.</p><div class="perf-box"><strong>Publisher Tip:</strong> If your monthly traffic is below 10,000 visitors, consider setting a longer default mining duration (Earnify's <code>throttle</code> and <code>duration</code> parameters) to maximize per-session hashes. Every additional second of mining time compounds toward crossing both thresholds faster.</div><h2 id="exchange-fees-dynamics">Exchange Fees and Hidden Costs That Shrink Your DOGE Payout</h2><p>Auto-exchange isn't free. zpool applies an exchange fee—typically <strong>0.5%–2% per exchange event</strong>—and the exchange rate you receive may not match the spot price you see on CoinMarketCap. Understanding these deductions helps you set realistic expectations for your Earnify mining yield.</p><h3 id="fee-stack-breakdown">The Full Fee Stack: From Browser to Wallet</h3><p>Every satoshi of value flowing from a visitor's CPU to your Dogecoin wallet passes through multiple fee layers. Here's the complete stack for an Earnify deployment on zpool with DOGE payout:</p><div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;"><svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="10" width="440" height="30" rx="4" fill="#1a1a2e" stroke="#27272a"/><text x="240" y="30" text-anchor="middle" fill="#dfe104" font-size="11">Gross Hashrate Yield: 100%</text><rect x="20" y="50" width="440" height="24" rx="4" fill="#1a1a2e" stroke="#27272a"/><text x="240" y="66" text-anchor="middle" fill="#a1a1aa" font-size="10">– Earnify Platform Fee: 10%</text><rect x="20" y="84" width="440" height="24" rx="4" fill="#1a1a2e" stroke="#27272a"/><text x="240" y="100" text-anchor="middle" fill="#a1a1aa" font-size="10">→ Publisher Share: 90%</text><rect x="20" y="118" width="440" height="24" rx="4" fill="#1a1a2e" stroke="#27272a"/><text x="240" y="134" text-anchor="middle" fill="#f97316" font-size="10">– zpool Pool Fee: 0.5–1% (varies by algorithm)</text><rect x="20" y="152" width="440" height="24" rx="4" fill="#1a1a2e" stroke="#27272a"/><text x="240" y="168" text-anchor="middle" fill="#f97316" font-size="10">– zpool Auto-Exchange Fee: 0.5–2%</text><rect x="20" y="186" width="440" height="24" rx="4" fill="#1a1a2e" stroke="#27272a"/><text x="240" y="202" text-anchor="middle" fill="#f97316" font-size="10">– DOGE Network Withdrawal Fee (pool-dependent)</text><rect x="20" y="210" width="440" height="10" fill="#0c0c0f"/></svg><p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Fee stack for a typical Earnify → zpool → DOGE wallet flow. Effective yield to wallet: ~78–88% of gross hashrate value.</p></div><p>The combined effect means that of every dollar-equivalent your visitors mine, <strong>roughly $0.78–$0.88 lands in your DOGE wallet</strong>. That's still competitive—traditional display ads pay $1–$5 RPM (revenue per thousand impressions), while browser mining with Earnify and smart auto-exchange configuration can yield $3–$8 RPM depending on traffic quality and session duration (<a href="/blog/" style="color:#dfe104;text-decoration:underline;">see our RPM benchmarks</a>).</p><h3 id="threshold-tradeoffs">Threshold Tradeoffs: Lower Isn't Always Better</h3><p>Some pools allow you to lower the auto-exchange threshold, but there's a cost. More frequent exchanges mean <strong>higher aggregate exchange fees</strong> and potential slippage on illiquid pairs. zpool's default thresholds are set conservatively to minimize fee drag. For small publishers, patience pays: letting coins accumulate to the default threshold before exchange reduces the percentage lost to fees.</p><p>If you're deploying Earnify on a site with highly variable traffic—spikes on weekends, dead during weekdays—your raw coin balance may hover just below the exchange threshold for extended periods. In that scenario, upgrading to Earnify's higher-performance thread configuration (adjustable via the <code>threads</code> init parameter) can push you over the threshold faster during peak hours.</p><h2 id="optimize-doge-frequency">How to Optimize Your Earnify Setup for Faster DOGE Payouts</h2><p>Getting Dogecoin into your wallet faster isn't about choosing a different pool—zpool's thresholds are what they are. It's about maximizing the effective hashrate per visitor so you cross thresholds in fewer sessions. Here are four configuration levers Earnify publishers control:</p><table class="cmp-table"><thead><tr><th>Parameter</th><th>Default</th><th>Optimized for DOGE Payouts</th><th>Impact</th></tr></thead><tbody><tr><td><code>threads</code></td><td>n-1 (auto)</td><td>n-1 (auto) <span class="check">✓</span></td><td>Auto leaves 1 core free for UI; manual override may cause lag</td></tr><tr><td><code>throttle</code></td><td>0 (no cap)</td><td>0.2–0.4 <span class="warn">⚠</span></td><td>Reduces CPU heat/fan noise at cost of 20–40% hashrate; only use on mobile-heavy audiences</td></tr><tr><td><code>duration</code></td><td>300 (5 min)</td><td>600–900 <span class="winner">★</span></td><td>Doubling session time nearly doubles per-session shares; most impactful lever</td></tr><tr><td><code>pool</code></td><td>zpool (MinotaurX)</td><td>zpool <span class="check">✓</span></td><td>zpool's DOGE auto-exchange is most liquid; other pools may have higher minimums</td></tr></tbody></table><p class="table-caption">Earnify configuration parameters and their effect on DOGE payout frequency. Duration extension yields the highest ROI with minimal user impact.</p><p>The single most effective optimization: <strong>extend mining duration</strong>. Earnify's default 5-minute session captures only a fraction of a visitor's potential hash contribution. Publishers who extend duration to 10–15 minutes report <strong>2–3x faster time-to-first-payout</strong> without meaningful bounce-rate impact—especially on content sites where users read long-form articles or browse galleries. Just ensure your privacy policy discloses the mining activity, as Earnify itself collects zero data and is fully GDPR-compliant by design.</p><h2 id="verify-payout-status">How to Verify Your DOGE Balance and Payout Status on zpool</h2><p>When payouts don't arrive on schedule, the problem is almost always one of three things. Here's a diagnostic checklist:</p><div class="perf-box"><ol><li><strong>Check immature vs. confirmed balance:</strong> Visit <code>zpool.ca/?address=YOUR_DOGE_ADDRESS</code>. If you see a non-zero "immature" balance but zero "confirmed" DOGE, your raw coins haven't crossed the auto-exchange threshold yet. This is normal and resolves automatically.</li><li><strong>Check payout threshold:</strong> Scroll to the payout section on your zpool dashboard. If confirmed DOGE is below the stated minimum (e.g., 50 DOGE), payouts are on hold until you reach it. No action needed—just more mining time.</li><li><strong>Check exchange status:</strong> zpool's "exchange" tab shows which coins are queued for auto-exchange. If a coin shows "no market" or "disabled," your raw coins may be stuck. This is rare for MinotaurX coins but can happen during exchange maintenance. Switching your Earnify pool config to a backup pool (<a href="/blog/" style="color:#dfe104;text-decoration:underline;">see algorithm pool options</a>) temporarily can keep hashrate productive.</li></ol></div><p>Payouts on zpool typically run <strong>once daily around 00:00 UTC</strong>. If your balance crosses the threshold at 12:00 UTC, you'll wait roughly 12 hours for the next payout window. This is by design—zpool batches transactions to minimize network fees.</p><h2 id="faqs">FAQs</h2><p><strong>Q: How long until I see my first Dogecoin payout after deploying Earnify?</strong><br>For a site with 500–1,000 daily visitors and 60-second mining sessions, expect 2–4 weeks to accumulate the typical 50–100 DOGE minimum payout. High-traffic sites (5,000+ daily visitors) may see daily or weekly payouts. The bottleneck is rarely Earnify—it's crossing zpool's auto-exchange threshold and payout minimum sequentially.</p><p><strong>Q: Can I lower the DOGE payout minimum on zpool?</strong><br>zpool's payout minimums are set globally per coin and cannot be changed per-user. For DOGE, the default is typically 50–100 DOGE. Some alternative pools support lower minimums (e.g., 10 DOGE), but often with higher percentage fees. Check zpool's live minimum on your dashboard before switching pools, as it adjusts periodically with network conditions.</p><p><strong>Q: Why does my zpool dashboard show zero DOGE even though Earnify is mining actively?</strong><br>This is expected. Your miners are producing shares on the MinotaurX algorithm, which credits raw Pulsar (PLSR) or similar coins—not DOGE. Until those coins accumulate past zpool's auto-exchange threshold (often 5–50 raw coins depending on the asset), they won't convert to DOGE and won't appear in your DOGE balance. Check the "immature" or "unexchanged" section of your zpool dashboard to confirm mining is working; the DOGE balance will populate once exchange executes.</p><p>Ready to start earning Dogecoin from your website traffic? <strong><a href="/get-started.html" style="color:#dfe104;text-decoration:underline;">Deploy Earnify in under 60 seconds</a></strong>—a single script tag, zero server infrastructure, and automatic zpool integration with DOGE auto-exchange configured out of the box. Your visitors' spare CPU cycles become Dogecoin in your wallet, with no cookies, no tracking, and full GDPR compliance.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How long until I see my first Dogecoin payout after deploying Earnify?</summary>
+          <p style="margin-top:0.75rem;">For a site with 500–1,000 daily visitors and 60-second mining sessions, expect 2–4 weeks to accumulate the typical 50–100 DOGE minimum payout. High-traffic sites (5,000+ daily visitors) may see daily or weekly payouts. The bottleneck is rarely Earnify—it's crossing zpool's auto-exchange threshold and payout minimum sequentially.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Can I lower the DOGE payout minimum on zpool?</summary>
+          <p style="margin-top:0.75rem;">zpool's payout minimums are set globally per coin and cannot be changed per-user. For DOGE, the default is typically 50–100 DOGE. Some alternative pools support lower minimums (e.g., 10 DOGE), but often with higher percentage fees. Check zpool's live minimum on your dashboard before switching pools, as it adjusts periodically with network conditions.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Why does my zpool dashboard show zero DOGE even though Earnify is mining actively?</summary>
+          <p style="margin-top:0.75rem;">Your miners are producing shares on the MinotaurX algorithm, which credits raw Pulsar (PLSR) or similar coins—not DOGE. Until those coins accumulate past zpool's auto-exchange threshold (often 5–50 raw coins depending on the asset), they won't convert to DOGE and won't appear in your DOGE balance. Check the 'immature' or 'unexchanged' section of your zpool dashboard to confirm mining is working.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#why-dogecoin-payouts" class="toc-link">Why Dogecoin Payouts Are Different from Direct Mining</a>
+            <a href="#zpool-auto-exchange" class="toc-link">How zpool's Auto-Exchange Engine Converts MinotaurX Coins to DOGE</a>
+            <a href="#exchange-threshold-explained" class="toc-link toc-h3">The Auto-Exchange Threshold: When Your Raw Coins Become DOGE</a>
+            <a href="#payout-minimum-doge" class="toc-link toc-h3">The Payout Minimum: Your DOGE Withdrawal Gate</a>
+            <a href="#exchange-fees-dynamics" class="toc-link">Exchange Fees and Hidden Costs That Shrink Your DOGE Payout</a>
+            <a href="#fee-stack-breakdown" class="toc-link toc-h3">The Full Fee Stack: From Browser to Wallet</a>
+            <a href="#threshold-tradeoffs" class="toc-link toc-h3">Threshold Tradeoffs: Lower Isn't Always Better</a>
+            <a href="#optimize-doge-frequency" class="toc-link">How to Optimize Your Earnify Setup for Faster DOGE Payouts</a>
+            <a href="#verify-payout-status" class="toc-link">How to Verify Your DOGE Balance and Payout Status on zpool</a>
+            <a href="#faqs" class="toc-link">FAQs</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>
