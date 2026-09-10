@@ -1,9 +1,9 @@
 {
-  "slug": "dogecoin-payouts-zpool-auto-exchange",
-  "title": "Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work",
-  "description": "Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts.",
+  "slug": "mining-pool-downtime-contingency",
+  "title": "What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners",
+  "description": "Mining pools fail more often than you think. Learn what actually happens to your hashrate, earnings, and visitors when a pool goes offline—plus a battle-tested contingency architecture.",
   "category": "Technical",
-  "readTime": "7 min read",
-  "date": "2026-09-07",
-  "rssDate": "Mon, 07 Sep 2026 02:42:38 GMT"
+  "readTime": "8 min read",
+  "date": "2026-09-10",
+  "rssDate": "Thu, 10 Sep 2026 02:54:48 GMT"
 }

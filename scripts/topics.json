@@ -152,7 +152,7 @@
       "slug": "mining-pool-downtime-contingency",
       "category": "Technical",
       "description": "Pool downtime is rare but real — how to detect it, what it costs in earnings, and how to configure a tested backup pool swap.",
-      "used": false
+      "used": true
     },
     {
       "title": "Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 21
+  "nextTopicIndex": 22
 }

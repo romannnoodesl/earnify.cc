@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Sep 2026 02:42:38 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 02:54:48 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                        <item>
+                                                            <item>
+      <title>What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners</title>
+      <link>https://earnify.cc/blog/mining-pool-downtime-contingency.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/mining-pool-downtime-contingency.html</guid>
+      <pubDate>Thu, 10 Sep 2026 02:54:48 GMT</pubDate>
+      <description><![CDATA[Mining pools fail more often than you think. Learn what actually happens to your hashrate, earnings, and visitors when a pool goes offline—plus a battle-tested contingency architecture.]]></description>
+    </item>
+<item>
       <title>Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work</title>
       <link>https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html</guid>
