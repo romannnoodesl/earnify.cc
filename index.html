@@ -57,7 +57,7 @@
       "programmingLanguage": "JavaScript",
       "featureList": [
         "Browser-based CPU mining",
-        "MinotaurX, Power2B, YesPower, Yescrypt, GhostRider algorithms",
+        "MinotaurX algorithm",
         "Web Workers + WASM execution",
         "Stratum V1 over WebSocket",
         "Zero data collection",
@@ -77,7 +77,7 @@
           "name": "Does Earnify cause performance degradation?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. By using navigator.hardwareConcurrency − 1, the primary UI core stays free. Less than 2% main-thread overhead. Lighthouse scores unaffected."
+            "text": "No. All computation runs in dedicated Web Workers, keeping mining off the main thread."
           }
         },
         {
@@ -101,7 +101,7 @@
           "name": "How does Earnify differ from Coinhive?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Earnify is fully open source with auditable code, charges only 10% fee vs Coinhive's 30%, connects directly to mining pools with no intermediary, and uses modern ASIC-resistant algorithms like MinotaurX and Power2B."
+            "text": "Earnify is fully open source with auditable code, charges only 10% fee vs Coinhive's 30%, connects directly to mining pools with no intermediary, and uses the ASIC-resistant MinotaurX algorithm."
           }
         }
       ]
@@ -1360,8 +1360,7 @@
                 Thread Control
               </h3>
               <p class="text-sm" style="color: var(--color-muted-fg)">
-                Limit hardware concurrency. Execute on n−1 threads to preserve
-                the primary UI core.
+                Limit hardware concurrency. Fractional or fixed thread allocation.
               </p>
             </div>
             <div class="glass-card p-6 md:p-8 group cursor-default rounded-[var(--radius-xl,16px)] reveal reveal-up" style="transition-delay:0.4s">
@@ -1542,9 +1541,8 @@
                 >Algorithms</span
               >
               <span class="text-lg md:text-xl font-bold"
-                >minotaurx(our default + most
-                profitable) coming soon (Power2B, yespower, yescrypt, and ghostrider)
-              </span>
+                >minotaurx
+               </span>
             </div>
             <div class="bg-bg p-6 flex flex-col gap-2">
               <span class="text-xs uppercase tracking-widest text-muted-fg"
@@ -1559,7 +1557,7 @@
                 >Thread Limit</span
               >
               <span class="text-lg md:text-xl font-bold"
-                >1 to n (default: n−1)</span
+                >1 to n</span
               >
             </div>
             <div class="bg-bg p-6 flex flex-col gap-2">
@@ -1745,15 +1743,9 @@
         <select id="calc-algo"
           class="focus-ring w-full bg-bg border-2 border-border text-xl font-bold uppercase tracking-tighter py-3 text-fg focus:border-accent outline-none appearance-none cursor-pointer"
           style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A1A1AA%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22/></svg>'); background-repeat: no-repeat; background-position: right 12px center; padding-right: 40px;">
-          <option value="minotaurx" style="background:#09090B;color:#FAFAFA">MinotaurX (Default)</option>
-          <option value="power2b" style="background:#09090B;color:#FAFAFA">Power2B</option>
-          <option value="yespower" style="background:#09090B;color:#FAFAFA">YesPower</option>
-          <option value="yescrypt" style="background:#09090B;color:#FAFAFA">Yescrypt</option>
-          <option value="flex" style="background:#09090B;color:#FAFAFA">Flex</option>
-          <option value="ghostrider" style="background:#09090B;color:#FAFAFA">GhostRider</option>
-          <option value="verushash" style="background:#09090B;color:#FAFAFA">VerusHash</option>
+          <option value="minotaurx" style="background:#09090B;color:#FAFAFA">MinotaurX</option>
 
-        </select>
+       </select>
       </div>
       <!-- daily users -->
       <div>
@@ -2037,11 +2029,10 @@
                 class="text-base md:text-lg font-bold uppercase tracking-tight"
                 >Battery</span
               >
-              <span class="text-2xl md:text-3xl font-bold">~8%/hr</span>
+               <span class="text-2xl md:text-3xl font-bold">—</span>
             </div>
             <p class="text-sm text-muted-fg leading-tight">
-              Auto-detects Battery Status API. Configurable throttle/pause below
-              threshold.
+              Mining runs in background Web Workers.
             </p>
           </div>
         </div>
@@ -2468,18 +2459,8 @@ Complete walkthrough from creating your Dogecoin wallet to seeing
               <div>
                 <div class="px-6 md:px-8 pb-6 md:pb-8 text-sm md:text-base leading-tight space-y-3" style="color: var(--color-muted-fg)">
               <p>
-                <strong style="color: var(--color-fg)">Short answer: No.</strong> By using
-                navigator.hardwareConcurrency − 1, the primary UI core stays
-                free for DOM rendering and user interaction.
-              </p>
-              <p>
-                Less than 2% main-thread overhead across all tested
-                configurations. Lighthouse performance scores unchanged. Core
-                Web Vitals show zero degradation.
-              </p>
-              <p>
-                Mobile devices get further throttled via Battery Status API
-                integration and dynamic thread scaling.
+                <strong style="color: var(--color-fg)">Short answer: No.</strong> All computation
+                runs in dedicated Web Workers, keeping mining off the main thread.
               </p>
             </div>
               </div>
@@ -2605,10 +2586,8 @@ Complete walkthrough from creating your Dogecoin wallet to seeing
                 pools.
               </p>
               <p>
-                Supported algorithms:
-                <strong style="color: var(--color-fg)">MinotaurX</strong> (Maza),
-                <strong style="color: var(--color-fg)">RandomX (coming soon)</strong> (Monero),
-                <strong style="color: var(--color-fg)">CryptoNight-R (also coming soon)</strong>. Auto-exchange
+                Supported algorithm:
+                <strong style="color: var(--color-fg)">MinotaurX</strong>. Auto-exchange
                 pools let you receive DOGE, BTC, LTC, or any supported currency.
               </p>
             </div>
@@ -3117,26 +3096,14 @@ Complete walkthrough from creating your Dogecoin wallet to seeing
       // ★ HARD-CODED POOL FEE — override API value
       const POOL_FEE = 10; // percent
       
-      // Algorithms we support — must match zpool's API keys
+      // Algorithm we support — must match zpool's API key
       const SUPPORTED_ALGOS = [
-        "minotaurx",
-        "verushash",
-        "yespower",
-        "yescrypt",
-        "ghostrider",
-        "power2b",
-        "flex"
+        "minotaurx"
       ];
-      
+
       // Human-friendly labels
       const ALGO_LABELS = {
-        minotaurx:  "MinotaurX (Default)",
-        verushash:  "VerusHash",
-        yespower:   "YesPower",
-        yescrypt:   "Yescrypt",
-        ghostrider: "GhostRider",
-        power2b:    "Power2b",
-        flex:       "Flex"
+        minotaurx:  "MinotaurX"
       };
       
       let btcPriceUSD = 0;

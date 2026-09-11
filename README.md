@@ -58,7 +58,6 @@ The miner uses the **MinotaurX** algorithm, optimized for CPU mining in the brow
 - **Socket.IO Transport** — Reliable WebSocket relay to any stratum pool
 - **Dev Fee Transparency** — 1 thread always allocated to dev (on top of user allocation)
 - **Graceful Stop & Report** — Full session report printed on `stop()`
-- **Lazy IO Loading** — Socket.IO loaded on-demand, zero upfront cost
 
 ---
 
@@ -106,10 +105,6 @@ Workers → "hashrate" data → onHashrate callback → UI update
 
 | Component | Purpose |
 |---|---|
-| `ensureIO()` | Lazily loads Socket.IO client library |
-| `resolveThreadCount()` | Converts `threadPercent` → integer thread count |
-| `connectAndMine()` | Opens socket, spawns workers, handles work/submit cycle |
-| `startMining()` | Orchestrates dev + user connections with thread allocation |
 | `hashrateTracker` | Tracks and reports mining statistics |
 | Web Workers (inline) | Perform actual hashing in parallel threads |
 
@@ -117,7 +112,7 @@ Workers → "hashrate" data → onHashrate callback → UI update
 
 ## Installation
 
-> **Note:** Socket.IO is loaded automatically by the miner — you do **not** need to include it separately.
+> **Note:** Socket.IO is bundled in the miner — you do **not** need to include it separately.
 
 ---
 
@@ -191,7 +186,7 @@ Start mining with full control over algorithm, pool, and callbacks.
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
-| `algo` | `string` | **required** | Algorithm identifier. Use `minotaurx` (`"cwm_minotaurx"`) or a custom string. |
+| `algo` | `string` | **required** | Algorithm identifier. Use `minotaurx` (`"cwm_minotaurx"`). Only MinotaurX is supported. |
 | `stratum` | `object` | **required** | Pool connection configuration. See [Stratum Configuration](#-stratum-configuration). |
 | `log` | `any` | `null` | Unused. Reserved for future use. |
 | `nthreads` | `number` | `0` (`ALL_THREADS`) | Fraction of CPU threads (e.g. `0.5` = 50%) or integer count. See [Thread Allocation](#-thread-allocation). |
@@ -227,7 +222,7 @@ const threads = await start(
 
 ### `stop()`
 
-Stops all mining immediately. Terminates all Web Workers, disconnects both sockets (dev + user), prints a final hashrate report, and stops the periodic reporter.
+Stops all mining immediately. Terminates all Web Workers, disconnects both sockets (dev + user), and prints a final hashrate report.
 
 **Parameters:** None
 
@@ -239,14 +234,12 @@ Stops all mining immediately. Terminates all Web Workers, disconnects both socke
 import { stop } from "https://earnify.cc/miner.js";
 stop();
 // Console output:
-// 🛑 Miner Stopped
-// ⚡ Hashrate Report ───────────────────────────────────
+// Hashrate Report
 //    Current:  12.50 KH/s
 //    Average:  11.87 KH/s
 //    Peak:     14.20 KH/s
 //    Uptime:   0h 5m 32s
 //    Shares:   47 accepted / 2 rejected
-// ────────────────────────────────────────────────────
 ```
 
 ---
@@ -266,7 +259,7 @@ Exported alias for the internal `hashrateTracker`. Use this to read mining stati
 
 | Method | Returns | Description |
 |---|---|---|
-| `getAverageHashrate()` | `string` | Average hashrate over last 60 samples (KH/s, 2 decimal places) |
+| `getAverageHashrate()` | `string \| number` | Average hashrate over last 60 samples (`0` when empty, otherwise KH/s string with 2 decimal places) |
 | `getUptime()` | `string` | Human-readable uptime string (`"Xh Ym Zs"`) |
 | `printReport()` | `void` | Prints full report to console |
 | `reset()` | `void` | Resets all statistics to zero |
@@ -416,21 +409,7 @@ The miner operates on a **transparent, fixed dev fee model**:
 
 ## Hashrate Tracking
 
-The built-in `hashrateTracker` provides real-time mining statistics for the **user pool only** (dev pool stats are not tracked).
-
-### Auto-Reported
-
-Every **10 seconds**, the miner prints a report to the console:
-
-```
-⚡ Hashrate Report ────────────────────────────────────
-   Current:  12.50 KH/s
-   Average:  11.87 KH/s
-   Peak:     14.20 KH/s
-   Uptime:   0h 5m 32s
-   Shares:   47 accepted / 2 rejected
-────────────────────────────────────────────────────
-```
+The built-in `hashrateTracker` provides real-time mining statistics for the **user pool only** (dev pool stats are not tracked). Reports print on `stop()` only.
 
 ### Programmatic Access
 
@@ -924,23 +903,6 @@ The relay translates WebSocket messages to Stratum protocol and back. You do **n
 
 ## Troubleshooting
 
-### Problem: "Failed to load Socket.IO"
-
-**Cause:** Network restriction, ad blocker, or CDN outage.
-
-**Fix:**
-
-```javascript
-// Pre-load Socket.IO yourself before importing the miner
-<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-<script type="module">
-  import { autoMine } from "minotaurx-miner";
-  autoMine("WALLET", 0.5);
-</script>
-```
-
----
-
 ### Problem: "Web Worker not supported"
 
 **Cause:** Ancient browser or browser with Workers disabled.
@@ -974,9 +936,9 @@ await start(
   stratumConfig,
   null,
   0.5,
-  ({ work }) => console.log("✅ Got work:", work),   // Should fire
-  ({ hashrateKHs }) => console.log("⚡ Hashrate:", hashrateKHs),
-  ({ error }) => console.error("❌ Error:", error)   // Watch for errors
+  ({ work }) => console.log("Got work:", work),   // Should fire
+  ({ hashrateKHs }) => console.log("Hashrate:", hashrateKHs),
+  ({ error }) => console.error("Error:", error)   // Watch for errors
 );
 ```
 
@@ -1062,7 +1024,7 @@ No. The dev fee (1 thread) is hardcoded into the miner and cannot be disabled. T
 
 ### Can I use a different algorithm?
 
-The `algo` parameter is passed to the relay server. The relay and pool must support it. Currently, only **MinotaurX** is tested and supported. Other algorithms may work if the relay/pool supports them.
+No. Only **MinotaurX** is supported.
 
 ### Can I self-host the WebSocket relay?
 
@@ -1107,14 +1069,15 @@ The current architecture uses one user pool + one dev pool. To mine multiple coi
 ## File Structure
 
 ```
-earnify-mine-bz/
-├── CNAME             
-├── README.md         
-├── favicon.svg        
-├── index.html          
-├── miner.js 
-├── og-image.png       
-├── robots.txt      
+├── README.md
+├── index.html
+├── miner.js
+├── miner.min.js
+├── demo/
+├── guide/
+├── blog/
+├── stats/
+├── scripts/
 └── sitemap.xml
 ```
 

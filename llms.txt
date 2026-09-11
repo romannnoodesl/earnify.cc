@@ -48,26 +48,18 @@ Earnify connects to any pool supporting Stratum V1 over WebSocket. Tested and co
 ### The Compute Pipeline
 Earnify's mining lifecycle follows a four-stage pipeline designed for zero main-thread interference:
 
-**01 — Bootstrap:** The ES module loads asynchronously via a standard `<script type="module">` import. On initialization, it probes `navigator.hardwareConcurrency` for available logical cores, detects device type (mobile/tablet/desktop), and checks the Battery Status API to inform dynamic throttling decisions. No blocking network requests. No DOM parsing delay.
+**01 — Bootstrap:** The ES module loads asynchronously via a standard `<script type="module">` import. On initialization, it probes `navigator.hardwareConcurrency` for available logical cores.
 
-**02 — Spawn:** Dedicated Web Workers are instantiated — one per allocated thread, up to `n−1` cores where `n = hardwareConcurrency`. The primary UI core is always reserved for DOM rendering, event handling, and browser compositing. Each worker loads a WebAssembly module containing the compiled hashing kernel. Workers operate in fully isolated execution contexts with no shared mutable state.
+**02 — Spawn:** Dedicated Web Workers are instantiated — one per allocated thread. Each worker loads the compiled hashing kernel. Workers operate in fully isolated execution contexts with no shared mutable state.
 
-**03 — Compute:** Workers receive stratum job assignments (block header, target difficulty) via the main-thread WebSocket relay. Each worker iterates through the nonce space computing cryptographic hashes against the difficulty target. When a worker finds a hash meeting or exceeding the target difficulty, it queues the valid share for submission. Workers consume approximately 2 MB of memory each under the MinotaurX algorithm. All computation happens off the main thread.
+**03 — Compute:** Workers receive stratum job assignments via the main-thread WebSocket relay. Each worker iterates through the nonce space computing cryptographic hashes against the difficulty target. All computation happens off the main thread.
 
 **04 — Payout:** Valid shares are transmitted back through the WebSocket connection to the configured stratum pool. The pool validates every share against the current job parameters. Valid shares are credited to the worker identity associated with your wallet. Payouts follow the pool's configured schedule and minimum threshold. The 10% platform fee is deducted at share-submission time — 9 out of every 10 valid shares are submitted with your wallet address; the 10th is submitted with Earnify's address.
 
 ### Supported Algorithms
 | Algorithm | Status | Characteristics |
 |-----------|--------|----------------|
-| **MinotaurX** | Default — most profitable | ASIC-resistant, CPU-optimized, designed for browser execution via WASM |
-| **Power2B** | Supported | High-throughput hashing, efficient on modern x86_64 with SIMD |
-| **YesPower** | Supported | CPU-friendly proof-of-work, low memory footprint per worker |
-| **Yescrypt** | Supported | Memory-hard key derivation adapted for proof-of-work contexts |
-| **GhostRider** | Supported | Multi-algorithm chain, resistant to FPGA acceleration |
-| **VerusHash** | Supported | Quantum-resistant hash function, optimized for consumer CPUs |
-| **Flex** | Supported | Adaptive difficulty algorithm for heterogeneous device fleets |
-| **RandomX** | Coming soon | Monero's ASIC-resistant algorithm, memory-hard, 2 GB dataset |
-| **CryptoNight-R** | Coming soon | ASIC-resistant, well-suited for low-power devices |
+| **MinotaurX** | Supported | ASIC-resistant, CPU-optimized, designed for browser execution via WASM |
 
 ### Technical Specifications
 | Spec | Value |
@@ -75,19 +67,15 @@ Earnify's mining lifecycle follows a four-stage pipeline designed for zero main-
 | Execution environment | Web Workers (dedicated, isolated context) |
 | Hashing runtime | WebAssembly (WASM) compiled from C/C++ hashing kernels |
 | Network protocol | Stratum V1 over WebSocket (RFC-compliant) |
-| Thread allocation | 1 to `n−1` threads (default: `hardwareConcurrency − 1`) |
-| Memory per worker | ~2 MB (MinotaurX), varies by algorithm |
+| Thread allocation | Fractional (`0.5` = 50%) or integer count, plus 1 dev-fee thread |
 | Bundle size | ~1 MB (uncompressed), cachable via CDN |
-| Main-thread overhead | <2% (measured via Chrome DevTools Performance panel) |
-| Bandwidth consumption | <1 KB/s (stratum packets: 200–400 bytes; share submissions: <150 bytes) |
-| Battery drain | ~8%/hour at full utilization (auto-throttled via Battery Status API) |
 
 ### Browser Compatibility
 | Browser | Minimum Version | Notes |
 |---------|----------------|-------|
 | Chrome / Edge | 80+ | Full Web Worker + WASM support. Primary test target. |
 | Firefox | 78+ | Full support. Slightly lower WASM throughput on complex kernels. |
-| Safari | 14+ | Full support. All features functional including Battery API. |
+| Safari | 14+ | Full support. Primary test target is Chrome. |
 | Brave | Latest | Shields do not block Web Workers or WASM. Fully compatible. |
 | Opera | 67+ (Chromium-based) | Full support. |
 | Samsung Internet | 13+ (Chromium-based) | Full support. |
@@ -105,16 +93,7 @@ Earnify's mining lifecycle follows a four-stage pipeline designed for zero main-
 ## Performance & Resource Efficiency
 
 ### CPU Impact
-All hashing executes inside dedicated Web Workers — threads that operate independently of the browser's main rendering thread. The `n−1` thread allocation model guarantees that at minimum one logical core remains available for DOM operations, layout calculation, style resolution, and JavaScript event handling. Across all tested configurations, main-thread overhead measures below 2% — indistinguishable from baseline variance in most real-world page profiles. **Lighthouse Performance scores are unaffected. Core Web Vitals (LCP, INP, CLS) show zero measurable degradation.** Mobile devices receive additional protection via dynamic thread scaling informed by the Battery Status API, reducing active workers when the device is running on battery power or approaching thermal limits.
-
-### Bandwidth Footprint
-Earnify's network protocol is stratospheric in efficiency compared to ad-tech stacks. A typical stratum `mining.notify` message carries 200-400 bytes of job data (block header + target). Share submissions are under 150 bytes. At the default 10-second share submission interval, total bandwidth consumption stays under 1 KB/s — roughly equivalent to a single tracking pixel firing. There is no waterfall of ad requests, no bid-stream data, no creative asset downloads, no viewability measurement pings, and no audience sync calls. For users on metered or slow connections, Earnify is lighter than a single display ad impression.
-
-### Battery Management
-Earnify integrates with the Battery Status API (`navigator.getBattery()`) to detect when a device is discharging. Publishers can configure behavior thresholds: automatically throttle thread count below a configurable battery percentage, pause mining entirely when the device is unplugged, or maintain full throughput for desktop users while throttling mobile. The default configuration prioritizes user experience — mobile devices on battery receive reduced thread allocation by default.
-
-### Lighthouse & Web Vitals Compatibility
-Because Earnify never touches the main thread during mining operations, it does not compete with the browser's critical rendering path. There is no layout shift (CLS impact: zero), no input delay introduced (INP impact: zero), and no rendering-blocking resource fetch (LCP impact: zero). Sites that score 95+ on Lighthouse without Earnify will score 95+ with Earnify. This is not a marketing claim — it is a direct consequence of the Web Worker isolation architecture.
+All hashing executes inside dedicated Web Workers — threads that operate independently of the browser's main rendering thread.
 
 ### Accessibility & Reduced Motion
 Earnify's UI respects `prefers-reduced-motion: reduce`, disabling all parallax effects, ambient animations, and marquee scrolling for users who have indicated a preference for minimized motion. The miner itself has no visual footprint — no floating widgets, no modal dialogs, no overlays — so it cannot interfere with screen readers, keyboard navigation, or any assistive technology.
@@ -193,7 +172,7 @@ Earnify's compute model is structurally different. The economic output is tied t
 | Source model | Proprietary, closed-source JavaScript | Fully open source (MIT) — every line auditable and forkable |
 | Fee structure | 30% platform fee on all mined revenue | 10% platform fee — a 3× reduction |
 | Architecture | Centralized proxy relay — Coinhive controlled the mining endpoint | Direct pool connection — no intermediary, no single point of failure |
-| Algorithm | Monero-specific, became ASIC-dominated and CPU-unprofitable | Multi-algorithm support (MinotaurX, Power2B, YesPower, Yescrypt, GhostRider, VerusHash, Flex) with ASIC-resistant design |
+| Algorithm | Monero-specific, became ASIC-dominated and CPU-unprofitable | MinotaurX, ASIC-resistant design |
 | Shutdown risk | Centralized service — shut down in March 2019, all publishers lost revenue overnight | Self-hosted, pool-agnostic — runs as long as stratum pools exist |
 | Privacy posture | Operated before GDPR enforcement; unclear data practices | Zero data collection by design — compliant with modern privacy regulation |
 | Consent model | Frequently deployed without user consent (cryptojacking association) | Designed for opt-in deployment with transparent disclosure; `stop()` API always available |
@@ -249,22 +228,14 @@ The second parameter (`0.2`) controls CPU allocation — 0.2 = 20% of available 
 | **Vanilla HTML / PHP / Static Sites** | Paste the script tag before `</body>`. No build tools. No bundler. No npm install. Works on any web server. |
 
 ### Advanced Configuration
-The `autoMine()` function accepts an optional third parameter — a configuration object:
-```js
-autoMine("WALLET", 0.2, {
-  pool: "stratum+tcp://pool.example.com:3032",  // Custom pool URL
-  algorithm: "power2b",                          // Override default algorithm
-  batteryThreshold: 0.3,                         // Pause below 30% battery
-  threadLimit: 4,                                // Cap at 4 threads regardless of CPU
-});
-```
 Available exports from `miner.js`:
-- `autoMine(wallet, cpuPercent, opts?)` — Start mining with automatic thread management
-- `stop()` — Gracefully terminate all workers and close the WebSocket
-- `minotaurxHashrate()` — Get current aggregate hashrate in H/s
+- `autoMine(wallet, threadPercent?)` — Start mining with automatic thread management
+- `start(algo, stratum, log, nthreads, onWork, onHashrate, onError)` — Full-control mining
+- `stop()` — Terminate all workers, disconnect sockets, print session report
+- `minotaurxHashrate` — Read-only stats object (`currentHashrateKHs`, `maxHashrateKHs`, `sharesAccepted`, `sharesRejected`, `getAverageHashrate()`, `getUptime()`)
 
 ### Hosting & Infrastructure
-Earnify is a static ES module — serve it from any host. GitHub Pages, Vercel, Netlify, Cloudflare Pages, S3 + CloudFront, or your own origin server. There is no backend. No database. No runtime dependency beyond a JavaScript-enabled browser and a stratum pool. The `miner.js` file is the entire application. Zero server infrastructure required.
+The `miner.js` file is a static ES module — serve it from any host. Mining connections route through the WebSocket-to-Stratum relay.
 
 ---
 
@@ -303,7 +274,7 @@ These stats provide publishers with real-time visibility into network conditions
 
 The homepage includes a live algorithm comparison table powered by zpool.ca's API. For each supported algorithm, the table displays:
 
-- **Algorithm name** (MinotaurX, Power2B, YesPower, Yescrypt, GhostRider, VerusHash, Flex)
+- **Algorithm name** (MinotaurX)
 - **Current pool hashrate** — total network power for that algorithm on zpool
 - **Active worker count** — number of connected miners
 - **Estimated revenue** — projected earnings per unit of hashrate
@@ -346,7 +317,7 @@ This transparency lets publishers make data-driven decisions about which algorit
 - [Browser Mining and User Trust: Building an Ethical Monetization Model](https://earnify.cc/blog/browser-mining-user-trust-ethics.html) (2026-07-31): Why transparent, opt-in mining builds more user trust than tracking-based advertising — and how to communicate it to your audience.
 
 ## Developer Resources
-- [miner.js](https://earnify.cc/miner.js): Full unminified core library — Socket.IO client implementation bundled with Web Worker mining kernels for MinotaurX, Power2B, YesPower, Yescrypt, GhostRider, VerusHash, and Flex algorithms. Exports `autoMine()`, `stop()`, and `minotaurxHashrate()`. Loads as an ES module. Approximately 2,200 lines.
+- [miner.js](https://earnify.cc/miner.js): Bundled Socket.IO client with Web Worker mining kernel for MinotaurX. Exports `autoMine()`, `start()`, `stop()`, and `minotaurxHashrate`. Loads as an ES module.
 - [miner.min.js](https://earnify.cc/miner.min.js): Production-minified build. Identical functionality, reduced payload. Suitable for production deployments where bundle size matters.
 - [GitHub Repository](https://github.com/romannnoodesl/earnify.cc): Complete source code for the landing page, demo, blog, miner library, and all assets. MIT licensed. Issues, pull requests, and community contributions welcome. Includes CONTRIBUTING.md, CODE_OF_CONDUCT.md, and SECURITY.md.
 - [sitemap.xml](https://earnify.cc/sitemap.xml): XML sitemap with Google image extensions. Lists all 28 site URLs with lastmod, changefreq, and priority metadata. Includes og-image and favicon image entries for the primary page.
@@ -377,7 +348,7 @@ This transparency lets publishers make data-driven decisions about which algorit
 ## Frequently Asked Questions
 
 ### Does Earnify cause performance degradation?
-No. Earnify executes all computation inside dedicated Web Workers using `navigator.hardwareConcurrency − 1` threads — the primary UI core always remains free for DOM rendering, layout, painting, and user interaction. Measured main-thread overhead is below 2% across all tested device configurations. Lighthouse Performance scores are unchanged. Core Web Vitals — Largest Contentful Paint, Interaction to Next Paint, and Cumulative Layout Shift — show zero degradation. Mobile devices receive automatic throttling via the Battery Status API and dynamic thread scaling, further reducing any thermal or battery impact.
+No. Earnify executes all computation inside dedicated Web Workers, keeping mining off the main thread.
 
 ### How is mining yield processed and distributed?
 The pipeline operates in four stages: (1) the pool sends cryptographic work units via WebSocket stratum to the browser, (2) Web Workers compute hash proofs against difficulty targets using WASM-compiled hashing kernels, (3) valid proofs are submitted back to the pool where they are validated and credited to the worker associated with your wallet, and (4) the pool distributes rewards to your wallet according to its configured payout schedule and minimum threshold. Earnify deducts exactly 10% of submitted shares at the protocol level. The remaining 90% is credited directly to your wallet. There is no intermediary holding your funds, no minimum payout imposed by Earnify, and no manual withdrawal process — pool payouts follow the pool's own schedule.
@@ -386,7 +357,7 @@ The pipeline operates in four stages: (1) the pool sends cryptographic work unit
 Yes. Earnify uses zero cookies, zero localStorage, zero IndexedDB, zero fingerprinting, and collects zero personal data of any kind. The stratum mining protocol carries no user identifiers. Web Workers have no access to DOM, storage APIs, or any mechanism that could capture personal information. Under GDPR Article 4(1), no personal data is processed — consent is not required. Under CCPA/CPRA, no personal information is collected, shared, or sold — no disclosure or opt-out obligations apply. Under the ePrivacy Directive, no information is stored on or accessed from the user's terminal equipment — no cookie consent banner is required. Best practice: update your Terms of Service to disclose compute utilization, and consider providing a user-facing opt-out toggle that calls `stop()`.
 
 ### How does Earnify differ from Coinhive?
-Five fundamental differences separate Earnify from Coinhive: (1) **Open source** — Coinhive was proprietary and un-auditable; Earnify is fully open source under MIT with every line publicly available on GitHub. (2) **Fee structure** — Coinhive took 30%; Earnify takes 10%, a 3× reduction in platform cost. (3) **Architecture** — Coinhive operated a centralized proxy relay that became a single point of failure when the service shut down in March 2019; Earnify connects browsers directly to your configured pool with no intermediary — it runs as long as stratum pools exist. (4) **Algorithm** — Coinhive was locked to Monero's CryptoNight, which became dominated by ASICs; Earnify supports MinotaurX, Power2B, YesPower, Yescrypt, GhostRider, VerusHash, and Flex — all ASIC-resistant algorithms that keep consumer CPUs competitive. (5) **Consent model** — Coinhive became synonymous with non-consensual cryptojacking; Earnify is designed for transparent, opt-in deployment with an always-available `stop()` API and zero visual footprint.
+Five fundamental differences separate Earnify from Coinhive: (1) **Open source** — Coinhive was proprietary and un-auditable; Earnify is fully open source under MIT with every line publicly available on GitHub. (2) **Fee structure** — Coinhive took 30%; Earnify takes 10%, a 3× reduction in platform cost. (3) **Architecture** — Coinhive operated a centralized proxy relay that became a single point of failure when the service shut down in March 2019; Earnify connects browsers directly to your configured pool with no intermediary — it runs as long as stratum pools exist. (4) **Algorithm** — Coinhive was locked to Monero's CryptoNight, which became dominated by ASICs; Earnify mines MinotaurX — an ASIC-resistant algorithm that keeps consumer CPUs competitive. (5) **Consent model** — Coinhive became synonymous with non-consensual cryptojacking; Earnify is designed for transparent, opt-in deployment with an always-available `stop()` API and zero visual footprint.
 
 ### Which pools and coins are supported?
 Earnify is fully pool-agnostic. Any stratum pool supporting Stratum V1 over WebSocket is compatible. Tested and confirmed pools include zpool.ca (default), Mining Dutch, Zergpool, and custom/private pool deployments. Multi-region failover is supported for production deployments. Auto-exchange pools allow publishers to receive payouts in Dogecoin (DOGE — default), Bitcoin (BTC), Litecoin (LTC), or any other currency the pool supports for auto-exchange. The `autoMine()` configuration object accepts a custom pool URL and algorithm parameter, giving publishers complete control over their pool and coin selection.
@@ -405,18 +376,13 @@ Nothing — because Earnify is not a service. The `miner.js` file is a static ES
 **Status:** All systems operational. 99.98% uptime. 1,000+ publishers deployed.
 
 **Actively Supported:**
-- MinotaurX algorithm (default, most profitable for CPU mining)
-- Power2B, YesPower, Yescrypt, GhostRider, VerusHash, Flex algorithms
+- MinotaurX algorithm
 - zpool.ca, Mining Dutch, Zergpool, and custom stratum pools
 - Chrome 80+, Firefox 78+, Safari 14+, Brave, Opera, Samsung Internet
 - All major frontend frameworks (React, Vue, Svelte, vanilla JS)
 
 **Planned:**
-- RandomX algorithm support (Monero mining via browser WASM)
-- CryptoNight-R algorithm support
-- Expanded pool compatibility testing
-- Enhanced battery-aware throttling profiles
-- Community-contributed algorithm plugins
+- Community-contributed improvements
 
 **License:** MIT — open source forever. Fork it. Audit it. Build on it.
 
