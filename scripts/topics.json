@@ -159,7 +159,7 @@
       "slug": "auto-exchange-pools-101",
       "category": "Technical",
       "description": "How auto-exchange pools like zpool convert earnings across coins and algorithms — and how to pick the payout currency that fits your site.",
-      "used": false
+      "used": true
     },
     {
       "title": "Hashrate, Shares, and Reject Rates: The Metrics That Decide Your Earnings",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 22
+  "nextTopicIndex": 23
 }

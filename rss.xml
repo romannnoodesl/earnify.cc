@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Sep 2026 02:54:48 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 13 Sep 2026 02:55:42 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                            <item>
+                                                                <item>
+      <title>Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC</title>
+      <link>https://earnify.cc/blog/auto-exchange-pools-101.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/auto-exchange-pools-101.html</guid>
+      <pubDate>Sun, 13 Sep 2026 02:55:42 GMT</pubDate>
+      <description><![CDATA[Learn how auto-exchange mining pools convert CPU-mined coins to DOGE or BTC automatically. Boost site revenue with Earnify's zero-server browser mining.]]></description>
+    </item>
+<item>
       <title>What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners</title>
       <link>https://earnify.cc/blog/mining-pool-downtime-contingency.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/mining-pool-downtime-contingency.html</guid>

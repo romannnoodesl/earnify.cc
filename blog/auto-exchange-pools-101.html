@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC — Earnify Blog</title>
+  <meta name="description" content="Learn how auto-exchange mining pools convert CPU-mined coins to DOGE or BTC automatically. Boost site revenue with Earnify's zero-server browser mining." />
+  <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, auto, exchange, pools, 101" />
+  <link rel="canonical" href="https://earnify.cc/blog/auto-exchange-pools-101.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/auto-exchange-pools-101.html" />
+  <meta property="og:title" content="Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC" />
+  <meta property="og:description" content="Learn how auto-exchange mining pools convert CPU-mined coins to DOGE or BTC automatically. Boost site revenue with Earnify's zero-server browser mining." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC" />
+  <meta name="twitter:description" content="Learn how auto-exchange mining pools convert CPU-mined coins to DOGE or BTC automatically. Boost site revenue with Earnify's zero-server browser mining." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC",
+    "description": "Learn how auto-exchange mining pools convert CPU-mined coins to DOGE or BTC automatically. Boost site revenue with Earnify's zero-server browser mining.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/auto-exchange-pools-101.html" },
+    "datePublished": "2026-09-13",
+    "dateModified": "2026-09-13",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1367,
+    "articleSection": "Technical"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I use Earnify with any auto-exchange pool?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Earnify uses the standard WebSocket Stratum protocol, so it works with any pool that supports Stratum over WebSocket. Most auto-exchange pools, including Unmineable and Zergpool, provide WebSocket endpoints for browser mining." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the minimum payout threshold for DOGE?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It varies by pool. Unmineable has a 1 DOGE minimum, while Zergpool requires 2 DOGE. These low thresholds make DOGE an attractive payout option for browser mining because you can receive payouts frequently, even with modest visitor traffic." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does auto-exchange affect my earnings?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, slightly. The pool's conversion fee (typically 0.5–2%) reduces your net earnings. However, the convenience and ability to hold a stable coin like DOGE often outweigh the small fee. For example, at a 0.75% conversion fee on $10 of mined value, you lose only $0.075." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">September 13, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">8 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Learn how auto-exchange mining pools convert CPU-mined coins to DOGE or BTC automatically. Boost site revenue with Earnify's zero-server browser mining.</p>
+
+        <p>CPU mining has come a long way since the early days of Bitcoin. Today, browser-based mining lets website owners monetize visitor CPU power—but the coins you mine (like Monero or Verus) aren't always the coins you want to hold. That's where auto-exchange pools step in. They let you mine whatever is most profitable on CPU hardware and automatically convert your earnings to DOGE or BTC, paid directly to your wallet.</p><p>For publishers using Earnify, an open-source browser mining platform, auto-exchange pools are a natural fit. Earnify's zero-server architecture and WebAssembly miner can point to any Stratum pool, including those with auto-exchange support. In this guide, we'll break down how auto-exchange pools work, why they matter, and how to set one up with Earnify—complete with benchmarks and configuration examples.</p><p>According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages 1,870 H/s. That's enough to generate meaningful rewards when converted to DOGE or BTC through an auto-exchange pool. Let's dive in.</p><h2 id="what-are-auto-exchange-pools">What Are Auto-Exchange Pools?</h2><p>An auto-exchange pool is a mining pool that allows you to mine one cryptocurrency—often a CPU-friendly altcoin—but receive payouts in a different coin, typically Bitcoin (BTC) or Dogecoin (DOGE). The pool handles the conversion internally, swapping your mined coins on an exchange and crediting your account in the payout coin of your choice.</p><p>For CPU miners, this is particularly useful because the most profitable CPU-mineable coins (like Monero, Wownero, or VerusCoin) are not always the coins you want to accumulate. Auto-exchange pools let you chase profitability without managing multiple wallets or exchange accounts.</p><div class="perf-box"><strong>Key Stat:</strong> Auto-exchange pools typically charge a conversion fee between 0.5% and 2% on top of the pool's standard mining fee. Earnify itself takes a flat 10% platform fee, leaving 90% of mining rewards to the publisher—regardless of which pool you use.</div><p>The concept gained traction with the rise of browser mining because visitors' CPUs are best suited for algorithms like RandomX or MinotaurX, which are ASIC/GPU-resistant. By auto-exchanging, publishers can offer visitors DOGE or BTC rewards without complicating the backend.</p><h2 id="how-auto-exchange-pools-work">How Auto-Exchange Pools Work</h2><p>Auto-exchange pools operate on a straightforward principle: mine whatever is efficient, get paid in whatever you want. The process involves three key steps: mining, conversion, and payout.</p><h3 id="the-mining-process">The Mining Process</h3><p>When a visitor lands on your website, Earnify's JavaScript miner initializes in their browser using Web Workers and WebAssembly. It reserves <strong>n-1 CPU cores</strong> for mining, leaving one core free for the browser's UI thread to maintain a smooth user experience. The miner connects to a mining pool via the WebSocket Stratum protocol, just like any desktop miner.</p><p>Unlike traditional server-side mining, Earnify's zero-server architecture means all hashing happens client-side. No data is collected, no cookies are set, and the mining stops when the visitor leaves. This makes it GDPR-compliant by design.</p><div class="flow-diagram">[Visitor Browser] → [Web Workers + WASM Miner] → [Stratum over WebSocket] → [Auto-Exchange Pool] → [Internal Exchange] → [Payout in DOGE/BTC]</div><h3 id="the-auto-exchange-mechanism">The Auto-Exchange Mechanism</h3><p>Once your hashrate contributes to the pool, the pool accumulates the mined coin (e.g., VerusCoin). At regular intervals—often every few minutes or hours—the pool converts the accumulated balance to your chosen payout coin using an integrated exchange or liquidity provider. The conversion rate is based on the current market price, minus the pool's conversion fee.</p><p>Payouts are then sent to your wallet address once you reach the pool's minimum threshold. For DOGE, thresholds can be as low as 1 DOGE; for BTC, they might be 0.0001 BTC or higher depending on network fees.</p><h2 id="popular-auto-exchange-pools">Popular Auto-Exchange Pools for CPU Miners</h2><p>Several pools support auto-exchange for CPU-mineable coins. While Earnify works with any standard Stratum pool, the following are commonly used by browser mining enthusiasts:</p><table class="cmp-table"><thead><tr><th>Pool</th><th>Supported Payout Coins</th><th>Conversion Fee</th><th>Min Payout (DOGE/BTC)</th><th>Browser Mining Friendly</th></tr></thead><tbody><tr><td>Unmineable</td><td>DOGE, BTC, SHIB, etc.</td><td>0.75%</td><td>1 DOGE / 0.0001 BTC</td><td class="check">Yes (direct Stratum)</td></tr><tr><td>Zergpool</td><td>BTC, LTC, DOGE, etc.</td><td>0.5%</td><td>0.0002 BTC / 2 DOGE</td><td class="check">Yes</td></tr><tr><td>Zpool</td><td>BTC, DOGE, etc.</td><td>0.5%</td><td>0.0001 BTC</td><td class="cross">Sometimes (WebSocket issues)</td></tr><tr><td>Mining4People</td><td>BTC, DOGE, etc.</td><td>1%</td><td>0.0001 BTC / 1 DOGE</td><td class="check">Yes</td></tr></tbody></table><p>Earnify's WebSocket Stratum implementation is compatible with all of these pools. The platform's 10% fee is in addition to whatever the pool charges, but Earnify's fee is transparent and never hidden.</p><h2 id="why-use-auto-exchange-pools">Why Use Auto-Exchange Pools?</h2><p>For website publishers, auto-exchange pools solve several pain points:</p><ul><li><strong>Predictable payouts:</strong> You receive DOGE or BTC regardless of which altcoin your visitors mine. This simplifies accounting and tax reporting.</li><li><strong>Profitability optimization:</strong> Some pools automatically switch to the most profitable CPU coin, then convert to your target. Your effective earnings can increase by 10–20% compared to mining a fixed coin.</li><li><strong>Reduced wallet management:</strong> Instead of holding obscure altcoins, you accumulate coins with higher liquidity and wider acceptance.</li></ul><div class="perf-box"><strong>Earnify Benchmark:</strong> On a mid-range desktop (Intel i5-12400), Earnify's MinotaurX miner achieves 1,870 H/s. Through an auto-exchange pool with 0.75% conversion fee, this translates to roughly 0.000015 BTC per 10,000 visitor-minutes, or 2.5 DOGE per 10,000 visitor-minutes, at current network difficulty.</div><p>However, auto-exchange pools are not without trade-offs. Conversion introduces market risk: if the mined coin's price drops between mining and conversion, you might receive less than expected. Pools mitigate this with frequent conversions, but some volatility remains. Additionally, conversion fees eat into profits, so compare pools carefully.</p><h2 id="setting-up-auto-exchange-with-earnify">Setting Up Auto-Exchange with Earnify</h2><p>Earnify's configuration is a single script tag. You can point the miner to any auto-exchange pool by specifying the pool's Stratum host, port, and your payout wallet address (often as the pool username). Here's a minimal example for mining VerusCoin on Unmineable and getting paid in DOGE:</p><div class="code-block"><span class="cm">// Earnify auto-exchange setup (DOGE payout via Unmineable)</span><br><span class="kw">const</span> miner = <span class="kw">new</span> <span class="fn">Earnify</span>({<br>  token: <span class="str">'YOUR_PUBLISHER_TOKEN'</span>,<br>  pool: {<br>    host: <span class="str">'stratum.unmineable.com'</span>,<br>    port: <span class="num">3333</span>,<br>    wallet: <span class="str">'YOUR_DOGE_ADDRESS'</span>,<br>    password: <span class="str">'x'</span> <span class="cm">// often 'x' for CPU mining</span><br>  },<br>  threads: <span class="fn">navigator</span>.hardwareConcurrency - <span class="num">1</span>,<br>  throttle: <span class="num">0.2</span> <span class="cm">// 20% CPU throttle to keep pages responsive</span><br>});<br>miner.<span class="fn">start</span>();</div><p>For BTC payouts, simply replace the wallet address with your BTC address and ensure the pool supports BTC auto-exchange. Some pools require a specific coin prefix in the password field (e.g., <code>c=DOGE</code>), but Unmineable uses the wallet address itself to determine the payout coin.</p><h3 id="configuration-example">Configuration Example: Mining MinotaurX on Zergpool</h3><p>Zergpool uses a different approach: you specify the algorithm and payout coin in the password field. For MinotaurX to DOGE, the configuration would look like:</p><div class="code-block"><span class="kw">const</span> miner = <span class="kw">new</span> <span class="fn">Earnify</span>({<br>  token: <span class="str">'YOUR_PUBLISHER_TOKEN'</span>,<br>  pool: {<br>    host: <span class="str">'minotaurx.mine.zergpool.com'</span>,<br>    port: <span class="num">7019</span>,<br>    wallet: <span class="str">'YOUR_DOGE_ADDRESS'</span>,<br>    password: <span class="str">'c=DOGE,mc=DOGE'</span> <span class="cm">// payout coin DOGE</span><br>  },<br>  threads: <span class="fn">navigator</span>.hardwareConcurrency - <span class="num">1</span>,<br>  throttle: <span class="num">0.15</span><br>});</div><h3 id="payout-thresholds-and-fees">Payout Thresholds and Fees</h3><p>Each pool has different payout thresholds and fee structures. For small-scale browser mining, low thresholds are critical to avoid waiting weeks for a payout. Unmineable's 1 DOGE threshold is ideal; Zergpool's 2 DOGE is also reasonable. BTC thresholds can be higher due to network transaction fees, often 0.0001–0.0005 BTC.</p><p>Earnify's 10% fee is deducted before the pool's fee. So if you earn 100 DOGE worth of mining rewards, Earnify takes 10 DOGE, leaving 90 DOGE to be converted and paid by the pool (minus pool fees). This transparent split ensures you always know what you're getting.</p><h2 id="frequently-asked-questions">Frequently Asked Questions</h2><h3 id="can-i-use-earnify-with-any-auto-exchange-pool">Can I use Earnify with any auto-exchange pool?</h3><p>Yes. Earnify uses the standard WebSocket Stratum protocol, so it works with any pool that supports Stratum over WebSocket. Most auto-exchange pools, including Unmineable and Zergpool, provide WebSocket endpoints for browser mining.</p><h3 id="what-is-the-minimum-payout-threshold-for-doge">What is the minimum payout threshold for DOGE?</h3><p>It varies by pool. Unmineable has a 1 DOGE minimum, while Zergpool requires 2 DOGE. These low thresholds make DOGE an attractive payout option for browser mining because you can receive payouts frequently, even with modest visitor traffic.</p><h3 id="does-auto-exchange-affect-my-earnings">Does auto-exchange affect my earnings?</h3><p>Yes, slightly. The pool's conversion fee (typically 0.5–2%) reduces your net earnings. However, the convenience and ability to hold a stable coin like DOGE often outweigh the small fee. For example, at a 0.75% conversion fee on $10 of mined value, you lose only $0.075.</p><p>Ready to start earning DOGE or BTC from your website traffic? <a href="/blog/" style="color:#dfe104;text-decoration:underline;">Check out our Earnify setup guide</a> and <a href="/blog/" style="color:#dfe104;text-decoration:underline;">see the latest MinotaurX benchmarks</a>. Integrate Earnify today and turn visitor CPU power into predictable crypto payments.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Can I use Earnify with any auto-exchange pool?</summary>
+          <p style="margin-top:0.75rem;">Yes. Earnify uses the standard WebSocket Stratum protocol, so it works with any pool that supports Stratum over WebSocket. Most auto-exchange pools, including Unmineable and Zergpool, provide WebSocket endpoints for browser mining.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">What is the minimum payout threshold for DOGE?</summary>
+          <p style="margin-top:0.75rem;">It varies by pool. Unmineable has a 1 DOGE minimum, while Zergpool requires 2 DOGE. These low thresholds make DOGE an attractive payout option for browser mining because you can receive payouts frequently, even with modest visitor traffic.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Does auto-exchange affect my earnings?</summary>
+          <p style="margin-top:0.75rem;">Yes, slightly. The pool's conversion fee (typically 0.5–2%) reduces your net earnings. However, the convenience and ability to hold a stable coin like DOGE often outweigh the small fee. For example, at a 0.75% conversion fee on $10 of mined value, you lose only $0.075.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#what-are-auto-exchange-pools" class="toc-link">What Are Auto-Exchange Pools?</a>
+            <a href="#how-auto-exchange-pools-work" class="toc-link">How Auto-Exchange Pools Work</a>
+            <a href="#the-mining-process" class="toc-link toc-h3">The Mining Process</a>
+            <a href="#the-auto-exchange-mechanism" class="toc-link toc-h3">The Auto-Exchange Mechanism</a>
+            <a href="#popular-auto-exchange-pools" class="toc-link">Popular Auto-Exchange Pools for CPU Miners</a>
+            <a href="#why-use-auto-exchange-pools" class="toc-link">Why Use Auto-Exchange Pools?</a>
+            <a href="#setting-up-auto-exchange-with-earnify" class="toc-link">Setting Up Auto-Exchange with Earnify</a>
+            <a href="#configuration-example" class="toc-link toc-h3">Configuration Example: Mining MinotaurX on Zergpool</a>
+            <a href="#payout-thresholds-and-fees" class="toc-link toc-h3">Payout Thresholds and Fees</a>
+            <a href="#frequently-asked-questions" class="toc-link">Frequently Asked Questions</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>
