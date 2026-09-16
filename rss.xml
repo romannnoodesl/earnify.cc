@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Sep 2026 02:55:42 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 03:08:49 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                <item>
+                                                                    <item>
+      <title>Hashrate, Shares, and Reject Rates: The Metrics That Decide Your Earnings</title>
+      <link>https://earnify.cc/blog/browser-mining-metrics-explained.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-metrics-explained.html</guid>
+      <pubDate>Wed, 16 Sep 2026 03:08:49 GMT</pubDate>
+      <description><![CDATA[Understand the three key metrics that determine your browser mining revenue. Learn how hashrate, share acceptance, and reject rates impact your earnings on Earnify and how to optimize them.]]></description>
+    </item>
+<item>
       <title>Auto-Exchange Pools 101: Mine CPU Coins, Get Paid in DOGE or BTC</title>
       <link>https://earnify.cc/blog/auto-exchange-pools-101.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/auto-exchange-pools-101.html</guid>

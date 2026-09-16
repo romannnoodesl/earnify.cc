@@ -9,7 +9,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -38,7 +38,7 @@
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/demo/</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -543,25 +543,38 @@
     </image:image>
   </url>
 
+
+  <url>
+    <loc>https://earnify.cc/blog/browser-mining-metrics-explained.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Hashrate, Shares, and Reject Rates: The Metrics That Decide Your Earnings</image:title>
+      <image:caption>Understand the three key metrics that determine your browser mining revenue. Learn how hashrate, share acceptance, and reject rates impact your earnings on Earnify and how to optimize them.</image:caption>
+    </image:image>
+  </url>
+
   <!-- XML / TEXT RESOURCES -->
   <!-- ═══════════════════════════════════════ -->
   <url>
     <loc>https://earnify.cc/llms.txt</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/rss.xml</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://earnify.cc/opensearch.xml</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

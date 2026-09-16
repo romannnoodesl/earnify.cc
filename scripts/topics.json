@@ -166,7 +166,7 @@
       "slug": "browser-mining-metrics-explained",
       "category": "Technical",
       "description": "A plain-English guide to the numbers on your pool dashboard — hashrate, accepted shares, stale/reject rates, and what each one means for payout.",
-      "used": false
+      "used": true
     },
     {
       "title": "The Miner.js API Reference for Developers",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 23
+  "nextTopicIndex": 24
 }
