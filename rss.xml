@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Sep 2026 03:08:49 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2026 03:00:40 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                    <item>
+                                                                        <item>
+      <title>The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control</title>
+      <link>https://earnify.cc/blog/miner-js-api-reference.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/miner-js-api-reference.html</guid>
+      <pubDate>Sat, 19 Sep 2026 03:00:40 GMT</pubDate>
+      <description><![CDATA[Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining.]]></description>
+    </item>
+<item>
       <title>Hashrate, Shares, and Reject Rates: The Metrics That Decide Your Earnings</title>
       <link>https://earnify.cc/blog/browser-mining-metrics-explained.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-metrics-explained.html</guid>

@@ -173,7 +173,7 @@
       "slug": "miner-js-api-reference",
       "category": "Technical",
       "description": "A developer-focused walkthrough of Miner.js exports — autoMine options, event hooks, throttling, and integration patterns for custom UIs.",
-      "used": false
+      "used": true
     },
     {
       "title": "When to Disable Mining on Mobile: A Traffic-Quality Strategy",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 24
+  "nextTopicIndex": 25
 }

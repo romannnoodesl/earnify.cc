@@ -1,9 +1,9 @@
 {
-  "slug": "browser-mining-metrics-explained",
-  "title": "Hashrate, Shares, and Reject Rates: The Metrics That Decide Your Earnings",
-  "description": "Understand the three key metrics that determine your browser mining revenue. Learn how hashrate, share acceptance, and reject rates impact your earnings on Earnify and how to optimize them.",
+  "slug": "miner-js-api-reference",
+  "title": "The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control",
+  "description": "Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining.",
   "category": "Technical",
-  "readTime": "7 min read",
-  "date": "2026-09-16",
-  "rssDate": "Wed, 16 Sep 2026 03:08:49 GMT"
+  "readTime": "8 min read",
+  "date": "2026-09-19",
+  "rssDate": "Sat, 19 Sep 2026 03:00:40 GMT"
 }
