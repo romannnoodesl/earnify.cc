@@ -101,6 +101,7 @@ function updateSitemap(meta) {
   const refreshLastmod = [
     "<loc>https://earnify.cc/</loc>",
     "<loc>https://earnify.cc/demo/</loc>",
+    "<loc>https://earnify.cc/blog/</loc>",
     "<loc>https://earnify.cc/llms.txt</loc>",
     "<loc>https://earnify.cc/rss.xml</loc>",
     "<loc>https://earnify.cc/opensearch.xml</loc>",
@@ -137,13 +138,13 @@ function updateBlogIndex(meta) {
         <span class="ac-meta" style="font-size:0.6875rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;margin-top:1rem;">${formatDisplayDate(meta.date)}</span>
       </a>`;
 
-    const firstCardComment = "<!-- Card: Case Study 3x Revenue -->";
-    if (!html.includes(firstCardComment)) {
-      console.warn(`Anchor "${firstCardComment}" not found in blog/index.html — skipping card insertion`);
-    } else {
-      html = html.replace(firstCardComment, newCard + "\n\n      " + firstCardComment);
-      insertedCard = true;
+    const gridMarker = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;">';
+    if (!html.includes(gridMarker)) {
+      throw new Error("Grid marker not found in blog/index.html — refusing to update feeds (would diverge card/JSON-LD/hero counts)");
     }
+    // Prepend new card at top of grid so the grid stays newest-first (matches RSS).
+    html = html.replace(gridMarker, gridMarker + "\n" + newCard);
+    insertedCard = true;
 
     const newSchemaEntry = `{
         "@type": "BlogPosting",
@@ -155,14 +156,15 @@ function updateBlogIndex(meta) {
 
     const blogPostIndex = html.indexOf('"blogPost": [');
     if (blogPostIndex !== -1) {
-      const closeBracket = html.indexOf('\n    ]', blogPostIndex);
-      if (closeBracket !== -1) {
+      // Prepend newest-first to match RSS ordering (was: append-at-end).
+      const arrayStart = html.indexOf('[', blogPostIndex);
+      if (arrayStart !== -1) {
         html =
-          html.slice(0, closeBracket) +
-          ",\n      " +
+          html.slice(0, arrayStart + 1) +
+          "\n      " +
           newSchemaEntry +
-          "\n" +
-          html.slice(closeBracket);
+          "," +
+          html.slice(arrayStart + 1);
       }
     }
   } else {

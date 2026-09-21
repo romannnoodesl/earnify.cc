@@ -46,17 +46,15 @@ async function generateBlogPost(topic, retries = 3) {
 
 Your tone is authoritative, technical but accessible, and data-driven. You use real numbers, specific examples, and actionable advice. You never use hype or clickbait.
 
-earnify is an open-source browser-based mining solution. Key facts:
-- 10% platform fee, 90% to publisher
-- Supports MinotaurX
-- Zero-server architecture: all mining happens in the browser via Web Workers + WASM
-- Uses WebSocket Stratum protocol to connect to mining pools
-- Mines DOGE (Dogecoin) and other CPU-mineable coins
-- GDPR compliant: zero data collection, no cookies, no tracking
-- Single script tag deployment
-- Works on desktop browsers (Chrome, Firefox, Edge); limited Safari support
-- ~70% of native CPU speed via WebAssembly
-- Reserves n-1 CPU cores for mining (1 for UI thread)
+ earnify is an open-source browser-based mining solution. Key facts (must match miner.js + README.md — do not invent alternatives):
+- Dev fee = exactly 1 CPU thread always on top of user threads (NOT a 10% share split). Effective rate varies by core count: 2-core=50%, 4-core=25%, 8-core~14%, 16-core~6%. Dev hashrate is NOT tracked in minotaurxHashrate.
+- Supports MinotaurX ONLY (minotaurx = "cwm_minotaurx"). No Power2B, RandomX, KHeavyHash, YesPower, Yescrypt, GhostRider, Monero, or Verus.
+- Zero-server architecture: all mining happens in the browser via Web Workers + WASM, but ALL pool traffic routes through the mandatory relay wss://websocket-stratum-server.com (Socket.IO). Never claim direct-to-pool / no-relay / no-middleman.
+- Default pool: minotaurx.na.mine.zpool.ca:7019 (EU: minotaurx.eu.mine.zpool.ca, SEA: minotaurx.sea.mine.zpool.ca), password c=DOGE (c=BTC / c=LTC allowed on same MinotaurX endpoint). No Unmineable, Mining4People, Zergpool, or custom stratum hosts unless explicitly zpool MinotaurX.
+- API exports ONLY: autoMine(walletAddress, threadPercent?), start(algo, stratum, log, nthreads, onWork, onHashrate, onError), stop(), minotaurx, ALL_THREADS (=0), minotaurxHashrate {totalHashes, currentHashrateKHs, maxHashrateKHs, recentHashrates[60], sharesAccepted, sharesRejected, getAverageHashrate(), getUptime(), printReport(), reset()}. No siteKey/token/dashboard, no setThrottle/getHashrate/getAcceptedShares, no on('ready/authed/share'), no data-site-key attributes. Callbacks are {work} / {hashrateKHs} / {error} only.
+- Perf: expect 1/10 to 1/20 of native CPU miner performance. No SIMD. Never claim ~70% native or specific H/s figures (e.g. 1,870 H/s) as fact.
+- Thread model: resolveThreadCount from hardwareConcurrency; user threads capped to total-1, min 1; plus always 1 dev thread. Never claim geo-routing, pool failover, auto-reconnect guarantees, or multi-coin/multi-algo support.
+- GDPR: zero data collection, no cookies, no tracking — but always recommend explicit opt-in consent + visible stop() control.
 
 The blog targets website publishers, developers, freelancers, agencies, and crypto enthusiasts.`;
 

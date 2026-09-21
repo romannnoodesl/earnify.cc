@@ -34,7 +34,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control",
-    "description": "Complete developer reference for the Miner.js API. Covers initialization options, runtime methods like start(), stop(), setThrottle(), and getHashrate(), event hooks for share tracking and error handling, and advanced thread management strategies for browser-based crypto mining.",
+    "description": "Complete developer reference for the Miner.js API. Covers autoMine(), start(), stop(), minotaurxHashrate stats, onWork/onHashrate/onError callbacks, and thread allocation for browser-based crypto mining.",
     "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
     "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/miner-js-api-reference.html" },
@@ -64,7 +64,7 @@
       {
         "@type": "Question",
         "name": "Can I use Miner.js with my own mining pool instead of Earnify's default pool?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Pass a custom pool configuration object in the constructor with your own Stratum host, port, and SSL settings. You'll still use your Earnify site key for client identification, but all share submissions route through your infrastructure. This is common for publishers who run their own pool for lower latency or custom payout logic." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Only zpool MinotaurX endpoints are supported in this build (minotaurx.na / .eu / .sea.mine.zpool.ca:7019 with c=DOGE, c=BTC, or c=LTC). Pass them via start(minotaurx, { server, port, worker, password, ssl }, ...) — there is no constructor pool object, no site key, and no Unmineable / Zergpool / custom-pool support." }
       }
     ]
   }
@@ -180,100 +180,23 @@
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control</h1>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining.</p>
 
-        <p>You've dropped the script tag. The miner is running. But now you need <em>control</em> — throttle hashrate when a user is active, pause mining on mobile, or fire a conversion event when a session hits a revenue threshold. That's where the Miner.js API comes in.</p><p>This reference covers every public method, configuration option, and event hook available in the Earnify miner client. Whether you're building a custom dashboard, integrating mining into a single-page application, or fine-tuning performance for a high-traffic media site, this is your authoritative guide.</p><p>According to Earnify's 2026 publisher data, sites that implement dynamic throttle logic via the API see 22% longer average session durations compared to static always-on configurations — because the API lets you respect user experience without sacrificing revenue.</p><h2 id="initialization-config">Initialization Configuration</h2><p>The <code>Earnify.Miner</code> constructor accepts a single configuration object. Every property is optional except <code>siteKey</code>. Here's the complete schema:</p><div class="code-block"><span class="kw">const</span> miner = <span class="kw">new</span> <span class="fn">Earnify.Miner</span>({
-  <span class="cm">// Required</span>
-  <span class="str">siteKey</span>: <span class="str">"pk_live_8f3a2b1c"</span>,
-
-  <span class="cm">// Thread control</span>
-  <span class="str">threads</span>: <span class="num">2</span>,
-  <span class="str">throttle</span>: <span class="num">0.5</span>,
-
-  <span class="cm">// Auto-start behavior</span>
-  <span class="str">autoStart</span>: <span class="kw">false</span>,
-
-  <span class="cm">// Pool configuration</span>
-  <span class="str">pool</span>: {
-    <span class="str">host</span>: <span class="str">"stratum.earnify.cc"</span>,
-    <span class="str">port</span>: <span class="num">4444</span>,
-    <span class="str">ssl</span>: <span class="kw">true</span>
-  }
-});</div><table class="cmp-table"><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>siteKey</code></td><td>String</td><td class="warn">Required</td><td>Your public site key from the Earnify dashboard. Identifies your account for revenue attribution.</td></tr><tr><td><code>threads</code></td><td>Number</td><td>navigator.hardwareConcurrency - 1</td><td>Number of Web Worker threads to spawn. Miner.js reserves 1 core for the UI thread by default. On an 8-core machine, 7 threads will mine.</td></tr><tr><td><code>throttle</code></td><td>Number</td><td>0</td><td>Caps CPU usage per thread. Range: 0.0 (full speed) to 1.0 (effectively paused). A value of 0.3 means each thread runs at 70% duty cycle.</td></tr><tr><td><code>autoStart</code></td><td>Boolean</td><td>true</td><td>When true, mining begins immediately after construction. Set to false for SPAs that need to delay mining until user consent or a specific route.</td></tr><tr><td><code>pool</code></td><td>Object</td><td>Earnify default pool</td><td>Override the Stratum pool connection. Useful for publishers who run their own mining pool infrastructure.</td></tr></tbody></table><div class="perf-box"><strong>Pro tip:</strong> According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages 1,870 H/s at full throttle across 7 threads. Dropping throttle to 0.5 yields roughly 935 H/s — a linear relationship that makes revenue forecasting predictable.</div><h2 id="runtime-methods">Runtime Methods</h2><p>Once the miner instance exists, these methods give you full control over its lifecycle. All methods are chainable where noted.</p><h3 id="start-stop">start() and stop()</h3><p>The two most important methods. Call <code>start()</code> to begin or resume mining, and <code>stop()</code> to halt all threads and disconnect from the pool.</p><div class="code-block"><span class="cm">// Pause mining when user switches tabs</span>
-<span class="kw">document</span>.addEventListener(<span class="str">'visibilitychange'</span>, () => {
-  <span class="kw">if</span> (<span class="kw">document</span>.hidden) {
-    miner.<span class="fn">stop</span>();
-  } <span class="kw">else</span> {
-    miner.<span class="fn">start</span>();
-  }
-});</div><p><code>stop()</code> is not destructive — you can call <code>start()</code> again later without reinitializing. This is critical for single-page applications where the miner instance persists across route changes. Publishers using Earnify on React or Vue sites typically bind <code>stop()</code> and <code>start()</code> to their router's navigation guards.</p><h3 id="set-throttle">setThrottle(value)</h3><p>Dynamically adjusts CPU usage without restarting threads. Accepts a float from 0.0 to 1.0. This is the API's most powerful method for user-experience-aware mining.</p><div class="code-block"><span class="cm">// Ramp down when user is active (mousemove), ramp up when idle</span>
-<span class="kw">let</span> idleTimer;
-<span class="kw">document</span>.addEventListener(<span class="str">'mousemove'</span>, () => {
-  miner.<span class="fn">setThrottle</span>(<span class="num">0.6</span>);
-  <span class="fn">clearTimeout</span>(idleTimer);
-  idleTimer = <span class="fn">setTimeout</span>(() => miner.<span class="fn">setThrottle</span>(<span class="num">0.1</span>), <span class="num">5000</span>);
-});</div><p>Throttle changes take effect within 200ms on average — fast enough for real-time interaction-based adjustments. Earnify's internal telemetry shows that sites using dynamic throttle with a 5-second idle timeout recover 91% of potential hashrate compared to always-on configurations, while maintaining a smoother user experience.</p><h3 id="get-hashrate">getHashrate()</h3><p>Returns the current aggregate hashrate across all active threads as a number (H/s). Updated every 500ms internally.</p><div class="code-block"><span class="kw">setInterval</span>(() => {
-  <span class="kw">const</span> rate = miner.<span class="fn">getHashrate</span>();
-  <span class="kw">console</span>.log(<span class="str">`Current hashrate: ${rate} H/s`</span>);
-}, <span class="num">1000</span>);</div><p>Use this to build real-time dashboards, display hashrate to users as a transparency measure, or log performance data to your analytics backend. Note that <code>getHashrate()</code> reflects accepted shares only — it's a trailing 60-second average, not an instantaneous measurement.</p><h3 id="get-accepted-shares">getAcceptedShares()</h3><p>Returns the total count of accepted shares since the miner started. Each accepted share represents a valid proof-of-work submitted to the Stratum pool. This counter resets when <code>stop()</code> is called.</p><table class="rev-table"><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody><tr><td>Average shares per minute (1 thread, full throttle)</td><td class="highlight">~4.2</td></tr><tr><td>Average shares per minute (7 threads, full throttle)</td><td class="highlight">~29.4</td></tr><tr><td>Share difficulty target</td><td>Auto-adjusted by pool</td></tr></tbody></table><h2 id="event-hooks">Event Hooks</h2><p>Miner.js exposes a set of lifecycle events you can subscribe to. These are critical for error handling, analytics integration, and building custom consent flows.</p><h3 id="on-ready">on(event, callback)</h3><p>The generic event listener. Returns the miner instance for chaining.</p><div class="code-block">miner
-  .<span class="fn">on</span>(<span class="str">'ready'</span>, () => <span class="kw">console</span>.log(<span class="str">'Workers initialized'</span>))
-  .<span class="fn">on</span>(<span class="str">'authed'</span>, () => <span class="kw">console</span>.log(<span class="str">'Stratum authorized'</span>))
-  .<span class="fn">on</span>(<span class="str">'share'</span>, (data) => {
-    <span class="cm">// Fire a GA4 event when a share is accepted</span>
-    <span class="fn">gtag</span>(<span class="str">'event'</span>, <span class="str">'share_accepted'</span>, {
-      <span class="str">'hashes'</span>: data.hashes,
-      <span class="str">'difficulty'</span>: data.difficulty
-    });
-  })
-  .<span class="fn">on</span>(<span class="str">'error'</span>, (err) => <span class="kw">console</span>.error(err));</div><table class="cmp-table"><thead><tr><th>Event</th><th>Payload</th><th>Fires When</th></tr></thead><tbody><tr><td><code>ready</code></td><td>None</td><td>Web Workers have been spawned and WASM modules are loaded. Mining has not necessarily started.</td></tr><tr><td><code>authed</code></td><td><code>{ token: string }</code></td><td>Stratum authorization succeeded. The miner is now eligible to receive work from the pool.</td></tr><tr><td><code>share</code></td><td><code>{ hashes: number, difficulty: number, nonce: string }</code></td><td>A valid share was accepted by the pool. Use this for revenue tracking and user incentives.</td></tr><tr><td><code>error</code></td><td><code>{ code: string, message: string }</code></td><td>Connection failures, authorization rejections, or Web Worker crashes.</td></tr><tr><td><code>close</code></td><td>None</td><td>The WebSocket connection to the Stratum pool was closed (intentionally or due to network issues).</td></tr></tbody></table><h3 id="error-handling">Error Handling Best Practices</h3><p>The <code>error</code> event returns a structured object with a machine-readable <code>code</code> and a human-readable <code>message</code>. Common error codes include:</p><ul><li><code>CONNECTION_REFUSED</code> — The Stratum pool is unreachable. Check firewall rules or pool status.</li><li><code>AUTH_FAILED</code> — Your site key is invalid or the account is suspended. Verify in the <a href="/blog/" style="color:#dfe104;text-decoration:underline;">Earnify dashboard</a>.</li><li><code>WORKER_CRASH</code> — A Web Worker terminated unexpectedly. Miner.js automatically respawns crashed workers after 3 seconds.</li><li><code>WASM_UNSUPPORTED</code> — The browser doesn't support WebAssembly. Affects less than 0.4% of global traffic according to caniuse data.</li></ul><div class="perf-box"><strong>Production pattern:</strong> Wrap error handling in an exponential backoff retry. Miner.js does not auto-reconnect on <code>CONNECTION_REFUSED</code> — you need to implement retry logic. A common approach is retrying at 1s, 2s, 4s, 8s, then capping at 30s intervals.</div><h2 id="advanced-thread-management">Advanced Thread Management</h2><p>For publishers running on high-traffic sites (500K+ monthly pageviews), thread management becomes a revenue lever. Miner.js gives you granular control beyond the constructor options.</p><h3 id="thread-count-strategy">Thread Count Strategy by Device Class</h3><p>Not all visitors have the same hardware. Detecting device class and adjusting thread count dynamically prevents poor experiences on low-end devices while maximizing revenue on high-end desktops.</p><div class="code-block"><span class="kw">function</span> <span class="fn">getOptimalThreads</span>() {
-  <span class="kw">const</span> cores = <span class="kw">navigator</span>.hardwareConcurrency || <span class="num">4</span>;
-  <span class="kw">const</span> memory = <span class="kw">navigator</span>.deviceMemory || <span class="num">4</span>;
-
-  <span class="cm">// Mobile devices: use at most 2 threads</span>
-  <span class="kw">if</span> (<span class="kw">navigator</span>.userAgent.includes(<span class="str">'Mobile'</span>)) {
-    <span class="kw">return</span> <span class="fn">Math</span>.min(cores - <span class="num">1</span>, <span class="num">2</span>);
-  }
-
-  <span class="cm">// Low-memory devices: cap at 50% of cores</span>
-  <span class="kw">if</span> (memory <= <span class="num">4</span>) {
-    <span class="kw">return</span> <span class="fn">Math</span>.floor(cores / <span class="num">2</span>);
-  }
-
-  <span class="cm">// High-end desktop: use all available cores minus 1</span>
-  <span class="kw">return</span> cores - <span class="num">1</span>;
-}
-
-<span class="kw">const</span> miner = <span class="kw">new</span> <span class="fn">Earnify.Miner</span>({
-  <span class="str">siteKey</span>: <span class="str">"pk_live_8f3a2b1c"</span>,
-  <span class="str">threads</span>: <span class="fn">getOptimalThreads</span>()
-});</div><table class="rev-table"><thead><tr><th>Device Class</th><th>Typical Cores</th><th>Recommended Threads</th><th>Expected Hashrate (MinotaurX)</th></tr></thead><tbody><tr><td>Flagship smartphone (2024+)</td><td>8</td><td>2</td><td>~420 H/s</td></tr><tr><td>Mid-range laptop</td><td>4-6</td><td>2-3</td><td>~560 H/s</td></tr><tr><td>High-end desktop</td><td>8-16</td><td>7-15</td><td>1,870-3,200 H/s</td></tr><tr><td>Budget Chromebook</td><td>2-4</td><td>1</td><td>~160 H/s</td></tr></tbody></table><h3 id="wasm-performance">WebAssembly Performance Characteristics</h3><p>Miner.js compiles the MinotaurX hashing algorithm to WebAssembly, achieving approximately 70% of native CPU speed. The remaining 30% overhead comes from JavaScript-to-WASM bridge calls and browser security sandboxing. This is consistent across Chrome, Firefox, and Edge.</p><div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;"><svg viewBox="0 0 500 240" width="100%" height="auto" style="max-width:500px;display:block;margin:0 auto;"><rect x="40" y="20" width="60" height="180" fill="#a1a1aa" rx="3"/><text x="70" y="210" fill="#71717a" font-size="11" text-anchor="middle" font-family="monospace">Native</text><text x="70" y="15" fill="#a1a1aa" font-size="12" text-anchor="middle" font-family="monospace">2,670</text><rect x="130" y="53" width="60" height="147" fill="#dfe104" rx="3"/><text x="160" y="210" fill="#71717a" font-size="11" text-anchor="middle" font-family="monospace">WASM</text><text x="160" y="48" fill="#dfe104" font-size="12" text-anchor="middle" font-family="monospace">1,870</text><rect x="220" y="107" width="60" height="93" fill="#fbbf24" rx="3"/><text x="250" y="210" fill="#71717a" font-size="11" text-anchor="middle" font-family="monospace">Throttle 0.5</text><text x="250" y="102" fill="#fbbf24" font-size="12" text-anchor="middle" font-family="monospace">935</text><rect x="310" y="147" width="60" height="53" fill="#ef4444" rx="3"/><text x="340" y="210" fill="#71717a" font-size="11" text-anchor="middle" font-family="monospace">Safari</text><text x="340" y="142" fill="#ef4444" font-size="12" text-anchor="middle" font-family="monospace">410</text><line x1="30" y1="200" x2="390" y2="200" stroke="#27272a" stroke-width="1"/><text x="400" y="204" fill="#52525b" font-size="10" font-family="monospace">H/s</text></svg><p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Hashrate comparison across execution environments for MinotaurX on an 8-core Intel i7-13700K. Safari's limited WASM thread support results in significantly lower throughput.</p></div><p>Safari deserves special attention. Apple's browser has limited support for shared memory and multi-threaded WebAssembly, capping Miner.js at a single thread. Publishers with significant Safari traffic (typically 18-25% of desktop visitors) should factor this into revenue projections. Earnify's platform fee remains 10% regardless of browser — you're never penalized for Safari's architectural limitations.</p><h2 id="integration-patterns">Integration Patterns for Common Frameworks</h2><p>Miner.js is framework-agnostic, but certain patterns emerge for popular stacks.</p><h3 id="react-pattern">React: Singleton Instance via Context</h3><p>In React applications, create a single miner instance and expose it through Context to avoid multiple initializations. Use <code>useEffect</code> cleanup to call <code>stop()</code> on unmount.</p><div class="code-block"><span class="cm">// MinerContext.tsx</span>
-<span class="kw">import</span> { createContext, useRef, useEffect } <span class="kw">from</span> <span class="str">'react'</span>;
-
-<span class="kw">export const</span> MinerContext = <span class="fn">createContext</span>(<span class="kw">null</span>);
-
-<span class="kw">export function</span> <span class="fn">MinerProvider</span>({ children }) {
-  <span class="kw">const</span> minerRef = <span class="fn">useRef</span>(<span class="kw">null</span>);
-
-  <span class="fn">useEffect</span>(() => {
-    minerRef.current = <span class="kw">new</span> <span class="fn">Earnify.Miner</span>({
-      <span class="str">siteKey</span>: <span class="str">"pk_live_8f3a2b1c"</span>,
-      <span class="str">autoStart</span>: <span class="kw">false</span>
-    });
-    <span class="kw">return</span> () => minerRef.current?.<span class="fn">stop</span>();
-  }, []);
-
-  <span class="kw">return</span> (
-    <span class="kw"><MinerContext.Provider</span> value={minerRef}>
-      {children}
-    <span class="kw"></MinerContext.Provider></span>
-  );
-}</div><p>For a complete walkthrough, see our guide on <a href="/blog/" style="color:#dfe104;text-decoration:underline;">integrating Earnify with React and Next.js</a>.</p><h3 id="wordpress-pattern">WordPress: wp_add_inline_script</h3><p>For WordPress publishers, enqueue the Earnify loader and use <code>wp_add_inline_script</code> to inject configuration. This keeps your API key server-side and allows per-page thread tuning via WordPress custom fields.</p><div class="code-block"><span class="cm">// functions.php</span>
-<span class="fn">wp_enqueue_script</span>(<span class="str">'earnify-miner'</span>, <span class="str">'https://earnify.cc/miner.js'</span>, [], <span class="kw">null</span>, <span class="kw">true</span>);
-<span class="fn">wp_add_inline_script</span>(<span class="str">'earnify-miner'</span>, <span class="str">"
-  new Earnify.Miner({
-    siteKey: '"</span> . <span class="fn">EARNIFY_SITE_KEY</span> . <span class="str">"',
-    threads: 2,
-    throttle: 0.3
-  });
-"</span>);</div><h2 id="faqs">FAQs</h2>
+        <p>Need control — pause mining on mobile, tune CPU share, or display live hashrate? Miner.js exposes exactly six things: <code>autoMine</code>, <code>start</code>, <code>stop</code>, <code>minotaurx</code>, <code>ALL_THREADS</code>, and <code>minotaurxHashrate</code>. There is no constructor, no site key, no dashboard token, and no throttle 0.0–1.0 API. This reference matches <code>miner.js</code> and <code>README.md</code>.</p><div class="perf-box"><strong>Ground truth:</strong> MinotaurX only (<code>cwm_minotaurx</code>). Default pool <code>minotaurx.na.mine.zpool.ca:7019</code>, password <code>c=DOGE</code>. All traffic goes through the mandatory relay <code>wss://websocket-stratum-server.com</code>. Dev fee = exactly 1 CPU thread on top of yours (not a share split).</div><h2 id="automine">autoMine(walletAddress, threadPercent?)</h2><p>Quick-start mining. Configures MinotaurX on zpool automatically. Returns a <code>Promise&lt;number&gt;</code> with the user thread count.</p><div class="code-block"><span class="kw">import</span> { autoMine } <span class="kw">from</span> <span class="str">"https://earnify.cc/miner.js"</span>;
+<span class="kw">const</span> threads = <span class="kw">await</span> <span class="fn">autoMine</span>(<span class="str">"YOUR_DOGE_WALLET_ADDRESS"</span>, <span class="num">0.5</span>);</div><table class="cmp-table"><thead><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td><code>walletAddress</code></td><td>String</td><td class="warn">Required</td><td>Your DOGE payout address (worker name sent to zpool).</td></tr><tr><td><code>threadPercent</code></td><td>Number</td><td>0 (ALL_THREADS)</td><td>Fraction of CPU (0.5 = 50%) or exact count if &gt; 1. Capped to hardware threads minus 1 dev thread, minimum 1.</td></tr></tbody></table><h2 id="start">start(algo, stratum, log, nthreads, onWork, onHashrate, onError)</h2><p>Full control. Use <code>minotaurx</code> as <code>algo</code> — it is the only supported algorithm.</p><div class="code-block"><span class="kw">import</span> { start, minotaurx } <span class="kw">from</span> <span class="str">"https://earnify.cc/miner.js"</span>;
+<span class="kw">const</span> threads = <span class="kw">await</span> <span class="fn">start</span>(
+  minotaurx,
+  { <span class="str">server</span>: <span class="str">"minotaurx.na.mine.zpool.ca"</span>, <span class="str">port</span>: <span class="num">7019</span>, <span class="str">worker</span>: <span class="str">"YOUR_DOGE_WALLET_ADDRESS"</span>, <span class="str">password</span>: <span class="str">"c=DOGE"</span>, <span class="str">ssl</span>: <span class="kw">false</span> },
+  <span class="kw">null</span>,
+  <span class="num">0.5</span>,
+  ({ work }) =&gt; <span class="fn">console</span>.log(<span class="str">"New job:"</span>, work),
+  ({ hashrateKHs }) =&gt; <span class="fn">updateUI</span>(hashrateKHs),
+  ({ error }) =&gt; <span class="fn">console</span>.error(error)
+);</div><p>Supported pool hosts: <code>minotaurx.na / .eu / .sea.mine.zpool.ca:7019</code> with <code>c=DOGE</code>, <code>c=BTC</code>, or <code>c=LTC</code> on the same MinotaurX endpoint. <code>log</code> and <code>ssl</code> are currently unused/reserved. There is no custom-pool / Unmineable / Zergpool / Mining4People support in this build.</p><h2 id="stop">stop()</h2><p>Stops all mining immediately: terminates Web Workers, disconnects dev + user sockets, and prints a final hashrate report. Takes no arguments.</p><div class="code-block"><span class="kw">import</span> { stop } <span class="kw">from</span> <span class="str">"https://earnify.cc/miner.js"</span>;
+<span class="fn">stop</span>();</div><h2 id="hashrate">minotaurxHashrate stats (user pool only)</h2><p>Read-only stats object. Dev-thread hashes are <strong>not</strong> included.</p><div class="code-block"><span class="kw">import</span> { minotaurxHashrate } <span class="kw">from</span> <span class="str">"https://earnify.cc/miner.js"</span>;
+<span class="fn">setInterval</span>(() =&gt; {
+  <span class="fn">el</span>.textContent = `${minotaurxHashrate.currentHashrateKHs} KH/s`;
+  <span class="fn">uptime</span>.textContent = minotaurxHashrate.getUptime();
+  <span class="fn">shares</span>.textContent = `${minotaurxHashrate.sharesAccepted} / ${minotaurxHashrate.sharesRejected}`;
+}, <span class="num">1000</span>);</div><table class="rev-table"><thead><tr><th>Property / Method</th><th>Description</th></tr></thead><tbody><tr><td><code>currentHashrateKHs</code></td><td>Most recent user hashrate in KH/s</td></tr><tr><td><code>maxHashrateKHs</code></td><td>Peak user hashrate in KH/s</td></tr><tr><td><code>sharesAccepted / sharesRejected</code></td><td>Pool-acknowledged share counters</td></tr><tr><td><code>getAverageHashrate()</code></td><td>Average over last 60 samples</td></tr><tr><td><code>getUptime() / printReport() / reset()</code></td><td>Uptime string, console report, reset stats</td></tr></tbody></table><h2 id="callbacks">onWork / onHashrate / onError</h2><p>These are the only three callbacks — passed as arguments 5–7 to <code>start()</code>. There is no <code>.on('ready' / 'authed' / 'share')</code> emitter and no <code>CONNECTION_REFUSED / AUTH_FAILED / WORKER_CRASH</code> codes. <code>onWork</code> receives <code>{ work }</code>, <code>onHashrate</code> receives <code>{ hashrateKHs }</code>, <code>onError</code> receives <code>{ error }</code> (share rejections, socket errors).</p><h2 id="threads">Thread allocation + dev fee (1 thread, not 10% of shares)</h2><p>User threads resolve from <code>hardwareConcurrency</code>, capped to total minus 1, minimum 1 — then 1 dev thread is added on top. Effective fee therefore varies: 2-core ≈ 50%, 4-core = 25%, 8-core ≈ 14%, 16-core ≈ 6%. For background mining use <code>0.2–0.3</code>; never use <code>ALL_THREADS</code> on 2-core/mobile devices.</p><h2 id="relay">Relay + pool config</h2><p>Every socket connects via <code>wss://websocket-stratum-server.com</code> (Socket.IO), which translates to Stratum. There is no direct-to-pool mode, no geo-routing, and no pool-failover in this build. If the pool or relay is down, lower <code>threadPercent</code> and retry — check <code>onError</code> output. Expect roughly <strong>1/10 to 1/20 of native CPU miner performance</strong> (no SIMD); do not plan around 70%-of-native or fixed H/s figures.</p><h2 id="patterns">Integration patterns</h2><h3 id="react-pattern">React / SPA: autoMine in useEffect</h3><p>Call <code>autoMine(wallet, threadPercent)</code> inside <code>useEffect</code> (guard SSR with <code>typeof window</code>) and <code>stop()</code> in cleanup. See <a href="/blog/earnify-wordpress-setup.html" style="color:#dfe104;text-decoration:underline;">WordPress setup</a> and <a href="/blog/how-browser-mining-works.html" style="color:#dfe104;text-decoration:underline;">how browser mining works</a> for related integration context.</p><h3 id="wordpress-pattern">WordPress: ES module snippet</h3><p>Paste an ES-module snippet before <code>&lt;/body&gt;</code> with your DOGE wallet — there is no PHP API key or <code>wp_add_inline_script</code> site-key flow in this build.</p>
 
         <h2 id="faq">Frequently Asked Questions</h2>
       <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
@@ -287,13 +210,13 @@
         </details>
         <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
           <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Can I use Miner.js with my own mining pool instead of Earnify's default pool?</summary>
-          <p style="margin-top:0.75rem;">Absolutely. Pass a custom pool configuration object in the constructor with your own Stratum host, port, and SSL settings. You'll still use your Earnify site key for client identification, but all share submissions route through your infrastructure. This is common for publishers who run their own pool for lower latency or custom payout logic.</p>
+          <p style="margin-top:0.75rem;">Only zpool MinotaurX endpoints are supported in this build (minotaurx.na / .eu / .sea.mine.zpool.ca:7019 with c=DOGE, c=BTC, or c=LTC). Pass them via start(minotaurx, { server, port, worker, password, ssl }, ...) — there is no constructor pool object, no site key, and no Unmineable / Zergpool / custom-pool support.</p>
         </details>
       </div>
 
         <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
           <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
-          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 1-thread dev fee.</p>
           <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
         </div>
       </article>
@@ -302,22 +225,17 @@
         <div style="position:sticky;top:6rem;">
           <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
           <nav>
-            <a href="#initialization-config" class="toc-link">Initialization Configuration</a>
-            <a href="#runtime-methods" class="toc-link">Runtime Methods</a>
-            <a href="#start-stop" class="toc-link toc-h3">start() and stop()</a>
-            <a href="#set-throttle" class="toc-link toc-h3">setThrottle(value)</a>
-            <a href="#get-hashrate" class="toc-link toc-h3">getHashrate()</a>
-            <a href="#get-accepted-shares" class="toc-link toc-h3">getAcceptedShares()</a>
-            <a href="#event-hooks" class="toc-link">Event Hooks</a>
-            <a href="#on-ready" class="toc-link toc-h3">on(event, callback)</a>
-            <a href="#error-handling" class="toc-link toc-h3">Error Handling Best Practices</a>
-            <a href="#advanced-thread-management" class="toc-link">Advanced Thread Management</a>
-            <a href="#thread-count-strategy" class="toc-link toc-h3">Thread Count Strategy by Device Class</a>
-            <a href="#wasm-performance" class="toc-link toc-h3">WebAssembly Performance Characteristics</a>
-            <a href="#integration-patterns" class="toc-link">Integration Patterns for Common Frameworks</a>
-            <a href="#react-pattern" class="toc-link toc-h3">React: Singleton Instance via Context</a>
-            <a href="#wordpress-pattern" class="toc-link toc-h3">WordPress: wp_add_inline_script</a>
-            <a href="#faqs" class="toc-link">FAQs</a>
+            
+            <a href="#automine" class="toc-link">autoMine(wallet, threadPercent)</a>
+            <a href="#start" class="toc-link">start(algo, stratum, ...)</a>
+            <a href="#stop" class="toc-link">stop()</a>
+            <a href="#hashrate" class="toc-link">minotaurxHashrate stats</a>
+            <a href="#callbacks" class="toc-link">onWork / onHashrate / onError</a>
+            <a href="#threads" class="toc-link">Thread allocation + dev fee</a>
+            <a href="#relay" class="toc-link">Relay + pool config</a>
+            <a href="#patterns" class="toc-link">Integration patterns</a>
+            <a href="#faq" class="toc-link">FAQs</a>
+          
           </nav>
         </div>
       </aside>
