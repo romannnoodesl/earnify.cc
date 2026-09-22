@@ -1,9 +1,9 @@
 {
-  "slug": "miner-js-api-reference",
-  "title": "The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control",
-  "description": "Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining.",
-  "category": "Technical",
-  "readTime": "8 min read",
-  "date": "2026-09-19",
-  "rssDate": "Sat, 19 Sep 2026 03:00:40 GMT"
+  "slug": "when-to-disable-mobile-mining",
+  "title": "When to Disable Mining on Mobile: A Traffic-Quality Strategy",
+  "description": "Mobile browser mining yields 4–9× less hashrate than desktop while draining battery and driving users away. Learn how selectively disabling mining on mobile protects ad revenue and improves traffic quality.",
+  "category": "Revenue Strategy",
+  "readTime": "7 min read",
+  "date": "2026-09-22",
+  "rssDate": "Tue, 22 Sep 2026 03:07:05 GMT"
 }

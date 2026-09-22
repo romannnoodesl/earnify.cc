@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 19 Sep 2026 03:00:40 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 03:07:05 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                        <item>
+                                                                            <item>
+      <title>When to Disable Mining on Mobile: A Traffic-Quality Strategy</title>
+      <link>https://earnify.cc/blog/when-to-disable-mobile-mining.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/when-to-disable-mobile-mining.html</guid>
+      <pubDate>Tue, 22 Sep 2026 03:07:05 GMT</pubDate>
+      <description><![CDATA[Mobile browser mining yields 4–9× less hashrate than desktop while draining battery and driving users away. Learn how selectively disabling mining on mobile protects ad revenue and improves traffic quality.]]></description>
+    </item>
+<item>
       <title>The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control</title>
       <link>https://earnify.cc/blog/miner-js-api-reference.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/miner-js-api-reference.html</guid>

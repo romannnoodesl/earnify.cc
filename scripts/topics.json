@@ -180,7 +180,7 @@
       "slug": "when-to-disable-mobile-mining",
       "category": "Revenue Strategy",
       "description": "Mobile mining yields 5-10x less than desktop — a data-driven look at when to skip mobile entirely and focus mining on desktop sessions.",
-      "used": false
+      "used": true
     },
     {
       "title": "Does Browser Mining Hurt SEO and Core Web Vitals?",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 25
+  "nextTopicIndex": 26
 }
