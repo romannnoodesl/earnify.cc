@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Sep 2026 03:07:05 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 03:15:36 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                            <item>
+                                                                                <item>
+      <title>Does Browser Mining Hurt SEO and Core Web Vitals?</title>
+      <link>https://earnify.cc/blog/browser-mining-seo-core-web-vitals.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-seo-core-web-vitals.html</guid>
+      <pubDate>Fri, 25 Sep 2026 03:15:36 GMT</pubDate>
+      <description><![CDATA[We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe.]]></description>
+    </item>
+<item>
       <title>When to Disable Mining on Mobile: A Traffic-Quality Strategy</title>
       <link>https://earnify.cc/blog/when-to-disable-mobile-mining.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/when-to-disable-mobile-mining.html</guid>

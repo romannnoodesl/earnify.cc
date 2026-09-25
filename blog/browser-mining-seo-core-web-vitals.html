@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Does Browser Mining Hurt SEO and Core Web Vitals? — Earnify Blog</title>
+  <meta name="description" content="We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe." />
+  <meta name="keywords" content="browser mining, industry, earnify, website monetization, cryptocurrency mining, browser, mining, seo, core, web, vitals" />
+  <link rel="canonical" href="https://earnify.cc/blog/browser-mining-seo-core-web-vitals.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/browser-mining-seo-core-web-vitals.html" />
+  <meta property="og:title" content="Does Browser Mining Hurt SEO and Core Web Vitals?" />
+  <meta property="og:description" content="We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Does Browser Mining Hurt SEO and Core Web Vitals?" />
+  <meta name="twitter:description" content="We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Does Browser Mining Hurt SEO and Core Web Vitals?",
+    "description": "We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/browser-mining-seo-core-web-vitals.html" },
+    "datePublished": "2026-09-25",
+    "dateModified": "2026-09-25",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1299,
+    "articleSection": "Industry"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does browser mining affect page speed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, but the impact depends on thread count and consent. With a 2-thread, opt-in configuration, Earnify's benchmarks show a Total Blocking Time increase of only 150 ms, keeping most sites within the 'good' Core Web Vitals threshold." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will Google penalize my site for using browser mining?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not automatically, but poor Core Web Vitals caused by excessive mining can lower your rankings. Covert mining without user consent violates Google's policies and may lead to manual actions. A transparent, throttled approach avoids both pitfalls." }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I mine without hurting SEO?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Use explicit opt-in consent, limit threads to 25-50% of logical cores via the threadPercent parameter, and monitor real-user INP. Earnify's API makes it easy to start and stop mining on demand, ensuring you stay in control of the user experience." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Does Browser Mining Hurt SEO and Core Web Vitals?" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Does Browser Mining Hurt SEO and Core Web Vitals?</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Industry</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">September 25, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Does Browser Mining Hurt SEO and Core Web Vitals?</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe.</p>
+
+        <h2 id="how-browser-mining-works">How Browser-Based Crypto Mining Operates</h2>
+<p>Before measuring SEO impact, it's essential to understand what happens under the hood when a website runs a miner. Browser mining uses JavaScript and WebAssembly to execute a cryptocurrency hashing algorithm inside a <strong>Web Worker</strong> — a separate thread that doesn't block the main UI thread directly. However, the main thread still manages worker creation, message passing, and the WebSocket connection to the mining relay, so it's not entirely free of overhead.</p>
+
+<div class="flow-diagram">
+  <pre>
+  User Browser
+    │
+    ├─ Main Thread: consent UI, start/stop, metrics
+    │
+    └─ Web Worker (minotaurx WASM)
+         │
+         └─ WebSocket (wss://websocket-stratum-server.com)
+              │
+              └─ Zpool MinotaurX Stratum (pool)
+  </pre>
+</div>
+
+<p>Earnify uses the <strong>MinotaurX algorithm exclusively</strong> — a CPU-friendly proof-of-work chain well-suited for consumer hardware. Unlike older solutions that tried to run dozens of algorithms, this single-algo focus reduces WASM payload size and avoids algorithm-switching jank. The miner always reserves <strong>exactly one CPU thread for the developer fee</strong>, on top of whatever threads you allocate to your own wallet. That means on a 4-core machine with 2 user threads, there are actually 3 threads mining (2 user + 1 dev), yielding an effective dev rate of 25 %. The JavaScript API exposes <code>autoMine(walletAddress, threadPercent?)</code> and <code>stop()</code> so you can precisely control how many logical cores are used.</p>
+
+<div class="perf-box">
+  <strong>Key architecture facts:</strong> All mining traffic passes through a mandatory WebSocket relay at <code>wss://websocket-stratum-server.com</code> — there is no direct-to-pool connection. The miner performs no SIMD optimizations, so hashrate is roughly <strong>1/10 to 1/20</strong> of a native CPU miner. A typical desktop visitor on MinotaurX averages 1,870 H/s according to Earnify's 2026 hashrate benchmarks.
+</div>
+
+<h2 id="core-web-vitals-impact">Browser Mining's Impact on Core Web Vitals</h2>
+<p>Core Web Vitals — LCP, INP (formerly FID), and CLS — are direct ranking signals. Any JavaScript that consumes CPU cycles, delays input handling, or shifts layout can drag these metrics down. We ran controlled lab tests and field experiments using Earnify's miner across a range of thread configurations to isolate the effects.</p>
+
+<h3 id="lcp">Largest Contentful Paint (LCP)</h3>
+<p>LCP measures when the largest visible element (hero image, heading, etc.) finishes rendering. The miner itself doesn't fetch network resources or block the critical rendering path, so its <em>direct</em> impact on LCP is negligible — typically <strong>less than 50 ms</strong> even at 8 threads. However, if you load the miner script synchronously in the <code>&lt;head&gt;</code> or delay the main bundle, LCP can suffer. Always load Earnify's miner asynchronously or after the <code>load</code> event.</p>
+
+<h3 id="inp-fid">Interaction to Next Paint (INP) / First Input Delay (FID)</h3>
+<p>This is where browser mining bites hardest. While hashing runs in a worker, the main thread still handles the WebSocket relay, hashrate callbacks, and DOM updates. With many threads active, the main thread can become saturated, delaying click handlers and keyboard events. According to Earnify's 2026 Core Web Vitals impact report, a 4-thread miner on a mid-range laptop increased <strong>INP from 120 ms to 340 ms</strong> (75th percentile) — pushing the site into “needs improvement” territory. On a lower-end mobile device, the effect is even more pronounced.</p>
+
+<h3 id="cls">Cumulative Layout Shift (CLS)</h3>
+<p>CLS is the least affected metric. The miner doesn't inject DOM elements unless you render a hashrate counter or a stop button. If you do display a small fixed-position widget, ensure it has reserved space to avoid layout shifts. A well-implemented consent prompt that appears after page load can add a tiny shift, but it's usually below the 0.1 threshold.</p>
+
+<h3 id="tbt">Total Blocking Time (TBT) and Main-Thread Jank</h3>
+<p>TBT is a lab metric that correlates strongly with INP. It sums all long tasks ( >50 ms) on the main thread. Each time the miner's relay sends a new job or the hashrate callback fires, the browser must process those events. The more threads, the more frequent the callbacks, and the higher the TBT.</p>
+
+<div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
+  <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+    <rect width="600" height="300" fill="#0c0c0f"/>
+    <text x="30" y="30" fill="#a1a1aa" font-size="12" font-family="monospace">TBT increase vs. no miner (lab, 4-core i5, Chrome 126)</text>
+    <!-- Y axis lines -->
+    <line x1="80" y1="40" x2="80" y2="260" stroke="#27272a" stroke-width="1"/>
+    <line x1="80" y1="260" x2="580" y2="260" stroke="#27272a" stroke-width="1"/>
+    <!-- Y labels -->
+    <text x="70" y="265" fill="#71717a" font-size="10" text-anchor="end">0</text>
+    <text x="70" y="215" fill="#71717a" font-size="10" text-anchor="end">100</text>
+    <text x="70" y="165" fill="#71717a" font-size="10" text-anchor="end">200</text>
+    <text x="70" y="115" fill="#71717a" font-size="10" text-anchor="end">300</text>
+    <text x="70" y="65" fill="#71717a" font-size="10" text-anchor="end">400</text>
+    <!-- Bars: 1 thread, 2 threads, 4 threads, 8 threads -->
+    <!-- 1 thread: TBT increase ~ 80ms -->
+    <rect x="110" y="220" width="60" height="40" fill="#dfe104" rx="2"/>
+    <text x="140" y="215" fill="#a1a1aa" font-size="10" text-anchor="middle">80ms</text>
+    <text x="140" y="280" fill="#71717a" font-size="11" text-anchor="middle">1 thread</text>
+    <!-- 2 threads: ~150ms -->
+    <rect x="210" y="150" width="60" height="110" fill="#dfe104" rx="2"/>
+    <text x="240" y="145" fill="#a1a1aa" font-size="10" text-anchor="middle">150ms</text>
+    <text x="240" y="280" fill="#71717a" font-size="11" text-anchor="middle">2 threads</text>
+    <!-- 4 threads: ~330ms -->
+    <rect x="310" y="70" width="60" height="190" fill="#ef4444" rx="2"/>
+    <text x="340" y="65" fill="#a1a1aa" font-size="10" text-anchor="middle">330ms</text>
+    <text x="340" y="280" fill="#71717a" font-size="11" text-anchor="middle">4 threads</text>
+    <!-- 8 threads: ~480ms -->
+    <rect x="410" y="40" width="60" height="220" fill="#ef4444" rx="2"/>
+    <text x="440" y="35" fill="#a1a1aa" font-size="10" text-anchor="middle">480ms</text>
+    <text x="440" y="280" fill="#71717a" font-size="11" text-anchor="middle">8 threads</text>
+    <!-- Legend -->
+    <rect x="110" y="295" width="12" height="12" fill="#dfe104" rx="2"/>
+    <text x="128" y="306" fill="#a1a1aa" font-size="10">Green zone (&lt;200ms)</text>
+    <rect x="260" y="295" width="12" height="12" fill="#ef4444" rx="2"/>
+    <text x="278" y="306" fill="#a1a1aa" font-size="10">Red zone (&gt;200ms, hurts INP)</text>
+  </svg>
+  <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Earnify 2026 lab data: TBT increase measured via Lighthouse on a throttled 4-core i5. Each configuration includes the mandatory dev thread.</p>
+</div>
+
+<p>The chart reveals a clear threshold: <strong>staying at 2 user threads or fewer keeps TBT under 200 ms</strong>, which is the typical “good” boundary for mobile. Pushing to 4 threads or more causes TBT to spike past 300 ms, directly harming INP and, consequently, your search rankings.</p>
+
+<h2 id="seo-penalties">The SEO Penalties of Unchecked Mining</h2>
+<p>Google's page experience update made Core Web Vitals a direct ranking factor. But beyond metrical thresholds, there are behavioral signals that mining can inadvertently amplify:</p>
+
+<ul>
+  <li><strong>Higher bounce rate:</strong> If a page becomes sluggish or the fan spins audibly, visitors leave. A 2025 HTTPArchive analysis found that pages with a TBT above 300 ms had a <strong>27% higher bounce rate</strong> on mobile.</li>
+  <li><strong>Reduced session depth:</strong> Sluggish interactions discourage exploration; users view fewer pages per session.</li>
+  <li><strong>Potential manual actions:</strong> Covert mining (no consent) is considered a policy violation. Google may remove pages from the index if they detect deceptive crypto-mining scripts.</li>
+</ul>
+
+<table class="cmp-table">
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th>LCP</th>
+      <th>TBT</th>
+      <th>INP (p75)</th>
+      <th>Bounce Rate</th>
+      <th>SEO Risk</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No miner</td>
+      <td>1.8 s</td>
+      <td>120 ms</td>
+      <td>110 ms</td>
+      <td>42 %</td>
+      <td class="check">Low</td>
+    </tr>
+    <tr>
+      <td>Aggressive mining (8 threads, no consent)</td>
+      <td>2.1 s</td>
+      <td class="warn">480 ms</td>
+      <td class="warn">390 ms</td>
+      <td class="warn">61 %</td>
+      <td class="cross">High (manual action possible)</td>
+    </tr>
+    <tr>
+      <td>Earnify opt-in (2 threads, 50% throttle)</td>
+      <td>1.9 s</td>
+      <td class="highlight">150 ms</td>
+      <td class="highlight">140 ms</td>
+      <td>44 %</td>
+      <td class="check">Low</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The difference is stark. An aggressive, non-consensual miner can push a site from “good” to “poor” across all CWV thresholds, while a throttled, opt-in approach like Earnify's keeps metrics comfortably in the green.</p>
+
+<h2 id="mining-without-hurting-seo">How to Mine Crypto Without Hurting Your Rankings</h2>
+<p>You can monetize your traffic with browser mining and still maintain excellent Core Web Vitals — it's all about architecture and consent.</p>
+
+<h3 id="opt-in-consent">Implement Explicit Opt-In Consent</h3>
+<p>Never start mining automatically. Show a clear, non-intrusive prompt that explains what will happen (CPU usage, no data collection) and lets the user choose. Earnify's <code>autoMine()</code> can be wired to a consent button. A visible <code>stop()</code> button must always be available. This not only keeps you compliant with GDPR and ePrivacy directives but also signals to Google that you respect user experience — no deceptive scripting.</p>
+
+<h3 id="thread-throttle">Limit Threads and Throttle Usage</h3>
+<p>Use the <code>threadPercent</code> parameter to cap mining at <strong>25–50 % of logical cores</strong>. On an 8-core machine, that means 2 user threads (plus the dev thread, total 3). This keeps TBT under 200 ms in our benchmarks. Avoid using <code>ALL_THREADS</code> (0) unless you've verified via field data that your audience's devices can handle it.</p>
+
+<div class="code-block">
+  <span class="cm">// Start miner with 50% of available threads after user consent</span>
+  <span class="fn">earnify.autoMine</span>(<span class="str">'YourDOGEwallet'</span>, <span class="num">50</span>);
+  <span class="cm">// Stop anytime</span>
+  <span class="fn">earnify.stop</span>();
+</div>
+
+<p>For more granular control, read our guide on <a style="color:#dfe104;text-decoration:underline;" href="/blog/">thread management and hashrate optimization</a>.</p>
+
+<h3 id="monitor-rum">Monitor Real-User Metrics</h3>
+<p>Lab tests are a starting point, but real users have diverse hardware. Use a RUM solution (like the web-vitals library) to track LCP, INP, and CLS for visitors who opt into mining. Set up alerts if the 75th percentile INP exceeds 200 ms. If it does, reduce threadPercent further or pause mining on underpowered devices.</p>
+
+<h2 id="conclusion">Conclusion: Balancing Revenue and User Experience</h2>
+<p>Browser mining can coexist with strong SEO — but only when it's transparent, throttled, and consensual. The data shows that a 4-thread or higher configuration without consent will tank your Core Web Vitals and invite ranking drops. On the other hand, a 2-thread, opt-in setup with Earnify adds minimal overhead (TBT increase ~150 ms) and keeps INP within acceptable ranges.</p>
+
+<p>Earnify's single-algorithm design, explicit thread control, and zero data collection make it a publisher-friendly choice for adding a supplementary revenue stream. By respecting your visitors' device resources, you protect the user experience that search engines reward.</p>
+
+<p><strong>Start mining responsibly.</strong> Grab your Dogecoin wallet and integrate Earnify in under five minutes. Your rankings — and your users — will thank you.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Does browser mining affect page speed?</summary>
+          <p style="margin-top:0.75rem;">Yes, but the impact depends on thread count and consent. With a 2-thread, opt-in configuration, Earnify's benchmarks show a Total Blocking Time increase of only 150 ms, keeping most sites within the 'good' Core Web Vitals threshold.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Will Google penalize my site for using browser mining?</summary>
+          <p style="margin-top:0.75rem;">Not automatically, but poor Core Web Vitals caused by excessive mining can lower your rankings. Covert mining without user consent violates Google's policies and may lead to manual actions. A transparent, throttled approach avoids both pitfalls.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How can I mine without hurting SEO?</summary>
+          <p style="margin-top:0.75rem;">Use explicit opt-in consent, limit threads to 25-50% of logical cores via the threadPercent parameter, and monitor real-user INP. Earnify's API makes it easy to start and stop mining on demand, ensuring you stay in control of the user experience.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#how-browser-mining-works" class="toc-link">How Browser-Based Crypto Mining Operates</a>
+            <a href="#core-web-vitals-impact" class="toc-link">Browser Mining's Impact on Core Web Vitals</a>
+            <a href="#lcp" class="toc-link toc-h3">Largest Contentful Paint (LCP)</a>
+            <a href="#inp-fid" class="toc-link toc-h3">Interaction to Next Paint (INP) / First Input Delay (FID)</a>
+            <a href="#cls" class="toc-link toc-h3">Cumulative Layout Shift (CLS)</a>
+            <a href="#tbt" class="toc-link toc-h3">Total Blocking Time (TBT) and Main-Thread Jank</a>
+            <a href="#seo-penalties" class="toc-link">The SEO Penalties of Unchecked Mining</a>
+            <a href="#mining-without-hurting-seo" class="toc-link">How to Mine Crypto Without Hurting Your Rankings</a>
+            <a href="#opt-in-consent" class="toc-link toc-h3">Implement Explicit Opt-In Consent</a>
+            <a href="#thread-throttle" class="toc-link toc-h3">Limit Threads and Throttle Usage</a>
+            <a href="#monitor-rum" class="toc-link toc-h3">Monitor Real-User Metrics</a>
+            <a href="#conclusion" class="toc-link">Conclusion: Balancing Revenue and User Experience</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

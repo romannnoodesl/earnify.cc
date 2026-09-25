@@ -187,7 +187,7 @@
       "slug": "browser-mining-seo-core-web-vitals",
       "category": "Industry",
       "description": "An honest look at whether a Web Worker miner affects LCP, INP, or search rankings — with test data and safe integration patterns.",
-      "used": false
+      "used": true
     },
     {
       "title": "Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won",
@@ -274,5 +274,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 26
+  "nextTopicIndex": 27
 }

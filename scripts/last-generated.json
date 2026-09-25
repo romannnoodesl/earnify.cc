@@ -1,9 +1,9 @@
 {
-  "slug": "when-to-disable-mobile-mining",
-  "title": "When to Disable Mining on Mobile: A Traffic-Quality Strategy",
-  "description": "Mobile browser mining yields 4–9× less hashrate than desktop while draining battery and driving users away. Learn how selectively disabling mining on mobile protects ad revenue and improves traffic quality.",
-  "category": "Revenue Strategy",
+  "slug": "browser-mining-seo-core-web-vitals",
+  "title": "Does Browser Mining Hurt SEO and Core Web Vitals?",
+  "description": "We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe.",
+  "category": "Industry",
   "readTime": "7 min read",
-  "date": "2026-09-22",
-  "rssDate": "Tue, 22 Sep 2026 03:07:05 GMT"
+  "date": "2026-09-25",
+  "rssDate": "Fri, 25 Sep 2026 03:15:36 GMT"
 }
