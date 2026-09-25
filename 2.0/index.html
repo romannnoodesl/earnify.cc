@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earnify 2.0 — Universal Browser Miner: 56% Smaller, Multi-Coin Auto-Detect | Monetize Without Ads</title>
+  <meta name="description" content="Earnify 2.0: one 430 KB newminer.js replaces miner.js (983 KB) + automine.js + automineLTC.js. Auto-detects DOGE, Litecoin & Ravencoin wallets, sets the pool password for you. No ads, no cookies, no tracking. Deploy in 5 minutes, 3 steps." />
+  <meta name="keywords" content="earnify 2.0, browser mining, web mining, monero alternative, coinhive alternative, monetize website without ads, adblock-proof revenue, minotaurx browser miner, dogecoin browser mining, litecoin web miner, ravencoin web miner, zpool browser mining, cpu monetization publishers" />
+  <link rel="canonical" href="https://earnify.cc/2.0/" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://earnify.cc/2.0/" />
+  <meta property="og:title" content="Earnify 2.0 — One Miner. Every Wallet. 56% Smaller." />
+  <meta property="og:description" content="One 430 KB file replaces 983 KB miner.js. Auto-detects DOGE / LTC / RVN wallets. No ads. No cookies. Deploy in 3 steps. Try the live demo." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Earnify 2.0 — 56% smaller. Every wallet. Zero config." />
+  <meta name="twitter:description" content="Universal browser miner: DOGE/LTC/RVN auto-detect, 430 KB, 3-step deploy, adblock-proof revenue. Live demo + docs." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Earnify 2.0 (newminer.js)",
+    "url": "https://earnify.cc/2.0/",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web Browser",
+    "softwareVersion": "2.0",
+    "fileSize": "430KB",
+    "description": "Universal browser miner: one 430 KB file (56% smaller than miner.js), automatic DOGE/LTC/RVN wallet detection, MinotaurX via zpool, H user threads + 1 fee thread. Monetize websites without ads, cookies or tracking.",
+    "featureList": [
+      "56% smaller than miner.js (430 KB vs 983 KB)",
+      "One file replaces automine.js + automineLTC.js",
+      "Automatic DOGE / Litecoin / Ravencoin wallet detection",
+      "Zero-config pool password (c=DOGE / c=LTC / c=RVN)",
+      "No ads, no cookies, no tracking",
+      "Adblock-proof publisher revenue",
+      "3-step deploy in 5 minutes"
+    ],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free. 1 fee thread; payouts go to your wallet." }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much smaller is Earnify 2.0 than v1?",
+        "acceptedAnswer": { "@type": "Answer", "text": "newminer.js is 430 KB — 56% smaller than miner.js (983 KB), saving 553 KB of page weight. It also replaces two single-coin files (automine.js + automineLTC.js, 878 KB combined) with one universal file." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which wallets does Earnify 2.0 support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any Dogecoin, Litecoin (ltc1/L/M prefixes) or Ravencoin (R prefix) address. The miner auto-detects the coin from the wallet prefix and sends the correct pool password (c=DOGE / c=LTC / c=RVN). Anything unrecognized defaults to Dogecoin." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I implement Earnify 2.0?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Three steps: 1) paste your wallet address, 2) add the 5-line autoMine snippet importing newminer.js, 3) verify shares on zpool.ca/wallet/<address>. No build step, no dependencies, no tracking code." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Earnify 2.0 work with ad-blocked visitors?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Browser mining earns from visitor CPU cycles, not ad impressions — revenue flows even when 40%+ of visitors block ads. No cookies, no fingerprinting, no consent banner needed." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #fafafa; font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+    ::selection { background: #dfe104; color: #000; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; width: 100%; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 2px solid #27272a; }
+    nav .logo { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.05em; text-transform: uppercase; text-decoration: none; color: #fafafa; }
+    nav .logo span { color: #dfe104; }
+    .nav-links { display: flex; gap: 24px; }
+    nav a:not(.logo) { color: #a1a1aa; text-decoration: none; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    nav a:not(.logo):hover { color: #dfe104; }
+    .pill { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #09090b; background: #dfe104; padding: 6px 14px; margin-bottom: 16px; }
+    .hero { padding: 72px 0 48px; text-align: center; border-bottom: 2px solid #27272a; }
+    .hero h1 { font-size: clamp(2.4rem, 8vw, 4.5rem); font-weight: 700; letter-spacing: -0.05em; text-transform: uppercase; line-height: 0.9; margin-bottom: 16px; }
+    .hero h1 span { color: #dfe104; }
+    .hero p { color: #a1a1aa; font-size: 1.05rem; max-width: 640px; margin: 0 auto 28px; line-height: 1.6; }
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 14px 28px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; border: 2px solid #dfe104; transition: all 0.15s; }
+    .btn-solid { background: #dfe104; color: #09090b; }
+    .btn-solid:hover { background: transparent; color: #dfe104; }
+    .btn-ghost { background: transparent; color: #dfe104; }
+    .btn-ghost:hover { background: #dfe104; color: #09090b; }
+    section { padding: 56px 0; border-bottom: 2px solid #27272a; }
+    section h2 { font-size: clamp(1.5rem, 4vw, 2.25rem); font-weight: 700; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 12px; }
+    section h2 span { color: #dfe104; }
+    section .lede { color: #a1a1aa; max-width: 720px; line-height: 1.7; margin-bottom: 24px; }
+    .cards { display: grid; gap: 1px; background: #27272a; border: 2px solid #27272a; }
+    @media (min-width: 640px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+    .card { background: #09090b; padding: 24px; }
+    .card .n { color: #dfe104; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.2em; margin-bottom: 8px; }
+    .card h3 { text-transform: uppercase; font-size: 1rem; margin-bottom: 8px; }
+    .card p { color: #a1a1aa; font-size: 0.9rem; line-height: 1.6; }
+    .card code { color: #dfe104; font-size: 0.8rem; }
+    /* showcase */
+    .showcase { border: 1px solid #27272a; background: #18181b; padding: 24px; }
+    .showcase label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: #a1a1aa; display: block; margin-bottom: 6px; }
+    .showcase input { width: 100%; background: transparent; border: none; border-bottom: 2px solid #27272a; padding: 8px 0; font-family: inherit; font-size: 0.95rem; color: #fafafa; outline: none; }
+    .showcase input:focus { border-color: #dfe104; }
+    .badge-row { display: flex; gap: 12px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
+    .coin-badge { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 16px; border: 2px solid #dfe104; color: #dfe104; }
+    .coin-badge small { display: block; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.05em; color: #a1a1aa; margin-top: 2px; text-transform: none; }
+    .prefill { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .prefill button { background: transparent; border: 1px solid #27272a; color: #fafafa; font-family: inherit; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 14px; cursor: pointer; }
+    .prefill button:hover { border-color: #dfe104; color: #dfe104; }
+    .logic { margin-top: 20px; font-family: 'Courier New', monospace; font-size: 0.8rem; color: #a1a1aa; background: #09090b; border: 1px solid #27272a; padding: 16px; line-height: 1.7; overflow-x: auto; }
+    .logic .k { color: #dfe104; }
+    pre.deploy { background: #09090b; border: 1px solid #27272a; padding: 20px; font-family: 'Courier New', monospace; font-size: 0.82rem; line-height: 1.7; overflow-x: auto; color: #a1a1aa; }
+    pre.deploy .c { color: #52525b; }
+    pre.deploy .k { color: #dfe104; }
+    .faq details { border: 1px solid #27272a; background: #18181b; margin-bottom: 8px; }
+    .faq summary { padding: 16px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary:hover { color: #dfe104; }
+    .faq .a { padding: 0 16px 16px; color: #a1a1aa; font-size: 0.9rem; line-height: 1.7; }
+    /* stat band */
+    .statband { background: #dfe104; color: #09090b; }
+    .statband .container { display: grid; gap: 1px; background: rgba(0,0,0,0.15); padding-top: 0; padding-bottom: 0; }
+    .statband .stats { display: grid; grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 640px) { .statband .stats { grid-template-columns: repeat(4, 1fr); } }
+    .statband .stat { padding: 20px 16px; text-align: center; }
+    .statband .big { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+    .statband .cap { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; margin-top: 6px; opacity: 0.75; }
+    /* steps */
+    .steps { display: grid; gap: 12px; margin-top: 24px; }
+    @media (min-width: 640px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step { border: 1px solid #27272a; background: #18181b; padding: 22px; position: relative; }
+    .step .s { font-size: 2.2rem; font-weight: 700; color: #dfe104; letter-spacing: -0.05em; line-height: 1; }
+    .step h3 { text-transform: uppercase; font-size: 0.95rem; margin: 10px 0 8px; }
+    .step p { color: #a1a1aa; font-size: 0.88rem; line-height: 1.65; }
+    .step code { color: #dfe104; font-size: 0.8rem; }
+    .step .time { position: absolute; top: 22px; right: 22px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #52525b; }
+    .codehead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0; border: 1px solid #27272a; border-bottom: none; background: #18181b; padding: 10px 16px; }
+    .codehead span { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #a1a1aa; }
+    .copybtn { background: transparent; border: 1px solid #27272a; color: #fafafa; font-family: inherit; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 6px 12px; cursor: pointer; }
+    .copybtn:hover { border-color: #dfe104; color: #dfe104; }
+    pre.deploy { margin-top: 0; }
+    table.compare { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 0.85rem; }
+    table.compare th, table.compare td { border: 1px solid #27272a; padding: 12px 14px; text-align: left; }
+    table.compare th { background: #18181b; text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.12em; }
+    table.compare td { color: #a1a1aa; line-height: 1.6; }
+    table.compare td:first-child { color: #52525b; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; }
+    table.compare .win { color: #dfe104; font-weight: 700; }
+    footer { padding: 32px 20px; text-align: center; font-size: 0.8rem; color: #52525b; margin-top: auto; }
+    footer a { color: #a1a1aa; text-decoration: none; }
+    footer a:hover { color: #dfe104; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/2.0/" class="logo">Earn<span>ify</span> <span style="font-size:0.7rem;letter-spacing:0.2em;">2.0</span></a>
+  <div class="nav-links">
+    <a href="/2.0/demo/">Demo</a>
+    <a href="/2.0/docs/">Docs</a>
+    <a href="/stats/">Calculator</a>
+    <a href="/blog/">Blog</a>
+    <a href="/">v1.0 →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <span class="pill">New — Earnify 2.0 is here</span>
+    <h1>Revenue your<br />ad-blocker <span>can't kill.</span></h1>
+    <p><strong style="color:#fafafa">One 430&nbsp;KB file. Every wallet. Zero config.</strong> Earnify 2.0 turns idle visitor CPU into Dogecoin, Litecoin or Ravencoin — <strong style="color:#fafafa">no ads, no cookies, no tracking, no consent banner.</strong> Paste your wallet, add 5 lines, get paid per share.</p>
+    <div class="cta-row">
+      <a class="btn btn-solid" href="/2.0/demo/">Try it live — 30 seconds →</a>
+      <a class="btn btn-ghost" href="#implement">See how simple it is</a>
+    </div>
+    <p style="margin:22px auto 0;font-size:0.8rem;color:#52525b;">Free to use · 1 fee thread · Payouts straight to <em>your</em> wallet · <a style="color:#dfe104" href="/2.0/docs/">Docs</a></p>
+  </div>
+</header>
+
+<div class="statband">
+  <div class="container">
+    <div class="stats">
+      <div class="stat"><div class="big">−56%</div><div class="cap">Page weight vs miner.js (983→430 KB)</div></div>
+      <div class="stat"><div class="big">3-in-1</div><div class="cap">DOGE · LTC · RVN auto-detect, one file</div></div>
+      <div class="stat"><div class="big">3 steps</div><div class="cap">Wallet → snippet → paid. ~5 minutes</div></div>
+      <div class="stat"><div class="big">0</div><div class="cap">Ads · cookies · tracking · consent banners</div></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <h2>Why publishers <span>upgrade</span></h2>
+    <p class="lede">Advertising is blocked, tracked and shrinking. Earnify 2.0 monetizes <strong style="color:#fafafa">engagement time itself</strong> — the longer visitors stay, the more you earn. And v2 removes every excuse not to switch: half the bytes, zero wallet guesswork, same 5-minute deploy.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="n">01 · −56% LIGHTER</div>
+        <h3>Half the bytes, same hashpower</h3>
+        <p><code>miner.js</code> was 983 KB. <code>newminer.js</code> is <strong style="color:#fafafa">430 KB — 553 KB lighter</strong>, faster to load, kinder to Core Web Vitals. Same WASM core, same MinotaurX hashrate, none of the dead weight.</p>
+      </div>
+      <div class="card">
+        <div class="n">02 · 3 COINS, 0 CONFIG</div>
+        <h3>It reads your wallet like a local</h3>
+        <p>Paste <em>anything</em> — <code>ltc1/L/M → c=LTC</code>, <code>R → c=RVN</code>, everything else <code>→ c=DOGE</code>. The pool password sets itself. Two single-coin files (<code>automine.js + automineLTC.js</code>) collapse into one you'll never misconfigure.</p>
+      </div>
+      <div class="card">
+        <div class="n">03 · ADBLOCK-PROOF</div>
+        <h3>Earn from the 42% ads can't reach</h3>
+        <p>No impressions, no pixels, no cookies — just CPU cycles converted to crypto on zpool. Works behind ad-blockers, survives cookie deprecation, and never shows your readers a single banner.</p>
+      </div>
+    </div>
+    <table class="compare" aria-label="Earnify v1 versus v2 comparison">
+      <tr><th></th><th>v1 (miner.js / automine)</th><th>v2 (newminer.js)</th></tr>
+      <tr><td>Size</td><td>983 KB full lib · 2 coin files</td><td class="win">430 KB single file · −56%</td></tr>
+      <tr><td>Coins</td><td>Pick the right file per coin</td><td class="win">DOGE + LTC + RVN auto-detected</td></tr>
+      <tr><td>Setup</td><td>Password + hashrate polling</td><td class="win">5 lines · push callbacks · 3 steps</td></tr>
+      <tr><td>Privacy</td><td colspan="2" style="text-align:center;color:#fafafa;">Zero cookies · zero tracking · zero consent banner — both versions</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Don't take our word for it — <span>paste a wallet</span></h2>
+    <p class="lede">This box runs the <strong style="color:#fafafa">exact detection logic shipping in newminer.js</strong> — no mining starts. Click each coin, watch the pool password flip, then press the same address into the <a style="color:#dfe104" href="/2.0/demo/">live demo</a> and mine for real.</p>
+    <div class="showcase">
+      <label for="walletDemo">Wallet address — try each button</label>
+      <input id="walletDemo" type="text" value="DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G" spellcheck="false" autocomplete="off" />
+      <div class="badge-row">
+        <div class="coin-badge" id="coinBadge">—<small id="coinSub">detecting…</small></div>
+        <span style="color:#52525b;font-size:0.8rem;" id="coinDetail"></span>
+      </div>
+      <div class="prefill">
+        <button type="button" data-wallet="DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G">DOGE example</button>
+        <button type="button" data-wallet="ltc1qt7gfae52q3z9m6lef892qrpt53mt4rz04ftrn7">LTC example</button>
+        <button type="button" data-wallet="RWmCvzsoC7CfM5Fh6moR3g2Xk3J566nD3m">RVN example</button>
+      </div>
+      <div class="logic"><span class="k">function</span> coinPass(a) {<br />&nbsp;&nbsp;a = String(a || <span class="k">""</span>).trim();<br />&nbsp;&nbsp;<span class="k">if</span> (/^ltc1<span class="k">/i</span>.test(a) || /^[LM]/.test(a)) <span class="k">return</span> <span class="k">"c=LTC"</span>; <span class="c">// Litecoin</span><br />&nbsp;&nbsp;<span class="k">if</span> (/^R/.test(a)) <span class="k">return</span> <span class="k">"c=RVN"</span>; <span class="c">// Ravencoin</span><br />&nbsp;&nbsp;<span class="k">return</span> <span class="k">"c=DOGE"</span>; <span class="c">// default: Dogecoin</span><br />}</div>
+    </div>
+  </div>
+</section>
+
+<section id="implement">
+  <div class="container">
+    <h2>Live in <span>3 steps, ~5 minutes</span></h2>
+    <p class="lede">If you can paste an address and copy 5 lines, you can monetize without ads. No SDK, no dashboard, no account — your wallet <em>is</em> your account, and payouts land on <a style="color:#dfe104" href="https://zpool.ca" target="_blank" rel="noopener">zpool</a>.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="time">~1 min</span>
+        <div class="s">1</div>
+        <h3>Grab your wallet</h3>
+        <p>Any DOGE, Litecoin or Ravencoin address. Already have one? You're done — the miner detects the coin itself. Need one? Any exchange or wallet app takes a minute.</p>
+      </div>
+      <div class="step">
+        <span class="time">~3 min</span>
+        <div class="s">2</div>
+        <h3>Drop in the snippet</h3>
+        <p>One <code>import</code>, one <code>autoMine()</code> call. Self-host it next to your page — or skip hosting entirely and import straight from <code>https://earnify.cc/2.0/newminer.js</code>. Tune <code>0.5</code> up or down for CPU share.</p>
+      </div>
+      <div class="step">
+        <span class="time">~1 min</span>
+        <div class="s">3</div>
+        <h3>Watch shares land</h3>
+        <p>Open <code>zpool.ca/wallet/&lt;your-address&gt;</code> and see accepted shares within a minute. Hashrate streams back via <code>onHashrate</code> — no polling, no dashboard needed.</p>
+      </div>
+    </div>
+    <div style="height:24px"></div>
+    <div class="codehead"><span>Copy-paste deploy — Earnify 2.0</span><button class="copybtn" id="copyBtn" type="button">Copy</button></div>
+    <pre class="deploy" id="deployCode"><span class="c">// Option A — CDN, no hosting needed (always the latest 2.0)</span>
+<span class="k">import</span> { autoMine } <span class="k">from</span> <span class="k">"https://earnify.cc/2.0/newminer.js"</span>;
+
+<span class="c">// Option B — self-hosted (download newminer.js, 430 KB, zero dependencies)</span>
+<span class="c">// import { autoMine } from "./newminer.js";</span>
+
+<span class="c">// One call. Coin auto-detected from YOUR address. 50% CPU.</span>
+<span class="k">const</span> miner = autoMine(<span class="k">"YOUR_WALLET_HERE"</span>, <span class="k">0.5</span>, {
+  onHashrate: (h) =&gt; console.log(h.hashrateKHs + <span class="k">" KH/s"</span>),
+  onError: (e) =&gt; console.warn(e),
+});
+
+<span class="c">// Check zpool.ca/wallet/YOUR_WALLET_HERE for shares. Done.</span>
+<span class="c">// miner.stop() whenever the visitor opts out. miner.userThreads tells you the load.</span></pre>
+    <p class="lede" style="margin-top:16px;margin-bottom:0;">Want every knob (<code style="color:#dfe104">start/stop/MiniSocket</code>, <code style="color:#dfe104">server/port/ssl/password</code> overrides, error strings)? <a style="color:#dfe104" href="/2.0/docs/">Full API reference + v1 → v2 migration →</a></p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="container">
+    <h2>FAQ — <span>2.0</span></h2>
+    <p class="lede">Short answers. Details in docs.</p>
+    <details open>
+      <summary>Which wallets work?</summary>
+      <div class="a">Any Dogecoin, Litecoin (<code>ltc1…</code>/<code>L…</code>/<code>M…</code>) or Ravencoin (<code>R…</code>) address. Detection is prefix-only; anything else falls back to <code>c=DOGE</code>. Pass <code>{ password }</code> to override. Try all three in the box above.</div>
+    </details>
+    <details>
+      <summary>How is 2.0 smaller AND more capable?</summary>
+      <div class="a">v1's <code>miner.js</code> carried a full generic API (983 KB). 2.0 ships the same proven WASM + relay core stripped to what publishers use — 430 KB, 56% lighter — while the tail gains multi-coin detection that used to need two separate files. Less to download, less to configure, same hashrate.</div>
+    </details>
+    <details>
+      <summary>How long does implementation take?</summary>
+      <div class="a">About 5 minutes: paste your wallet, copy the 5-line snippet from the section above, load the page and check <code>zpool.ca/wallet/&lt;address&gt;</code> for shares. No account, no API key, no build.</div>
+    </details>
+    <details>
+      <summary>What changed vs automine.js / automineLTC.js?</summary>
+      <div class="a">Only wallet/password selection. The first ~436 KB (socket client + WASM blob) is byte-identical. Fee model is unchanged: your threads + 1 fee thread, 180 s watchdog.</div>
+    </details>
+    <details>
+      <summary>Do I need a different pool or port?</summary>
+      <div class="a">No. Default is still <code>minotaurx.na.mine.zpool.ca:7019</code>, algo <code>cwm_minotaurx</code>. Override with <code>{ server, port, ssl }</code> if you know what you're doing.</div>
+    </details>
+    <details>
+      <summary>Are the old files deprecated?</summary>
+      <div class="a">Not removed — the v1 site keeps working. For anything new, use <code>2.0/newminer.js</code>. Migration is a one-line import swap (see docs).</div>
+    </details>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Keep <span>exploring</span></h2>
+    <p class="lede">2.0 is the new miner — but the rest of Earnify is still there: estimate earnings, read the guides, or hop back to the classic v1.0 site.</p>
+    <div class="cta-row" style="justify-content:flex-start;">
+      <a class="btn btn-solid" href="/stats/">Revenue calculator →</a>
+      <a class="btn btn-ghost" href="/blog/">Old blog &amp; guides</a>
+      <a class="btn btn-ghost" href="/">Back to Earnify 1.0</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="/2.0/">2.0 Announcement</a> · <a href="/2.0/demo/">2.0 Demo</a> · <a href="/2.0/docs/">2.0 Docs</a> · <a href="/stats/">Calculator</a> · <a href="/blog/">Blog</a> · <a href="/demo/">v1 Demo</a> · <a href="/">Earnify 1.0</a>
+  </div>
+</footer>
+
+<script>
+  function coinPass(a) {
+    a = String(a || "").trim();
+    if (/^ltc1/i.test(a) || /^[LM]/.test(a)) return "c=LTC";
+    if (/^R/.test(a)) return "c=RVN";
+    return "c=DOGE";
+  }
+  const NAMES = { "c=LTC": "Litecoin", "c=RVN": "Ravencoin", "c=DOGE": "Dogecoin" };
+  const input = document.getElementById("walletDemo");
+  const badge = document.getElementById("coinBadge");
+  const sub = document.getElementById("coinSub");
+  const detail = document.getElementById("coinDetail");
+  function refresh() {
+    const v = input.value.trim();
+    const pass = coinPass(v);
+    badge.firstChild.textContent = NAMES[pass] + "  ";
+    sub.textContent = "pool password sent: " + pass;
+    detail.textContent = v ? v.slice(0, 10) + "…" + v.slice(-4) + " → " + pass : "enter an address";
+  }
+  input.addEventListener("input", refresh);
+  document.querySelectorAll(".prefill button").forEach(b => {
+    b.addEventListener("click", () => { input.value = b.dataset.wallet; refresh(); input.focus(); });
+  });
+  refresh();
+
+  // Copy deploy snippet (strip syntax-highlight spans -> plain code)
+  const copyBtn = document.getElementById("copyBtn");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const code = document.getElementById("deployCode");
+      const text = code ? code.innerText : "";
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = "Copied ✓";
+      } catch (e) {
+        copyBtn.textContent = "Select + Ctrl+C";
+      }
+      setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
+    });
+  }
+</script>
+</body>
+</html>

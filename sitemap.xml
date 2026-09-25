@@ -44,6 +44,33 @@
   </url>
 
   <!-- ═══════════════════════════════════════ -->
+  <!-- EARNIFY 2.0 -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://earnify.cc/2.0/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Earnify 2.0 — One 430 KB Miner for Every Wallet</image:title>
+      <image:caption>Universal browser miner: 56% smaller than miner.js, auto-detects DOGE, Litecoin and Ravencoin wallets. No ads. No cookies. Deploy in 3 steps.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://earnify.cc/2.0/demo/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://earnify.cc/2.0/docs/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
   <!-- BLOG INDEX -->
   <!-- ═══════════════════════════════════════ -->
   <url>
@@ -592,6 +619,19 @@
       <image:loc>https://earnify.cc/og-image.png</image:loc>
       <image:title>Does Browser Mining Hurt SEO and Core Web Vitals?</image:title>
       <image:caption>We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe.</image:caption>
+    </image:image>
+  </url>
+
+
+  <url>
+    <loc>https://earnify.cc/blog/earnify-2-0-universal-miner.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://earnify.cc/og-image.png</image:loc>
+      <image:title>Earnify 2.0: One 430 KB Miner for Every Wallet (DOGE, LTC, RVN)</image:title>
+      <image:caption>Earnify 2.0 ships newminer.js: a 430 KB universal browser miner (56% smaller than miner.js) that auto-detects DOGE, Litecoin and Ravencoin wallets. Deploy in 3 steps, import from CDN, try the live demo.</image:caption>
     </image:image>
   </url>
 

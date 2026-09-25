@@ -13,10 +13,34 @@ Stay updated with releases, mining updates, feature announcements, and community
 
 -  **Discord Community:** https://discord.com/invite/g2JxcVYavJ
 -  **Telegram Channel:** https://t.me/+GtzrnpVaCRcwMWM5
+---
+
+## Earnify 2.0 — One 430 KB Miner for Every Wallet
+
+**New:** `2.0/newminer.js` is a single 430 KB universal browser miner (**56% smaller** than `miner.js` at 983 KB) that replaces both `automine.js` (DOGE-only) and `automineLTC.js` (LTC-only). Paste any DOGE, Litecoin (`ltc1`/`L`/`M`) or Ravencoin (`R`) wallet — the coin is auto-detected and the pool password (`c=DOGE` / `c=LTC` / `c=RVN`) is set for you. Same WASM core, same pool (`minotaurx.na.mine.zpool.ca:7019`), same fee model (your threads + exactly 1 fee thread).
+
+```javascript
+import { autoMine } from "https://earnify.cc/2.0/newminer.js";
+
+const miner = autoMine("YOUR_WALLET_HERE", 0.5, {
+  onHashrate: (h) => console.log(h.hashrateKHs + " KH/s"),
+  onError: (e) => console.warn(e),
+});
+// miner.stop() on opt-out. Returns { stop, userThreads, feeThreads }.
+```
+
+- **Announcement:** https://earnify.cc/2.0/ (auto-detect showcase, 3-step deploy, FAQ)
+- **Live multi-coin demo:** https://earnify.cc/2.0/demo/
+- **API reference + v1 → v2 migration:** https://earnify.cc/2.0/docs/
+- **Launch post:** https://earnify.cc/blog/earnify-2-0-universal-miner.html
+
+> Note: v2 reports hashrate via the `onHashrate` push callback only — there is no `minotaurxHashrate` global to poll. The rest of this README documents the v1 (`miner.js`) API, which keeps working unchanged.
 
 ---
+
 ## Table of Contents
 
+- [Earnify 2.0](#earnify-20--one-430-kb-miner-for-every-wallet)
 - [Overview](#-overview)
 - [Features](#-features)
 - [Architecture](#-architecture)
@@ -1073,6 +1097,7 @@ The current architecture uses one user pool + one dev pool. To mine multiple coi
 ├── index.html
 ├── miner.js
 ├── miner.min.js
+├── 2.0/                  ← Earnify 2.0: newminer.js + announcement + demo + docs
 ├── demo/
 ├── guide/
 ├── blog/

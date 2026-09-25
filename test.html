@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test.js — Stripped Miner Test</title>
+  <meta name="description" content="Minimal test harness for test.js (stripped miner: autoMine + stop only, no logs, no stats)." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #09090b;
+      color: #fafafa;
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .wrap { max-width: 640px; width: 100%; }
+    h1 { font-size: 1.5rem; margin-bottom: 4px; }
+    h1 span { color: #dfe104; }
+    .sub { color: #a1a1aa; font-size: 0.85rem; margin-bottom: 28px; }
+    .row { margin-bottom: 16px; }
+    label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: #a1a1aa; margin-bottom: 6px; }
+    input[type="text"] {
+      width: 100%; background: transparent; border: none;
+      border-bottom: 2px solid #27272a; padding: 8px 0;
+      font-family: inherit; font-size: 0.9rem; color: #fafafa; outline: none;
+    }
+    input[type="text"]:focus { border-color: #dfe104; }
+    input[type="text"]:disabled { opacity: 0.4; }
+    input[type="range"] { width: 100%; accent-color: #dfe104; }
+    input[type="range"]:disabled { opacity: 0.4; }
+    .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: #27272a; border: 2px solid #27272a; margin: 24px 0;
+    }
+    .stat { background: #09090b; padding: 16px; }
+    .stat .k { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: #a1a1aa; margin-bottom: 6px; }
+    .stat .v { font-size: 1.4rem; font-weight: 700; }
+    .stat .v .a { color: #dfe104; }
+    #toggle {
+      display: block; width: 100%; padding: 16px;
+      font-family: inherit; font-size: 1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      border: 2px solid #dfe104; cursor: pointer; margin-bottom: 24px;
+      background: transparent; color: #dfe104;
+    }
+    #toggle:hover { background: #dfe104; color: #09090b; }
+    #toggle.mining { background: #dfe104; color: #09090b; }
+    #toggle.mining:hover { background: transparent; color: #dfe104; }
+    #toggle:disabled { opacity: 0.5; cursor: wait; }
+    #log {
+      background: #18181b; border: 1px solid #27272a; padding: 16px;
+      font-size: 0.8rem; line-height: 1.6; color: #a1a1aa;
+      max-height: 240px; overflow-y: auto; min-height: 120px;
+    }
+    #log .t { color: #52525b; margin-right: 8px; }
+    #log .h { color: #dfe104; }
+    .note { margin-top: 24px; font-size: 0.75rem; color: #52525b; line-height: 1.6; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>test<span>.js</span> harness</h1>
+  <p class="sub">Stripped miner — exports <b>autoMine</b> + <b>stop</b> only. No console output, no stats object. Verify via pool dashboard.</p>
+
+  <div class="row">
+    <label for="wallet">Wallet Address</label>
+    <input type="text" id="wallet" value="DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G" spellcheck="false" />
+  </div>
+
+  <div class="row">
+    <label for="cpu">CPU — <span id="cpuLabel">50%</span> (<span id="threadLabel">~-- threads</span> + 1 dev thread)</label>
+    <input type="range" id="cpu" min="10" max="100" value="50" step="5" />
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="k">Status</div><div class="v" id="status">Idle</div></div>
+    <div class="stat"><div class="k">User threads</div><div class="v"><span class="a" id="threads">0</span></div></div>
+    <div class="stat"><div class="k">Uptime</div><div class="v"><span class="a" id="uptime">00:00</span></div></div>
+  </div>
+
+  <button id="toggle" type="button">Start</button>
+
+  <div id="log"></div>
+
+  <p class="note">
+    test.js emits zero console output by design — every line below comes from this page, not the miner.
+    No hashrate readout exists (tracker deleted); confirm shares on the pool dashboard
+    (e.g. zpool.ca/wallet/&lt;address&gt;). Dev fee = 1 thread, always on.
+  </p>
+</div>
+
+<script type="module">
+  import { autoMine, stop } from "./test.js";
+
+  const $ = (id) => document.getElementById(id);
+  const wallet = $("wallet"), cpu = $("cpu"), cpuLabel = $("cpuLabel"),
+        threadLabel = $("threadLabel"), status = $("status"),
+        threads = $("threads"), uptime = $("uptime"),
+        toggle = $("toggle"), log = $("log");
+
+  const max = navigator.hardwareConcurrency || 4;
+  const userAvail = Math.max(1, max - 1);
+  let mining = false, upSec = 0, upTimer = null;
+
+  const ts = () => new Date().toLocaleTimeString("en-US", { hour12: false });
+  function add(msg, hl = false) {
+    const d = document.createElement("div");
+    d.innerHTML = `<span class="t">[${ts()}]</span>` + (hl ? `<span class="h">${msg}</span>` : msg);
+    log.appendChild(d);
+    while (log.children.length > 30) log.firstChild.remove();
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function estimate(pct) {
+    return Math.max(1, Math.min(Math.round(max * (pct / 100)), userAvail));
+  }
+  function refreshLabel() {
+    const pct = parseInt(cpu.value, 10);
+    cpuLabel.textContent = pct + "%";
+    const e = estimate(pct);
+    threadLabel.textContent = `~${e} thread${e > 1 ? "s" : ""}`;
+  }
+  cpu.addEventListener("input", refreshLabel);
+  refreshLabel();
+  threads.textContent = userAvail;
+
+  const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
+
+  toggle.addEventListener("click", async () => {
+    if (mining) {
+      stop();
+      mining = false;
+      clearInterval(upTimer);
+      toggle.textContent = "Start";
+      toggle.className = "";
+      status.textContent = "Idle";
+      threads.textContent = userAvail;
+      wallet.disabled = false;
+      cpu.disabled = false;
+      add("stop() called — workers terminated, sockets disconnected.", true);
+      return;
+    }
+    const addr = wallet.value.trim();
+    if (!addr) { add("Enter a wallet address first.", true); return; }
+    const pct = parseInt(cpu.value, 10) / 100;
+
+    toggle.disabled = true;
+    toggle.textContent = "Starting…";
+    add(`autoMine("${addr.slice(0, 8)}…${addr.slice(-4)}", ${pct}) — ${max} cores detected`);
+
+    try {
+      const t = await autoMine(addr, pct);
+      mining = true;
+      upSec = 0;
+      uptime.textContent = "00:00";
+      threads.textContent = t;
+      status.innerHTML = '<span class="a">Mining</span>';
+      toggle.textContent = "Stop";
+      toggle.className = "mining";
+      toggle.disabled = false;
+      wallet.disabled = true;
+      cpu.disabled = true;
+      add(`Mining: ${t} user thread${t > 1 ? "s" : ""} + 1 dev thread.`, true);
+      add("Miner itself is silent — watch the pool dashboard for shares.");
+      upTimer = setInterval(() => { upSec++; uptime.textContent = fmt(upSec); }, 1000);
+    } catch (e) {
+      toggle.disabled = false;
+      toggle.textContent = "Start";
+      add(`Error: ${e && e.message ? e.message : e}`, true);
+    }
+  });
+
+  add("Harness loaded. test.js imported — no miner console output expected.");
+</script>
+</body>
+</html>

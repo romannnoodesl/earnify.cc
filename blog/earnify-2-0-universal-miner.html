@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Earnify 2.0: One 430 KB Miner for Every Wallet (DOGE, LTC, RVN) — Earnify Blog</title>
+  <meta name="description" content="Earnify 2.0 ships newminer.js: a 430 KB universal browser miner (56% smaller than miner.js) that auto-detects DOGE, Litecoin and Ravencoin wallets. Deploy in 3 steps, import from CDN, try the live demo." />
+  <meta name="keywords" content="earnify 2.0, browser mining, web mining, newminer.js, monetize website without ads, dogecoin browser mining, litecoin web miner, ravencoin web miner, minotaurx, zpool" />
+  <link rel="canonical" href="https://earnify.cc/blog/earnify-2-0-universal-miner.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/earnify-2-0-universal-miner.html" />
+  <meta property="og:title" content="Earnify 2.0: One 430 KB Miner for Every Wallet" />
+  <meta property="og:description" content="56% smaller. DOGE/LTC/RVN auto-detect. 3-step deploy. No ads, no cookies, no tracking. Read the launch post." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Earnify 2.0: One 430 KB Miner for Every Wallet" />
+  <meta name="twitter:description" content="Universal browser miner: 56% smaller, multi-coin auto-detect, CDN import, live demo. Monetize without ads." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Earnify 2.0: One 430 KB Miner for Every Wallet (DOGE, LTC, RVN)",
+    "description": "Earnify 2.0 ships newminer.js: a 430 KB universal browser miner (56% smaller than miner.js) that auto-detects DOGE, Litecoin and Ravencoin wallets. Deploy in 3 steps, import from CDN, try the live demo.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/earnify-2-0-universal-miner.html" },
+    "datePublished": "2026-09-25",
+    "dateModified": "2026-09-25",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1100,
+    "articleSection": "Release"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much smaller is Earnify 2.0?",
+        "acceptedAnswer": { "@type": "Answer", "text": "newminer.js is 430 KB — 56% smaller than miner.js (983 KB). It also replaces two single-coin files (automine.js + automineLTC.js) with one universal file." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which wallets does Earnify 2.0 support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Any Dogecoin, Litecoin (ltc1/L/M) or Ravencoin (R) address. The miner detects the coin from the wallet prefix and sends the matching pool password automatically." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install Earnify 2.0?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Import from https://earnify.cc/2.0/newminer.js or self-host the file, call autoMine with your wallet, and check shares on zpool.ca/wallet/<address>. Full guide at earnify.cc/2.0/." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Earnify 2.0: One 430 KB Miner for Every Wallet" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .cmp-table { font-size: 0.8125rem; } .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Earnify 2.0: One 430 KB Miner for Every Wallet</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Release</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">September 25, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">6 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Earnify 2.0: One 430 KB Miner for Every Wallet</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">56% smaller than miner.js. Auto-detects DOGE, Litecoin and Ravencoin wallets. Import from CDN in one line. Revenue your ad-blocker can't kill.</p>
+
+        <h2 id="announcement">The announcement</h2>
+<p>Earnify 2.0 is live at <a style="color:#dfe104;text-decoration:underline;" href="/2.0/">earnify.cc/2.0/</a> — a new announcement site with a <a style="color:#dfe104;text-decoration:underline;" href="/2.0/demo/">live multi-coin demo</a> and <a style="color:#dfe104;text-decoration:underline;" href="/2.0/docs/">full API docs</a>. The headline feature is <strong>newminer.js</strong>: a single 430 KB universal browser miner that replaces both <code>automine.js</code> (DOGE-only) and <code>automineLTC.js</code> (LTC-only). Paste any supported wallet and it detects the coin for you — no config, no wrong-file mistakes.</p>
+
+<div class="perf-box">
+  <p><strong>By the numbers:</strong> 430 KB vs 983 KB <code>miner.js</code> — <strong>56% smaller, 553 KB saved</strong> on every page load. Two single-coin files (878 KB combined) collapse into one. Same MinotaurX core, same pool (<code>minotaurx.na.mine.zpool.ca:7019</code>), same fee model: your threads + exactly 1 fee thread.</p>
+</div>
+
+<h2 id="auto-detect">Paste anything: DOGE, LTC, RVN auto-detect</h2>
+<p>v1 made you choose the right file per coin. v2 reads the wallet prefix: <code>ltc1…</code>, <code>L…</code> or <code>M…</code> mines Litecoin (<code>c=LTC</code>), <code>R…</code> mines Ravencoin (<code>c=RVN</code>), and everything else defaults to Dogecoin (<code>c=DOGE</code>). The matching pool password is sent automatically — override it anytime with <code>{ password }</code> if you know what you're doing.</p>
+
+<p>Try it without mining anything: the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/">2.0 announcement page</a> has a type-and-see box running the exact detection logic, with one-click DOGE, LTC and RVN examples. Then press the same addresses into the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/demo/">live demo</a> and watch the detected coin badge follow your input while real hashrate streams in.</p>
+
+<h2 id="implement">Implement in 3 steps (~5 minutes)</h2>
+<p><strong>1. Grab your wallet.</strong> Any DOGE, Litecoin or Ravencoin address — it already is your account. Payouts land on zpool under that address, no signup.</p>
+<p><strong>2. Drop in the snippet.</strong> Self-host the file next to your page, or skip hosting entirely and import from the CDN:</p>
+
+<div class="code-block">import { autoMine } from "https://earnify.cc/2.0/newminer.js";
+
+const miner = autoMine("YOUR_WALLET_HERE", 0.5, {
+  onHashrate: (h) =&gt; console.log(h.hashrateKHs + " KH/s"),
+  onError: (e) =&gt; console.warn(e),
+});
+// miner.stop() on opt-out. miner.userThreads tells you the load.</div>
+
+<p><strong>3. Verify shares.</strong> Open <code>zpool.ca/wallet/&lt;your-address&gt;</code> — accepted shares show up within a minute. Hashrate arrives via the <code>onHashrate</code> push callback (there's no global to poll in v2), and <code>cpuShare</code> (0–1, default 0.5) controls thread count: <code>H = clamp(floor(cores × share), 1, cores−1)</code> plus the 1 fee thread.</p>
+
+<p>Estimating earnings first? Run your traffic through the <a style="color:#dfe104;text-decoration:underline;" href="/stats/">revenue calculator</a> before you deploy.</p>
+
+<h2 id="what-didnt-change">What didn't change (on purpose)</h2>
+<ul>
+  <li><strong>Same core:</strong> identical WASM worker + relay path, algo <code>cwm_minotaurx v5</code> — hashrate you benchmarked on v1 carries over.</li>
+  <li><strong>Same fee honesty:</strong> exactly 1 fee thread, with a watchdog that halts everything if fee work stalls for 180 s. Block the fee socket and mining stops — by design.</li>
+  <li><strong>Same privacy:</strong> zero cookies, zero tracking, zero consent banner. Mining earns from CPU cycles, so it works behind ad-blockers that erase display revenue.</li>
+  <li><strong>v1 keeps working:</strong> nothing in the root site, <code>miner.js</code>, or the WordPress flow was touched. Adopt v2 per page when ready — the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/docs/">migration table</a> is a one-line import swap plus callback update.</li>
+</ul>
+
+<table class="cmp-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>v1</th>
+      <th>v2 (newminer.js)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Size</td>
+      <td>983 KB lib · 2 coin files</td>
+      <td>430 KB single file · −56%</td>
+    </tr>
+    <tr>
+      <td>Coins</td>
+      <td>Pick the file per coin</td>
+      <td>DOGE + LTC + RVN auto-detected</td>
+    </tr>
+    <tr>
+      <td>Install</td>
+      <td>Self-host, manual password</td>
+      <td>CDN or self-host · password automatic</td>
+    </tr>
+    <tr>
+      <td>Hashrate signal</td>
+      <td>Poll a global</td>
+      <td>onHashrate push callback</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="conclusion">Start with the demo, not the docs</h2>
+<p>The fastest way to feel v2: open the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/demo/">live demo</a>, click the LTC tab, press Start at 10% CPU, and watch the badge, threads and KH/s line up. Then swap in your own wallet and check zpool. When you're convinced, the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/">announcement page</a> has the copy-paste snippet and the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/docs/">docs</a> cover every knob (<code>server/port/ssl/password</code>, <code>start/stop</code>, error strings).</p>
+
+<p><strong>Revenue your ad-blocker can't kill — now in one file, for every wallet.</strong></p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How much smaller is Earnify 2.0?</summary>
+          <p style="margin-top:0.75rem;">newminer.js is 430 KB — 56% smaller than miner.js (983 KB), saving 553 KB per page load. It also replaces two single-coin files (automine.js + automineLTC.js) with one universal file.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Which wallets work with v2?</summary>
+          <p style="margin-top:0.75rem;">Any Dogecoin, Litecoin (ltc1/L/M) or Ravencoin (R) address. The coin is detected from the wallet prefix and anything unrecognized defaults to Dogecoin. Pass { password } to override.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Can I import v2 from a CDN?</summary>
+          <p style="margin-top:0.75rem;">Yes — import { autoMine } from "https://earnify.cc/2.0/newminer.js" with zero hosting, or download and self-host the 430 KB file. Both paths expose the same API.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Try Earnify 2.0 Live</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Multi-coin demo, announcement, and docs — pick your entry point.</p>
+          <a href="/2.0/demo/" class="btn btn-accent" style="text-decoration:none;color:#09090b;margin-right:0.75rem;">Live Demo</a>
+          <a href="/2.0/" class="btn" style="text-decoration:none;color:#FAFAFA;">Announcement</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#announcement" class="toc-link">The Announcement</a>
+            <a href="#auto-detect" class="toc-link">Paste Anything: Auto-Detect</a>
+            <a href="#implement" class="toc-link">Implement in 3 Steps</a>
+            <a href="#what-didnt-change" class="toc-link">What Didn't Change</a>
+            <a href="#conclusion" class="toc-link">Start With the Demo</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

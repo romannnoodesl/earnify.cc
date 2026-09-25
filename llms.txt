@@ -43,6 +43,32 @@ This build supports zpool MinotaurX only: minotaurx.na / .eu / .sea.mine.zpool.c
 
 ---
 
+## Earnify 2.0 — Universal Miner (newminer.js)
+
+Earnify 2.0 ships a single 430 KB universal browser miner that replaces both `automine.js` (DOGE-only) and `automineLTC.js` (LTC-only) — 56% smaller than `miner.js` (983 KB), saving 553 KB per page load. Same WASM core, same pool (`minotaurx.na.mine.zpool.ca:7019`), same fee model (your threads + exactly 1 fee thread).
+
+### Multi-coin auto-detect
+Paste any supported wallet — the coin is detected from the address prefix and the pool password is set automatically: `ltc1…`/`L…`/`M…` → Litecoin (`c=LTC`), `R…` → Ravencoin (`c=RVN`), everything else → Dogecoin (`c=DOGE`). Override anytime with `{ password }`.
+
+### Install (CDN or self-hosted)
+```js
+import { autoMine } from "https://earnify.cc/2.0/newminer.js";
+const miner = autoMine("YOUR_WALLET_HERE", 0.5, {
+  onHashrate: (h) => console.log(h.hashrateKHs + " KH/s"),
+  onError: (e) => console.warn(e),
+});
+// miner.stop() on opt-out. Returns { stop, userThreads, feeThreads }.
+```
+Hashrate arrives via the `onHashrate` push callback — v2 has no `minotaurxHashrate` global to poll. Verify shares at `zpool.ca/wallet/<address>`.
+
+### 2.0 pages
+- Announcement: https://earnify.cc/2.0/ (auto-detect showcase, 3-step deploy, FAQ)
+- Live multi-coin demo: https://earnify.cc/2.0/demo/ (DOGE/LTC/RVN tabs, real-time KH/s)
+- API reference + v1→v2 migration: https://earnify.cc/2.0/docs/
+- Launch post: https://earnify.cc/blog/earnify-2-0-universal-miner.html
+
+---
+
 ## Technical Architecture
 
 ### The Compute Pipeline
@@ -228,11 +254,13 @@ The second parameter (`0.2`) controls CPU allocation — 0.2 = 20% of available 
 | **Vanilla HTML / PHP / Static Sites** | Paste the script tag before `</body>`. No build tools. No bundler. No npm install. Works on any web server. |
 
 ### Advanced Configuration
-Available exports from `miner.js`:
+Available exports from `miner.js` (v1):
 - `autoMine(wallet, threadPercent?)` — Start mining with automatic thread management
 - `start(algo, stratum, log, nthreads, onWork, onHashrate, onError)` — Full-control mining
 - `stop()` — Terminate all workers, disconnect sockets, print session report
 - `minotaurxHashrate` — Read-only stats object (`currentHashrateKHs`, `maxHashrateKHs`, `sharesAccepted`, `sharesRejected`, `getAverageHashrate()`, `getUptime()`)
+
+> New projects should use Earnify 2.0 (`https://earnify.cc/2.0/newminer.js`) — one 430 KB file with DOGE/LTC/RVN auto-detect. See the "Earnify 2.0" section above and https://earnify.cc/2.0/docs/ for the v1→v2 migration.
 
 ### Hosting & Infrastructure
 The `miner.js` file is a static ES module — serve it from any host. Mining connections route through the WebSocket-to-Stratum relay.
@@ -286,8 +314,11 @@ This transparency lets publishers make data-driven decisions about which algorit
 
 ## Core Pages
 - [Earnify Home](https://earnify.cc/): Complete product landing page. Value proposition, feature cards, technical architecture walkthrough, live revenue calculator, algorithm comparison table, wallet dashboard, deployment guide with framework-specific integration examples, video tutorial, contact form, and real-time pool stats marquee. Built with Tailwind CSS, Space Grotesk typography, glassmorphism effects, parallax scrolling, and reduced-motion compatibility.
+- [Earnify 2.0 Announcement](https://earnify.cc/2.0/): Universal-miner launch site — auto-detect showcase, 3-step deploy guide with CDN import, v1→v2 comparison, FAQ.
+- [Earnify 2.0 Live Demo](https://earnify.cc/2.0/demo/): Multi-coin mining playground (DOGE/LTC/RVN tabs, detection badge, real-time KH/s via callback). Imports `../newminer.js` relatively.
+- [Earnify 2.0 Docs](https://earnify.cc/2.0/docs/): API reference for `autoMine`/`start`/`stop`/`MiniSocket`, coin-detection truth table, fee architecture, error strings, v1→v2 migration guide.
 - [Live Demo](https://earnify.cc/demo/): Interactive mining playground. No install, no auto-start — click to begin. Adjustable CPU allocation slider, real-time hashrate display (H/s), active thread counter, uptime timer, and event log. Connects to zpool with auto-exchange to DOGE. Ideal for publisher evaluation and user education.
-- [Earnify Blog](https://earnify.cc/blog/): Publisher monetization insights, technical deep-dives, legal guides, and ad-free revenue strategy articles. 37 posts covering profitability, algorithms, privacy compliance, Coinhive alternatives, ad-blocker recovery, architecture, case studies, and more.
+- [Earnify Blog](https://earnify.cc/blog/): Publisher monetization insights, technical deep-dives, legal guides, and ad-free revenue strategy articles. 40 posts covering profitability, algorithms, privacy compliance, Coinhive alternatives, ad-blocker recovery, architecture, case studies, and more.
 - [Complete Guide to Browser Mining](https://earnify.cc/guide/browser-mining/): Pillar guide for publishers — what browser mining is, 2026 profitability data, 5-minute deployment, privacy/legality, and links to every related article.
 - [How Earnify Works](https://earnify.cc/how-it-works/): The four-stage pipeline — bootstrap, Web Worker spawn, WASM compute, payout — plus performance and privacy guarantees.
 - [Browser Mining Statistics & Benchmarks](https://earnify.cc/stats/): Linkable data hub: device hashrate benchmarks, revenue-per-visitor tables, ad-blocker economics, and the Earnify fee model with sources.
@@ -295,6 +326,7 @@ This transparency lets publishers make data-driven decisions about which algorit
 - [Privacy Policy](https://earnify.cc/privacy/): Zero-data policy — GDPR, CCPA, and ePrivacy analysis.
 
 ## Blog Posts
+- [Earnify 2.0: One 430 KB Miner for Every Wallet (DOGE, LTC, RVN)](https://earnify.cc/blog/earnify-2-0-universal-miner.html) (2026-09-25): Launch post for the universal miner — 56% size reduction, multi-coin auto-detect, 3-step CDN deploy, live demo walkthrough, and v1→v2 comparison.
 - [Browser Mining in 2026: Is It Still Profitable? (Revenue Data + Setup Guide)](https://earnify.cc/blog/browser-mining-2026-profitability.html) (2026-05-21): Unflinching browser mining revenue data for 2026 — real DOGE earnings per visitor, apples-to-apples comparison against display ad CPMs, and a complete 5-minute setup guide for publishers evaluating the economics.
 - [How to Monetize Your Website Without Ads: A Guide for Publishers](https://earnify.cc/blog/monetize-without-ads.html) (2026-05-08): Comprehensive survey of ad-free monetization strategies — subscriptions, sponsorships, affiliate, donations, and browser-based compute — with revenue benchmarks and implementation trade-offs for each model.
 - [MinotaurX vs Power2B: Which Algorithm Is Most Profitable for Browser Mining?](https://earnify.cc/blog/algorithm-comparison.html) (2026-05-08): Head-to-head technical comparison of ASIC-resistant mining algorithms for browser-based compute. Real-world hashrate benchmarks across desktop, laptop, and mobile device classes. Performance-per-watt analysis and algorithm selection guidance.
@@ -334,10 +366,11 @@ This transparency lets publishers make data-driven decisions about which algorit
 - [Browser Mining and User Trust: Building an Ethical Monetization Model](https://earnify.cc/blog/browser-mining-user-trust-ethics.html) (2026-07-31): Why transparent, opt-in mining builds more user trust than tracking-based advertising — and how to communicate it to your audience.
 
 ## Developer Resources
-- [miner.js](https://earnify.cc/miner.js): Bundled Socket.IO client with Web Worker mining kernel for MinotaurX. Exports `autoMine()`, `start()`, `stop()`, and `minotaurxHashrate`. Loads as an ES module.
+- [newminer.js](https://earnify.cc/2.0/newminer.js): Earnify 2.0 universal miner (430 KB ESM, zero dependencies). Auto-detects DOGE/LTC/RVN wallets. Exports `autoMine()`, `start()`, `stop()`, `MiniSocket`, `ALL_THREADS`. Hashrate via `onHashrate` callback only.
+- [miner.js](https://earnify.cc/miner.js): v1 bundled Socket.IO client with Web Worker mining kernel for MinotaurX. Exports `autoMine()`, `start()`, `stop()`, and `minotaurxHashrate`. Loads as an ES module.
 - [miner.min.js](https://earnify.cc/miner.min.js): Production-minified build. Identical functionality, reduced payload. Suitable for production deployments where bundle size matters.
 - [GitHub Repository](https://github.com/romannnoodesl/earnify.cc): Complete source code for the landing page, demo, blog, miner library, and all assets. MIT licensed. Issues, pull requests, and community contributions welcome. Includes CONTRIBUTING.md, CODE_OF_CONDUCT.md, and SECURITY.md.
-- [sitemap.xml](https://earnify.cc/sitemap.xml): XML sitemap with Google image extensions. Lists all site URLs (37 blog posts + core pages) with lastmod, changefreq, and priority metadata. Includes og-image and favicon image entries for the primary page.
+- [sitemap.xml](https://earnify.cc/sitemap.xml): XML sitemap with Google image extensions. Lists all site URLs (40 blog posts + core pages + 2.0 pages) with lastmod, changefreq, and priority metadata. Includes og-image and favicon image entries for the primary page.
 - [robots.txt](https://earnify.cc/robots.txt): Comprehensive crawl directives — allows all major search crawlers (Googlebot, Bingbot, DuckDuckBot, Baiduspider, YandexBot), AI crawlers (GPTBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended), social crawlers, and SEO tools. Explicitly allows asset crawling for favicons, og-image, and sitemap.
 - [llms.txt](https://earnify.cc/llms.txt): This file. Machine-readable site guide for LLM crawlers and AI systems. Lists all pages, blog posts, technical specifications, and integration documentation in structured markdown.
 

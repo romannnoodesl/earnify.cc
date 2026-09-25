@@ -1,9 +1,1 @@
-{
-  "slug": "browser-mining-seo-core-web-vitals",
-  "title": "Does Browser Mining Hurt SEO and Core Web Vitals?",
-  "description": "We measured how browser-based crypto mining impacts LCP, INP, TBT, and real-world SEO — and how a consent-first, throttled approach can keep rankings safe.",
-  "category": "Industry",
-  "readTime": "7 min read",
-  "date": "2026-09-25",
-  "rssDate": "Fri, 25 Sep 2026 03:15:36 GMT"
-}
+{"category": "Release", "date": "2026-09-25", "description": "Earnify 2.0 ships newminer.js: a 430 KB universal browser miner (56% smaller than miner.js) that auto-detects DOGE, Litecoin and Ravencoin wallets. Deploy in 3 steps, import from CDN, try the live demo.", "readTime": "6 min read", "rssDate": "Fri, 25 Sep 2026 16:35:00 GMT", "slug": "earnify-2-0-universal-miner", "title": "Earnify 2.0: One 430 KB Miner for Every Wallet (DOGE, LTC, RVN)"}

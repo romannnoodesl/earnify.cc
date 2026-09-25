@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — Earnify 2.0 newminer.js API &amp; v1 → v2 Migration</title>
+  <meta name="description" content="Earnify 2.0 docs: autoMine/start/stop/MiniSocket reference, coin auto-detection table, fee architecture, error strings, and migration guide from miner.js, automine.js and automineLTC.js." />
+  <link rel="canonical" href="https://earnify.cc/2.0/docs/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/2.0/docs/" />
+  <meta property="og:title" content="Docs — Earnify 2.0 newminer.js" />
+  <meta property="og:description" content="API reference + v1 → v2 migration for the universal auto-detecting miner." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:site_name" content="Earnify" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#09090B" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #fafafa; font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+    ::selection { background: #dfe104; color: #000; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; width: 100%; }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 2px solid #27272a; }
+    nav .logo { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.05em; text-transform: uppercase; text-decoration: none; color: #fafafa; }
+    nav .logo span { color: #dfe104; }
+    .nav-links { display: flex; gap: 24px; }
+    nav a:not(.logo) { color: #a1a1aa; text-decoration: none; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    nav a:not(.logo):hover { color: #dfe104; }
+    header { padding: 56px 0 32px; border-bottom: 2px solid #27272a; }
+    header h1 { font-size: clamp(2rem, 6vw, 3.25rem); text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.95; }
+    header h1 span { color: #dfe104; }
+    header p { color: #a1a1aa; margin-top: 12px; line-height: 1.6; max-width: 700px; }
+    .toc { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+    .toc a { border: 1px solid #27272a; color: #fafafa; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 14px; }
+    .toc a:hover { border-color: #dfe104; color: #dfe104; }
+    section { padding: 44px 0; border-bottom: 2px solid #27272a; }
+    section h2 { font-size: clamp(1.3rem, 3.5vw, 1.9rem); text-transform: uppercase; margin-bottom: 12px; }
+    section h2 span { color: #dfe104; }
+    section p, section li { color: #a1a1aa; line-height: 1.7; font-size: 0.93rem; }
+    section p { margin-bottom: 12px; max-width: 760px; }
+    section code, td code, li code { color: #dfe104; font-size: 0.85em; }
+    pre { background: #000; border: 1px solid #27272a; padding: 18px; font-family: 'Courier New', monospace; font-size: 0.8rem; line-height: 1.7; overflow-x: auto; color: #a1a1aa; margin: 14px 0; }
+    pre .k { color: #dfe104; } pre .c { color: #52525b; }
+    table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+    th, td { border: 1px solid #27272a; padding: 10px 12px; text-align: left; }
+    th { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.12em; color: #fafafa; background: #18181b; }
+    td { color: #a1a1aa; line-height: 1.6; }
+    ul { margin: 8px 0 12px 20px; }
+    li { margin-bottom: 6px; }
+    .warn { border: 1px solid #dfe104; padding: 14px 16px; font-size: 0.85rem; color: #fafafa; line-height: 1.6; margin: 14px 0; }
+    .warn strong { color: #dfe104; }
+    footer { padding: 28px 20px; text-align: center; font-size: 0.8rem; color: #52525b; margin-top: auto; }
+    footer a { color: #a1a1aa; text-decoration: none; }
+    footer a:hover { color: #dfe104; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/2.0/" class="logo">Earn<span>ify</span> <span style="font-size:0.7rem;letter-spacing:0.2em;">2.0 docs</span></a>
+  <div class="nav-links">
+    <a href="/2.0/">Announcement</a>
+    <a href="/2.0/demo/">Demo</a>
+    <a href="/stats/">Calculator</a>
+    <a href="/blog/">Blog</a>
+    <a href="/">v1.0 →</a>
+  </div>
+</nav>
+
+<header>
+  <div class="container">
+    <h1>newminer.js <span>docs</span></h1>
+    <p>Reference for Earnify 2.0's universal miner (<code>2.0/newminer.js</code>, ~439 KB ESM, zero dependencies). Verified against source: default pool <code>minotaurx.na.mine.zpool.ca:7019</code>, algo <code>cwm_minotaurx</code>, relay <code>wss://websocket-stratum-server.com</code>.</p>
+    <div class="toc">
+      <a href="#automine">autoMine</a>
+      <a href="#detection">Auto-detect</a>
+      <a href="#lowlevel">start / stop</a>
+      <a href="#fee">Fee model</a>
+      <a href="#errors">Errors</a>
+      <a href="#migrate">v1 → v2</a>
+    </div>
+  </div>
+</header>
+
+<section id="automine">
+  <div class="container">
+    <h2>1 · <span>autoMine()</span> — the only function most sites need</h2>
+    <pre><span class="k">import</span> { autoMine } <span class="k">from</span> <span class="k">"../newminer.js"</span>;
+
+<span class="k">const</span> miner = autoMine(wallet, cpuShare?, opts?);
+<span class="c">// wallet:   string, required — DOGE / LTC / RVN address</span>
+<span class="c">// cpuShare: number 0–1, default 0.5 — clamped; &gt;1 clamps to 1; ≤0 throws</span>
+<span class="c">// returns:  { stop(), userThreads, feeThreads } — NOT a bare thread count</span>
+miner.stop(); <span class="c">// terminates workers + sockets + watchdog</span></pre>
+    <table>
+      <tr><th>opts field</th><th>Type</th><th>What it does</th></tr>
+      <tr><td><code>password</code></td><td>string</td><td>Override auto-detected <code>c=DOGE / c=LTC / c=RVN</code>. Sent as Stratum <code>password</code>.</td></tr>
+      <tr><td><code>server</code> / <code>port</code> / <code>ssl</code></td><td>string / number / bool</td><td>Override default pool. Defaults: <code>minotaurx.na.mine.zpool.ca</code> / <code>7019</code> / <code>false</code>.</td></tr>
+      <tr><td><code>onWork</code></td><td>() =&gt; void</td><td>Fired on each new pool <code>work</code> packet (user stratum only).</td></tr>
+      <tr><td><code>onHashrate</code></td><td>({ hashrateKHs }) =&gt; void</td><td>Only hashrate signal. There is <strong>no</strong> <code>minotaurxHashrate</code> global in 2.0.</td></tr>
+      <tr><td><code>onError</code></td><td>({ error }) =&gt; void</td><td>Share rejections (<code>submit failed</code>), socket <code>error</code>, worker bootstrap failures.</td></tr>
+    </table>
+    <p>Thread math (same as v1): <code>H = clamp(floor(cores × cpuShare), 1, cores−1)</code>; total processes = <code>H + 1</code> (1 fee thread, always on). Requires <code>Worker</code> + <code>DecompressionStream(gzip)</code> — otherwise it throws a plain-English error.</p>
+  </div>
+</section>
+
+<section id="detection">
+  <div class="container">
+    <h2>2 · <span>Coin auto-detection</span> truth table</h2>
+    <p>Source logic is <code>coinPass()</code> in <code>newminer.js</code> — prefix match on the trimmed address. The announcement page (<a style="color:#dfe104" href="/2.0/">/2.0/</a>) and demo (<a style="color:#dfe104" href="/2.0/demo/">/2.0/demo/</a>) both mirror this exact logic for display.</p>
+    <table>
+      <tr><th>Wallet prefix</th><th>Detected coin</th><th>Stratum password sent</th><th>Example</th></tr>
+      <tr><td><code>ltc1…</code> (any case), <code>L…</code>, <code>M…</code></td><td>Litecoin</td><td><code>c=LTC</code></td><td><code>ltc1qt7…trn7</code></td></tr>
+      <tr><td><code>R…</code></td><td>Ravencoin</td><td><code>c=RVN</code></td><td><code>RWmC…nD3m</code></td></tr>
+      <tr><td>anything else</td><td>Dogecoin (default)</td><td><code>c=DOGE</code></td><td><code>DMvq…K2G</code></td></tr>
+    </table>
+    <pre><span class="k">function</span> coinPass(a) {
+  a = String(a || <span class="k">""</span>).trim();
+  <span class="k">if</span> (/^ltc1<span class="k">/i</span>.test(a) || /^[LM]/.test(a)) <span class="k">return</span> <span class="k">"c=LTC"</span>;
+  <span class="k">if</span> (/^R/.test(a)) <span class="k">return</span> <span class="k">"c=RVN"</span>;
+  <span class="k">return</span> <span class="k">"c=DOGE"</span>;
+}</pre>
+  </div>
+</section>
+
+<section id="lowlevel">
+  <div class="container">
+    <h2>3 · Low-level: <span>start / stop / MiniSocket</span></h2>
+    <pre><span class="k">import</span> { start, stop, MiniSocket, ALL_THREADS } <span class="k">from</span> <span class="k">"../newminer.js"</span>;
+
+<span class="c">// single-stratum control (autoMine() runs TWO of these internally: user + fee)</span>
+start(stratum, threads, onWork, onHashrate, onError);
+<span class="c">// stratum: { server, port, worker, password, ssl }</span>
+<span class="c">// threads: number (clamped to hardwareConcurrency)</span>
+stop(); <span class="c">// stops the singleton started by start()</span></pre>
+    <ul>
+      <li><code>MiniSocket</code> — minimal socket.io client (Engine.IO + packet types <code>0/2/4x</code>), auto-reconnect every 3 s. Exported for debugging; you don't need it for normal use.</li>
+      <li><code>ALL_THREADS = 0</code> — re-exported sentinel constant.</li>
+      <li>Handshake emits <code>{ client: "earnifyminer", version: "5", stratum, algo: "cwm_minotaurx" }</code> on <code>start</code> after connect (~2.5 s delay) or on pool <code>can start</code>.</li>
+      <li>Each <code>work</code> packet respawns <code>T</code> Workers from a cached gzip-decoded blob URL; submits via <code>submit</code>, reports <code>hashrate: { hashrate }</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="fee">
+  <div class="container">
+    <h2>4 · <span>Fee architecture</span> (unchanged from v1)</h2>
+    <p><code>autoMine()</code> opens <strong>two</strong> stratum connections: yours (<code>H</code> threads) and the fee endpoint (1 thread, always on).</p>
+    <div class="warn"><strong>Watchdog:</strong> if no fee-stratum work arrives for 180 s, <code>autoMine()</code> stops <em>both</em> connections (checked every 30 s). Don't block the fee socket or mining halts — by design.</div>
+  </div>
+</section>
+
+<section id="errors">
+  <div class="container">
+    <h2>5 · <span>Errors</span> you can actually hit</h2>
+    <table>
+      <tr><th>Message</th><th>When</th></tr>
+      <tr><td><code>autoMine needs a wallet address string</code></td><td>Empty / non-string wallet.</td></tr>
+      <tr><td><code>cpuShare must be &gt; 0</code></td><td><code>cpuShare ≤ 0</code>. Values &gt; 1 are clamped, not thrown.</td></tr>
+      <tr><td><code>Web Worker not supported</code></td><td>Ancient browser / disabled Workers.</td></tr>
+      <tr><td><code>this browser lacks DecompressionStream (gzip)…</code></td><td>No gzip streams API — worker blob can't be decoded.</td></tr>
+      <tr><td><code>worker bootstrap failed: …</code></td><td>WASM blob decode or Worker spawn failed (via <code>onError</code>).</td></tr>
+      <tr><td><code>Share found is not valid: …</code></td><td>Pool rejected a share (<code>submit failed</code> event, via <code>onError</code>).</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="migrate">
+  <div class="container">
+    <h2>6 · <span>v1 → v2 migration</span></h2>
+    <table>
+      <tr><th>v1</th><th>v2</th><th>Change</th></tr>
+      <tr><td><code>automine.js</code> (DOGE) + <code>automineLTC.js</code> (LTC)</td><td><code>2.0/newminer.js</code></td><td>One file. Delete the coin-file choice; detection is automatic.</td></tr>
+      <tr><td><code>import { autoMine } from "https://earnify.cc/miner.js"</code></td><td><code>import { autoMine } from "../newminer.js"</code></td><td>Relative import inside <code>2.0/</code>. Same function name.</td></tr>
+      <tr><td><code>const threads = await autoMine(w, pct)</code> (number)</td><td><code>const { userThreads, feeThreads, stop } = autoMine(w, share, { onHashrate… })</code></td><td>Return is an object; hashrate only via <code>onHashrate</code> callback.</td></tr>
+      <tr><td><code>miner.js → minotaurxHashrate.currentHashrateKHs</code> (poll)</td><td><code>onHashrate: ({ hashrateKHs })</code> (push)</td><td>Remove polling loops; handle the callback. See <code>2.0/demo/</code> source.</td></tr>
+      <tr><td><code>{ password }</code> manual per coin</td><td>omit it</td><td>Only pass <code>password</code> to override auto-detect.</td></tr>
+    </table>
+    <pre><span class="c">// v1 (DOGE demo)</span>
+<span class="k">import</span> { autoMine, stop, minotaurxHashrate } <span class="k">from</span> <span class="k">"https://earnify.cc/miner.js"</span>;
+<span class="k">const</span> threads = <span class="k">await</span> autoMine(wallet, <span class="k">0.5</span>);
+setInterval(() =&gt; read(minotaurxHashrate.currentHashrateKHs), <span class="k">2000</span>);
+
+<span class="c">// v2 (any coin)</span>
+<span class="k">import</span> { autoMine } <span class="k">from</span> <span class="k">"../newminer.js"</span>;
+<span class="k">const</span> miner = autoMine(wallet, <span class="k">0.5</span>, {
+  onHashrate: (h) =&gt; render(h.hashrateKHs), <span class="c">// push, no polling</span>
+  onError: (e) =&gt; warn(e),
+});</pre>
+    <p>Nothing in the v1 root (<code>miner.js</code>, <code>automine*.js</code>, <code>/demo/</code>, WP plugin) is touched by 2.0. Adopt per page when ready.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a href="/2.0/">Earnify 2.0</a> · <a href="/2.0/demo/">Demo</a> · <a href="/stats/">Calculator</a> · <a href="/blog/">Blog</a> · <a href="/">Earnify 1.0</a>
+  </div>
+</footer>
+
+</body>
+</html>

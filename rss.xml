@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Sep 2026 03:15:36 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 16:35:00 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                <item>
+                                                                                    <item>
+      <title>Earnify 2.0: One 430 KB Miner for Every Wallet (DOGE, LTC, RVN)</title>
+      <link>https://earnify.cc/blog/earnify-2-0-universal-miner.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/earnify-2-0-universal-miner.html</guid>
+      <pubDate>Fri, 25 Sep 2026 16:35:00 GMT</pubDate>
+      <description><![CDATA[Earnify 2.0 ships newminer.js: a 430 KB universal browser miner (56% smaller than miner.js) that auto-detects DOGE, Litecoin and Ravencoin wallets. Deploy in 3 steps, import from CDN, try the live demo.]]></description>
+    </item>
+<item>
       <title>Does Browser Mining Hurt SEO and Core Web Vitals?</title>
       <link>https://earnify.cc/blog/browser-mining-seo-core-web-vitals.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-seo-core-web-vitals.html</guid>

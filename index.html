@@ -769,6 +769,61 @@
   </head>
   <body class="bg-bg text-fg overflow-x-hidden font-display antialiased">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-accent focus:text-bg focus:px-4 focus:py-2 focus:font-bold focus:uppercase focus:tracking-wider">Skip to content</a>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- 2.0 ANNOUNCEMENT BANNER (dismissible) -->
+    <!-- ═══════════════════════════════════════ -->
+    <style>
+      #v2banner {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+        height: 40px; display: flex; align-items: center; justify-content: center;
+        background: #dfe104; color: #09090b;
+      }
+      #v2banner .v2link {
+        color: #09090b; text-decoration: none;
+        font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.08em; white-space: nowrap; overflow: hidden;
+        text-overflow: ellipsis; max-width: 100%; padding: 0 44px 0 16px;
+      }
+      #v2banner .v2link:hover { text-decoration: underline; text-underline-offset: 3px; }
+      #v2close {
+        position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+        background: transparent; border: none; cursor: pointer;
+        color: #09090b; font-size: 1rem; font-weight: 700; line-height: 1;
+        padding: 8px 10px;
+      }
+      #v2close:hover { opacity: 0.6; }
+      nav.fixed { transition: top 0.3s ease; }
+      .v2push { transition: margin-top 0.3s ease; }
+      html.has-v2banner nav.fixed { top: 40px; }
+      html.has-v2banner .v2push { margin-top: calc(4rem + 40px); }
+      @media (min-width: 768px) {
+        html.has-v2banner .v2push { margin-top: calc(5rem + 40px); }
+      }
+    </style>
+    <div id="v2banner" role="region" aria-label="Earnify 2.0 announcement">
+      <a href="/2.0/" class="v2link">Announcement: Earnify 2.0 is here — one 430 KB miner for every wallet. Check it out →</a>
+      <button id="v2close" type="button" onclick="closeV2Banner()" aria-label="Dismiss announcement">✕</button>
+    </div>
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem("earnify-v2-banner") === "dismissed") {
+            document.getElementById("v2banner").style.display = "none";
+          } else {
+            document.documentElement.classList.add("has-v2banner");
+          }
+        } catch (e) {
+          document.documentElement.classList.add("has-v2banner");
+        }
+      })();
+      function closeV2Banner() {
+        try { localStorage.setItem("earnify-v2-banner", "dismissed"); } catch (e) {}
+        var b = document.getElementById("v2banner");
+        if (b) b.style.display = "none";
+        document.documentElement.classList.remove("has-v2banner");
+      }
+    </script>
     <!-- SVG Noise Overlay -->
     <svg
       class="noise-overlay"
@@ -888,7 +943,7 @@
     <!-- MARQUEE BANNER -->
     <!-- ═══════════════════════════════════════ -->
     <div aria-hidden="true"
-      class="mt-16 md:mt-20 border-b-2 border-border bg-accent text-bg overflow-hidden"
+      class="v2push mt-16 md:mt-20 border-b-2 border-border bg-accent text-bg overflow-hidden"
     >
       <div class="flex whitespace-nowrap marquee-left py-3">
         <span class="flex items-center gap-8 px-4">
