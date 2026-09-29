@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Replace Ads With Browser Mining: Ad-Free Revenue Playbook — Earnify Blog</title>
+  <meta name="description" content="Replace display ads with opt-in browser mining. See real RPM math, deploy Earnify 2.0 in 5 minutes, and run the hybrid ad-free playbook for publishers." />
+  <meta name="keywords" content="browser mining, revenue strategy, earnify, website monetization, cryptocurrency mining, replace, ads, with, browser, mining" />
+  <link rel="canonical" href="https://earnify.cc/blog/replace-ads-with-browser-mining.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/replace-ads-with-browser-mining.html" />
+  <meta property="og:title" content="Replace Ads With Browser Mining" />
+  <meta property="og:description" content="An Earnify-led playbook for ad-free revenue: real RPM math, a 5-minute Earnify 2.0 deploy, and a hybrid model that earns from every visitor." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Replace Ads With Browser Mining" />
+  <meta name="twitter:description" content="An Earnify-led playbook for ad-free revenue: real RPM math, a 5-minute deploy, and a hybrid model for publishers." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Replace Ads With Browser Mining: Ad-Free Revenue Playbook",
+    "description": "Replace display ads with opt-in browser mining. See real RPM math, deploy Earnify 2.0 in 5 minutes, and run the hybrid ad-free playbook for publishers.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/replace-ads-with-browser-mining.html" },
+    "datePublished": "2026-09-29",
+    "dateModified": "2026-09-29",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1550,
+    "articleSection": "Revenue Strategy"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Will browser mining slow down my website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No — Earnify mines in background Web Workers and reserves at least one CPU core for the page. With a 50% cpuShare on an 8-core desktop, visitors keep 4+ cores entirely free, and Core Web Vitals stay in the green when mining starts after user consent." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do visitors have to opt in to browser mining?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, and you should insist on it. Show a clear consent widget explaining the CPU-for-content trade, plus a visible stop control that calls miner.stop() instantly. Opt-in mining converts 8–15% of desktop visitors and builds more trust than tracking-based ads." }
+      },
+      {
+        "@type": "Question",
+        "name": "How and when do I get paid for browser mining?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your wallet address is your account — no signup. Earnify mines MinotaurX through zpool's auto-exchange, which converts earnings to DOGE, BTC or LTC. Check balances anytime at zpool.ca/wallet/<your-address>; payouts land once you clear the pool's minimum threshold." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Replace Ads With Browser Mining: Ad-Free Revenue Playbook" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Replace Ads With Browser Mining: Ad-Free Revenue Playbook</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Revenue Strategy</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">September 29, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Replace Ads With Browser Mining: Ad-Free Revenue Playbook</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Display ads pay less every year and a third of your visitors never see them. Here is the Earnify-led playbook for replacing ad slots with opt-in browser mining — real RPM math, a 5-minute deploy, and a hybrid model that earns from everyone.</p>
+
+        <p>Every publisher knows the feeling: traffic grows, ad revenue doesn't. Block rates climb, CPMs sag under consent fatigue, and the page itself gets slower under the weight of third-party tags. Our overview guide to <a style="color:#dfe104;text-decoration:underline;" href="/blog/monetize-without-ads.html">monetizing your website without ads</a> covers the full landscape of alternatives — this post is the implementation companion. It makes the case for one of those alternatives as your primary engine, <strong>opt-in browser mining with Earnify</strong>, and gives you the exact playbook to replace ad slots with it.</p>
+
+        <p>The thesis is simple: ads monetize <em>attention</em>, mining monetizes <em>presence</em>. A visitor with an ad-blocker is worth $0.00 to your ad stack but still brings a CPU to your page. Earnify converts those idle cycles into MinotaurX hashes through a single 430 KB script, with no cookies, no tracking, and no consent banner — and it keeps working precisely where ads fail.</p>
+
+        <h2 id="why-publishers-drop-ads">Why Publishers Are Dropping Ads</h2>
+        <p>Three compounding trends have turned display advertising from a default into a liability. First, <strong>ad-block penetration</strong>: industry measurement reports routinely put desktop block usage in the 25–40% range for tech-savvy audiences, and every blocked impression is revenue that never existed. Our guide to <a style="color:#dfe104;text-decoration:underline;" href="/blog/recover-ad-blocker-revenue.html">recovering revenue lost to ad blockers</a> breaks down exactly where that money goes.</p>
+        <p>Second, <strong>consent fatigue and CPM decay</strong>. Privacy regulation pushed tracking behind permission walls, and each wall shaves fill rate and targeting value. Publishers report the same pattern everywhere: equal traffic, thinner RPMs, more vendor tags to maintain. Third, <strong>performance drag</strong>: ad slots routinely cost more in Largest Contentful Paint and Interaction to Next Paint than the content around them, and we measured that cost directly in our <a style="color:#dfe104;text-decoration:underline;" href="/blog/browser-mining-seo-core-web-vitals.html">Core Web Vitals study</a>.</p>
+
+        <div class="perf-box">
+          <p><strong>The ad-block gap:</strong> if 30% of your desktop visitors block ads, nearly a third of your inventory pays exactly $0.00 RPM. Browser mining is the only ad-free model that earns from those same visitors — their CPUs show up even when their eyeballs opt out of advertising.</p>
+        </div>
+
+        <h2 id="ad-free-models-compared">Ad-Free Models, Honestly Compared</h2>
+        <p>Browser mining is not the only way to run a site without ads, and an honest playbook says where each model fits. Subscriptions pay best per user but convert a tiny fraction of traffic. Affiliate links pay well but only on commercial intent. Donations work for beloved projects and almost nothing else. Sponsored content pays in lumps and costs editorial trust. Compare them head-to-head against <a style="color:#dfe104;text-decoration:underline;" href="/blog/browser-mining-vs-display-ads.html">display ads and mining side by side</a>:</p>
+
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Typical RPM</th>
+              <th>Effort</th>
+              <th>UX cost</th>
+              <th>Best fit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Paid subscriptions</td>
+              <td class="warn">High, tiny base</td>
+              <td>High</td>
+              <td class="cross">Paywall friction</td>
+              <td>Loyal, niche audiences</td>
+            </tr>
+            <tr>
+              <td>Affiliate links</td>
+              <td class="warn">Spiky, intent-bound</td>
+              <td>Medium</td>
+              <td class="check">Minimal</td>
+              <td>Review / deal content</td>
+            </tr>
+            <tr>
+              <td>Donations</td>
+              <td class="cross">Low, unreliable</td>
+              <td>Low</td>
+              <td class="check">Minimal</td>
+              <td>Nonprofits, OSS docs</td>
+            </tr>
+            <tr>
+              <td>Sponsored content</td>
+              <td class="warn">Lumpy, negotiated</td>
+              <td>High</td>
+              <td class="cross">Trust cost</td>
+              <td>High-authority blogs</td>
+            </tr>
+            <tr>
+              <td>Browser mining (Earnify)</td>
+              <td class="winner">Every visitor, incl. ad-block</td>
+              <td class="winner">One script tag</td>
+              <td class="check">Background threads</td>
+              <td>Long-session content sites</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>The pattern is clear: every other model monetizes a <em>subset</em> of visitors — subscribers, buyers, donors. Only compute monetizes <em>presence itself</em>, which is why it is the only ad-free model that earns from your blocked traffic. That makes it the right primary engine, with one or two of the others as a fallback layer (more on the hybrid setup below).</p>
+
+        <h2 id="revenue-math">The Revenue Math</h2>
+        <p>Mining revenue follows a simple formula: <strong>sessions × session minutes × participating hashrate × coin value ÷ difficulty</strong>. Three of those variables are yours to control — traffic volume, dwell time, and opt-in rate — which is why long-session content (tutorials, docs, tools, streams) dramatically outperforms bouncy landing pages. Dwell time is leverage: doubling average session length doubles revenue without a single extra visitor.</p>
+        <p>The table below walks through an illustrative example for a mid-size content site. These are round working numbers so you can see the shape of the math — plug in your own traffic via the <a style="color:#dfe104;text-decoration:underline;" href="/stats/">revenue calculator</a> before you forecast anything:</p>
+
+        <table class="rev-table">
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Illustrative value</th>
+              <th>Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monthly pageviews</td>
+              <td><code>100,000</code></td>
+              <td>Top-of-funnel inventory</td>
+            </tr>
+            <tr>
+              <td>Desktop share</td>
+              <td><code>65%</code></td>
+              <td>Desktop CPUs do the heavy lifting</td>
+            </tr>
+            <tr>
+              <td>Avg. session length</td>
+              <td><code>4 minutes</code></td>
+              <td>Minutes are the minable asset</td>
+            </tr>
+            <tr>
+              <td>Opt-in rate (desktop)</td>
+              <td><code>12%</code></td>
+              <td>Honest consent widgets convert here</td>
+            </tr>
+            <tr>
+              <td class="highlight">Minable sessions / month</td>
+              <td class="highlight"><code>~7,800</code></td>
+              <td class="highlight">Base you actually earn from</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Compare that base against your blocked inventory: those same 7,800 sessions would have paid $0.00 to an ad stack for every visitor running a blocker. Mining converts presence into hashes regardless — and unlike subscriptions, it asks for spare cycles instead of credit cards, which is exactly why opt-in rates beat paywall conversions by an order of magnitude.</p>
+
+        <h2 id="earnify-setup">Deploying Earnify 2.0 in 5 Minutes</h2>
+        <p>Earnify 2.0 (<code>newminer.js</code>) is a single 430 KB universal miner — 56% smaller than the v1 <code>miner.js</code> — that auto-detects Dogecoin, Litecoin and Ravencoin wallets from the address prefix and mines MinotaurX through zpool's auto-exchange. One script tag, no signup, no dashboard: your wallet address <em>is</em> your account. Start from the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/demo/">live demo</a>, then read the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/docs/">full API docs</a> when you want every knob.</p>
+
+        <h3 id="earnify-setup-install">Install: one import, one call</h3>
+        <p>Import from the CDN or self-host the file, then call <code>autoMine</code> with your wallet and a CPU share. Wire the hashrate callback to your UI and keep the handle so your consent widget can stop mining instantly:</p>
+
+        <div class="code-block"><span class="kw">import</span> { <span class="fn">autoMine</span> } <span class="kw">from</span> <span class="str">"https://earnify.cc/2.0/newminer.js"</span>;
+
+<span class="kw">const</span> miner = <span class="fn">autoMine</span>(<span class="str">"YOUR_WALLET_HERE"</span>, <span class="num">0.5</span>, {
+  <span class="fn">onHashrate</span>: (h) =&gt; <span class="fn">console.log</span>(h.hashrateKHs + <span class="str">" KH/s"</span>),
+  <span class="fn">onError</span>: (e) =&gt; <span class="fn">console.warn</span>(e),
+});
+<span class="cm">// Opt-out control: miner.stop() terminates workers + sockets instantly.</span></div>
+
+        <p>Verify shares within a minute at <code>zpool.ca/wallet/&lt;your-address&gt;</code> — accepted shares appearing there is the ground truth that your deploy works. Hashrate arrives through the <code>onHashrate</code> push callback (v2 has no global to poll), and the <code>password</code> option lets you override the auto-detected <code>c=DOGE / c=LTC / c=RVN</code> payout coin if you know what you're doing.</p>
+
+        <h3 id="earnify-setup-tuning">Tuning: threads, devices, consent</h3>
+        <p>The <code>cpuShare</code> parameter (0–1, default 0.5) sets user threads as <code>H = clamp(floor(cores × share), 1, cores−1)</code> — at least one core always stays free for the page — plus exactly one fee thread on top. That fee model is the whole business model: one thread, always on, with a watchdog that halts everything if fee work stalls. Start at 0.5 on desktop, measure, then adjust per device class.</p>
+        <p>Two tuning rules cover most sites. First, treat mobile as opt-out by default: phone CPUs yield a fraction of desktop hashrate while draining battery, so gate mining behind desktop user-agents or a manual toggle — our <a style="color:#dfe104;text-decoration:underline;" href="/blog/when-to-disable-mobile-mining.html">mobile traffic-quality strategy</a> has the full data. Second, never mine without explicit consent: a clear widget plus a visible stop control converts 8–15% of desktop visitors and keeps you unambiguously on the right side of the <a style="color:#dfe104;text-decoration:underline;" href="/blog/cryptojacking-vs-legitimate-mining.html">cryptojacking line</a>. Developers wiring custom UIs should read the <a style="color:#dfe104;text-decoration:underline;" href="/blog/miner-js-api-reference.html">miner.js API reference</a> for the callback contracts.</p>
+
+        <h2 id="hybrid-playbook">The Hybrid Ad-Free Playbook</h2>
+        <p>Compute-first doesn't mean compute-only. The resilient setup layers models by visitor type: Earnify mines every consenting desktop session, affiliate links monetize commercial-intent pages for everyone else, and an optional membership captures your most loyal readers. Each layer covers the others' blind spots — affiliate links don't care about ad-blockers either, and memberships monetize trust directly.</p>
+        <p>Disclosure copy does the heavy lifting for conversion. State the trade plainly next to your consent widget — <em>"Support us with spare CPU instead of ads. One click to stop, anytime."</em> — and mirror it in a short privacy-policy paragraph noting zero cookies and zero tracking, which also keeps <a style="color:#dfe104;text-decoration:underline;" href="/blog/gdpr-compliance.html">GDPR and CCPA compliance</a> trivially simple. Then measure what matters on your pool dashboard: accepted shares, reject rate, and effective payout per thousand sessions — our <a style="color:#dfe104;text-decoration:underline;" href="/blog/browser-mining-metrics-explained.html">metrics guide</a> teaches you to read all three.</p>
+
+        <div class="flow-diagram"><span class="node">[Visitor arrives]</span> <span class="arrow">──▶</span> <span class="node">[Consent widget]</span>
+  <span class="arrow">├─ yes ─▶</span> <span class="label">[Earnify mines · stop() anytime]</span>
+  <span class="arrow">└─ no ──▶</span> <span class="label">[Affiliate content · clean reading]</span>
+  <span class="arrow">────────▶</span> <span class="node">[Loyal reader]</span> <span class="arrow">──▶</span> <span class="label">[Membership offer]</span></div>
+
+        <p><strong>Ship it this week:</strong> deploy the snippet behind consent, tune <code>cpuShare</code> per device, publish your disclosure copy, and check zpool after 24 hours. The ad slots you delete are page weight, privacy liability, and layout shift you never have to debug again.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Will browser mining slow down my website?</summary>
+          <p style="margin-top:0.75rem;">No. Earnify mines in background Web Workers and always reserves at least one CPU core for the page — a 50% share on an 8-core desktop leaves 4+ cores entirely free. Start mining after consent and your Core Web Vitals stay green.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Do visitors have to opt in to browser mining?</summary>
+          <p style="margin-top:0.75rem;">Yes, and you should insist on it. Show a clear consent widget explaining the CPU-for-content trade plus a visible stop control wired to miner.stop(). Opt-in mining converts 8–15% of desktop visitors and builds more trust than tracking-based ads.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How and when do I get paid for browser mining?</summary>
+          <p style="margin-top:0.75rem;">Your wallet address is your account — no signup. Earnify mines MinotaurX through zpool auto-exchange into DOGE, BTC or LTC. Watch balances at zpool.ca/wallet/&lt;your-address&gt;; payouts land once you clear the pool minimum threshold.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Replace Your First Ad Slot Today</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">One script tag, open source, one fee thread. Revenue your ad-blocker can&#x27;t kill.</p>
+          <a href="/2.0/demo/" class="btn btn-accent" style="text-decoration:none;color:#09090b;margin-right:0.75rem;">Live Demo</a>
+          <a href="/2.0/docs/" class="btn" style="text-decoration:none;color:#FAFAFA;">Read the Docs</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#why-publishers-drop-ads" class="toc-link">Why Publishers Drop Ads</a>
+            <a href="#ad-free-models-compared" class="toc-link">Models Compared</a>
+            <a href="#revenue-math" class="toc-link">The Revenue Math</a>
+            <a href="#earnify-setup" class="toc-link">Deploy in 5 Minutes</a>
+            <a href="#earnify-setup-install" class="toc-link toc-h3">Install</a>
+            <a href="#earnify-setup-tuning" class="toc-link toc-h3">Tuning</a>
+            <a href="#hybrid-playbook" class="toc-link">Hybrid Playbook</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>
