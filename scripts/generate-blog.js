@@ -93,6 +93,10 @@ Available visual components (use these to make posts look professional and data-
   "structuredData": {"headline": "...", "description": "..."}
 }`;
 
+  const MAX_COMPLETION_TOKENS = Number(process.env.OPENROUTER_MAX_TOKENS) || 16000;
+  let lastRaw = null;
+  let lastMeta = null;
+
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
       const response = await client.chat.completions.create({
@@ -102,26 +106,170 @@ Available visual components (use these to make posts look professional and data-
           { role: "user", content: userPrompt },
         ],
         temperature: 0.7,
-        max_tokens: 8000,
+        max_completion_tokens: MAX_COMPLETION_TOKENS,
         response_format: { type: "json_object" },
       });
 
-      const content = response?.choices?.[0]?.message?.content;
-      if (!content || typeof content !== "string") {
-        throw new Error("Empty or invalid API response content");
+      const choice = response?.choices?.[0];
+      const finishReason = choice?.finish_reason;
+      const usage = response?.usage;
+      let content = choice?.message?.content;
+      lastMeta = {
+        model: MODEL,
+        topic: topic.title,
+        attempt: attempt + 1,
+        finishReason: finishReason ?? null,
+        usage: usage ?? null,
+        contentLength: typeof content === "string" ? content.length : 0,
+      };
+      console.log(
+        `API attempt ${attempt + 1}: finish_reason=${finishReason ?? "n/a"} ` +
+          `contentLength=${lastMeta.contentLength} ` +
+          `usage=${usage ? JSON.stringify(usage) : "n/a"}`
+      );
+
+      if (finishReason === "length") {
+        throw new Error(
+          `Output truncated by token limit (finish_reason=length, max_completion_tokens=${MAX_COMPLETION_TOKENS}). ` +
+            `Raise OPENROUTER_MAX_TOKENS or shorten the prompt.`
+        );
       }
-      return JSON.parse(content);
+      if (!content || typeof content !== "string" || !content.trim()) {
+        throw new Error(
+          `Empty or invalid API response content (finish_reason=${finishReason ?? "n/a"})`
+        );
+      }
+      lastRaw = content;
+      const post = parsePostJSON(content);
+      validatePost(post);
+      return post;
     } catch (err) {
       if (attempt < retries) {
         const delay = Math.pow(2, attempt) * 2000 + Math.random() * 1000;
         console.warn(`API attempt ${attempt + 1} failed: ${err.message}. Retrying in ${Math.round(delay)}ms...`);
         await new Promise((r) => setTimeout(r, delay));
       } else {
+        saveFailureArtifact(topic, lastMeta, lastRaw, err);
         throw err;
       }
     }
   }
   throw new Error("Unexpected: retry loop exhausted");
+}
+
+// Extract the JSON payload from raw model output: strip markdown fences,
+// then isolate the largest {...} block. Dependency-free.
+function extractJSON(text) {
+  let t = String(text).trim();
+  // Strip ```json ... ``` or ``` ... ``` fences (take the largest fenced block).
+  const fenceMatch = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fenceMatch && fenceMatch[1].trim()) {
+    t = fenceMatch[1].trim();
+  }
+  const start = t.indexOf("{");
+  const end = t.lastIndexOf("}");
+  if (start !== -1 && end !== -1 && end > start) {
+    return t.slice(start, end + 1);
+  }
+  return t;
+}
+
+// Best-effort repair for truncated JSON (most commonly an unterminated
+// string inside "content" when the model hits the token limit). Closes an
+// open string, then closes any unclosed brackets/braces. Returns null if
+// the text is too damaged to salvage.
+function repairTruncatedJSON(text) {
+  let inString = false;
+  let escaped = false;
+  const stack = [];
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inString) {
+      if (escaped) {
+        escaped = false;
+      } else if (ch === "\\") {
+        escaped = true;
+      } else if (ch === '"') {
+        inString = false;
+      }
+    } else {
+      if (ch === '"') {
+        inString = true;
+      } else if (ch === "{" || ch === "[") {
+        stack.push(ch);
+      } else if (ch === "}") {
+        if (stack[stack.length - 1] === "{") stack.pop();
+      } else if (ch === "]") {
+        if (stack[stack.length - 1] === "[") stack.pop();
+      }
+    }
+  }
+  let fixed = text;
+  if (inString) fixed += '"';
+  while (stack.length) {
+    fixed += stack.pop() === "{" ? "}" : "]";
+  }
+  try {
+    JSON.parse(fixed);
+    return fixed;
+  } catch {
+    return null;
+  }
+}
+
+function parsePostJSON(content) {
+  const candidates = [content, extractJSON(content)];
+  for (const candidate of candidates) {
+    try {
+      return JSON.parse(candidate);
+    } catch {
+      // try next candidate / repair below
+    }
+  }
+  const repaired = repairTruncatedJSON(candidates[1]);
+  if (repaired) {
+    console.warn("JSON needed truncation repair — output was likely cut off; validating repaired object.");
+    return JSON.parse(repaired);
+  }
+  throw new Error(
+    `Model output is not valid JSON (tried raw, fence-stripped, and repair; length=${content.length})`
+  );
+}
+
+function validatePost(post) {
+  const problems = [];
+  if (!post || typeof post !== "object") problems.push("top-level value is not an object");
+  else {
+    if (!post.title || typeof post.title !== "string") problems.push("missing/invalid title");
+    if (!post.description || typeof post.description !== "string") problems.push("missing/invalid description");
+    if (!post.content || typeof post.content !== "string" || post.content.length < 2000)
+      problems.push(`content too short (${post.content?.length ?? 0} chars, expected 2000+) — likely truncated`);
+    if (!Array.isArray(post.toc) || post.toc.length === 0) problems.push("missing/empty toc");
+    if (!Array.isArray(post.faqs) || post.faqs.length === 0) problems.push("missing/empty faqs");
+  }
+  if (problems.length) {
+    throw new Error(`Post failed validation: ${problems.join("; ")}`);
+  }
+}
+
+function saveFailureArtifact(topic, meta, raw, err) {
+  try {
+    const payload = {
+      error: err?.message ?? String(err),
+      meta: meta ?? null,
+      topic: topic ?? null,
+      rawPreview: typeof raw === "string" ? raw.slice(0, 2000) : null,
+      rawLength: typeof raw === "string" ? raw.length : 0,
+    };
+    // Full raw output goes to a file for the workflow artifact upload step.
+    writeFileSync(join(__dirname, ".last-failure.json"), JSON.stringify(payload, null, 2) + "\n");
+    if (typeof raw === "string" && raw) {
+      writeFileSync(join(__dirname, ".last-response.txt"), raw);
+    }
+    console.error(`Saved failure debug info to scripts/.last-failure.json (${payload.rawLength} chars of raw output)`);
+  } catch (writeErr) {
+    console.error(`Could not save failure artifact: ${writeErr.message}`);
+  }
 }
 
 function escapeJSON(str) {

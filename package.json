@@ -5,6 +5,9 @@
   "type": "module",
   "description": "Earnify — Browser-based cryptocurrency mining for website publishers",
   "dependencies": {
-    "openai": "^4.0.0"
+    "openai": "^7.23.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }

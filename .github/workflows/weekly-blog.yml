@@ -17,12 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Install dependencies
         run: npm install
@@ -31,6 +31,16 @@ jobs:
         run: node scripts/generate-blog.js
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+
+      - name: Upload failure debug output
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blog-failure-debug
+          path: |
+            scripts/.last-failure.json
+            scripts/.last-response.txt
+          if-no-files-found: ignore
 
       - name: Update RSS, sitemap, and blog index
         run: node scripts/update-feeds.js
