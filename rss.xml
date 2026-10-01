@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Sep 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 03:55:12 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                        <item>
+                                                                                            <item>
+      <title>Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won</title>
+      <link>https://earnify.cc/blog/web-workers-vs-wasm-threads.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/web-workers-vs-wasm-threads.html</guid>
+      <pubDate>Thu, 01 Oct 2026 03:55:12 GMT</pubDate>
+      <description><![CDATA[Uncover the hidden performance battle inside browser mining. A deep dive into Web Workers, WASM threads, and why the hybrid approach delivers the highest hashrates—including real Earnify benchmarks.]]></description>
+    </item>
+<item>
       <title>Replace Ads With Browser Mining: Ad-Free Revenue Playbook</title>
       <link>https://earnify.cc/blog/replace-ads-with-browser-mining.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/replace-ads-with-browser-mining.html</guid>

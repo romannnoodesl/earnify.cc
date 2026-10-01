@@ -201,7 +201,7 @@
       "slug": "web-workers-vs-wasm-threads",
       "category": "Technical",
       "description": "Inside the threading model of modern browser miners — Web Workers, WASM compilation, SIMD, and why n-1 core reservation matters.",
-      "used": false
+      "used": true
     },
     {
       "title": "Is Your Site a Good Candidate for Browser Mining? A Qualification Checklist",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 27
+  "nextTopicIndex": 28
 }

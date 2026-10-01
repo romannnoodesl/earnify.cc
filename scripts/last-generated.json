@@ -1,1 +1,9 @@
-{"category": "Revenue Strategy", "date": "2026-09-29", "description": "Replace display ads with opt-in browser mining. See real RPM math, deploy Earnify 2.0 in 5 minutes, and run the hybrid ad-free playbook for publishers.", "readTime": "7 min read", "rssDate": "Tue, 29 Sep 2026 12:00:00 GMT", "slug": "replace-ads-with-browser-mining", "title": "Replace Ads With Browser Mining: Ad-Free Revenue Playbook"}
+{
+  "slug": "web-workers-vs-wasm-threads",
+  "title": "Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won",
+  "description": "Uncover the hidden performance battle inside browser mining. A deep dive into Web Workers, WASM threads, and why the hybrid approach delivers the highest hashrates—including real Earnify benchmarks.",
+  "category": "Technical",
+  "readTime": "8 min read",
+  "date": "2026-10-01",
+  "rssDate": "Thu, 01 Oct 2026 03:55:12 GMT"
+}

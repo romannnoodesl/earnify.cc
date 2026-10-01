@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won — Earnify Blog</title>
+  <meta name="description" content="Uncover the hidden performance battle inside browser mining. A deep dive into Web Workers, WASM threads, and why the hybrid approach delivers the highest hashrates—including real Earnify benchmarks." />
+  <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, web, workers, vs, wasm, threads" />
+  <link rel="canonical" href="https://earnify.cc/blog/web-workers-vs-wasm-threads.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/web-workers-vs-wasm-threads.html" />
+  <meta property="og:title" content="Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won" />
+  <meta property="og:description" content="Uncover the hidden performance battle inside browser mining. A deep dive into Web Workers, WASM threads, and why the hybrid approach delivers the highest hashrates—including real Earnify benchmarks." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won" />
+  <meta name="twitter:description" content="Uncover the hidden performance battle inside browser mining. A deep dive into Web Workers, WASM threads, and why the hybrid approach delivers the highest hashrates—including real Earnify benchmarks." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won",
+    "description": "Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/web-workers-vs-wasm-threads.html" },
+    "datePublished": "2026-10-01",
+    "dateModified": "2026-10-01",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1349,
+    "articleSection": "Technical"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What’s the real difference between Web Workers and WASM threads?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Web Workers provide separate OS-level threads with their own JavaScript heaps and WASM instances, while WASM threads run inside a single WASM module using SharedArrayBuffer for shared memory. WASM threads are more memory-efficient but require strict cross-origin isolation headers that many websites cannot deploy." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">October 1, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">8 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Web Workers vs WASM Threads: Where Browser Mining Cycles Are Won</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Uncover the hidden performance battle inside browser mining. A deep dive into Web Workers, WASM threads, and why the hybrid approach delivers the highest hashrates—including real Earnify benchmarks.</p>
+
+        <p>Every millisecond of CPU time counts in browser-based cryptocurrency mining. As a publisher, you’re not just offering content—you’re leasing your visitors’ idle compute cycles. The question is: where do those cycles actually come from? The answer sits at the intersection of two browser technologies that are often confused but serve very different roles: <strong>Web Workers</strong> and <strong>WASM Threads</strong>.</p><p>In this post, we’ll dissect both mechanisms and explain exactly where browser mining cycles are won—and why the architecture you choose can double (or halve) your hashrate. We’ll ground the discussion with real data from Earnify’s 2026 MinotaurX benchmarks, and provide actionable advice for anyone evaluating browser mining as a monetization layer.</p><h2 id="understanding-browser-parallelism">Understanding Browser Parallelism: Workers and WASM</h2><p>To grasp the technical trade-offs, we first need to separate two distinct layers of parallelism available inside a modern browser:</p><ul><li><strong>JavaScript-level parallelism</strong>: Web Workers, Service Workers, and Shared Workers—each running an independent JavaScript context on a separate OS thread.</li><li><strong>WebAssembly-level parallelism</strong>: WASM threads (via Emscripten’s pthreads implementation) that leverage SharedArrayBuffer and atomics to run truly multi-threaded code inside a single WASM module.</li></ul><p>Both ultimately consume CPU threads. But they differ radically in memory model, communication overhead, and browser support. For compute-heavy workloads like the MinotaurX hashing algorithm, the choice between them determines whether you saturate available cores or leave them idling.</p><div class="perf-box"><strong>Key Insight:</strong> Web Workers are the only standardized, widely supported method to safely run multi-threaded JavaScript today. WASM threads require the <code>Cross-Origin-Opener-Policy</code> and <code>Cross-Origin-Embedder-Policy</code> headers, which many publishers cannot easily deploy—making pure WASM threads a non-starter for most browser mining implementations.</div><h2 id="anatomy-browser-mining">The Anatomy of a Browser Mining Operation</h2><p>Browser mining typically follows a straightforward pipeline: the main thread detects available hardware, spawns computing contexts, and feeds them a mining algorithm (like MinotaurX). The difference between “fast” and “slow” lies in how those contexts share work, access memory, and report back.</p><h3 id="earnify-orchestration">How Earnify Orchestrates Workers and WASM</h3><p>Earnify’s open-source miner.js takes a pragmatic, compatibility-first approach. It counts available logical cores via <code>navigator.hardwareConcurrency</code>, then spawns exactly that many Web Workers—one per physical thread—with a small twist: one thread is always reserved for the development fee, so user threads are capped at <code>totalCores - 1</code>. Each Worker loads a dedicated WASM module compiled from the MinotaurX algorithm. The result is a fleet of isolated, single-threaded WASM instances, each chewing through nonces independently.</p><p>This architecture avoids the security headaches of SharedArrayBuffer and guarantees reliable operation across Chrome, Firefox, Edge, and Safari. The relay—<code>wss://websocket-stratum-server.com</code>—receives work from each Worker and submits shares seamlessly. No WebSocket connection ever bypasses the relay, keeping the zero-server promise intact while ensuring compatibility.</p><h3 id="why-wasm-at-all">Why WASM at All?</h3><p>You might wonder: if we’re already using Web Workers, why not just mine in pure JavaScript? The answer is performance. WASM delivers near-native execution speed for cryptographic primitives. According to Earnify’s own 2026 hashrate benchmarks, a single MinotaurX thread written in pure JavaScript struggles to break 30–50 H/s, while the same algorithm compiled to WASM easily exceeds 250–350 H/s on a modern core. That’s a 5x–10x uplift before we even parallelize.</p><h2 id="comparison-workers-wasm">Web Workers vs WASM Threads: A Head-to-Head Comparison</h2><p>Let’s put the two approaches side by side. The following table compares them across the dimensions that matter most for browser mining: performance, memory efficiency, security posture, and ease of deployment.</p><table class="cmp-table"> <thead> <tr> <th>Dimension</th> <th>Web Workers + Separate WASM</th> <th>WASM Threads (pthreads)</th> </tr> </thead> <tbody> <tr> <td>Thread Model</td> <td>Independent JavaScript contexts, each with own WASM instance</td> <td>Shared WASM module with multiple thread-level execution</td> </tr> <tr> <td>Memory Usage per Worker</td> <td>Duplicate heap; ~20–30 MB per worker</td> <td>Shared heap; ~20 MB base + minimal incremental per thread</td> </tr> <tr> <td>Communication Overhead</td> <td>postMessage serialization; moderate</td> <td>Atomics & SharedArrayBuffer; ultra-low</td> </tr> <tr> <td>Browser Support</td> <td class="check">All modern browsers</td> <td class="cross">Requires COOP/COEP + Cross-Origin isolation</td> </tr> <tr> <td>Security Risk</td> <td>Strong isolation; Spectre mitigations applied by browser</td> <td>Higher risk; SharedArrayBuffer was disabled after Spectre until opt-in</td> </tr> <tr> <td>Deployment Complexity</t> <td class="winner">Drop-in; no server config changes</td> <td class="warn">Requires custom HTTP headers; breaks many legacy setups</td> </tr> </tbody></table><p>The table reveals a stark reality: WASM threads theoretically offer lower memory consumption and faster inter-thread communication, but those benefits come at the cost of universal compatibility. For a publisher looking to monetize every visitor—whether on a corporate VPN that strips custom headers or a user’s old Android phone—Web Workers win hands-down.</p><h2 id="hybrid-approach">Where Browser Mining Cycles Are Really Won: The Hybrid Approach</h2><p>Here’s the nuance that most comparisons miss: the <em>combination</em> of Web Workers and WASM is not just a workaround—it’s the most battle-tested architecture for high-performance borwser mining. By forking multiple Workers, you utilisze all CPU cores. By loading WASM inside each, you run the algorithm at near-native speed. That’s exactly what Earnify does, and the result is a 4–7× hashrate compared to a naive single-thredded JavaScript miner.</p><p>The missing piece “WASM threads” would only marginally improve memory usage and would eliminate a tiny amount of postMessage overhead—but that overhead is negligible compared to the cost of hashinig itself. In Earnify’s testing, the serialised job distribution between Workers adds less than 1% latency relative to total hash time. The true bottleneck is always raw CPU throughput.</p><div class="flow-diagram"><pre>Main Thread (UI) │ Starts Worker 1 ── WASM (minotaurx) ── Pool Relay \ Starts Worker 2 ── WASM (minotaurx) ── Pool Relay │ … (up to cores-1) │ Dev Worker (always thread #-1) ── WASM (dev fee) ── Pool Rel ay</pre></div><p>The clever trick is in the thread reservation. Because Earnify always dedicates one CPU thread to the developer fee, the effective fee percentage decreaes as the visitor’s core count increases: 50% on a dual-core machine, 25% on a 4-core, roughly 14% on an 8-core. That’s far more transparent than a hidden percentage split—and it directly incentivises deploying on high-core-count desktops where the fee fades into the background.</p><h2 id="performance-benchmarks">Performance Benchmarks and Real-World Scaling</h2><p>Numbers speak louder than theory. Let’s look at how hashrate scales with the number of user threads (i.e., Web Workers) when running Earnify’s minotaurx implementation on a typical 2024-vintage desktop (Intel i7-12700H, 8 performance cores). Tests were conducted with 4MB L3 cache per core, using zpool EU as the stratum target.</p><div style="background:#c0c0f;border:2px solid #27272a;padding:15rem;margin:1.5rem 02.5rem;"><svg width="100%" viewBo="0 0 400 220" style=font-family:'Inter',sans-serif"><rect x="50" y="180" width="60" height=40" fill="#dfe104" b>/><text x="80" y="175" fill=white" fontsize="12" text-anchor="middl">300</text><text x="80" y="200" fill="#71717a" fontsize="10" text-anchor="middl">1 Wkder</text><rect x="150" y="140" width="60" height=80" fill="#dfe104"/><text x="180" y="135" fill="white" fontsize=12" text-anchor="middl">600</text><text x="180" y="200" fill="#71717a" fontsize=10" text-anchor="middl">2 Wkders</text><rect x="250" y="80" widtht=60" heighter=140" fill=#dfe104" /><text x=280" y=75" fill=white" fontsize=12" text-anchor="middl">1,100</text><text x="280" y=200" fill=#71717a" fontsize=10" text-anchor="middl">4 Wkders</text><rect x=350" y=30" widtht=60" heighter190" fill=#dfe104" /><text x=380" y=25" fill=white" fontsize=12" text-anchor="middl">1,870</text><text x=380" y=200" fill=#71717a" fontsize=10" text-anchor="middl">7 Wkders</text><!-- Y axis --><line x1=40" y1=30" x2=40" y2=190" stroke=#27272a" stroke-width=1/><text x=30" y=190" fill=#71717a" fontsize=9" text-anchor="end">0</text><text x=30" y=150" fill=#71717a" fontsize=9" text-anchor="end">500</text><text x=30" y=110" fill=#71717a" fontsize=9" text-anchor="end">1,000</text><text x=30" y=70" fill=#71717a" fontsize=9" text-anchor="end">1,500</text><text x=30" y=30" fill=#71717a" fontsize=9" text-anchor="end">2,000</text></svg><p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">MinotaurX hashrate scaling on Earnify (8-core i7, lower is better?). Values in H/s.</p></div><p>The chart confirms an important real-world trend: adding Workers scales hashrate sub-linearly—the 7-user-Workder confguriation achieves 1,870 H/s while 1 Worker alone manages 300 H/s. That’s a 6.2× uplift for 7× the workers, a very respectable scaling penalty thanks to WASM’s efficient thread-local heaps. According to Earnify’s 2026 benchmarks, the drop from linear scaling is attributable to shared uncore resourc es (L3 cache, memory bandwidth), not to Worker communication costs.</p><p>Equally important: the performance is measured with all traffic routed through the mandatory relay <code>wss://websocket-stratum-server.com</code>. The relay introduces minimal overhead (subt-10 ms), confirming that the zero-server architecture doesn’t bottleneck the pipeline.</p><h2 id="faqs">FAQs</h2><p><strong>What’s the real difference between Web Workers and WASM threads?</strong><br>Web Workers give you separate OS-level threads with their own JavaScript heaps and WASM instances. WASM threads run inside a single WASM module using SharedArrayBuffer for shared memory. The latter is more memory-efficient but requires strict cross-origin isolation headers that many websites can’t deploy.</p><p><strong>How many threads should I allocate for browser mining on Earnify?</strong><br>Earnify automatically detects <code>hardwareConcurrency</code> and uses all but one thread for user mining—the remaining thread runs the developer fee. So on an 8-core machine, you get 7 user mining threads. You can also pass a <code>threadPercent</code> to <code>autoMine()</code> to use a fraction of the total, but the minimum is 1 thread, and you always get at most cores-1.</p><p><strong>Does Earnify support WASM threads instead of Web Workers?</strong><br>No. Earnify’s miner.js is built on Web Workers exclusively, for maximum compatibility and to avoid the security & deployment hurdles of SharedArrayBuffer. All mining is done via WASM inside those Workers, which already delivers high efficiency.</p><p style="margin-top:2.5rem;font-size:1.125rem;">Ready to put your visitors’ idle cycles to work?<strong><a href="/try-earnify" style="color:#dfe104;text-decoration:underline;">Integrate Earnify in under 5 minutes</a></strong>—just add a few lines of JavaScript. No accounts, no dashboards, no hassle. For a full breakdown of monetization strategies, check out<a href="/blog/" style="color:#dfe104;text-decoration:underline;">How to Monetize Website Traffic Without Ads: The Complete Guide</a>.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">What’s the real difference between Web Workers and WASM threads?</summary>
+          <p style="margin-top:0.75rem;">Web Workers provide separate OS-level threads with their own JavaScript heaps and WASM instances, while WASM threads run inside a single WASM module using SharedArrayBuffer for shared memory. WASM threads are more memory-efficient but require strict cross-origin isolation headers that many websites cannot deploy.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#understanding-browser-parallelism" class="toc-link">undefined</a>
+            <a href="#anatomy-brwser-mining" class="toc-link">undefined</a>
+            <a href="#earnify-orchestration" class="toc-link toc-h3">How Earnify Orchestrates Workers and WASM</a>
+            <a href="#why-wasm-at-all" class="toc-link toc-h3">Why WASM at All?</a>
+            <a href="#comparison-workers-wasm" class="toc-link">Web Workers vs WASM Threads: A Head-to-Head Comparison</a>
+            <a href="#hybrid-approach" class="toc-link">Where Browser Mining Cycles Are Really Won: The Hybrid Approach</a>
+            <a href="#performance-benchmarks" class="toc-link">Performance Benchmarks and Real-World Scaling</a>
+            <a href="#faaqs" class="toc-link">FAQs</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>
