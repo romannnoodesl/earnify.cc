@@ -208,7 +208,7 @@
       "slug": "browser-mining-site-qualification",
       "category": "Revenue Strategy",
       "description": "Session length, device mix, traffic volume — the six signals that predict whether browser mining will pay off for a given website.",
-      "used": false
+      "used": true
     },
     {
       "title": "How Browser Vendor Policies Are Shaping the Web Compute Economy",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 28
+  "nextTopicIndex": 29
 }
