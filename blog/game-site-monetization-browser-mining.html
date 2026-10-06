@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monetizing Browser Game Sites With Opt-In Browser Mining — Earnify Blog</title>
+  <meta name="description" content="Browser games mean long sessions but heavy CPU use. Learn how to add opt-in browser mining during lobbies and menus — without wrecking gameplay performance." />
+  <meta name="keywords" content="browser mining, game site monetization, earnify, website monetization, cryptocurrency mining, browser games, unblocked games, opt-in mining" />
+  <link rel="canonical" href="https://earnify.cc/blog/game-site-monetization-browser-mining.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/game-site-monetization-browser-mining.html" />
+  <meta property="og:title" content="Monetizing Browser Game Sites With Opt-In Browser Mining" />
+  <meta property="og:description" content="Long sessions, high bounce-resistant engagement, and a huge ad-blocking audience — here is how game portals turn idle lobby time into revenue with opt-in mining." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Monetizing Browser Game Sites With Opt-In Browser Mining" />
+  <meta name="twitter:description" content="How game portals turn idle lobby time into revenue with opt-in browser mining — without wrecking gameplay." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Monetizing Browser Game Sites With Opt-In Browser Mining",
+    "description": "Browser games mean long sessions but heavy CPU use. Learn how to add opt-in browser mining during lobbies and menus — without wrecking gameplay performance.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/game-site-monetization-browser-mining.html" },
+    "datePublished": "2026-10-06",
+    "dateModified": "2026-10-06",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1620,
+    "articleSection": "Revenue Strategy"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Will browser mining make my games lag?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Not if you mine at the right time. Earnify always reserves at least one CPU core for the page, and a low cpuShare (0.2–0.3) keeps active gameplay smooth. The safest pattern is to mine only during menus, lobbies, and loading screens, then stop when play begins." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do game players actually opt in to mining?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Gamers are unusually receptive to ad-free monetization. Because they already block ads and hate pre-roll video, an honest 'spare CPU instead of ads' widget converts comparably to other long-session content sites, and the opt-out stays one click away via miner.stop()." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much can a game portal earn from mining?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It depends on session length, desktop share, and opt-in rate. Long sessions help, but the CPU is busy during gameplay, so realistic revenue comes from lobby and menu minutes — plug your traffic into the Earnify revenue calculator before forecasting." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Monetizing Browser Game Sites With Opt-In Browser Mining" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Monetizing Browser Game Sites With Opt-In Browser Mining</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Revenue Strategy</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">October 6, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Monetizing Browser Game Sites With Opt-In Browser Mining</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Free game portals have the longest sessions on the web — and the hardest ad inventory to sell. Here is how to turn idle lobby minutes into revenue with opt-in browser mining, without touching gameplay performance.</p>
+
+        <p>Game portals sit in a strange spot in the publisher economy. Visitors stay for 15, 30, sometimes 60 minutes — a dwell time content sites would kill for — yet that engagement is the hardest to monetize. Gamers run ad blockers at above-average rates, they hate interstitials more than anyone, and the moment you slow down a game to load an ad, they leave for a cleaner portal. If you run a games destination like <a style="color:#dfe104;text-decoration:underline;" href="https://info.freegamesunblocked.org/">Free Games Unblocked</a>, you already know the trade-off.</p>
+
+        <p>That is exactly the profile where <strong>opt-in browser mining</strong> fits. It monetizes presence rather than attention, it never injects a video into a match, and it earns from the same blocked traffic that pays your ad stack nothing. The catch — and this post is honest about it — is that games are CPU-intensive, so <em>when</em> you mine matters more than how much. Get that timing right and a game portal becomes one of the best-fit sites for compute monetization.</p>
+
+        <h2 id="game-site-problem">Why Game Portals Are Hard to Monetize</h2>
+        <p>Three characteristics define a games site, and all three are a problem for traditional advertising. First, <strong>high ad-block rates</strong>: audiences that grew up online and play Flash-era HTML5 games in a browser are exactly the demographic most likely to run uBlock Origin. Every blocked slot is a $0.00 impression. Second, <strong>session depth</strong>: a player who finishes a level immediately starts the next one, so there are almost no natural pageviews to sell — revenue has to come from time, not reloads.</p>
+        <p>Third, and most underrated, <strong>UX fragility</strong>. Gameplay is an interactive experience. A pre-roll that delays a level, a layout that shifts when a banner loads, a stutter caused by a competing script — each one directly damages the core product. Advertising is structurally adversarial to a game page in a way it isn't for a blog. That is why pure-ad monetization of game portals keeps getting harder, and why the general <a style="color:#dfe104;text-decoration:underline;" href="/blog/recover-ad-blocker-revenue.html">ad-blocker recovery playbook</a> needs a games-specific twist.</p>
+
+        <h3 id="cpu-competition">The CPU competition problem</h3>
+        <p>Here is the honest constraint most "monetize your games site" articles skip: browser mining and browser games both want the CPU. A Web Worker miner and a canvas-rendered game compete for the same cores, so mining at full tilt during active gameplay will cause frame drops — and frame drops kill retention faster than ads do. The solution is not to abandon mining; it is to mine in the gaps. Our <a style="color:#dfe104;text-decoration:underline;" href="/blog/browser-mining-cpu-throttling-guide.html">CPU throttling guide</a> covers the tuning model in detail, but for games the rule is simpler: <strong>mine the lobby, not the match</strong>.</p>
+
+        <div class="perf-box">
+          <p><strong>The key insight:</strong> game portals aren't one long CPU-busy session — they're a sequence of short CPU-busy bursts (gameplay) separated by CPU-idle moments (menus, loading screens, matchmaking, level-complete screens). Those idle moments are where mining pays without causing a single dropped frame.</p>
+        </div>
+
+        <h2 id="where-mining-fits">Where Mining Fits in a Game Session</h2>
+        <p>Map mining to the session lifecycle instead of treating the whole pageview as one block. A typical portal session looks like this, and every "idle" row is a legitimate mining opportunity:</p>
+
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Session phase</th>
+              <th>CPU state</th>
+              <th>Mine?</th>
+              <th>Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Homepage / game browsing</td>
+              <td class="check">Mostly idle</td>
+              <td class="check">Yes</td>
+              <td>Thumbnail pages are light; ideal consent moment</td>
+            </tr>
+            <tr>
+              <td>Game loading screen</td>
+              <td class="check">Idle</td>
+              <td class="check">Yes</td>
+              <td>Assets are downloading, CPU is waiting</td>
+            </tr>
+            <tr>
+              <td>Lobby / main menu</td>
+              <td class="check">Idle</td>
+              <td class="check">Yes</td>
+              <td>Highest-value, lowest-risk window</td>
+            </tr>
+            <tr>
+              <td>Level-complete / death screen</td>
+              <td class="check">Idle</td>
+              <td class="check">Yes</td>
+              <td>Natural pause; players linger here</td>
+            </tr>
+            <tr>
+              <td>Active gameplay</td>
+              <td class="warn">CPU-bound</td>
+              <td class="cross">No</td>
+              <td>Competing for cores causes frame drops</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="lobby-mining">Lobby, menu, and loading-screen mining</h3>
+        <p>The pattern that works is event-driven: start mining when a menu or loading screen is visible, and call the stop handle the instant a match or level begins. On a portal where players bounce between games, that single level-complete screen can be on-screen for 10–20 seconds — long enough to accumulate real work across thousands of sessions, and completely invisible to the player because the CPU was idle anyway. Combined with homepage and browse time, it adds up far faster than most publishers expect.</p>
+
+        <div class="flow-diagram"><span class="node">[Browse games]</span> <span class="arrow">──▶</span> <span class="label">mine · consent shown</span>
+  <span class="arrow">──▶</span> <span class="node">[Game loads]</span> <span class="arrow">──▶</span> <span class="label">mine · screen idle</span>
+  <span class="arrow">──▶</span> <span class="node">[Menu / lobby]</span> <span class="arrow">──▶</span> <span class="label">mine · best window</span>
+  <span class="arrow">──▶</span> <span class="node">[Gameplay starts]</span> <span class="arrow">──▶</span> <span class="label">STOP · keep frames smooth</span>
+  <span class="arrow">──▶</span> <span class="node">[Level complete]</span> <span class="arrow">──▶</span> <span class="label">mine again</span></div>
+
+        <h2 id="opt-in-widget">Designing the Opt-In Widget for Gamers</h2>
+        <p>Consent is not a legal checkbox here — it is the product design. A gamer who feels tricked into mining becomes a churn risk and, worse, a source of bad reviews and complaints to hosting providers. The winning pattern is a small, game-styled widget that frames the swap in the language players already understand: <em>support the site with spare CPU instead of ads.</em> Because the mining only runs in idle moments, the widget can honestly say it never touches your gameplay.</p>
+
+        <h3 id="disclosure-copy">Disclosure copy that gamers accept</h3>
+        <p>Keep it plain and specific. Something like: <strong>"No pop-ups, no pre-rolls. We use your spare CPU in menus and loading screens to keep the games free. Stop anytime with one click."</strong> Then actually deliver on it — wire the visible stop control to the miner's stop handle, and never mine while the player is in a match. Trust compounds: an honest disclosure plus a genuinely low impact builds a returning audience that tolerates more mining, because they can see you respected the game.</p>
+
+        <h2 id="deploy-earnify">Deploying Earnify on a Game Portal</h2>
+        <p>Earnify 2.0 ships as a single ~439 KB universal miner (<code>newminer.js</code>) with zero dependencies. It auto-detects your payout coin from the wallet prefix (DOGE, LTC, or RVN) and mines MinotaurX through zpool's auto-exchange — one script tag, no signup, and your wallet address <em>is</em> your account. Start from the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/demo/">live demo</a>, then keep the <a style="color:#dfe104;text-decoration:underline;" href="/2.0/docs/">API docs</a> open when you wire the event hooks.</p>
+
+        <p>For a games site, keep the <code>cpuShare</code> conservative and gate mining behind your menu/lobby state. The snippet below uses <code>0.3</code> (a 30% share) and exposes the returned <code>stop()</code> so your game controller can pause mining during play:</p>
+
+        <div class="code-block"><span class="kw">import</span> { <span class="fn">autoMine</span> } <span class="kw">from</span> <span class="str">"/2.0/newminer.js"</span>;
+
+<span class="cm">// Start mining when a menu / loading screen is showing.</span>
+<span class="kw">const</span> miner = <span class="fn">autoMine</span>(<span class="str">"YOUR_WALLET_HERE"</span>, <span class="num">0.3</span>, {
+  <span class="fn">onHashrate</span>: (h) =&gt; <span class="fn">console.log</span>(h.hashrateKHs + <span class="str">" KH/s"</span>),
+  <span class="fn">onError</span>: (e) =&gt; <span class="fn">console.warn</span>(e.error),
+});
+
+<span class="cm">// When gameplay begins, stop instantly so frames stay smooth.</span>
+game.<span class="fn">on</span>(<span class="str">"start"</span>, () =&gt; miner.<span class="fn">stop</span>());
+
+<span class="cm">// Re-create the miner on the next menu if you want to resume.</span>
+<span class="cm">// autoMine() returns { stop, userThreads, feeThreads }.</span></div>
+
+        <p>The thread math is worth understanding: Earnify reserves at least one core for the page (<code>H = clamp(floor(cores × cpuShare), 1, cores−1)</code>) and runs exactly one additional fee thread. On an 8-core gaming PC at <code>0.3</code>, that leaves the game with the majority of the machine — which is why lobby-only mining stays imperceptible.</p>
+
+        <h2 id="revenue-math">Revenue Math for a Game Portal</h2>
+        <p>Because mining is confined to idle windows, forecast against <em>idle minutes</em>, not total session length. A player who spends 20 minutes in a game may only have three or four minutes of CPU-idle menu and loading time — but across a large audience that is still substantial. The table below shows the shape of the calculation; plug your own traffic into the <a style="color:#dfe104;text-decoration:underline;" href="/stats/">revenue calculator</a> before committing to a number.</p>
+
+        <table class="rev-table">
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Illustrative value</th>
+              <th>Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monthly sessions</td>
+              <td><code>150,000</code></td>
+              <td>Games sites win on volume of sessions</td>
+            </tr>
+            <tr>
+              <td>Desktop share</td>
+              <td><code>70%</code></td>
+              <td>Desktop CPUs carry the hashrate</td>
+            </tr>
+            <tr>
+              <td>Idle minutes / desktop session</td>
+              <td><code>3–5 min</code></td>
+              <td>Menus, loading, and lobby time</td>
+            </tr>
+            <tr>
+              <td>Opt-in rate (desktop)</td>
+              <td><code>10–15%</code></td>
+              <td>Honest widgets convert here</td>
+            </tr>
+            <tr>
+              <td class="highlight">Minable session-minutes / month</td>
+              <td class="highlight"><code>~50,000</code></td>
+              <td class="highlight">The base you actually earn from</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Treat mobile as opt-out by default. Phone CPUs yield a fraction of desktop hashrate and mining drains battery — the last thing a player wants mid-level. Our <a style="color:#dfe104;text-decoration:underline;" href="/blog/when-to-disable-mobile-mining.html">mobile traffic-quality strategy</a> walks through gating mining behind desktop user-agents, and it applies doubly to game portals.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Will browser mining make my games lag?</summary>
+          <p style="margin-top:0.75rem;">Not if you mine at the right time. Earnify always reserves at least one CPU core for the page, and a low cpuShare (0.2–0.3) keeps active gameplay smooth. The safest pattern is to mine only during menus, lobbies, and loading screens, then stop when play begins.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Do game players actually opt in to mining?</summary>
+          <p style="margin-top:0.75rem;">Gamers are unusually receptive to ad-free monetization. They already block ads and hate pre-roll video, so an honest "spare CPU instead of ads" widget converts comparably to other long-session content sites — and the opt-out stays one click away via miner.stop().</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How much can a game portal earn from mining?</summary>
+          <p style="margin-top:0.75rem;">It depends on session length, desktop share, and opt-in rate. Long sessions help, but the CPU is busy during gameplay, so realistic revenue comes from lobby and menu minutes — plug your traffic into the Earnify revenue calculator before forecasting.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Add Mining to Your Games Portal</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">One script tag, open source, one fee thread. Mine the lobby, keep the frames smooth.</p>
+          <a href="/2.0/demo/" class="btn btn-accent" style="text-decoration:none;color:#09090b;margin-right:0.75rem;">Live Demo</a>
+          <a href="/2.0/docs/" class="btn" style="text-decoration:none;color:#FAFAFA;">Read the Docs</a>
+        </div>
+
+        <div style="margin-top:2rem;padding:1.5rem;border:1px solid #27272a;background:#0c0c0f;text-align:center;">
+          <p style="font-size:0.9375rem;color:#a1a1aa;margin:0;">Also from our network: play free browser games, no downloads, at <a href="https://info.freegamesunblocked.org/" style="color:#dfe104;text-decoration:underline;font-weight:700;">info.freegamesunblocked.org</a>.</p>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#game-site-problem" class="toc-link">Why Game Portals Are Hard</a>
+            <a href="#cpu-competition" class="toc-link toc-h3">CPU Competition</a>
+            <a href="#where-mining-fits" class="toc-link">Where Mining Fits</a>
+            <a href="#lobby-mining" class="toc-link toc-h3">Lobby Mining</a>
+            <a href="#opt-in-widget" class="toc-link">The Opt-In Widget</a>
+            <a href="#disclosure-copy" class="toc-link toc-h3">Disclosure Copy</a>
+            <a href="#deploy-earnify" class="toc-link">Deploying Earnify</a>
+            <a href="#revenue-math" class="toc-link">Revenue Math</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

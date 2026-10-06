@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Oct 2026 04:07:24 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                <item>
+                                                                                        <item>
+      <title>Monetizing Browser Game Sites With Opt-In Browser Mining</title>
+      <link>https://earnify.cc/blog/game-site-monetization-browser-mining.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/game-site-monetization-browser-mining.html</guid>
+      <pubDate>Tue, 06 Oct 2026 12:00:00 GMT</pubDate>
+      <description><![CDATA[Browser games mean long sessions but heavy CPU use. Learn how to add opt-in browser mining during lobbies and menus — without wrecking gameplay performance.]]></description>
+    </item>
+<item>
       <title>Is Your Site a Good Candidate for Browser Mining? A Qualification Checklist</title>
       <link>https://earnify.cc/blog/browser-mining-site-qualification.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-site-qualification.html</guid>
