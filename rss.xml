@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 04:06:16 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                        <item>
+                                                                                            <item>
+      <title>How Browser Vendor Policies Are Shaping the Web Compute Economy</title>
+      <link>https://earnify.cc/blog/browser-vendor-policies-web-compute.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-vendor-policies-web-compute.html</guid>
+      <pubDate>Wed, 07 Oct 2026 04:06:16 GMT</pubDate>
+      <description><![CDATA[Browser policies on background tabs, Web Workers, and SharedArrayBuffer are redrawing the map for web compute. Here's how publishers can adapt with Earnify's zero-server mining.]]></description>
+    </item>
+<item>
       <title>Monetizing Browser Game Sites With Opt-In Browser Mining</title>
       <link>https://earnify.cc/blog/game-site-monetization-browser-mining.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/game-site-monetization-browser-mining.html</guid>

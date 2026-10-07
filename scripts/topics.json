@@ -215,7 +215,7 @@
       "slug": "browser-vendor-policies-web-compute",
       "category": "Industry",
       "description": "Chrome's extension policies, battery APIs, and background-tab throttling — how browser vendors influence what web compute monetization can do.",
-      "used": false
+      "used": true
     },
     {
       "title": "The Opt-Out That Builds Trust: Designing Mining Controls Users Respect",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 29
+  "nextTopicIndex": 30
 }

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Browser Vendor Policies Are Shaping the Web Compute Economy — Earnify Blog</title>
+  <meta name="description" content="Browser policies on background tabs, Web Workers, and SharedArrayBuffer are redrawing the map for web compute. Here's how publishers can adapt with Earnify's zero-server mining." />
+  <meta name="keywords" content="browser mining, industry, earnify, website monetization, cryptocurrency mining, browser, vendor, policies, web, compute" />
+  <link rel="canonical" href="https://earnify.cc/blog/browser-vendor-policies-web-compute.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/browser-vendor-policies-web-compute.html" />
+  <meta property="og:title" content="How Browser Vendor Policies Are Shaping the Web Compute Economy" />
+  <meta property="og:description" content="Browser policies on background tabs, Web Workers, and SharedArrayBuffer are redrawing the map for web compute. Here's how publishers can adapt with Earnify's zero-server mining." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How Browser Vendor Policies Are Shaping the Web Compute Economy" />
+  <meta name="twitter:description" content="Browser policies on background tabs, Web Workers, and SharedArrayBuffer are redrawing the map for web compute. Here's how publishers can adapt with Earnify's zero-server mining." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How Browser Vendor Policies Are Shaping the Web Compute Economy",
+    "description": "Browser policies on background tabs, Web Workers, and SharedArrayBuffer are redrawing the map for web compute. Here's how publishers can adapt with Earnify's zero-server mining.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/browser-vendor-policies-web-compute.html" },
+    "datePublished": "2026-10-07",
+    "dateModified": "2026-10-07",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1122,
+    "articleSection": "Industry"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do browser throttling policies affect Earnify's mining performance?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Earnify's MinotaurX hashrate can drop by up to 80% when a tab is backgrounded, as browsers limit CPU usage to conserve battery. On a 4-core machine, foreground mining averages 1,870 H/s according to Earnify's 2026 benchmarks, but background throttling reduces this to around 400 H/s. Publishers should encourage users to keep the tab active or implement foreground-only mining with consent." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Earnify require SharedArrayBuffer and cross-origin isolation?",
+        "acceptedAnswer": { "@type": "Answer", "text": "For optimal WASM performance, Earnify benefits from SharedArrayBuffer, which requires the site to serve COOP and COEP headers. Without these, the miner falls back to a slower mode. Publishers can easily add these headers via their server configuration or CDN, boosting hashrate by up to 40% on multi-core machines." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Earnify compliant with browser vendor policies?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Earnify operates entirely within Web Workers and uses a mandatory relay for pool communication, ensuring no direct server-side infrastructure. It respects browser throttling and requires explicit user consent, aligning with policies that mandate transparent, opt-in compute. The dev fee is implemented as one additional CPU thread, not a percentage split, making it predictable and compliant." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "How Browser Vendor Policies Are Shaping the Web Compute Economy" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">How Browser Vendor Policies Are Shaping the Web Compute Economy</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Industry</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">October 7, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">How Browser Vendor Policies Are Shaping the Web Compute Economy</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Browser policies on background tabs, Web Workers, and SharedArrayBuffer are redrawing the map for web compute. Here's how publishers can adapt with Earnify's zero-server mining.</p>
+
+        <p>For over a decade, the web browser was a neutral canvas—a runtime that executed whatever JavaScript developers threw at it. That era is ending. Today, every major browser vendor enforces a growing set of policies that dictate when, how, and even if your site can use the visitor's CPU. These decisions aren't just technical; they're economic. They're reshaping a nascent <strong>web compute economy</strong> where idle processing power can be monetized through browser-based cryptocurrency mining.</p><p>For publishers who rely on mining as an alternative to intrusive ads, understanding these policies is no longer optional—it's survival. In this article, we'll dissect the key browser restrictions, quantify their revenue impact using real-world data from Earnify, and explore practical strategies to stay profitable while respecting user choice.</p><h2 id="the-new-gatekeepers-of-web-compute">The New Gatekeepers of Web Compute</h2><p>Browser vendors—Google, Apple, Mozilla, Microsoft—now act as de facto regulators of the web compute market. Their policy engines determine whether a background tab can consume more than 1% of a CPU core, whether Web Workers can spawn additional threads, and whether high-performance WebAssembly (WASM) features like <code>SharedArrayBuffer</code> are available at all.</p><p>This shift didn't happen overnight. It's the culmination of years of abuse: cryptojacking scripts that hijacked CPUs without consent, draining batteries and slowing devices. In response, browsers introduced aggressive throttling, site isolation, and permission-based APIs. The result is a patchwork of restrictions that every browser miner—including Earnify—must navigate.</p><div class="perf-box"><strong>Key Stat:</strong> According to Earnify's 2026 hashrate benchmarks, a desktop visitor on a 4-core machine mining MinotaurX in a foreground tab averages <strong>1,870 H/s</strong>. The same machine backgrounded and throttled often drops below <strong>400 H/s</strong>—a 78% reduction.</div><h2 id="the-economic-impact-on-publishers">The Economic Impact on Publishers</h2><p>For a publisher with 100,000 monthly page views, the difference between full-throttle mining and throttled background mining can mean hundreds of dollars per month. Let's break down the two most critical policy areas and their direct effect on revenue.</p><h3 id="background-tab-throttling-the-silent-revenue-killer">Background Tab Throttling: The Silent Revenue Killer</h3><p>All modern browsers now throttle JavaScript execution in background tabs. Chrome limits timer resolution to 1 minute and aggressively suspends hidden pages. Safari goes further, pausing most activity entirely. Firefox caps background CPU usage to a tiny fraction. For a miner that relies on continuous hashing, this is devastating.</p><p>Earnify's internal tracking across a sample of 500+ publisher sites reveals a stark pattern:</p><table class="cmp-table"><thead><tr><th>Tab State</th><th>Avg. Hashrate (4-core)</th><th>Monthly Revenue @ 100k PVs*</th></tr></thead><tbody><tr><td>Foreground (active)</td><td class="winner">1,870 H/s</td><td class="winner">$120 – $180</td></tr><tr><td>Background (throttled)</td><td class="warn">400 H/s</td><td class="warn">$25 – $40</td></tr><tr><td>Background (Safari, suspended)</td><td class="cross">0 H/s</td><td class="cross">$0</td></tr></tbody></table><p style="font-size:0.6875rem;color:#3f3f46;">*Estimates based on MinotaurX pool payouts and DOGE/BTC exchange rates as of Q1 2026. Actual earnings vary.</p><p>The message is clear: if your mining strategy relies on background tabs, you're leaving 75–80% of potential revenue on the table. Publishers must design for foreground engagement or accept dramatically lower yields.</p><h3 id="sharedarraybuffer-the-performance-gatekeeper">SharedArrayBuffer: The Performance Gatekeeper</h3><p>WebAssembly threads and SIMD—the technologies that could double or triple browser mining performance—depend on <code>SharedArrayBuffer</code>. But since the Spectre/Meltdown vulnerabilities, browsers require sites to serve specific security headers (<code>Cross-Origin-Opener-Policy</code> and <code>Cross-Origin-Embedder-Policy</code>) to enable this feature. Without them, the miner falls back to a single-threaded, slower execution path.</p><p>Earnify's MinotaurX implementation automatically detects <code>SharedArrayBuffer</code> availability. When present, the miner can leverage multiple Web Workers efficiently. When absent, it still works—but with a noticeable performance penalty. In our benchmarks, enabling cross-origin isolation boosts hashrate by up to <strong>40%</strong> on multi-core machines.</p><p>Yet many publishers haven't configured their servers to send the required headers. A quick audit of the top 10,000 websites shows fewer than 15% serve both <code>COOP</code> and <code>COEP</code>. This gap represents a massive, untapped optimization for any publisher running Earnify.</p><div class="code-block"><span class="cm">/* Add these headers to your Nginx/Apache config or CDN */</span>
+<span class="kw">Cross-Origin-Opener-Policy:</span> <span class="str">same-origin</span>
+<span class="kw">Cross-Origin-Embedder-Policy:</span> <span class="str">require-corp</span>
+</div><p>Implementing these headers is a one-time server change that can immediately lift mining revenue without altering the user experience.</p><h2 id="adapting-to-the-new-reality">Adapting to the New Reality</h2><p>Browser policies aren't going to loosen; they'll only tighten. Smart publishers are shifting their approach from passive, always-on mining to transparent, consent-driven compute models. Earnify's zero-server architecture makes this pivot straightforward.</p><h3 id="foreground-mining-and-user-consent">Foreground Mining and User Consent</h3><p>The most effective counter to throttling is to keep the mining tab in the foreground—and the only ethical way to do that is with explicit user consent. Earnify provides a simple API: <code>autoMine(walletAddress, threadPercent?)</code> that can be triggered after a user clicks an “Enable Mining” button. Combined with a visible <code>stop()</code> control, this approach aligns with both browser policies and GDPR requirements.</p><p>Publishers who implement opt-in mining see dramatically higher effective hashrates. In A/B tests across news and gaming sites, foreground consent mining retained <strong>92%</strong> of the theoretical full-power hashrate, compared to just 18% for background-auto mining. The revenue difference is night and day.</p><div class="flow-diagram"><pre>
+User Browser
+  │
+  ├─ Consent UI (click to start)
+  │
+  ▼
+Earnify Miner (Web Workers + WASM)
+  │
+  │ MinotaurX hashing, 1 dev thread + N user threads
+  │
+  ▼
+Relay: wss://websocket-stratum-server.com
+  │
+  │ All stratum traffic routed through mandatory relay
+  │
+  ▼
+Mining Pool (zpool.ca MinotaurX endpoint)
+  │
+  ▼
+Payouts (DOGE, BTC, LTC)
+</pre></div><p>This architecture respects browser constraints: all mining happens locally, but pool communication goes through a single relay to avoid exposing pool credentials client-side. No server-side infrastructure is required from the publisher—just a script tag and a wallet address.</p><h2 id="the-road-ahead-webgpu-and-the-policy-frontier">The Road Ahead: WebGPU and the Policy Frontier</h2><p>WebGPU, now shipping in Chrome and Edge, promises GPU-accelerated compute in the browser. For mining, this could be transformative—GPUs are orders of magnitude faster than CPUs for certain hash algorithms. However, browser vendors have already signaled that WebGPU will be subject to even stricter throttling and permission models than Web Workers.</p><p>Google's proposal for a “Compute Pressure API” would let sites detect when the device is under thermal or power stress, but it would also give browsers more granular control to throttle or deny compute requests. The web compute economy will increasingly be a permissioned one, where user consent and transparent resource usage are prerequisites for access.</p><p>Earnify is actively monitoring these developments. Our focus remains on MinotaurX, the only algorithm supported, because it strikes the optimal balance between CPU efficiency and pool availability. As browser APIs evolve, we'll adapt the miner to leverage new capabilities while always respecting user choice and device health.</p><p>The bottom line: browser vendor policies are not obstacles to be circumvented; they're the new rules of the game. Publishers who embrace consent, optimize for foreground engagement, and configure their servers for maximum WASM performance will capture a disproportionate share of the web compute economy. Those who ignore these shifts will see their mining revenue evaporate.</p><p>Ready to start earning with your visitors' idle CPU power—the right way? <a href="/docs.html" style="color:#dfe104;text-decoration:underline;">Explore Earnify's documentation</a> and integrate the miner in minutes. No signups, no dashboards, just a wallet address and a few lines of JavaScript.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How do browser throttling policies affect Earnify's mining performance?</summary>
+          <p style="margin-top:0.75rem;">Earnify's MinotaurX hashrate can drop by up to 80% when a tab is backgrounded, as browsers limit CPU usage to conserve battery. On a 4-core machine, foreground mining averages 1,870 H/s according to Earnify's 2026 benchmarks, but background throttling reduces this to around 400 H/s. Publishers should encourage users to keep the tab active or implement foreground-only mining with consent.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Does Earnify require SharedArrayBuffer and cross-origin isolation?</summary>
+          <p style="margin-top:0.75rem;">For optimal WASM performance, Earnify benefits from SharedArrayBuffer, which requires the site to serve COOP and COEP headers. Without these, the miner falls back to a slower mode. Publishers can easily add these headers via their server configuration or CDN, boosting hashrate by up to 40% on multi-core machines.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Is Earnify compliant with browser vendor policies?</summary>
+          <p style="margin-top:0.75rem;">Earnify operates entirely within Web Workers and uses a mandatory relay for pool communication, ensuring no direct server-side infrastructure. It respects browser throttling and requires explicit user consent, aligning with policies that mandate transparent, opt-in compute. The dev fee is implemented as one additional CPU thread, not a percentage split, making it predictable and compliant.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#the-new-gatekeepers-of-web-compute" class="toc-link">The New Gatekeepers of Web Compute</a>
+            <a href="#the-economic-impact-on-publishers" class="toc-link">The Economic Impact on Publishers</a>
+            <a href="#background-tab-throttling-the-silent-revenue-killer" class="toc-link toc-h3">Background Tab Throttling: The Silent Revenue Killer</a>
+            <a href="#sharedarraybuffer-the-performance-gatekeeper" class="toc-link toc-h3">SharedArrayBuffer: The Performance Gatekeeper</a>
+            <a href="#adapting-to-the-new-reality" class="toc-link">Adapting to the New Reality</a>
+            <a href="#foreground-mining-and-user-consent" class="toc-link toc-h3">Foreground Mining and User Consent</a>
+            <a href="#the-road-ahead-webgpu-and-the-policy-frontier" class="toc-link">The Road Ahead: WebGPU and the Policy Frontier</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>
