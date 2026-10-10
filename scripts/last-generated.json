@@ -1,9 +1,9 @@
 {
-  "slug": "browser-vendor-policies-web-compute",
-  "title": "How Browser Vendor Policies Are Shaping the Web Compute Economy",
-  "description": "Browser policies on background tabs, Web Workers, and SharedArrayBuffer are redrawing the map for web compute. Here's how publishers can adapt with Earnify's zero-server mining.",
-  "category": "Industry",
-  "readTime": "7 min read",
-  "date": "2026-10-07",
-  "rssDate": "Wed, 07 Oct 2026 04:06:16 GMT"
+  "slug": "mining-opt-out-trust-design",
+  "title": "The Opt-Out That Builds Trust: Designing Mining Controls Users Respect",
+  "description": "Browser mining earns revenue—but only if visitors stay. Learn how transparent opt-in controls, clear feedback, and a visible stop button build user trust instead of destroying it.",
+  "category": "Revenue Strategy",
+  "readTime": "8 min read",
+  "date": "2026-10-10",
+  "rssDate": "Sat, 10 Oct 2026 04:08:06 GMT"
 }

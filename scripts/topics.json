@@ -222,7 +222,7 @@
       "slug": "mining-opt-out-trust-design",
       "category": "Revenue Strategy",
       "description": "Opt-out friction costs revenue, but a well-designed opt-out costs almost nothing — patterns for instantly disabling mining without losing trust.",
-      "used": false
+      "used": true
     },
     {
       "title": "DOGE vs BTC Payouts: Which Coin Should Publishers Choose?",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 30
+  "nextTopicIndex": 31
 }

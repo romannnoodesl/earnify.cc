@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2026 04:06:16 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 04:08:06 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                            <item>
+                                                                                                <item>
+      <title>The Opt-Out That Builds Trust: Designing Mining Controls Users Respect</title>
+      <link>https://earnify.cc/blog/mining-opt-out-trust-design.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/mining-opt-out-trust-design.html</guid>
+      <pubDate>Sat, 10 Oct 2026 04:08:06 GMT</pubDate>
+      <description><![CDATA[Browser mining earns revenue—but only if visitors stay. Learn how transparent opt-in controls, clear feedback, and a visible stop button build user trust instead of destroying it.]]></description>
+    </item>
+<item>
       <title>How Browser Vendor Policies Are Shaping the Web Compute Economy</title>
       <link>https://earnify.cc/blog/browser-vendor-policies-web-compute.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-vendor-policies-web-compute.html</guid>
