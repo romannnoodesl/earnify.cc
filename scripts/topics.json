@@ -229,7 +229,7 @@
       "slug": "doge-vs-btc-payouts-publishers",
       "category": "Revenue Strategy",
       "description": "Volatility, fees, payout thresholds, and liquidity — a practical comparison of holding site earnings in Dogecoin versus Bitcoin.",
-      "used": false
+      "used": true
     },
     {
       "title": "Choosing and Securing a Dogecoin Wallet for Your Site's Earnings",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 31
+  "nextTopicIndex": 32
 }

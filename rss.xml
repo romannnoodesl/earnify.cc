@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2026 04:08:06 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 05:18:22 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                <item>
+                                                                                                    <item>
+      <title>DOGE vs BTC Payouts: Which Coin Should Publishers Choose?</title>
+      <link>https://earnify.cc/blog/doge-vs-btc-payouts-publishers.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/doge-vs-btc-payouts-publishers.html</guid>
+      <pubDate>Tue, 13 Oct 2026 05:18:22 GMT</pubDate>
+      <description><![CDATA[Browser mining with Earnify lets you get paid in DOGE or BTC. Compare transaction fees, minimum payouts, volatility, and earning speed to pick the best coin for your site's traffic and revenue goals.]]></description>
+    </item>
+<item>
       <title>The Opt-Out That Builds Trust: Designing Mining Controls Users Respect</title>
       <link>https://earnify.cc/blog/mining-opt-out-trust-design.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/mining-opt-out-trust-design.html</guid>
