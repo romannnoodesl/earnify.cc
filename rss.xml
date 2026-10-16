@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Oct 2026 05:18:22 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 02:58:10 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                    <item>
+                                                                                                        <item>
+      <title>Choosing and Securing a Dogecoin Wallet for Your Site’s Mining Earnings: A Publisher’s Guide</title>
+      <link>https://earnify.cc/blog/dogecoin-wallet-guide-publishers.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/dogecoin-wallet-guide-publishers.html</guid>
+      <pubDate>Fri, 16 Oct 2026 02:58:10 GMT</pubDate>
+      <description><![CDATA[Learn how to pick a secure Dogecoin wallet for your website's browser mining income. Compare software vs hardware wallets, avoid custodial risks, and set up Earnify’s DOGE payouts safely.]]></description>
+    </item>
+<item>
       <title>DOGE vs BTC Payouts: Which Coin Should Publishers Choose?</title>
       <link>https://earnify.cc/blog/doge-vs-btc-payouts-publishers.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/doge-vs-btc-payouts-publishers.html</guid>

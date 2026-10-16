@@ -236,7 +236,7 @@
       "slug": "dogecoin-wallet-guide-publishers",
       "category": "Technical",
       "description": "Software, hardware, and exchange wallets compared for mining payouts — plus the address validation pitfalls that cost publishers money.",
-      "used": false
+      "used": true
     },
     {
       "title": "Minimum Payouts and Pool Fees: The Hidden Costs of Browser Mining",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 32
+  "nextTopicIndex": 33
 }
