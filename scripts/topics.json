@@ -243,7 +243,7 @@
       "slug": "mining-pool-fees-minimum-payouts",
       "category": "Technical",
       "description": "Every pool charges a fee and most enforce a minimum payout — how to read pool stats pages and pick the best fee-to-threshold tradeoff.",
-      "used": false
+      "used": true
     },
     {
       "title": "How Open-Source Transparency Killed Cryptojacking's Business Model",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 33
+  "nextTopicIndex": 34
 }

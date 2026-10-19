@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Oct 2026 02:58:10 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 19 Oct 2026 03:03:34 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                        <item>
+                                                                                                            <item>
+      <title>Minimum Payouts and Pool Fees: The Hidden Costs of Browser Mining</title>
+      <link>https://earnify.cc/blog/mining-pool-fees-minimum-payouts.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/mining-pool-fees-minimum-payouts.html</guid>
+      <pubDate>Mon, 19 Oct 2026 03:03:34 GMT</pubDate>
+      <description><![CDATA[Browser mining profit isn't just about hashrate. Minimum payout thresholds and pool fees can silently drain 40-60% of revenue from small websites. Learn the real math behind payouts.]]></description>
+    </item>
+<item>
       <title>Choosing and Securing a Dogecoin Wallet for Your Site’s Mining Earnings: A Publisher’s Guide</title>
       <link>https://earnify.cc/blog/dogecoin-wallet-guide-publishers.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/dogecoin-wallet-guide-publishers.html</guid>
