@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 19 Oct 2026 03:03:34 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 22 Oct 2026 03:14:12 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                            <item>
+                                                                                                                <item>
+      <title>How Open-Source Transparency Killed Cryptojacking&apos;s Business Model</title>
+      <link>https://earnify.cc/blog/open-source-vs-cryptojacking.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/open-source-vs-cryptojacking.html</guid>
+      <pubDate>Thu, 22 Oct 2026 03:14:12 GMT</pubDate>
+      <description><![CDATA[Discover how open-source transparency dismantled cryptojacking's stealth model, making consent-based browser mining the only viable path. Earnify's auditable code and transparent dev fee prove that honest mining wins.]]></description>
+    </item>
+<item>
       <title>Minimum Payouts and Pool Fees: The Hidden Costs of Browser Mining</title>
       <link>https://earnify.cc/blog/mining-pool-fees-minimum-payouts.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/mining-pool-fees-minimum-payouts.html</guid>

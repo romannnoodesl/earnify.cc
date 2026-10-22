@@ -250,7 +250,7 @@
       "slug": "open-source-vs-cryptojacking",
       "category": "Industry",
       "description": "Closed-source miners enabled abuse; auditable open-source code didn't just fix trust — it removed the incentive for hiding in the first place.",
-      "used": false
+      "used": true
     },
     {
       "title": "Mining Difficulty and Why Your Weekly Earnings Fluctuate",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 34
+  "nextTopicIndex": 35
 }
