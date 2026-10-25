@@ -1,9 +1,9 @@
 {
-  "slug": "open-source-vs-cryptojacking",
-  "title": "How Open-Source Transparency Killed Cryptojacking's Business Model",
-  "description": "Discover how open-source transparency dismantled cryptojacking's stealth model, making consent-based browser mining the only viable path. Earnify's auditable code and transparent dev fee prove that honest mining wins.",
-  "category": "Industry",
-  "readTime": "7 min read",
-  "date": "2026-10-22",
-  "rssDate": "Thu, 22 Oct 2026 03:14:12 GMT"
+  "slug": "mining-difficulty-earnings-fluctuations",
+  "title": "Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)",
+  "description": "A full technical guide on what difficulty means in PoW mining, why it swings weekly, and how publishers using Earnify's browser miner can stabilize MinotaurX earnings.",
+  "category": "Technical",
+  "readTime": "8 min read",
+  "date": "2026-10-25",
+  "rssDate": "Sun, 25 Oct 2026 03:02:14 GMT"
 }

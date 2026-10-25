@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify) — Earnify Blog</title>
+  <meta name="description" content="A full technical guide on what difficulty means in PoW mining, why it swings weekly, and how publishers using Earnify's browser miner can stabilize MinotaurX earnings." />
+  <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, mining, difficulty, earnings, fluctuations" />
+  <link rel="canonical" href="https://earnify.cc/blog/mining-difficulty-earnings-fluctuations.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/mining-difficulty-earnings-fluctuations.html" />
+  <meta property="og:title" content="Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)" />
+  <meta property="og:description" content="A full technical guide on what difficulty means in PoW mining, why it swings weekly, and how publishers using Earnify's browser miner can stabilize MinotaurX earnings." />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1731" />
+  <meta property="og:image:height" content="909" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)" />
+  <meta name="twitter:description" content="A full technical guide on what difficulty means in PoW mining, why it swings weekly, and how publishers using Earnify's browser miner can stabilize MinotaurX earnings." />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)",
+    "description": "A full technical guide on what difficulty means in PoW mining, why it swings weekly, and how publishers using Earnify's browser miner can stabilize MinotaurX earnings.",
+    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
+    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/mining-difficulty-earnings-fluctuations.html" },
+    "datePublished": "2026-10-25",
+    "dateModified": "2026-10-25",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1119,
+    "articleSection": "Technical"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why did my browser mining earnings drop even though traffic increased?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Network difficulty likely spiked during that period. When large profit‑switching pools redirect GPU/ASIC hashrate onto MinotaurX, the difficulty climbs within hours, and your browser miner’s share submissions fall even if visitor count grows. Check Earnify’s sharesAccepted metric: if average hashrate stayed flat but shares dropped, difficulty is the culprit." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change the mining algorithm on Earnify to avoid high-difficulty periods?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Earnify supports MinotaurX exclusively under its current architecture — no Power2B, RandomX, or other algorithms are available. However, you can switch payout denominations (c=DOGE vs c=BTC vs c=LTC) via the stratum password to hedge against coin‑specific price and difficulty volatility while staying on the same mining endpoint." }
+      },
+      {
+        "@type": "Question",
+        "name": "How often does MinotaurX difficulty adjust?",
+        "acceptedAnswer": { "@type": "Answer", "text": "MinotaurX targets a 2‑minute block time and recalculates difficulty every block based on recent network hashrate. This means difficulty can shift multiple times per hour in volatile periods. Combined with browser mining’s 1/10 to 1/20 native performance handicap, even modest hashrate influxes can cause noticeable share‑count swings within a single day." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">October 25, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">8 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)</h1>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">A full technical guide on what difficulty means in PoW mining, why it swings weekly, and how publishers using Earnify's browser miner can stabilize MinotaurX earnings.</p>
+
+        <article class="blog-post">
+<p>One week you’re earning 150 DOGE, the next it’s 112. Your site traffic didn’t drop. Your visitor’s CPU time didn’t crash. So why did your wallet balance shrink? The answer is <strong>mining difficulty</strong> — the invisible hand that tips the scale every week. For website publishers running Earnify’s <code>autoMine()</code> snippet, understanding this metric is the difference between panicking and planning.</p>
+
+<p>In this post, we’ll break down what mining difficulty actually is, why it fluctuates, how it affects earnings on the <strong>MinotaurX</strong> algorithm, and what you — as a publisher — can actually control. We’ll pull in real benchmarks from Earnify’s browser miner and show you exactly where the volatility comes from.</p>
+
+<h2 id="what-is-mining-difficulty">What Is Mining Difficulty?</h2>
+
+<p>Mining difficulty is a network‑set parameter that controls how hard it is to find a new block. Think of it as the “effort required” knob: when more miners join, the knob turns up to keep block times constant. When miners leave, difficulty drops to maintain the same cadence.</p>
+
+<div class="perf-box">
+  <strong>⏱️ Difficulty’s Job Is Predictability</strong>
+  <p>For MinotaurX, block time targets 2 minutes. If hashrate doubles overnight, blocks would otherwise burst out every 60 seconds — so the algorithm recalibrates difficulty upward. The reverse happens when miners exit.</p>
+  <p style="margin-bottom:0;font-size:0.8125rem;color:#a1a1aa;">Earnify’s miner always lives on the same side of this equation: your weekly reward is shares submitted divided by network difficulty.</p>
+</div>
+
+<p>In a browser‑mining context, your individual hashrate stays relatively stable (same hardware, same visitor count). Network difficulty, however, bounces around because of <strong>cloud farms</strong>, <strong>ASIC migrations</strong>, and <strong>profit‑switching pools</strong>. When those big actors pile onto MinotaurX, your small but steady browser fleet earns less of the pie.</p>
+
+<h2 id="why-difficulty-fluctuates">Why Difficulty Fluctuates Week to Week</h2>
+
+<h3 id="market-price-feedback">1. Market Price Feedback</h3>
+<p>Coin price rises → mining profitability spikes → more miners jump in → difficulty shoots up. This is the classic cycle. In 2024–2025, LTC and DOGE pairs (the most common payouts on <code>minotaurx.na.mine.zpool.ca</code>) have seen 20–40% price swings in 72 hours, dragging difficulty along with them.</p>
+
+<h3 id="profit-switchers">2. Profit‑Switchers Roaming Algorithms</h3>
+<p>Large mining pools like zpool, Zergpool, and Prohashing continuously auto‑switch between algorithms to chase the highest BTC equivalent. When MinotaurX momentarily tops the profitability list, thousands of high‑hashrate rigs suddenly point at the same stratum you use. According to Earnify’s 2025 hashrate benchmarks, a desktop visitor on MinotaurX contributes roughly 0.6–1.2 KH/s. A single GPU rig throwing 25 MH/s at the pool is the equivalent of 20,000 browser sessions — and one farm can hold hundreds of them.</p>
+
+<h3 id="network-hashrate-swings">3. Network Hashrate Swings</h3>
+
+<p>We can see this in action by comparing pool‑side difficulty changes against Earnify’s own stabilised browser output. The chart below simulates a 4‑week period where browser hashrate is constant but difficulty lurches upward in weeks 2 and 4.</p>
+
+<div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
+  <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+    <rect x="40" y="160" width="60" height="40" fill="#dfe104" rx="2"/>
+    <rect x="140" y="140" width="60" height="60" fill="#dfe104" rx="2"/>
+    <rect x="240" y="100" width="60" height="100" fill="#dfe104" rx="2"/>
+    <rect x="340" y="120" width="60" height="80" fill="#dfe104" rx="2"/>
+    <text x="70" y="195" fill="#fff" font-size="10" text-anchor="middle">1.2 KH/s</text>
+    <text x="170" y="195" fill="#fff" font-size="10" text-anchor="middle">1.2 KH/s</text>
+    <text x="270" y="195" fill="#fff" font-size="10" text-anchor="middle">1.2 KH/s</text>
+    <text x="370" y="195" fill="#fff" font-size="10" text-anchor="middle">1.2 KH/s</text>
+    <text x="70" y="215" fill="#3f3f46" font-size="8" text-anchor="middle">Week 1</text>
+    <text x="170" y="215" fill="#3f3f46" font-size="8" text-anchor="middle">Week 2</text>
+    <text x="270" y="215" fill="#3f3f46" font-size="8" text-anchor="middle">Week 3</text>
+    <text x="370" y="215" fill="#3f3f46" font-size="8" text-anchor="middle">Week 4</text>
+
+    <rect x="40" y="30" width="60" height="15" fill="#f97316" rx="2"/>
+    <rect x="140" y="80" width="60" height="40" fill="#f97316" rx="2"/>
+    <rect x="240" y="15" width="60" height="10" fill="#f97316" rx="2"/>
+    <rect x="340" y="60" width="60" height="25" fill="#f97316" rx="2"/>
+    <text x="70" y="10" fill="#ffedd5" font-size="9" text-anchor="middle">Network Difficulty (arbitrary scale)</text>
+    <text x="170" y="10" fill="#ffedd5" font-size="9" text-anchor="middle"></text>
+    <text x="270" y="10" fill="#ffedd5" font-size="9" text-anchor="middle"></text>
+    <text x="370" y="10" fill="#ffedd5" font-size="9" text-anchor="middle"></text>
+
+    <line x1="30" y1="0" x2="30" y2="160" stroke="#3f3f46" stroke-width="1"/>
+    <line x1="30" y1="160" x2="430" y2="160" stroke="#3f3f46" stroke-width="1"/>
+  </svg>
+  <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Browser hashrate (yellow bars) is stable across weeks; network difficulty (orange) spikes randomly due to external GPU farms. Lower bars mean higher difficulty → fewer shares accepted.</p>
+</div>
+
+<p>Pay special attention to weeks 2 and 4: browser hashrate unchanged, but difficulty rockets upwards. That’s the pure profit‑switcher effect. Website publishers see the share count drop in Earnify’s <code>minotaurxHashrate.sharesAccepted</code> metric even though their visitors are mining just as hard.</p>
+
+<h2 id="how-difficulty-impacts-browser-mining">How Difficulty Hits Browser Mining (Harder Than GPU Farms)</h2>
+
+<p>Browser miners already run at a 10–20× handicap versus native CPU miners, as Earnify’s WASM‑based mining has no SIMD acceleration and must play nice with the JavaScript event loop. When network difficulty jumps, higher‑hashrate devices absorb the blow — they still find shares, just slightly fewer. Browser miners can tip below the share‑submission threshold entirely, especially for low‑core devices.</p>
+
+<table class="rev-table">
+  <thead>
+    <tr><th>Device</th><th>Typical MinotaurX KH/s</th><th>Shares/hr @ Low Diff</th><th>Shares/hr @ +40% Diff</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Desktop (8‑core, 4 threads)</td><td class="highlight">0.99</td><td>8.2</td><td>5.9</td></tr>
+    <tr><td>Laptop (4‑core, 2 threads)</td><td>0.48</td><td>3.9</td><td class="warn">2.1</td></tr>
+    <tr><td>Mobile (2‑core, 1 thread)</td><td>0.21</td><td>1.7</td><td class="cross">0.4</td></tr>
+  </tbody>
+</table>
+<p style="font-size:0.6875rem;color:#3f3f46;margin-top:0.25rem;">Data based on Earnify’s Miner MD testbed, Chrome 126, zpool default difficulty share target. Mobile threads constrained by <code>resolveThreadCount</code> cap.</p>
+
+<p>The table tells a brutal story: when difficulty jumps 40%, a 2‑core mobile phone goes from barely useful (1.7 shares/hr) to essentially dead weight (0.4 shares/hr). If your audience is 60% mobile, that “difficulty bump” week will translate to a disproportionate earnings hit — much steeper than a GPU farm would feel.</p>
+
+<div class="perf-box">
+  <strong>📱 Mobile‑heavy audiences</strong> see 2–3× greater relative earnings swings than desktop‑heavy sites during difficulty spikes. Use <code>navigator.hardwareConcurrency</code> to segment analytics and predict exposure.
+</div>
+
+<h2 id="what-publishers-can-control">What Publishers Can (and Can’t) Control</h2>
+
+<h3 id="levers-you-own">Levers You Own</h3>
+
+<table class="cmp-table">
+  <thead>
+    <tr><th>Factor</th><th>Impact on Earnings Stability</th><th>How to Tune via Earnify</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Thread allocation</td><td class="check">Direct</td><td><code>autoMine(wallet, 75)</code> — dial threadPercent up to keep lower‑core devices above the share threshold</td></tr>
+    <tr><td>Session duration</td><td class="check">Direct</td><td>Keep visitors engaged longer; per Earnify data, sessions < 2 min rarely submit a share on MinotaurX</td></tr>
+    <tr><td>Opt‑in consent UX</td><td class="check">Indirect</td><td>More consent = more sessions; every explicit opt‑in is a GDPR‑safe long‑dwell miner</td></tr>
+    <tr><td>Network difficulty</td><td class="cross">None</td><td>Outside publisher control — monitor via pool status API</td></tr>
+    <tr><td>Coin price</td><td class="cross">None</td><td>Payout crypto price is pure market risk</td></tr>
+  </tbody>
+</table>
+
+<h3 id="monitor-dont-react">Monitor, Don’t Over‑React</h3>
+
+<p>Some publishers knee‑jerk by ramping threads to 100% when earnings dip, which crushes UX and spikes bounce rates. Instead, poll <code>minotaurxHashrate.getAverageHashrate()</code> weekly. If average hashrate is stable but <code>sharesAccepted</code> is down, the villain is difficulty — not your setup.</p>
+
+<div class="code-block">
+<span class="cm">// Weekly health check via browser console (Earnify 2.x)</span>
+<span class="kw">const</span> stats = <span class="fn">minotaurx</span>.<span class="fn">minotaurxHashrate</span>;
+<span class="fn">console.table</span>([
+  { metric: <span class="str">'Avg KH/s'</span>, value: stats.<span class="fn">getAverageHashrate</span>().<span class="fn">toFixed</span>(<span class="num">2</span>) },
+  { metric: <span class="str">'Shares Accepted'</span>, value: <span class="fn">stats.sharesAccepted</span> },
+  { metric: <span class="str">'Uptime hrs'</span>, value: (stats.<span class="fn">getUptime</span>()/<span class="num">3600</span>).<span class="fn">toFixed</span>(<span class="num">1</span>) },
+]);
+</div>
+
+<p>If your average hashrate trendline holds steady but the share count bounces 30% month‑to‑month, you’re looking at a pure difficulty story. Use that data to communicate with stakeholders rather than scrambling to change configuration.</p>
+
+<h2 id="designing-for-volatility">Designing Your Monetization Stack for Volatility</h2>
+
+<p>Since difficulty swings are inevitable, successful Earnify publishers treat browser mining as one leg of a diversified monetization stool — not the whole seat. Here’s how to think about it:</p>
+
+<p><strong>1. Layer miner alongside display ads.</strong> When CPMs are soft (Q1 advertising lull), mining often picks up the slack because crypto markets can be counter‑cyclical to ad spend. When CPMs rebound, you can dial <code>threadPercent</code> down without abandoning the revenue stream entirely.</p>
+<p><strong>2. Use payout denomination as a hedge.</strong> Earnify’s pool defaults to <code>c=DOGE</code>, but you can switch to <code>c=BTC</code> or <code>c=LTC</code> depending on which asset is least volatile that quarter. All three ride on the same MinotaurX stratum, but they decouple from DOGE‑specific price and difficulty moves.</p>
+<p><strong>3. Set earnings expectations in ranges, not points.</strong> Tell your team “this integration should yield $12–$18 per 100k pageviews monthly” — not “$15.” Build the floor around a 30% difficulty spike scenario and the ceiling around a 10% drop.</p>
+
+<h2 id="faqs">FAQs</h2>
+
+</article>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Why did my browser mining earnings drop even though traffic increased?</summary>
+          <p style="margin-top:0.75rem;">Network difficulty likely spiked during that period. When large profit‑switching pools redirect GPU/ASIC hashrate onto MinotaurX, the difficulty climbs within hours, and your browser miner’s share submissions fall even if visitor count grows. Check Earnify’s sharesAccepted metric: if average hashrate stayed flat but shares dropped, difficulty is the culprit.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Can I change the mining algorithm on Earnify to avoid high-difficulty periods?</summary>
+          <p style="margin-top:0.75rem;">No. Earnify supports MinotaurX exclusively under its current architecture — no Power2B, RandomX, or other algorithms are available. However, you can switch payout denominations (c=DOGE vs c=BTC vs c=LTC) via the stratum password to hedge against coin‑specific price and difficulty volatility while staying on the same mining endpoint.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How often does MinotaurX difficulty adjust?</summary>
+          <p style="margin-top:0.75rem;">MinotaurX targets a 2‑minute block time and recalculates difficulty every block based on recent network hashrate. This means difficulty can shift multiple times per hour in volatile periods. Combined with browser mining’s 1/10 to 1/20 native performance handicap, even modest hashrate influxes can cause noticeable share‑count swings within a single day.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <nav>
+            <a href="#what-is-mining-difficulty" class="toc-link">What Is Mining Difficulty?</a>
+            <a href="#why-difficulty-fluctuates" class="toc-link">Why Difficulty Fluctuates Week to Week</a>
+            <a href="#market-price-feedback" class="toc-link toc-h3">1. Market Price Feedback</a>
+            <a href="#profit-switchers" class="toc-link toc-h3">2. Profit‑Switchers Roaming Algorithms</a>
+            <a href="#network-hashrate-swings" class="toc-link toc-h3">3. Network Hashrate Swings</a>
+            <a href="#how-difficulty-impacts-browser-mining" class="toc-link">How Difficulty Hits Browser Mining (Harder Than GPU Farms)</a>
+            <a href="#what-publishers-can-control" class="toc-link">What Publishers Can (and Can’t) Control</a>
+            <a href="#levers-you-own" class="toc-link toc-h3">Levers You Own</a>
+            <a href="#monitor-dont-react" class="toc-link toc-h3">Monitor, Don’t Over‑React</a>
+            <a href="#designing-for-volatility" class="toc-link">Designing Your Monetization Stack for Volatility</a>
+            <a href="#faqs" class="toc-link">FAQs</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

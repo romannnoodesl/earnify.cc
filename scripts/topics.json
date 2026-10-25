@@ -257,7 +257,7 @@
       "slug": "mining-difficulty-earnings-fluctuations",
       "category": "Technical",
       "description": "Why the same hashrate pays different amounts from week to week — network difficulty, block rewards, and pool luck explained for publishers.",
-      "used": false
+      "used": true
     },
     {
       "title": "Your Browser Mining Launch Checklist: 15 Steps Before Going Live",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 35
+  "nextTopicIndex": 36
 }

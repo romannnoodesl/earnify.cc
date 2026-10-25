@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Oct 2026 03:14:12 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 03:02:14 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                <item>
+                                                                                                                    <item>
+      <title>Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)</title>
+      <link>https://earnify.cc/blog/mining-difficulty-earnings-fluctuations.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/mining-difficulty-earnings-fluctuations.html</guid>
+      <pubDate>Sun, 25 Oct 2026 03:02:14 GMT</pubDate>
+      <description><![CDATA[A full technical guide on what difficulty means in PoW mining, why it swings weekly, and how publishers using Earnify's browser miner can stabilize MinotaurX earnings.]]></description>
+    </item>
+<item>
       <title>How Open-Source Transparency Killed Cryptojacking&apos;s Business Model</title>
       <link>https://earnify.cc/blog/open-source-vs-cryptojacking.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/open-source-vs-cryptojacking.html</guid>
