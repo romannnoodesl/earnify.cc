@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Oct 2026 03:02:14 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2026 03:49:00 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                    <item>
+                                                                                                                        <item>
+      <title>Your Browser Mining Launch Checklist: 15 Steps Before Going Live</title>
+      <link>https://earnify.cc/blog/browser-mining-launch-checklist.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-launch-checklist.html</guid>
+      <pubDate>Wed, 28 Oct 2026 03:49:00 GMT</pubDate>
+      <description><![CDATA[Launch browser mining without the bottlenecks. This 15-step checklist covers consent, thread tuning, relay stability, and earnings benchmarks publishers need before going live.]]></description>
+    </item>
+<item>
       <title>Browser Mining Difficulty Decoded: Why Your Weekly Earnings Fluctuate (With Real Data From Earnify)</title>
       <link>https://earnify.cc/blog/mining-difficulty-earnings-fluctuations.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/mining-difficulty-earnings-fluctuations.html</guid>

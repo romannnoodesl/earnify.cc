@@ -264,7 +264,7 @@
       "slug": "browser-mining-launch-checklist",
       "category": "Revenue Strategy",
       "description": "Privacy policy updates, disclosure copy, device testing, and the go-live verification steps that separate smooth launches from support tickets.",
-      "used": false
+      "used": true
     },
     {
       "title": "Browser Mining for Nonprofits and Public-Benefit Sites",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 36
+  "nextTopicIndex": 37
 }
