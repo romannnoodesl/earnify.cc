@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Oct 2026 03:49:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 31 Oct 2026 03:54:13 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon.svg</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                        <item>
+                                                                                                                            <item>
+      <title>Browser Mining for Nonprofits and Public-Benefit Sites: A Privacy-First Revenue Alternative</title>
+      <link>https://earnify.cc/blog/browser-mining-nonprofits.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-nonprofits.html</guid>
+      <pubDate>Sat, 31 Oct 2026 03:54:13 GMT</pubDate>
+      <description><![CDATA[Learn how nonprofits can ethically supplement donations with browser-based cryptocurrency mining. Earnify’s zero-data MinotaurX platform offers an opt-in, transparent revenue stream without ads or trackers.]]></description>
+    </item>
+<item>
       <title>Your Browser Mining Launch Checklist: 15 Steps Before Going Live</title>
       <link>https://earnify.cc/blog/browser-mining-launch-checklist.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-mining-launch-checklist.html</guid>

@@ -271,7 +271,7 @@
       "slug": "browser-mining-nonprofits",
       "category": "Revenue Strategy",
       "description": "Donation fatigue is real — how nonprofits, wikis, and public-service sites use opt-in mining to turn visitor minutes into operating budget.",
-      "used": false
+      "used": true
     },
     {
       "title": "Compute Monetization in 2027: Predictions and Open Questions",
@@ -281,5 +281,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 37
+  "nextTopicIndex": 38
 }
