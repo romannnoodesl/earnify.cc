@@ -278,8 +278,8 @@
       "slug": "compute-monetization-2027-predictions",
       "category": "Industry",
       "description": "Where browser compute monetization goes next — WASM maturity, AI workloads in the browser, and the regulatory questions nobody has answered.",
-      "used": false
+      "used": true
     }
   ],
-  "nextTopicIndex": 38
+  "nextTopicIndex": 39
 }
