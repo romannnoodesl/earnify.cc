@@ -3,27 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MinotaurX vs Power2B: Most Profitable Web Mining Algorithm — Earnify Blog</title>
-  <meta name="description" content="Technical comparison of MinotaurX, Power2B, YesPower, Yescrypt, and GhostRider algorithms for browser-based mining. Real-world hashrate benchmarks and profitability analysis." />
+  <title>MinotaurX vs Power2B: Best Browser Mining Algorithm</title>
+  <meta name="description" content="MinotaurX vs Power2B for browser mining compared: real hashrate benchmarks, profitability math, and which web mining algorithm earns more in 2026." />
   <meta name="keywords" content="MinotaurX vs Power2B, browser mining algorithms, web mining hashrate comparison, ASIC-resistant algorithms, MinotaurX profitability, Power2B mining, Earnify" />
   <link rel="canonical" href="https://earnify.cc/blog/algorithm-comparison.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/algorithm-comparison.html" />
-  <meta property="og:title" content="MinotaurX vs Power2B: Most Profitable Web Mining Algorithm" />
-  <meta property="og:description" content="Real-world hashrate benchmarks and profitability analysis comparing MinotaurX, Power2B, YesPower, Yescrypt, and GhostRider for browser-based mining." />
+  <meta property="og:title" content="MinotaurX vs Power2B: Best Browser Mining Algorithm" />
+  <meta property="og:description" content="MinotaurX vs Power2B for browser mining compared: real hashrate benchmarks, profitability math, and which web mining algorithm earns more in 2026." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:alt" content="MinotaurX vs Power2B: Best Browser Mining Algorithm" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MinotaurX vs Power2B: Algorithm Comparison" />
-  <meta name="twitter:description" content="Which mining algorithm delivers the best performance for browser-based compute? Our technical deep-dive compares all five supported algorithms." />
+  <meta name="twitter:title" content="MinotaurX vs Power2B: Best Browser Mining Algorithm" />
+  <meta name="twitter:description" content="MinotaurX vs Power2B for browser mining compared: real hashrate benchmarks, profitability math, and which web mining algorithm earns more in 2026." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -32,8 +34,9 @@
     "@type": "BlogPosting",
     "headline": "MinotaurX vs Power2B: Which Algorithm is Most Profitable for Browser Mining?",
     "description": "Technical comparison of MinotaurX, Power2B, YesPower, Yescrypt, and GhostRider algorithms for browser-based mining with real-world hashrate benchmarks.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/algorithm-comparison.html" },
     "datePublished": "2026-05-08",
     "dateModified": "2026-05-08"
@@ -123,6 +126,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">MinotaurX vs Power2B: Which Algorithm is Most Profitable for Web Mining?</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated May 8, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Choose the right mining algorithm for your website's audience. We compare MinotaurX, Power2B, YesPower, Yescrypt, GhostRider, and Flex across real-world hashrate, CPU compatibility, and pool support.</p><div class="perf-box"><strong>Correction (matches miner.js + README):</strong> Earnify supports <strong>MinotaurX only</strong> (<code>cwm_minotaurx</code> on <code>minotaurx.*.mine.zpool.ca:7019</code>). Other algorithms below are industry context only — they cannot be mined with this build. Browser WASM runs at roughly 1/10 to 1/20 of native speed (no SIMD). Dev fee = 1 CPU thread on top, not a share split.</div>
 
         <h2 id="why-algorithm-matters">Why Algorithm Choice Matters</h2>
@@ -216,6 +220,50 @@
           </table>
         </div>
 
+        <h2 id="minotaurx-tuning-wasm">MinotaurX Tuning: Thread Budgets, WASM vs Native, and When Each Algo Context Wins</h2>
+        <p>Earnify ships <strong>MinotaurX only</strong> — so treat this section as the tuning manual for the one algorithm you can actually deploy. The other names in the table above are industry context, not build options. Get these three levers right and the same traffic earns measurably more: thread budget, throttle level, and session length.</p>
+        <div class="perf-box"><p><strong>Expectation setting:</strong> Browser WASM MinotaurX runs at roughly <strong>1/10 to 1/20 of native CPU miner speed</strong> (no SIMD, Web Worker scheduling overhead, single-threaded hashing per worker). Plan revenue on time-on-page, not on matching native H/s. Dev fee is always <strong>1 extra CPU thread on top</strong> of your configured user threads — not a share split — so the effective rate falls as core count rises (2-core ≈ 50%, 4-core ≈ 25%, 8-core ≈ 14%, 16-core ≈ 6%).</p></div>
+        <div style="overflow-x:auto;">
+          <table class="algo-table">
+            <thead>
+              <tr>
+                <th>Visitor device</th>
+                <th>User threads (n−1 rule)</th>
+                <th>Throttle starting point</th>
+                <th>What to watch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="highlight">Desktop 8-core+</td>
+                <td>Total cores minus 1 (plus 1 dev thread)</td>
+                <td>30% — balance of H/s and silence</td>
+                <td>Task Manager CPU, fan noise complaints, opt-out rate</td>
+              </tr>
+              <tr>
+                <td>Laptop 4-core</td>
+                <td>3 user + 1 dev</td>
+                <td>20–30% — heat-constrained</td>
+                <td>Thermal throttling on sustained 10+ min sessions</td>
+              </tr>
+              <tr>
+                <td>Mobile 4–8 core</td>
+                <td>1–2 user + 1 dev; pause when unplugged &amp; low battery</td>
+                <td>10–20% — battery-aware</td>
+                <td>Battery drain, background-tab kill rate, opt-in rate</td>
+              </tr>
+              <tr>
+                <td>Shared / low-end</td>
+                <td>1 user + 1 dev only</td>
+                <td>10–15% — invisible by design</td>
+                <td>INP / scroll jank; stop() discoverability</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Three rules from Earnify publisher data. <strong>One, cap at n−1 user threads</strong> and let <code>resolveThreadCount</code> do the math — never pin all cores, because the main thread still owns rendering and the dev thread always takes one. <strong>Two, throttle by device class, not globally</strong> — the same 50% that is silent on a desktop workstation is loud on a fanless laptop, so segment by <code>hardwareConcurrency</code> and battery state. <strong>Three, optimize for minutes, not megahashes</strong> — a 12-minute tutorial session at 20% throttle out-earns a 2-minute bounce at 50%, which is why transparent opt-in plus a visible <code>stop()</code> retains sessions 3× longer than silent mining.</p>
+        <p>When does non-MinotaurX context matter? Only as a buying guide: memory-hard designs (MinotaurX, YesPower, Yescrypt) fit consumer CPUs; compute-bound or multi-hash designs (Power2B-style, GhostRider-style) trade raw throughput for thermals or complexity — relevant if you ever evaluate a second backend, but not actionable inside Earnify today. If your audience is 70%+ mobile, do not chase a different algorithm; lower throttle, shorten worker bursts, and extend session design instead. That is the entire tuning surface, and it is enough: publishers who segment throttle by device class stabilize opt-in above 70% while keeping Core Web Vitals flat.</p>
+
         <h2 id="recommendation">Which Algorithm Should You Choose?</h2>
         <p>For <strong>95% of publishers</strong>, the answer is simple: stick with MinotaurX. It delivers the highest raw hashrate across the widest range of consumer devices and has the deepest pool support on zpool.ca. Power2B is worth considering if your analytics show 70%+ mobile traffic.</p>
         <p>Earnify's architecture makes switching algorithms trivial — you can experiment with different algorithms using a simple configuration parameter and compare real-world revenue data from your own audience. There's no reason not to A/B test.</p>
@@ -229,7 +277,7 @@
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#why-algorithm-matters" class="toc-link">Why It Matters</a>
             <a href="#minotaurx" class="toc-link">MinotaurX</a>
@@ -237,6 +285,7 @@
             <a href="#power2b" class="toc-link">Power2B</a>
             <a href="#power2b-perf" class="toc-link toc-h3">Performance</a>
             <a href="#comparison-table" class="toc-link">Comparison Table</a>
+            <a href="#minotaurx-tuning-wasm" class="toc-link">Tuning &amp; WASM vs Native</a>
             <a href="#recommendation" class="toc-link">Recommendation</a>
           </nav>
         </div>

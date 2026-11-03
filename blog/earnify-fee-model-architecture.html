@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How Zero-Server Architecture Enables Earnify's 10% Fee Model: A Technical Deep Dive — Earnify Blog</title>
-  <meta name="description" content="Earnify's 10% fee isn't a gimmick—it's a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers' pockets." />
+  <title>Zero-Server Architecture: Why Earnify Fee Is Only 10%</title>
+  <meta name="description" content="Why Earnify fee is only 10%: zero-server architecture, WebAssembly, and efficient Stratum keep 90% of browser mining revenue in publishers pockets. How." />
   <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, earnify, fee, model, architecture" />
   <link rel="canonical" href="https://earnify.cc/blog/earnify-fee-model-architecture.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/earnify-fee-model-architecture.html" />
-  <meta property="og:title" content="How Zero-Server Architecture Enables Earnify's 10% Fee Model: A Technical Deep Dive" />
-  <meta property="og:description" content="Earnify's 10% fee isn't a gimmick—it's a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers' pockets." />
+  <meta property="og:title" content="Zero-Server Architecture: Why Earnify Fee Is Only 10%" />
+  <meta property="og:description" content="Why Earnify fee is only 10%: zero-server architecture, WebAssembly, and efficient Stratum keep 90% of browser mining revenue in publishers pockets. How." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="Zero-Server Architecture: Why Earnify Fee Is Only 10%" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How Zero-Server Architecture Enables Earnify's 10% Fee Model: A Technical Deep Dive" />
-  <meta name="twitter:description" content="Earnify's 10% fee isn't a gimmick—it's a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers' pockets." />
+  <meta name="twitter:title" content="Zero-Server Architecture: Why Earnify Fee Is Only 10%" />
+  <meta name="twitter:description" content="Why Earnify fee is only 10%: zero-server architecture, WebAssembly, and efficient Stratum keep 90% of browser mining revenue in publishers pockets. How." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -35,8 +37,9 @@
     "@type": "BlogPosting",
     "headline": "How Zero-Server Architecture Enables Earnify's 10% Fee Model: A Technical Deep Dive",
     "description": "Earnify’s 10% fee isn’t a gimmick—it’s a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers’ pockets.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/earnify-fee-model-architecture.html" },
     "datePublished": "2026-09-01",
     "dateModified": "2026-09-01",
@@ -178,6 +181,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">How Zero-Server Architecture Enables Earnify's 10% Fee Model: A Technical Deep Dive</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated September 1, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Earnify's 10% fee isn't a gimmick—it's a direct result of zero-server architecture, WebAssembly, and efficient Stratum protocol. See the technical breakdown that keeps 90% of mining revenue in publishers' pockets.</p>
 
         <p>When a browser-based mining platform tells you it takes only 10% of the revenue, the first question a technical publisher asks is: <em>How?</em> The typical model for browser mining involves a proxy server that routes work, collects shares, and often hoards user data—all of which cost money to run. Those costs are passed back to the publisher in the form of 20%, 30%, or even 40% fees. Earnify’s architecture is fundamentally different. It eliminates the server layer entirely. The result is a sustainable 10% platform fee that leaves 90% of mining revenue with the publisher, all while staying GDPR compliant and delivering solid hashrate performance. In this deep dive, we’ll unpack the technical architecture that makes the numbers work.</p>
@@ -207,7 +211,7 @@
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#zero-server-architecture" class="toc-link">Zero-Server Architecture: The Foundation</a>
             <a href="#browser-mining-engine" class="toc-link">Browser-Based Mining Engine: WebAssembly + Web Workers</a>

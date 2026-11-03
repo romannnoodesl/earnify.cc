@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { readFileSync, writeFileSync, existsSync } from "fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -64,7 +64,7 @@ Requirements:
 1. Write the blog content as HTML (not markdown). Use rich formatting with the available components listed below.
 2. Every <h2> and <h3> must have an id attribute for the table of contents (use lowercase kebab-case).
 3. Aim for 1200-1800 words (roughly 6-8 minute read).
-4. Include 3-5 H2 sections and 2-3 H3 subsections.
+4. Include 3-5 H2 sections and 2-3 H3 subsections. Title must be under 60 characters.
 5. Reference Earnify naturally where relevant (don't force it).
 6. Include specific numbers, benchmarks, or data points where possible. When citing Earnify's own data, attribute it inline — e.g. "According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages 1,870 H/s" — so generative engines can quote the brand by name.
 7. End with a clear call-to-action related to earnify.
@@ -83,8 +83,8 @@ Available visual components (use these to make posts look professional and data-
 12. The content, title, and description must be original. Do not reuse near-duplicate angles of previously published articles on similar topics — differentiate with a fresh angle, new data, or a specific use case.
 13. Return ONLY a JSON object with this exact structure (no markdown fences):
 {
-  "title": "The blog post title",
-  "description": "A 150-160 character meta description for SEO",
+  "title": "The blog post title (under 60 characters)",
+  "description": "A 120-160 chars meta description for SEO, front-load primary keyword",
   "category": "${topic.category}",
   "readTime": "X min read",
   "content": "The full HTML article content including tables, code blocks, charts, and callout boxes",
@@ -241,14 +241,83 @@ function validatePost(post) {
   if (!post || typeof post !== "object") problems.push("top-level value is not an object");
   else {
     if (!post.title || typeof post.title !== "string") problems.push("missing/invalid title");
+    else if (post.title.length > 60)
+      problems.push(`title too long (${post.title.length} chars, expected ≤60)`);
     if (!post.description || typeof post.description !== "string") problems.push("missing/invalid description");
-    if (!post.content || typeof post.content !== "string" || post.content.length < 2000)
-      problems.push(`content too short (${post.content?.length ?? 0} chars, expected 2000+) — likely truncated`);
+    else if (post.description.length < 120 || post.description.length > 160)
+      problems.push(`description length ${post.description.length} chars, expected 120-160 with front-loaded primary keyword`);
+    if (!post.content || typeof post.content !== "string" || post.content.length < 4000)
+      problems.push(`content too short (${post.content?.length ?? 0} chars, expected 4000+) — likely truncated`);
     if (!Array.isArray(post.toc) || post.toc.length === 0) problems.push("missing/empty toc");
     if (!Array.isArray(post.faqs) || post.faqs.length === 0) problems.push("missing/empty faqs");
   }
   if (problems.length) {
     throw new Error(`Post failed validation: ${problems.join("; ")}`);
+  }
+}
+
+// Non-blocking originality guard (dependency-free, CI-safe).
+// Compares the new article word-set against existing blog/*.html word-sets
+// via Jaccard similarity and logs the top overlapping terms. Never throws,
+// so the workflow stays green — owner reviews warnings in CI logs.
+function checkOriginality(content) {
+  try {
+    const stop = new Set("the,and,for,with,that,this,from,you,your,are,was,were,have,has,will,can,all,any,our,earnify,browser,mining".split(","));
+    const tokenize = (html) => {
+      const text = String(html || "").replace(/<[^>]+>/g, " ").toLowerCase();
+      const words = text.match(/[a-z]{4,}/g) || [];
+      const freq = new Map();
+      for (const w of words) {
+        if (stop.has(w)) continue;
+        freq.set(w, (freq.get(w) || 0) + 1);
+      }
+      const top = [...freq.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).map(([w]) => w);
+      return { set: new Set(top), top };
+    };
+    const cur = tokenize(content);
+    const dir = join(ROOT, "blog");
+    let files = [];
+    try { files = readdirSync(dir).filter((f) => f.endsWith(".html") && f !== "index.html"); } catch { files = []; }
+    let worst = { file: null, score: 0, overlap: [] };
+    for (const f of files) {
+      let html = "";
+      try { html = readFileSync(join(dir, f), "utf-8"); } catch { continue; }
+      const m = html.match(/<article[^>]*>([\s\S]*?)<\/article>/i);
+      const other = tokenize(m ? m[1] : html);
+      const inter = [...cur.set].filter((w) => other.set.has(w));
+      const union = new Set([...cur.set, ...other.set]);
+      const score = union.size ? inter.length / union.size : 0;
+      if (score > worst.score) worst = { file: f, score, overlap: inter.slice(0, 10) };
+    }
+    if (worst.file) {
+      console.log(`Originality check: max Jaccard=${worst.score.toFixed(2)} vs ${worst.file} overlap=[${worst.overlap.join(", ")}]`);
+      if (worst.score > 0.6) {
+        console.warn(`WARNING: new post top-terms overlap Jaccard ${worst.score.toFixed(2)} > 0.6 vs ${worst.file} — possible near-duplicate angle. Non-blocking; owner should review before publishing.`);
+      }
+    }
+  } catch (err) {
+    console.warn(`Originality check skipped: ${err.message}`);
+  }
+}
+
+// Human-review gate (GitHub-compatible, workflow stays green):
+// after writing the post file, append {slug, date, status:'pending'} to
+// scripts/.needs-review.json. Owner reviews/merges; CI never fails on review.
+function flagForHumanReview(slug, title) {
+  try {
+    const p = join(__dirname, ".needs-review.json");
+    let arr = [];
+    if (existsSync(p)) {
+      try { arr = JSON.parse(readFileSync(p, "utf-8")); } catch { arr = []; }
+      if (!Array.isArray(arr)) arr = [];
+    }
+    if (!arr.some((e) => e && e.slug === slug && e.status === "pending")) {
+      arr.push({ slug, title: title || slug, date: new Date().toISOString().slice(0, 10), status: "pending" });
+      writeFileSync(p, JSON.stringify(arr, null, 2) + "\n");
+      console.log(`Flagged for human review: ${slug} → scripts/.needs-review.json (pending)`);
+    }
+  } catch (err) {
+    console.warn(`Could not flag for human review: ${err.message}`);
   }
 }
 
@@ -364,7 +433,7 @@ function buildHTML(post, topic, date) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${title} — Earnify Blog</title>
+  <title>${title}</title>
   <meta name="description" content="${description}" />
   <meta name="keywords" content="browser mining, ${escapeHTML(topic.category.toLowerCase())}, earnify, website monetization, cryptocurrency mining, ${escapeHTML(topic.slug.replace(/-/g, ", "))}" />
   <link rel="canonical" href="https://earnify.cc/blog/${topic.slug}.html" />
@@ -373,21 +442,23 @@ function buildHTML(post, topic, date) {
   <meta property="og:title" content="${title}" />
   <meta property="og:description" content="${description}" />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="${title}" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${title}" />
   <meta name="twitter:description" content="${description}" />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -396,8 +467,9 @@ function buildHTML(post, topic, date) {
     "@type": "BlogPosting",
     "headline": "${escapeJSON(structuredData.headline || postTitle)}",
     "description": "${escapeJSON(structuredData.description || postTitle)}",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/${topic.slug}.html" },
     "datePublished": "${dateISO}",
     "dateModified": "${dateISO}",
@@ -516,7 +588,8 @@ function buildHTML(post, topic, date) {
           <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">${readTime}</span>
         </div>
 
-        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">${title}</h1>
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.75rem;">${title}</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated ${dateStr}</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">${description}</p>
 
         ${content}
@@ -532,7 +605,7 @@ function buildHTML(post, topic, date) {
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             ${tocHTML}
           </nav>
@@ -593,6 +666,9 @@ async function main() {
   const now = new Date();
   const html = buildHTML(post, topic, now);
 
+  // Non-blocking similarity guard: logs Jaccard overlap vs existing posts.
+  checkOriginality(post.content || "");
+
   topic.used = true;
   topicsData.nextTopicIndex++;
   saveTopics(topicsData);
@@ -601,6 +677,9 @@ async function main() {
   const outPath = join(ROOT, "blog", `${topic.slug}.html`);
   writeFileSync(outPath, html);
   console.log(`Written to: blog/${topic.slug}.html`);
+
+  // Human-review gate: flag for owner review (workflow stays green).
+  flagForHumanReview(topic.slug, post.title);
 
   const meta = {
     slug: topic.slug,

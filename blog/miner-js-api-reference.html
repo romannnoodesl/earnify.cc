@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control — Earnify Blog</title>
-  <meta name="description" content="Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining." />
+  <title>Miner.js API Reference: Browser Mining for Developers</title>
+  <meta name="description" content="Miner.js API reference for browser mining developers: autoMine, start, stop, thread control, onWork and onHashrate hooks, live examples included." />
   <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, miner, js, api, reference" />
   <link rel="canonical" href="https://earnify.cc/blog/miner-js-api-reference.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/miner-js-api-reference.html" />
-  <meta property="og:title" content="The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control" />
-  <meta property="og:description" content="Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining." />
+  <meta property="og:title" content="Miner.js API Reference: Browser Mining for Developers" />
+  <meta property="og:description" content="Miner.js API reference for browser mining developers: autoMine, start, stop, thread control, onWork and onHashrate hooks, live examples included." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="Miner.js API Reference: Browser Mining for Developers" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control" />
-  <meta name="twitter:description" content="Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining." />
+  <meta name="twitter:title" content="Miner.js API Reference: Browser Mining for Developers" />
+  <meta name="twitter:description" content="Miner.js API reference for browser mining developers: autoMine, start, stop, thread control, onWork and onHashrate hooks, live examples included." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -35,8 +37,9 @@
     "@type": "BlogPosting",
     "headline": "The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control",
     "description": "Complete developer reference for the Miner.js API. Covers autoMine(), start(), stop(), minotaurxHashrate stats, onWork/onHashrate/onError callbacks, and thread allocation for browser-based crypto mining.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/miner-js-api-reference.html" },
     "datePublished": "2026-09-19",
     "dateModified": "2026-09-19",
@@ -178,6 +181,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">The Miner.js API Reference for Developers: Hooks, Events, and Runtime Control</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated September 19, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Complete developer reference for the Miner.js API. Learn about initialization options, runtime methods, event hooks, and advanced thread management for browser-based crypto mining.</p>
 
         <p>Need control — pause mining on mobile, tune CPU share, or display live hashrate? Miner.js exposes exactly six things: <code>autoMine</code>, <code>start</code>, <code>stop</code>, <code>minotaurx</code>, <code>ALL_THREADS</code>, and <code>minotaurxHashrate</code>. There is no constructor, no site key, no dashboard token, and no throttle 0.0–1.0 API. This reference matches <code>miner.js</code> and <code>README.md</code>.</p><div class="perf-box"><strong>Ground truth:</strong> MinotaurX only (<code>cwm_minotaurx</code>). Default pool <code>minotaurx.na.mine.zpool.ca:7019</code>, password <code>c=DOGE</code>. All traffic goes through the mandatory relay <code>wss://websocket-stratum-server.com</code>. Dev fee = exactly 1 CPU thread on top of yours (not a share split).</div><h2 id="automine">autoMine(walletAddress, threadPercent?)</h2><p>Quick-start mining. Configures MinotaurX on zpool automatically. Returns a <code>Promise&lt;number&gt;</code> with the user thread count.</p><div class="code-block"><span class="kw">import</span> { autoMine } <span class="kw">from</span> <span class="str">"https://earnify.cc/miner.js"</span>;
@@ -232,7 +236,7 @@
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             
             <a href="#automine" class="toc-link">autoMine(wallet, threadPercent)</a>

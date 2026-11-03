@@ -279,7 +279,147 @@
       "category": "Industry",
       "description": "Where browser compute monetization goes next — WASM maturity, AI workloads in the browser, and the regulatory questions nobody has answered.",
       "used": true
+    },
+    {
+      "title": "AdBlock Revenue Recovery Calculator: Modeling Mining Yield Against Lost Impressions",
+      "slug": "adblock-revenue-recovery-calculator",
+      "category": "Revenue Strategy",
+      "description": "An interactive-model post: plug your ad-block rate, DAU, and session length into a mining-yield formula to forecast recovered revenue.",
+      "used": false
+    },
+    {
+      "title": "Earnify WordPress Plugin Roadmap: One-Click Mining Without Code Edits",
+      "slug": "wordpress-plugin-mining-integration",
+      "category": "Technical",
+      "description": "What a native WordPress plugin for Earnify would look like — settings-page wallet config, shortcode opt-in widget, and per-page throttling.",
+      "used": false
+    },
+    {
+      "title": "Monetizing Browser Game Portals: Idle-Lobby Mining That Protects Frame Rates",
+      "slug": "browser-game-portal-idle-mining",
+      "category": "Revenue Strategy",
+      "description": "How game portals run miners only in lobbies, menus, and loading screens — timing, throttling, and frame-budget math.",
+      "used": false
+    },
+    {
+      "title": "Mobile-First Mining Strategy: When to Throttle, Pause, or Skip Handsets Entirely",
+      "slug": "mobile-first-mining-throttling-strategy",
+      "category": "Technical",
+      "description": "A device-tier playbook for mobile traffic — battery budgets, thermal limits, and the session-value cutoff for disabling mining.",
+      "used": false
+    },
+    {
+      "title": "Pool Fees vs Payout Thresholds: Picking the Cheapest Path to Your First DOGE",
+      "slug": "pool-fee-payout-threshold-comparison",
+      "category": "Technical",
+      "description": "Comparing effective pool costs: fee percent, minimum payout, exchange spread, and time-to-first-payout for small publishers.",
+      "used": false
+    },
+    {
+      "title": "Session-Length Arbitrage: Why Long-Dwell Niches Earn More Per Visitor",
+      "slug": "session-length-arbitrage-long-dwell-niches",
+      "category": "Revenue Strategy",
+      "description": "Documentation sites, calculators, and web tools hold visitors 5–20x longer — the session-length math that makes them ideal mining candidates.",
+      "used": false
+    },
+    {
+      "title": "Deploying Earnify on Static Site Generators: Hugo, Jekyll, and Astro Patterns",
+      "slug": "static-site-generator-mining-deploy",
+      "category": "Technical",
+      "description": "Copy-paste integration patterns for SSGs — partial templates, environment-keyed wallets, and build-time vs runtime config.",
+      "used": false
+    },
+    {
+      "title": "Privacy Policy Language for Mining Disclosure: Copy-Paste Templates",
+      "slug": "privacy-policy-mining-disclosure-templates",
+      "category": "Legal",
+      "description": "Ready-to-adapt disclosure paragraphs for Terms and Privacy pages — consent-first wording reviewed for GDPR/ePrivacy alignment.",
+      "used": false
+    },
+    {
+      "title": "Revenue Stacking: Running Mining Alongside Affiliate Links Without UX Clutter",
+      "slug": "revenue-stacking-mining-affiliate-hybrid",
+      "category": "Revenue Strategy",
+      "description": "How publishers layer invisible mining under visible affiliate content — yield-stacking math and cannibalization checks.",
+      "used": false
+    },
+    {
+      "title": "WebAssembly Performance Budgets: Keeping Mining Under Your Core Web Vitals Ceiling",
+      "slug": "wasm-performance-budget-core-web-vitals",
+      "category": "Technical",
+      "description": "Setting CPU and INP budgets for background WASM work — worker counts, idle-callback scheduling, and field-data validation.",
+      "used": false
+    },
+    {
+      "title": "Forum and Community Monetization: Turning Thread Views Into Compute Yield",
+      "slug": "forum-community-mining-monetization",
+      "category": "Revenue Strategy",
+      "description": "Why forums and Q&A sites with deep scroll sessions fit mining — placement of opt-in prompts in thread UX.",
+      "used": false
+    },
+    {
+      "title": "Donation-Alternative Funding for Creators: Mining as a Tip Jar",
+      "slug": "creator-tip-jar-mining-alternative",
+      "category": "Revenue Strategy",
+      "description": "Positioning opt-in mining as a no-cost tip jar for newsletters, podcasts, and indie creators — consent copy that converts.",
+      "used": false
+    },
+    {
+      "title": "Litecoin Payouts for Publishers: When LTC Beats DOGE on Fees and Speed",
+      "slug": "litecoin-payouts-publishers-guide",
+      "category": "Technical",
+      "description": "A publisher-focused LTC payout guide — address formats, confirmation times, fee comparison vs DOGE, and zpool password setup.",
+      "used": false
+    },
+    {
+      "title": "Ravencoin Payouts Explained: Wallets, Exchanges, and Minimum Thresholds",
+      "slug": "ravencoin-payouts-publishers-guide",
+      "category": "Technical",
+      "description": "What publishers need to receive RVN from auto-exchange pools — wallet setup, liquidity, and when RVN makes sense over DOGE.",
+      "used": false
+    },
+    {
+      "title": "Mining During Video and Streaming Sessions: Long-Watch Yield Math",
+      "slug": "video-streaming-session-mining-yield",
+      "category": "Revenue Strategy",
+      "description": "Long watch sessions mean sustained CPU headroom — estimating mining yield from video, livestream, and podcast audiences.",
+      "used": false
+    },
+    {
+      "title": "School and Library Networks: Ethical Mining Policies for Shared Devices",
+      "slug": "shared-device-mining-ethics-policy",
+      "category": "Legal",
+      "description": "Why shared and institutional devices need explicit opt-in policies — device-ownership disclosure and admin-consent patterns.",
+      "used": false
+    },
+    {
+      "title": "A/B Testing Mining Consent Copy: Headlines That Lift Opt-In Without Dark Patterns",
+      "slug": "mining-consent-copy-ab-testing",
+      "category": "Revenue Strategy",
+      "description": "Tested headline and button-copy variants for mining consent — what lifted opt-in rates in publisher experiments.",
+      "used": false
+    },
+    {
+      "title": "Uptime Monitoring for Browser Mining: Detecting Silent Worker Failures",
+      "slug": "browser-mining-uptime-monitoring",
+      "category": "Technical",
+      "description": "How to detect dead workers, blocked WebSockets, and pool outages from the publisher side — heartbeat checks and alerting.",
+      "used": false
+    },
+    {
+      "title": "Tax Basics for Mining Revenue: What Small Publishers Should Track",
+      "slug": "mining-revenue-tax-basics-publishers",
+      "category": "Legal",
+      "description": "A non-advice primer on tracking mining payouts for tax time — wallet exports, cost basis, and records to keep.",
+      "used": false
+    },
+    {
+      "title": "Sunsetting Display Ads: A 90-Day Migration Plan to Compute-First Revenue",
+      "slug": "sunsetting-display-ads-migration-plan",
+      "category": "Revenue Strategy",
+      "description": "A phased 90-day plan for cutting ad weight while ramping mining — milestones, rollback triggers, and revenue checkpoints.",
+      "used": false
     }
   ],
-  "nextTopicIndex": 39
+  "nextTopicIndex": 40
 }

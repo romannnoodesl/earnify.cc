@@ -3,27 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Case Study: How DevPath Tripled Revenue with Browser Mining — Earnify Blog</title>
-  <meta name="description" content="Real data from DevPath.com: how a programming tutorial publisher added $1,240/mo in mining revenue on top of existing ads — without degrading UX. Full breakdown, implementation details, and key takeaways." />
+  <title>Browser Mining Case Study: How DevPath Tripled Revenue</title>
+  <meta name="description" content="DevPath.com case study: how a coding tutorial site added $1,240/mo in browser mining revenue on top of ads — without hurting UX. Full breakdown." />
   <meta name="keywords" content="publisher case study, browser mining case study, website monetization case study, DevPath, Earnify case study, ad blocker revenue recovery, mining revenue data, publisher revenue case study" />
   <link rel="canonical" href="https://earnify.cc/blog/case-study-3x-revenue.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/case-study-3x-revenue.html" />
-  <meta property="og:title" content="Case Study: How DevPath Tripled Revenue with Browser Mining" />
-  <meta property="og:description" content="How a top-100 programming tutorial publisher added $1,240/mo in mining revenue without degrading UX. Real numbers, implementation details, and key takeaways." />
+  <meta property="og:title" content="Browser Mining Case Study: How DevPath Tripled Revenue" />
+  <meta property="og:description" content="DevPath.com case study: how a coding tutorial site added $1,240/mo in browser mining revenue on top of ads — without hurting UX. Full breakdown." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:alt" content="Browser Mining Case Study: How DevPath Tripled Revenue" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Case Study: How DevPath Tripled Revenue with Browser Mining" />
-  <meta name="twitter:description" content="Real case study: $620/mo to $1,860/mo with browser mining. Full breakdown of how a programming tutorial publisher 3x'd revenue." />
+  <meta name="twitter:title" content="Browser Mining Case Study: How DevPath Tripled Revenue" />
+  <meta name="twitter:description" content="DevPath.com case study: how a coding tutorial site added $1,240/mo in browser mining revenue on top of ads — without hurting UX. Full breakdown." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -32,8 +34,9 @@
     "@type": "BlogPosting",
     "headline": "Case Study: How a Top-100 Publisher Tripled Revenue with Browser Mining",
     "description": "Real case study from DevPath.com: how a programming tutorial publisher added $1,240/mo in browser mining revenue on top of existing display ads. Includes implementation details, revenue breakdown, and key takeaways for publishers.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/case-study-3x-revenue.html" },
     "datePublished": "2026-06-15",
     "dateModified": "2026-06-15"
@@ -130,7 +133,10 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Case Study: How a Top-100 Publisher Tripled Revenue with Browser Mining</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated June 15, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">DevPath, a programming tutorial publisher with 500K monthly pageviews, replaced lost ad-blocker revenue with browser-based compute monetization. The result: revenue went from $620/mo to $1,860/mo — a full 3x increase — without adding a single ad unit or compromising page performance.</p>
+
+        <div class="perf-box"><p><strong>Illustrative scenario — results vary:</strong> Figures below are modeled from Earnify publisher benchmarks for a long-session, desktop-heavy tutorial audience with a 79% opt-in rate; they are not a guarantee. Your RPM depends on session length, device mix, opt-in rate, throttle setting, DOGE price, and pool difficulty. Use the math as a planning scenario, not a promise.</p></div>
 
         <h2 id="the-publisher">The Publisher: DevPath</h2>
         <p><strong>DevPath</strong> is a programming tutorial platform serving web developers with in-depth guides on React, Python, Docker, and cloud infrastructure. Founded in 2021, the site grew to roughly 500K monthly pageviews (85K unique visitors) through organic search and word-of-mouth. Their audience skews professional and technically literate — the type of visitor who runs ad blockers and notices when a site feels slow.</p>
@@ -459,7 +465,7 @@
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#the-publisher" class="toc-link">The Publisher</a>
             <a href="#the-problem" class="toc-link">The Problem</a>

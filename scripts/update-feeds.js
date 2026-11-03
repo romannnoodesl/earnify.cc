@@ -83,14 +83,9 @@ function updateSitemap(meta) {
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://earnify.cc/og-image.png</image:loc>
-      <image:title>${escapeXML(meta.title)}</image:title>
-      <image:caption>${escapeXML(meta.description)}</image:caption>
-    </image:image>
   </url>`;
 
-  const insertBefore = "  <!-- XML / TEXT RESOURCES -->";
+  const insertBefore = "  <!-- HUB & TRUST PAGES -->";
   if (sitemap.includes(insertBefore)) {
     sitemap = sitemap.replace(insertBefore, newUrl + "\n\n" + insertBefore);
   } else {
@@ -105,9 +100,6 @@ function updateSitemap(meta) {
     "<loc>https://earnify.cc/2.0/</loc>",
     "<loc>https://earnify.cc/2.0/demo/</loc>",
     "<loc>https://earnify.cc/2.0/docs/</loc>",
-    "<loc>https://earnify.cc/llms.txt</loc>",
-    "<loc>https://earnify.cc/rss.xml</loc>",
-    "<loc>https://earnify.cc/opensearch.xml</loc>",
   ];
   for (const refreshLoc of refreshLastmod) {
     const escaped = refreshLoc.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -215,6 +207,29 @@ function escapeJSON(str) {
     .replace(/\n/g, "\\n");
 }
 
+function updateLlmsTxt(meta) {
+  const llmsPath = join(ROOT, "llms.txt");
+  let llms = readFileSync(llmsPath, "utf-8");
+
+  const slugUrl = `https://earnify.cc/blog/${meta.slug}.html`;
+  if (llms.includes(slugUrl)) {
+    console.log("llms.txt already contains this post — skipping");
+    return false;
+  }
+
+  const entry = `- [${meta.title}](${slugUrl}) (${meta.date}): ${meta.description}`;
+  const marker = "## Developer Resources";
+  if (llms.includes(marker)) {
+    llms = llms.replace(marker, entry + "\n" + marker);
+  } else {
+    llms = llms.trimEnd() + "\n" + entry + "\n";
+  }
+
+  writeFileSync(llmsPath, llms);
+  console.log("Updated llms.txt");
+  return true;
+}
+
 function main() {
   const meta = loadMeta();
   console.log(`Updating feeds for: "${meta.title}"`);
@@ -222,8 +237,9 @@ function main() {
   const rssChanged = updateRSS(meta);
   const sitemapChanged = updateSitemap(meta);
   const indexChanged = updateBlogIndex(meta);
+  const llmsChanged = updateLlmsTxt(meta);
 
-  if (!rssChanged && !sitemapChanged && !indexChanged) {
+  if (!rssChanged && !sitemapChanged && !indexChanged && !llmsChanged) {
     console.log("Post already present in all feeds — nothing to do");
     return;
   }

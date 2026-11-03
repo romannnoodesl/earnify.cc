@@ -3,27 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How Browser Mining Works: Web Workers, WASM & Stratum — Earnify Blog</title>
-  <meta name="description" content="A developer's technical breakdown of browser-based mining: Web Worker API threading, WASM compilation of C/Rust hashing code, WebSocket Stratum connections, and share submission to mining pools." />
+  <title>How Browser Mining Works: Workers, WASM + Stratum</title>
+  <meta name="description" content="How browser mining works for developers: Web Worker threading, WASM hashing, WebSocket Stratum, and pool share submission — Earnify technical guide." />
   <meta name="keywords" content="browser mining architecture, Web Workers mining, WASM cryptocurrency, Stratum protocol WebSocket, browser mining code flow, Earnify technical, WASM mining performance" />
   <link rel="canonical" href="https://earnify.cc/blog/how-browser-mining-works.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/how-browser-mining-works.html" />
-  <meta property="og:title" content="How Browser Mining Works: Web Workers, WASM & Stratum" />
-  <meta property="og:description" content="Developer deep-dive into the four layers that make browser mining possible: Worker API, WASM compilation, WebSocket Stratum, and pool share submission." />
+  <meta property="og:title" content="How Browser Mining Works: Workers, WASM + Stratum" />
+  <meta property="og:description" content="How browser mining works for developers: Web Worker threading, WASM hashing, WebSocket Stratum, and pool share submission — Earnify technical guide." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:alt" content="How Browser Mining Works: Workers, WASM + Stratum" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="How Browser Mining Works: Workers, WASM & Stratum" />
-  <meta name="twitter:description" content="Technical breakdown of browser mining — Worker API, WASM bytecode, WebSocket Stratum, and pool share submission." />
+  <meta name="twitter:title" content="How Browser Mining Works: Workers, WASM + Stratum" />
+  <meta name="twitter:description" content="How browser mining works for developers: Web Worker threading, WASM hashing, WebSocket Stratum, and pool share submission — Earnify technical guide." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -32,8 +34,9 @@
     "@type": "BlogPosting",
     "headline": "How Browser Mining Works: Web Workers, WASM & Stratum Protocol",
     "description": "A developer's technical breakdown of browser-based mining architecture: Web Worker API threading, WASM compilation of C/Rust hashing, WebSocket Stratum connections, and pool share submission.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/how-browser-mining-works.html" },
     "datePublished": "2026-06-02",
     "dateModified": "2026-06-02"
@@ -130,6 +133,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">How Browser Mining Works: Workers, WASM & Stratum</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated June 2, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Four layers stand between a visitor's tab and a mining pool's ledger. Here's how each one works — and why the browser is a surprisingly viable place to hash.</p>
 
         <h2 id="overview">The Architecture at a Glance</h2>
@@ -282,7 +286,7 @@ ws.onmessage = ({ data }) => {
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#overview" class="toc-link">Architecture Overview</a>
             <a href="#web-workers" class="toc-link">Web Workers</a>

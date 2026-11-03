@@ -3,27 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser — Earnify Blog</title>
-  <meta name="description" content="Deep-dive into Earnify's browser-only mining architecture: Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay, dev fee model, and security — no backend server required by the publisher." />
+  <title>Zero-Server Browser Mining: How Earnify Runs In-Browser</title>
+  <meta name="description" content="How Earnify zero-server browser mining works: Web Workers, WASM MinotaurX hashing, Stratum relay, dev-fee model — no backend server needed." />
   <meta name="keywords" content="zero-server architecture, browser mining architecture, Web Workers WASM mining, MinotaurX hashing, Stratum WebSocket relay, browser-based mining infrastructure, Earnify architecture" />
   <link rel="canonical" href="https://earnify.cc/blog/zero-server-infrastructure.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/zero-server-infrastructure.html" />
-  <meta property="og:title" content="Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser" />
-  <meta property="og:description" content="Deep-dive into Earnify's browser-only mining architecture: Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay, dev fee model, and security — no backend server required by the publisher." />
+  <meta property="og:title" content="Zero-Server Browser Mining: How Earnify Runs In-Browser" />
+  <meta property="og:description" content="How Earnify zero-server browser mining works: Web Workers, WASM MinotaurX hashing, Stratum relay, dev-fee model — no backend server needed." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:alt" content="Zero-Server Browser Mining: How Earnify Runs In-Browser" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser" />
-  <meta name="twitter:description" content="Earnify's browser-only mining architecture — Web Workers, WASM MinotaurX, Socket.IO Stratum relay. No backend server required. Full technical deep-dive." />
+  <meta name="twitter:title" content="Zero-Server Browser Mining: How Earnify Runs In-Browser" />
+  <meta name="twitter:description" content="How Earnify zero-server browser mining works: Web Workers, WASM MinotaurX hashing, Stratum relay, dev-fee model — no backend server needed." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -32,8 +34,9 @@
     "@type": "BlogPosting",
     "headline": "Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser",
     "description": "Deep-dive into Earnify's browser-only mining architecture: Web Workers, WASM MinotaurX hashing, Socket.IO Stratum relay, dev fee model, and security — no backend server required by the publisher.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/zero-server-infrastructure.html" },
     "datePublished": "2026-05-26",
     "dateModified": "2026-05-26"
@@ -144,6 +147,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Zero-Server Infrastructure: How Earnify Runs Mining Entirely in the Browser</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated May 26, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Every other web monetization platform requires you to spin up servers, manage connections, and deal with infrastructure drift. Earnify requires a script tag. This is the architectural deep-dive into how it works — from Web Workers and WebAssembly through to the Stratum wire protocol — and why the publisher never needs a backend.</p>
 
         <h2 id="thesis">The Zero-Server Thesis</h2>
@@ -400,7 +404,7 @@ const threads = await start(
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#thesis" class="toc-link">The Zero-Server Thesis</a>
             <a href="#architecture" class="toc-link">Architecture Overview</a>

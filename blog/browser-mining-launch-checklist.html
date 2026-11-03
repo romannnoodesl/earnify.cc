@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Browser Mining Launch Checklist: 15 Steps Before Going Live — Earnify Blog</title>
-  <meta name="description" content="Launch browser mining without the bottlenecks. This 15-step checklist covers consent, thread tuning, relay stability, and earnings benchmarks publishers need before going live." />
+  <title>Browser Mining Launch Checklist: 15 Steps to Go Live</title>
+  <meta name="description" content="Launch browser mining without bottlenecks: 15-step checklist covering consent, thread tuning, relay stability, and earnings benchmarks before going live." />
   <meta name="keywords" content="browser mining, revenue strategy, earnify, website monetization, cryptocurrency mining, browser, mining, launch, checklist" />
   <link rel="canonical" href="https://earnify.cc/blog/browser-mining-launch-checklist.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/browser-mining-launch-checklist.html" />
-  <meta property="og:title" content="Your Browser Mining Launch Checklist: 15 Steps Before Going Live" />
-  <meta property="og:description" content="Launch browser mining without the bottlenecks. This 15-step checklist covers consent, thread tuning, relay stability, and earnings benchmarks publishers need before going live." />
+  <meta property="og:title" content="Browser Mining Launch Checklist: 15 Steps to Go Live" />
+  <meta property="og:description" content="Launch browser mining without bottlenecks: 15-step checklist covering consent, thread tuning, relay stability, and earnings benchmarks before going live." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="Browser Mining Launch Checklist: 15 Steps to Go Live" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Your Browser Mining Launch Checklist: 15 Steps Before Going Live" />
-  <meta name="twitter:description" content="Launch browser mining without the bottlenecks. This 15-step checklist covers consent, thread tuning, relay stability, and earnings benchmarks publishers need before going live." />
+  <meta name="twitter:title" content="Browser Mining Launch Checklist: 15 Steps to Go Live" />
+  <meta name="twitter:description" content="Launch browser mining without bottlenecks: 15-step checklist covering consent, thread tuning, relay stability, and earnings benchmarks before going live." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -35,8 +37,9 @@
     "@type": "BlogPosting",
     "headline": "Your Browser Mining Launch Checklist: 15 Steps Before Going Live",
     "description": "A comprehensive 15-step checklist for publishers deploying Earnify browser mining, covering GDPR consent, thread calibration, relay configuration, and post-launch monitoring with specific benchmarks and data points.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/browser-mining-launch-checklist.html" },
     "datePublished": "2026-10-28",
     "dateModified": "2026-10-28",
@@ -178,6 +181,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Your Browser Mining Launch Checklist: 15 Steps Before Going Live</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated October 28, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Launch browser mining without the bottlenecks. This 15-step checklist covers consent, thread tuning, relay stability, and earnings benchmarks publishers need before going live.</p>
 
         <p>Most publishers treat browser-based cryptocurrency mining like a banner ad — paste a snippet, hit publish, and watch the revenue roll in. The reality is far less forgiving. A single misconfiguration can torch your CPM, throttle your visitors' CPUs into unusable territory, or land you in a compliance gray zone that no ad network will touch.</p><p>This checklist walks you through 15 specific, testable steps to take your Earnify <code>miner.js</code> integration from "works on my machine" to production-grade. Every step includes concrete thresholds, tool recommendations, and the exact numbers you should be measuring before you send a single hash to a stratum relay.</p><div class="perf-box"><strong>Key Stat:</strong> According to Earnify's 2026 deployment audits, publishers who complete a structured pre-flight checklist reduce visitor churn by 34% and see 2.1× higher average session hashrate compared to those who launch with default settings only.</div><h2 id="consent-and-compliance">1. Consent & Compliance (Steps 1–4)</h2><p>Browser mining sits in a regulatory spotlight. Unlike display ads, mining consumes measurable CPU resources on a visitor's device. GDPR, ePrivacy Directive, and evolving US state privacy laws all require explicit, informed opt-in before you spin up a single Web Worker.</p><h3 id="explicit-opt-in-banner">1.1 Implement an Explicit Opt‑In Banner</h3><p>Passive consent — buried disclosures, pre‑ticked checkboxes, or "by continuing you agree" language — is insufficient. You need a visible toggle that calls <code>Earnify.start()</code> only after affirmative user action.</p><div class="code-block"><span class="cm">// Minimum viable consent pattern</span>
@@ -231,7 +235,7 @@ consentBtn.<span class="fn">addEventListener</span>(<span class="str">'click'</s
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#consent-and-compliance" class="toc-link">Consent & Compliance (Steps 1–4)</a>
             <a href="#explicit-opt-in-banner" class="toc-link toc-h3">Implement an Explicit Opt‑In Banner</a>

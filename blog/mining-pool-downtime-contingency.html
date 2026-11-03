@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners — Earnify Blog</title>
-  <meta name="description" content="Mining pools fail more often than you think. Learn what actually happens to your hashrate, earnings, and visitors when a pool goes offline—plus a battle-tested contingency architecture." />
+  <title>Mining Pool Downtime: Contingency Plan for Publishers</title>
+  <meta name="description" content="When mining pools go down: what happens to hashrate, earnings, and visitors — plus a battle-tested contingency architecture for browser miners. Guide." />
   <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, mining, pool, downtime, contingency" />
   <link rel="canonical" href="https://earnify.cc/blog/mining-pool-downtime-contingency.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/mining-pool-downtime-contingency.html" />
-  <meta property="og:title" content="What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners" />
-  <meta property="og:description" content="Mining pools fail more often than you think. Learn what actually happens to your hashrate, earnings, and visitors when a pool goes offline—plus a battle-tested contingency architecture." />
+  <meta property="og:title" content="Mining Pool Downtime: Contingency Plan for Publishers" />
+  <meta property="og:description" content="When mining pools go down: what happens to hashrate, earnings, and visitors — plus a battle-tested contingency architecture for browser miners. Guide." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="Mining Pool Downtime: Contingency Plan for Publishers" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners" />
-  <meta name="twitter:description" content="Mining pools fail more often than you think. Learn what actually happens to your hashrate, earnings, and visitors when a pool goes offline—plus a battle-tested contingency architecture." />
+  <meta name="twitter:title" content="Mining Pool Downtime: Contingency Plan for Publishers" />
+  <meta name="twitter:description" content="When mining pools go down: what happens to hashrate, earnings, and visitors — plus a battle-tested contingency architecture for browser miners. Guide." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -35,8 +37,9 @@
     "@type": "BlogPosting",
     "headline": "What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners",
     "description": "Mining pools fail more often than you think. Learn what actually happens to your hashrate, earnings, and visitors when a pool goes offline—plus a battle-tested contingency architecture with specific failover patterns for browser-based cryptocurrency mining.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/mining-pool-downtime-contingency.html" },
     "datePublished": "2026-09-10",
     "dateModified": "2026-09-10",
@@ -178,6 +181,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">What Happens When a Mining Pool Goes Down: A Contingency Guide for Browser-Based Miners</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated September 10, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Mining pools fail more often than you think. Learn what actually happens to your hashrate, earnings, and visitors when a pool goes offline—plus a battle-tested contingency architecture.</p>
 
         <p>At 03:47 UTC on a Tuesday in March, one of the largest Scrypt mining pools experienced a cascading infrastructure failure. For 94 minutes, over 12,000 connected miners—including thousands of browser-based instances—produced exactly zero accepted shares. The pool's stratum servers simply stopped responding to TCP connections.</p><p>For a website publisher running browser mining, those 94 minutes translate into something painfully concrete: lost revenue, wasted CPU cycles, and visitors whose devices spun up for nothing. Yet remarkably, fewer than 8% of browser mining deployments have any form of pool redundancy configured. This guide explains exactly what happens during a pool outage, how to measure the financial impact, and how to build a contingency architecture that keeps your hashrate productive even when your primary pool disappears.</p><div class="perf-box"><strong>Key Statistic:</strong> According to aggregated stratum monitoring data from 2024–2025, the top 15 Scrypt mining pools experienced a combined 47 significant outage events (lasting longer than 10 minutes) over a 12-month period. The mean downtime per pool was 4.2 hours annually. For a publisher generating $18/day from browser mining, that's roughly $31.50 in avoidable annual losses—before accounting for the <em>much larger</em> opportunity cost of idle hardware.</div><h2 id="what-actually-happens-during-a-pool-outage">What Actually Happens During a Pool Outage</h2><p>When a mining pool goes down, the failure isn't always a clean binary event. Understanding the failure modes is critical because different types of outages produce different symptoms—and require different responses.</p><h3 id="stratum-server-failure">Stratum Server Failure: The Silent Killer</h3><p>The Stratum protocol operates over persistent TCP connections. When a browser miner connects to a pool, it opens a WebSocket to the pool's stratum endpoint and maintains that connection for the duration of the mining session. The pool periodically sends <code>mining.set_difficulty</code> and <code>mining.notify</code> messages; the miner responds with <code>mining.submit</code> when it finds a share meeting the target difficulty.</p><p>When the stratum server fails, one of three things happens:</p><ul><li><strong>TCP connection timeout (most common):</strong> The miner's WebSocket remains in an ESTABLISHED state but receives no data. Eventually—typically after 60–120 seconds depending on browser TCP keepalive behavior—the connection times out. During this window, the miner continues hashing and attempting submissions that silently fail.</li><li><strong>Connection refused (RST):</strong> The server actively rejects new connections. Reconnection attempts fail immediately with a connection error.</li><li><strong>DNS failure (rare):</strong> The pool's domain becomes unresolvable. This is the worst case because even failover logic relying on the same hostname will break.</li></ul><p>In all three scenarios, the critical metric is <strong>time-to-detection</strong>. Without explicit health-check logic, a browser miner may continue wasting CPU cycles for 90+ seconds before recognizing the connection is dead.</p><h3 id="share-submission-backlog">The Share Submission Backlog Problem</h3><p>Here's a subtlety most publishers miss: shares found <em>during</em> the outage window are not retroactively accepted. When the pool comes back online and the miner reconnects, it starts fresh with a new <code>mining.notify</code> message containing a new block template. Any shares computed against the old block are worthless.</p><p>According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages 1,870 H/s. At a typical vardiff of 1,024, that visitor finds approximately 1.83 shares per minute. In a 90-second detection window, that's 2–3 shares per visitor—completely discarded. For a site with 200 concurrent miners, that's 400–600 wasted shares per outage event.</p><div class="perf-box"><strong>Wasted Work Calculation:</strong><br>200 concurrent miners × 1,870 H/s × 90 seconds = <strong>33.66 MH of wasted computation</strong><br>Equivalent to roughly 18,000 accepted shares at diff 1,024<br>At a typical PPS rate of 0.00000042 DOGE/share, that's ~0.0076 DOGE in unrealized earnings—per outage event. Over a year with 4–6 outages, the compounding effect becomes material.</div><h2 id="financial-impact-modeling">Financial Impact: Modeling the Cost of Downtime</h2><p>To build a business case for redundancy, you need concrete numbers. Let's model three publisher profiles and their annualized losses from pool outages.</p><table class="rev-table"><thead><tr><th>Publisher Profile</th><th>Avg. Concurrent Miners</th><th>Daily Revenue (DOGE)</th><th>Annual Downtime Loss (4.2 hrs)</th><th>With 5 Outages + Detection Lag</th></tr></thead><tbody><tr><td>Small Blog</td><td class="highlight">15</td><td>42 DOGE</td><td>7.35 DOGE</td><td class="warn">11.2 DOGE</td></tr><tr><td>Mid-Size Content Site</td><td class="highlight">120</td><td>336 DOGE</td><td>58.8 DOGE</td><td class="warn">89.4 DOGE</td></tr><tr><td>High-Traffic Platform</td><td class="highlight">800</td><td>2,240 DOGE</td><td>392 DOGE</td><td class="warn">596 DOGE</td></tr></tbody></table><p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Table assumes 4.2 hours of annual pool downtime plus an average 90-second detection lag per outage event, at a hashrate of 1,870 H/s per miner and PPS payout of 0.00000042 DOGE per diff-1,024 share.</p><p>The "detection lag" column is crucial—it accounts for the wasted computation that occurs <em>before</em> the miner realizes the pool is down. This is entirely avoidable with proper health-check logic, which we'll cover in the implementation section.</p><h2 id="contingency-architecture">Building a Multi-Pool Contingency Architecture</h2><p>The goal is simple: when the primary pool stops accepting shares, the miner should seamlessly transition to a backup pool with minimal interruption. Here's how to design that system.</p><h3 id="health-check-strategy">Health-Check Strategy: Beyond Simple Timeouts</h3><p>A naive approach checks only for WebSocket disconnection events. A robust implementation layers three detection mechanisms:</p><div class="code-block"><span class="cm">// Layer 1: Response timeout — did we get a mining.notify recently?</span>
@@ -243,7 +247,7 @@
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#what-actually-happens-during-a-pool-outage" class="toc-link">What Actually Happens During a Pool Outage</a>
             <a href="#stratum-server-failure" class="toc-link toc-h3">Stratum Server Failure: The Silent Killer</a>

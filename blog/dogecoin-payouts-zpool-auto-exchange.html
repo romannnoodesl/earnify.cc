@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work — Earnify Blog</title>
-  <meta name="description" content="Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts." />
+  <title>Dogecoin Payouts: zpool Thresholds for Browser Miners</title>
+  <meta name="description" content="Dogecoin payouts on zpool explained: auto-exchange thresholds, minimum withdrawals, and how Earnify publishers optimize for faster DOGE payouts. Guide." />
   <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, dogecoin, payouts, zpool, auto, exchange" />
   <link rel="canonical" href="https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html" />
-  <meta property="og:title" content="Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work" />
-  <meta property="og:description" content="Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts." />
+  <meta property="og:title" content="Dogecoin Payouts: zpool Thresholds for Browser Miners" />
+  <meta property="og:description" content="Dogecoin payouts on zpool explained: auto-exchange thresholds, minimum withdrawals, and how Earnify publishers optimize for faster DOGE payouts. Guide." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="Dogecoin Payouts: zpool Thresholds for Browser Miners" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work" />
-  <meta name="twitter:description" content="Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts." />
+  <meta name="twitter:title" content="Dogecoin Payouts: zpool Thresholds for Browser Miners" />
+  <meta name="twitter:description" content="Dogecoin payouts on zpool explained: auto-exchange thresholds, minimum withdrawals, and how Earnify publishers optimize for faster DOGE payouts. Guide." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -35,8 +37,9 @@
     "@type": "BlogPosting",
     "headline": "Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work",
     "description": "Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/dogecoin-payouts-zpool-auto-exchange.html" },
     "datePublished": "2026-09-07",
     "dateModified": "2026-09-07",
@@ -178,6 +181,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Dogecoin Payouts Explained: How zpool Auto-Exchange Thresholds Work</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated September 7, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Understand Dogecoin payout mechanics on zpool, from auto-exchange thresholds to minimum withdrawal limits. Learn how Earnify publishers optimize for faster DOGE payouts.</p>
 
         <h2 id="why-dogecoin-payouts">Why Dogecoin Payouts Are Different from Direct Mining</h2><p>When a website visitor mines cryptocurrency through a browser-based solution like Earnify, the underlying mining pool rarely pays out in the coin being mined. Instead, most pools use an <strong>auto-exchange mechanism</strong> that converts whatever algorithm-specific coin your miners produce into a single payout currency—often Dogecoin (DOGE), Litecoin (LTC), or Bitcoin (BTC).</p><p>This is especially true on <strong>zpool</strong>, one of the most popular multi-algorithm profit-switching pools used by browser mining platforms. zpool supports dozens of algorithms including <strong>MinotaurX</strong>—the primary algorithm Earnify hashes against. But MinotaurX doesn't mine Dogecoin directly. It mines coins like <a href="/blog/" style="color:#dfe104;text-decoration:underline;">Pulsar (PLSR) and other CPU-optimized chain forks</a>, which zpool then auto-exchanges to DOGE on your behalf.</p><div class="perf-box"><strong>Key Insight:</strong> When you configure Earnify with a Dogecoin payout address, you're not mining DOGE. You're mining MinotaurX coins that zpool instantly sells for DOGE at market rate—minus exchange fees. This distinction matters because it affects payout frequency, minimum thresholds, and the effective exchange rate you receive.</div><p>According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages <strong>1,870 H/s</strong> per thread. That raw hashrate translates into a constantly fluctuating DOGE reward stream governed by zpool's auto-exchange rules. Understanding those rules is the difference between seeing regular payouts and wondering why your balance sits unclaimed for weeks.</p><h2 id="zpool-auto-exchange">How zpool's Auto-Exchange Engine Converts MinotaurX Coins to DOGE</h2><p>zpool operates what it calls an "auto-exchange" system. Here's the simplified flow from browser miner to Dogecoin wallet:</p><div class="flow-diagram"><pre style="font-family:monospace;white-space:pre;">
@@ -228,7 +232,7 @@
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#why-dogecoin-payouts" class="toc-link">Why Dogecoin Payouts Are Different from Direct Mining</a>
             <a href="#zpool-auto-exchange" class="toc-link">How zpool's Auto-Exchange Engine Converts MinotaurX Coins to DOGE</a>

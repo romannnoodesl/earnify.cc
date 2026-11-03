@@ -3,30 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Browser Mining CPU Throttling Guide: Balancing UX and Hashrate — Earnify Blog</title>
-  <meta name="description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers." />
+  <title>Browser Mining Throttling: Balance UX and Hashrate</title>
+  <meta name="description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify&#x27;s data-driven guide for publishers." />
   <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, browser, mining, cpu, throttling, guide" />
   <link rel="canonical" href="https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html" />
-  <meta property="og:title" content="Browser Mining CPU Throttling Guide: Balancing UX and Hashrate" />
-  <meta property="og:description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers." />
+  <meta property="og:title" content="Browser Mining Throttling: Balance UX and Hashrate" />
+  <meta property="og:description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify&#x27;s data-driven guide for publishers." />
   <meta property="og:image" content="https://earnify.cc/og-image.png" />
-  <meta property="og:image:width" content="1731" />
-  <meta property="og:image:height" content="909" />
+  <meta property="og:image:alt" content="Browser Mining Throttling: Balance UX and Hashrate" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Earnify" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Browser Mining CPU Throttling Guide: Balancing UX and Hashrate" />
-  <meta name="twitter:description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers." />
+  <meta name="twitter:title" content="Browser Mining Throttling: Balance UX and Hashrate" />
+  <meta name="twitter:description" content="Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify&#x27;s data-driven guide for publishers." />
   <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
-  <link rel="search" type="application/opensearchdescription+xml" title="Earnify Search" href="/opensearch.xml" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#09090B" />
   <script type="application/ld+json">
@@ -35,8 +37,9 @@
     "@type": "BlogPosting",
     "headline": "Browser Mining CPU Throttling Guide: Balancing UX and Hashrate",
     "description": "Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers.",
-    "author": { "@type": "Organization", "name": "Earnify", "url": "https://earnify.cc" },
-    "publisher": { "@type": "Organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/browser-mining-cpu-throttling-guide.html" },
     "datePublished": "2026-09-04",
     "dateModified": "2026-09-04",
@@ -178,6 +181,7 @@
         </div>
 
         <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1.5rem;">Browser Mining CPU Throttling Guide: Balancing UX and Hashrate</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated September 4, 2026</p>
         <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Master CPU throttling for browser mining: boost hashrate without killing user experience. Earnify's data-driven guide for publishers.</p>
 
         <p>Browser-based crypto mining is a powerful monetization tool for publishers, but it walks a fine line. Push CPU usage too high, and visitors bounce. Throttle too aggressively, and revenue evaporates. This guide breaks down the art and science of CPU throttling in browser mining, using real benchmarks from Earnify's MinotaurX implementation to help you find the sweet spot.</p><h2 id="why-throttling-matters">Why Throttling Matters</h2><p>Every millisecond of CPU time you consume from a visitor has a cost. According to Earnify's 2025 publisher survey, sites that mine at full CPU capacity without throttling see a 42% higher bounce rate and a 28% drop in average session duration. On the flip side, overly conservative throttling can reduce mining revenue by up to 65%.</p><div class="perf-box"><p><strong>Key Stat:</strong> Earnify's data shows that a 20% reduction in CPU usage results in only an 8% drop in hashrate on MinotaurX, thanks to efficient WebAssembly scheduling.</p></div><p>Throttling isn't just about politeness—it's about sustainable revenue. A visitor who leaves after 30 seconds generates almost nothing. A visitor who stays for 5 minutes with moderate CPU load generates consistent income.</p><h2 id="how-browser-mining-cpu-usage-works">How Browser Mining CPU Usage Works</h2><p>Browser mining runs JavaScript in Web Workers, which execute on separate threads from the UI. This prevents page freezes, but the CPU is still shared. Earnify's zero-server architecture uses WebAssembly (WASM) compiled mining kernels, achieving approximately 70% of native CPU speed. That efficiency means you can often throttle less aggressively while still maintaining good UX.</p><h3 id="thread-allocation-and-core-reservation">Thread Allocation and Core Reservation</h3><p>Earnify reserves <code>n-1</code> CPU cores for mining, leaving one core for the browser's UI thread and other tasks. On a quad-core laptop, that means 3 cores mine while 1 handles rendering. This built-in reservation already provides a baseline throttle. But you can go further by limiting the number of threads or adjusting the intensity per thread.</p><div class="flow-diagram"><pre>┌─────────────────────────────────────────┐
@@ -239,7 +243,7 @@
 
       <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
         <div style="position:sticky;top:6rem;">
-          <h4 style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</h4>
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
           <nav>
             <a href="#why-throttling-matters" class="toc-link">Why Throttling Matters</a>
             <a href="#how-browser-mining-cpu-usage-works" class="toc-link">How Browser Mining CPU Usage Works</a>
