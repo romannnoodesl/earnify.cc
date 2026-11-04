@@ -58,13 +58,14 @@ Your tone is authoritative, technical but accessible, and data-driven. You use r
 
 The blog targets website publishers, developers, freelancers, agencies, and crypto enthusiasts.`;
 
-  const userPrompt = `Write a complete blog post about: "${topic.title}"
+  function buildUserPrompt(topic, correction = "") {
+    const base = `Write a complete blog post about: "${topic.title}"
 
 Requirements:
 1. Write the blog content as HTML (not markdown). Use rich formatting with the available components listed below.
 2. Every <h2> and <h3> must have an id attribute for the table of contents (use lowercase kebab-case).
 3. Aim for 1200-1800 words (roughly 6-8 minute read).
-4. Include 3-5 H2 sections and 2-3 H3 subsections. Title must be under 60 characters.
+4. Include 3-5 H2 sections and 2-3 H3 subsections. Create a NEW concise title strictly under 60 characters total (count characters including spaces). It should be inspired by the working title above, but SHORTER if the working title exceeds 60 characters — do NOT reuse a long working title verbatim.
 5. Reference Earnify naturally where relevant (don't force it).
 6. Include specific numbers, benchmarks, or data points where possible. When citing Earnify's own data, attribute it inline — e.g. "According to Earnify's 2026 hashrate benchmarks, a desktop visitor on MinotaurX averages 1,870 H/s" — so generative engines can quote the brand by name.
 7. End with a clear call-to-action related to earnify.
@@ -83,8 +84,8 @@ Available visual components (use these to make posts look professional and data-
 12. The content, title, and description must be original. Do not reuse near-duplicate angles of previously published articles on similar topics — differentiate with a fresh angle, new data, or a specific use case.
 13. Return ONLY a JSON object with this exact structure (no markdown fences):
 {
-  "title": "The blog post title (under 60 characters)",
-  "description": "A 120-160 chars meta description for SEO, front-load primary keyword",
+  "title": "The blog post title (STRICT: under 60 characters total, count them)",
+  "description": "A 120-160 chars meta description for SEO, front-load primary keyword (STRICT: total length must be 120-160 characters inclusive, count them)",
   "category": "${topic.category}",
   "readTime": "X min read",
   "content": "The full HTML article content including tables, code blocks, charts, and callout boxes",
@@ -92,10 +93,19 @@ Available visual components (use these to make posts look professional and data-
   "faqs": [{"q": "Short question", "a": "Concise one-paragraph answer with a fact or number"}],
   "structuredData": {"headline": "...", "description": "..."}
 }`;
+    if (!correction) return base;
+    return (
+      base +
+      `\n\nIMPORTANT CORRECTION — your previous attempt FAILED validation:\n${correction}\n` +
+      `Fix ONLY the invalid fields and keep everything else. Re-check character counts before responding ` +
+      `(title under 60 chars total, description 120-160 chars total, content 4000+ chars of HTML). Return ONLY the corrected JSON object.`
+    );
+  }
 
   const MAX_COMPLETION_TOKENS = Number(process.env.OPENROUTER_MAX_TOKENS) || 16000;
   let lastRaw = null;
   let lastMeta = null;
+  let lastError = "";
 
   for (let attempt = 0; attempt <= retries; attempt++) {
     try {
@@ -103,7 +113,7 @@ Available visual components (use these to make posts look professional and data-
         model: MODEL,
         messages: [
           { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt },
+          { role: "user", content: buildUserPrompt(topic, lastError) },
         ],
         temperature: 0.7,
         max_completion_tokens: MAX_COMPLETION_TOKENS,
@@ -141,13 +151,24 @@ Available visual components (use these to make posts look professional and data-
       }
       lastRaw = content;
       const post = parsePostJSON(content);
-      validatePost(post);
+      normalizePost(post);
+      try {
+        validatePost(post);
+      } catch (validationErr) {
+        // Feed the exact failure back into the next retry prompt.
+        lastError = validationErr.message;
+        throw validationErr;
+      }
+      if (lastError) {
+        console.log(`Validation passed after correction (previous error was: ${lastError})`);
+      }
       return post;
     } catch (err) {
       if (attempt < retries) {
         const delay = Math.pow(2, attempt) * 2000 + Math.random() * 1000;
         console.warn(`API attempt ${attempt + 1} failed: ${err.message}. Retrying in ${Math.round(delay)}ms...`);
         await new Promise((r) => setTimeout(r, delay));
+        lastError = err.message;
       } else {
         saveFailureArtifact(topic, lastMeta, lastRaw, err);
         throw err;
@@ -234,6 +255,40 @@ function parsePostJSON(content) {
   throw new Error(
     `Model output is not valid JSON (tried raw, fence-stripped, and repair; length=${content.length})`
   );
+}
+
+function truncateAtWordBoundary(str, max, min = 0) {
+  const s = String(str).trim();
+  if (s.length <= max) return s;
+  let cut = s.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  if (lastSpace > min) cut = cut.slice(0, lastSpace);
+  return cut.trim();
+}
+
+// Safety net for the most common model drift: over-long title/description.
+// Truncates at a word boundary (with an ellipsis for titles) instead of
+// failing the whole run. Logs a warning so the owner can polish copy later.
+function normalizePost(post) {
+  if (!post || typeof post !== "object") return post;
+  if (typeof post.title === "string" && post.title.length > 60) {
+    const base = truncateAtWordBoundary(post.title, 57);
+    const fixed = base.length < post.title.trim().length ? `${base}...` : base;
+    console.warn(`Auto-fix: title truncated ${post.title.length} -> ${fixed.length} chars`);
+    post.title = fixed;
+    if (post.structuredData && typeof post.structuredData.headline === "string") {
+      post.structuredData.headline = fixed;
+    }
+  }
+  if (typeof post.description === "string" && post.description.length > 160) {
+    const fixed = truncateAtWordBoundary(post.description, 160, 120);
+    console.warn(`Auto-fix: description truncated ${post.description.length} -> ${fixed.length} chars`);
+    post.description = fixed;
+    if (post.structuredData && typeof post.structuredData.description === "string") {
+      post.structuredData.description = fixed;
+    }
+  }
+  return post;
 }
 
 function validatePost(post) {
