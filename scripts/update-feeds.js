@@ -85,7 +85,7 @@ function updateSitemap(meta) {
     <priority>0.8</priority>
   </url>`;
 
-  const insertBefore = "  <!-- HUB & TRUST PAGES -->";
+  const insertBefore = "  <!-- HUB AND TRUST PAGES -->";
   if (sitemap.includes(insertBefore)) {
     sitemap = sitemap.replace(insertBefore, newUrl + "\n\n" + insertBefore);
   } else {
