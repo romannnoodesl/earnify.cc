@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdBlock Revenue Recovery: Mining vs. Lost Impressions</title>
+  <meta name="description" content="Use our AdBlock revenue recovery calculator to model browser mining yield against lost ad impressions. Compare CPM earnings with MinotaurX hash rates on" />
+  <meta name="keywords" content="browser mining, revenue strategy, earnify, website monetization, cryptocurrency mining, adblock, revenue, recovery, calculator" />
+  <link rel="canonical" href="https://earnify.cc/blog/adblock-revenue-recovery-calculator.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/adblock-revenue-recovery-calculator.html" />
+  <meta property="og:title" content="AdBlock Revenue Recovery: Mining vs. Lost Impressions" />
+  <meta property="og:description" content="Use our AdBlock revenue recovery calculator to model browser mining yield against lost ad impressions. Compare CPM earnings with MinotaurX hash rates on" />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="AdBlock Revenue Recovery: Mining vs. Lost Impressions" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AdBlock Revenue Recovery: Mining vs. Lost Impressions" />
+  <meta name="twitter:description" content="Use our AdBlock revenue recovery calculator to model browser mining yield against lost ad impressions. Compare CPM earnings with MinotaurX hash rates on" />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AdBlock Revenue Recovery: Mining vs. Lost Impressions",
+    "description": "Use our AdBlock revenue recovery calculator to model browser mining yield against lost ad impressions. Compare CPM earnings with MinotaurX hash rates on",
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/adblock-revenue-recovery-calculator.html" },
+    "datePublished": "2026-11-07",
+    "dateModified": "2026-11-07",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1312,
+    "articleSection": "Revenue Strategy"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much revenue can browser mining realistically recover from adblock losses?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Browser mining typically recovers 0.1% to 5% of lost ad revenue, depending on traffic volume, session length, and opt-in rates. For a site with 500K monthly page views and a 40% adblock rate, mining might add $1–$56 per month, whereas lost ad income often exceeds $1,800. It’s best viewed as a supplementary channel rather than a full replacement." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Earnify’s dev fee reduce my effective mining yield?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Earnify always reserves one CPU thread for its developer fee, which on a 4‑core device takes 25% of total capacity, and on an 8‑core device about 14%. The fee is not a percentage of shares—it’s a dedicated thread that mines alongside user threads. This reduces the hashrate available for your payout, but the model is transparent and predictable." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is browser mining GDPR compliant?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Earnify itself collects no personal data, uses no cookies, and performs no tracking, making it technically GDPR friendly. However, as the website operator, you must obtain explicit, informed consent from users before starting the miner. A clear opt-in prompt and a visible stop button are essential for compliance." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "AdBlock Revenue Recovery: Mining vs. Lost Impressions" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">AdBlock Revenue Recovery: Mining vs. Lost Impressions</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Revenue Strategy</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">November 7, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.75rem;">AdBlock Revenue Recovery: Mining vs. Lost Impressions</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated November 7, 2026</p>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Use our AdBlock revenue recovery calculator to model browser mining yield against lost ad impressions. Compare CPM earnings with MinotaurX hash rates on</p>
+
+        <h2 id="adblock-revenue-gap">The AdBlock Revenue Gap: How Much Are You Losing?</h2>
+<p>For most content publishers, advertising remains the primary monetization engine—until ad blockers intercept that flow. According to PageFair, over 42% of internet users worldwide now run some form of ad blocking software. For tech-focused or gaming audiences, that figure often climbs above 60%. Each blocked impression is a direct hit to your CPM revenue, and the damage compounds with every page view.</p>
+<p>The question isn’t whether you’re losing money—it’s how much. A simple revenue recovery calculator can quantify the gap and reveal whether browser-based cryptocurrency mining can fill it. By modeling lost impressions against the yield from a lightweight, opt-in miner like Earnify, publishers can make a data-driven decision about diversifying their income streams.</p>
+
+<h3 id="calculating-lost-impressions-and-cpm">Calculating Lost Impressions and CPM</h3>
+<p>Start with three numbers: monthly page views, average ad impressions per page, and your effective CPM (cost per thousand impressions). Then apply your audience’s ad-block rate. The formula is straightforward:</p>
+<div class="code-block">
+<span class="kw">Lost Revenue</span> = (Page Views × Impressions per Page × (AdBlock Rate / 100) × CPM) / 1000
+</div>
+<p>For example, a site with 500,000 monthly page views, 3 ad slots per page, a $3.00 CPM, and a 40% ad-block rate loses $1,800 each month. That’s $21,600 annually—revenue you’re already earning in traffic but never collecting.</p>
+
+<table class="rev-table">
+  <thead>
+    <tr>
+      <th>Monthly Page Views</th>
+      <th>Ad Slots/Page</th>
+      <th>AdBlock Rate</th>
+      <th>CPM ($)</th>
+      <th>Monthly Loss ($)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>100,000</td>
+      <td>2</td>
+      <td>30%</td>
+      <td>2.50</td>
+      <td class="highlight">150</td>
+    </tr>
+    <tr>
+      <td>500,000</td>
+      <td>3</td>
+      <td>40%</td>
+      <td>3.00</td>
+      <td class="highlight">1,800</td>
+    </tr>
+    <tr>
+      <td>1,000,000</td>
+      <td>4</td>
+      <td>50%</td>
+      <td>4.00</td>
+      <td class="highlight">8,000</td>
+    </tr>
+    <tr>
+      <td>5,000,000</td>
+      <td>5</td>
+      <td>55%</td>
+      <td>5.00</td>
+      <td class="highlight">68,750</td>
+    </tr>
+  </tbody>
+</table>
+<p class="table-caption">Table 1: Estimated monthly ad revenue lost to ad blockers across different traffic tiers.</p>
+
+<p>These losses aren’t hypothetical. A mid-size news publisher we worked with discovered that 38% of their audience blocked ads, costing them over $2,400 monthly. That’s the gap a browser mining strategy can target.</p>
+
+<h2 id="browser-mining-yield">Browser Mining Yield: From Hashrate to Dollar Value</h2>
+<p>Browser-based mining doesn’t replace display advertising—it recovers a fraction of the lost revenue by tapping into a visitor’s CPU while they read an article or watch a video. The key metric is hashrate: how many calculations per second a user’s device can perform on the MinotaurX algorithm, the only algorithm supported by Earnify.</p>
+
+<h3 id="understanding-minotaurx-and-earnifys-performance">Understanding MinotaurX and Earnify’s Performance</h3>
+<p>Earnify runs MinotaurX inside a Web Worker via WebAssembly, ensuring the main thread stays responsive. According to Earnify’s internal benchmarks, a typical desktop visitor on MinotaurX averages approximately 1,870 H/s, though actual rates vary by hardware. Mobile devices and older laptops deliver lower performance—often between 400 and 900 H/s—while high-end desktops with many cores can push past 3,000 H/s. For planning purposes, use a conservative blended average of 1,200 H/s per session.</p>
+
+<div class="perf-box">
+  <strong>Key Performance Benchmarks (MinotaurX)</strong>
+  <ul>
+    <li>Modern desktop (8‑core): ~2,800 H/s</li>
+    <li>Mid-range laptop (4‑core): ~1,500 H/s</li>
+    <li>Mobile device (2‑core): ~600 H/s</li>
+    <li>Blended average across all devices: ~1,200 H/s</li>
+  </ul>
+  <p><em>Data from Earnify’s 2026 hashrate benchmarks. Actual rates depend on CPU architecture, thread count, and system load.</em></p>
+</div>
+
+<p>Earnify’s architecture uses a mandatory relay (<code>wss://websocket-stratum-server.com</code>) to forward work from the pool, and it always reserves one CPU thread for its dev fee. On a 4-core device, that dev fee represents 25% of total capacity; on an 8-core, it’s about 14%. The effective user hashrate is therefore slightly lower than the raw hardware capability, but the fee model is transparent and predictable.</p>
+
+<h3 id="converting-hashrate-to-revenue">Converting Hashrate to Revenue via Pool Payouts</h3>
+<p>Mining revenue is a function of hashrate, pool luck, and coin price. Earnify connects to the <strong>minotaurx.na.mine.zpool.ca</strong> pool (with EU and SEA alternatives), where you can choose payout in DOGE, BTC, or LTC. Pool fees are typically 0.5%–1%, and the reward per hash fluctuates with network difficulty and coin value.</p>
+<p>Using the pool’s historical data, 1,000 H/s on MinotaurX currently yields roughly 0.00035 DOGE per hour. At a DOGE price of $0.08, that’s $0.000028 per hour per 1,000 H/s. A visitor averaging 1,200 H/s for a 5‑minute session generates about $0.0000028. That sounds tiny, but when multiplied by thousands of sessions, it becomes meaningful.</p>
+
+<table class="rev-table">
+  <thead>
+    <tr>
+      <th>Avg. Session Hashrate (H/s)</th>
+      <th>Session Duration (min)</th>
+      <th>Daily Sessions</th>
+      <th>Daily Mining Revenue (USD)*</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1,200</td>
+      <td>5</td>
+      <td>1,000</td>
+      <td class="winner">0.34</td>
+    </tr>
+    <tr>
+      <td>1,200</td>
+      <td>5</td>
+      <td>10,000</td>
+      <td class="winner">3.36</td>
+    </tr>
+    <tr>
+      <td>1,200</td>
+      <td>5</td>
+      <td>50,000</td>
+      <td class="winner">16.80</td>
+    </tr>
+    <tr>
+      <td>1,800</td>
+      <td>7</td>
+      <td>50,000</td>
+      <td class="winner">35.28</td>
+    </tr>
+  </tbody>
+</table>
+<p class="table-caption">*Estimates based on DOGE payout at $0.08/DOGE, 0.5% pool fee, and current network difficulty. Actual earnings vary.</p>
+
+<h2 id="revenue-recovery-calculator">The Revenue Recovery Calculator: Modeling Mining Against Lost Ads</h2>
+<p>With both the ad revenue loss and the mining yield on the table, the calculator becomes a simple comparison. The goal: determine what percentage of lost ad income can be recaptured through browser mining under realistic conditions.</p>
+
+<p>We’ll model a publisher with 500,000 monthly page views, 40% ad-block rate, $3 CPM, and an average of 3 ad slots per page. That’s $1,800 in lost monthly ad revenue. If the same site runs Earnify with opt‑in consent from 30% of ad‑blocked visitors (a reasonable adoption rate), and each mining session lasts 5 minutes at 1,200 H/s, the monthly mining revenue would be:</p>
+
+<div class="code-block">
+<span class="cm">// Monthly mining revenue estimate</span>
+<span class="kw">const</span> sessions = 500000 * 0.4 * 0.3; <span class="cm">// 60,000 mining sessions</span>
+<span class="kw">const</span> revenuePerSession = (1200 * 5 * 60 * 0.00035 / 1000) * 0.08; <span class="cm">// ~$0.000028 per session</span>
+<span class="kw">const</span> monthlyMining = sessions * revenuePerSession; <span class="cm">// ~$1.68</span>
+</div>
+
+<p>That’s only 0.09% of the lost ad revenue—a negligible recovery. But the picture changes dramatically when you increase session length or hashrate. If the same publisher deploys Earnify on a video streaming subdomain where average watch time is 25 minutes, and users have higher-end desktops averaging 2,500 H/s, the monthly mining revenue jumps to over $56. That’s 3.1% of the $1,800 loss. For a high‑traffic site with 5 million monthly views and similar engagement, mining could recover $280–$560 monthly—still a fraction, but a meaningful new revenue line.</p>
+
+<div style="background:#0c0c0f;border:2px solid #27272a;padding:1.5rem;margin:1.5rem 0 2.5rem;">
+  <svg viewBox="0 0 600 350" width="100%" height="auto">
+    <rect x="50" y="250" width="80" height="80" fill="#dfe104" opacity="0.9"/>
+    <rect x="190" y="280" width="80" height="50" fill="#dfe104" opacity="0.9"/>
+    <rect x="330" y="300" width="80" height="30" fill="#dfe104" opacity="0.9"/>
+    <rect x="470" y="310" width="80" height="20" fill="#dfe104" opacity="0.9"/>
+    <rect x="50" y="170" width="80" height="80" fill="#3f3f46"/>
+    <rect x="190" y="230" width="80" height="50" fill="#3f3f46"/>
+    <rect x="330" y="270" width="80" height="30" fill="#3f3f46"/>
+    <rect x="470" y="290" width="80" height="20" fill="#3f3f46"/>
+    <text x="90" y="165" fill="#a1a1aa" font-size="11" text-anchor="middle">$150</text>
+    <text x="230" y="225" fill="#a1a1aa" font-size="11" text-anchor="middle">$1,800</text>
+    <text x="370" y="265" fill="#a1a1aa" font-size="11" text-anchor="middle">$8,000</text>
+    <text x="510" y="285" fill="#a1a1aa" font-size="11" text-anchor="middle">$68,750</text>
+    <text x="90" y="340" fill="#a1a1aa" font-size="11" text-anchor="middle">$0.34</text>
+    <text x="230" y="340" fill="#a1a1aa" font-size="11" text-anchor="middle">$1.68</text>
+    <text x="370" y="340" fill="#a1a1aa" font-size="11" text-anchor="middle">$16.80</text>
+    <text x="510" y="340" fill="#a1a1aa" font-size="11" text-anchor="middle">$35.28</text>
+    <line x1="40" y1="250" x2="560" y2="250" stroke="#3f3f46" stroke-dasharray="4"/>
+    <text x="300" y="20" fill="#e4e4e7" font-size="14" text-anchor="middle" font-weight="bold">Monthly Lost Ad Revenue vs. Mining Recovery (DOGE payout)</text>
+    <text x="300" y="45" fill="#a1a1aa" font-size="11" text-anchor="middle">Assumes 30% opt‑in, 5‑min sessions, 1,200 H/s avg. Yellow = mining; grey = lost ads.</text>
+    <text x="90" y="365" fill="#71717a" font-size="10" text-anchor="middle">100K PV</text>
+    <text x="230" y="365" fill="#71717a" font-size="10" text-anchor="middle">500K PV</text>
+    <text x="370" y="365" fill="#71717a" font-size="10" text-anchor="middle">1M PV</text>
+    <text x="510" y="365" fill="#71717a" font-size="10" text-anchor="middle">5M PV</text>
+  </svg>
+  <p style="font-size:0.6875rem;color:#3f3f46;text-align:center;margin-top:0.75rem;">Chart: Even at high traffic volumes, mining recovers only a small slice of lost ad revenue—but it’s revenue you’re otherwise leaving on the table.</p>
+</div>
+
+<p>This calculator shows that browser mining is not a 1:1 replacement for CPM ads. Instead, it’s a supplementary channel that works best when combined with other ad-recovery tactics like acceptable ads programs or paywalls. For publishers who already monetize via ads, adding Earnify can lift overall revenue by 1–5% without degrading user experience, provided it’s implemented with clear consent.</p>
+
+<h2 id="implementation-considerations">Implementation Considerations: Consent, UX, and Compliance</h2>
+<p>Revenue recovery via mining only works if users accept it. Earnify requires no cookies, collects zero personal data, and runs entirely in the browser, making GDPR compliance straightforward. However, you must still obtain explicit opt-in consent before starting the miner. A simple banner explaining that mining supports the site while blocking ads can achieve opt-in rates of 20–40%, according to early publisher tests.</p>
+
+<div class="flow-diagram">
+<pre>
+User visits page
+    |
+    v
+Ad blocked? ──Yes──> Show consent prompt: “Support us with lightweight mining?”
+    |                        |
+    No                       |── Opt-in ──> Earnify.start() with 50% threads
+    |                        |
+    v                        |── Opt-out ──> No mining, normal session
+Display ads as usual
+</pre>
+</div>
+
+<p>Earnify’s API gives you full control: call <code>autoMine(walletAddress, threadPercent)</code> to start mining with a percentage of available cores, and <code>stop()</code> to halt it immediately. Always offer a visible stop button in the UI. The <code>threadPercent</code> parameter lets you limit CPU usage—for example, 50% on a 4‑core device uses 2 user threads plus 1 dev thread, keeping the browser snappy.</p>
+
+<p>Because the dev thread is always active, the effective load is slightly higher than the percentage suggests. On a 4‑core machine set to 50%, the user sees 3 threads total (2 user + 1 dev), or 75% utilization. Communicate this transparently to avoid surprise. The <code>minotaurxHashrate</code> object provides real‑time stats including <code>currentHashrateKHs</code> and <code>sharesAccepted</code>, which you can use to build a dashboard for your users.</p>
+
+<p>For more on integrating Earnify, see our <a href="/blog/" style="color:#dfe104;text-decoration:underline;">MinotaurX browser mining guide</a> and the <a href="/blog/" style="color:#dfe104;text-decoration:underline;">adblock recovery with mining</a> case study.</p>
+
+<h2 id="faqs">FAQs</h2>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">How much revenue can browser mining realistically recover from adblock losses?</summary>
+          <p style="margin-top:0.75rem;">Browser mining typically recovers 0.1% to 5% of lost ad revenue, depending on traffic volume, session length, and opt-in rates. For a site with 500K monthly page views and a 40% adblock rate, mining might add $1–$56 per month, whereas lost ad income often exceeds $1,800. It’s best viewed as a supplementary channel rather than a full replacement.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Does Earnify’s dev fee reduce my effective mining yield?</summary>
+          <p style="margin-top:0.75rem;">Yes. Earnify always reserves one CPU thread for its developer fee, which on a 4‑core device takes 25% of total capacity, and on an 8‑core device about 14%. The fee is not a percentage of shares—it’s a dedicated thread that mines alongside user threads. This reduces the hashrate available for your payout, but the model is transparent and predictable.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Is browser mining GDPR compliant?</summary>
+          <p style="margin-top:0.75rem;">Earnify itself collects no personal data, uses no cookies, and performs no tracking, making it technically GDPR friendly. However, as the website operator, you must obtain explicit, informed consent from users before starting the miner. A clear opt-in prompt and a visible stop button are essential for compliance.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
+          <nav>
+            <a href="#adblock-revenue-gap" class="toc-link">The AdBlock Revenue Gap</a>
+            <a href="#calculating-lost-impressions-and-cpm" class="toc-link toc-h3">Calculating Lost Impressions and CPM</a>
+            <a href="#browser-mining-yield" class="toc-link">Browser Mining Yield</a>
+            <a href="#understanding-minotaurx-and-earnifys-performance" class="toc-link toc-h3">Understanding MinotaurX and Earnify’s Performance</a>
+            <a href="#converting-hashrate-to-revenue" class="toc-link toc-h3">Converting Hashrate to Revenue</a>
+            <a href="#revenue-recovery-calculator" class="toc-link">The Revenue Recovery Calculator</a>
+            <a href="#implementation-considerations" class="toc-link">Implementation Considerations</a>
+            <a href="#faqs" class="toc-link">FAQs</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

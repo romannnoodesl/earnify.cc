@@ -285,7 +285,7 @@
       "slug": "adblock-revenue-recovery-calculator",
       "category": "Revenue Strategy",
       "description": "An interactive-model post: plug your ad-block rate, DAU, and session length into a mining-yield formula to forecast recovered revenue.",
-      "used": false
+      "used": true
     },
     {
       "title": "Earnify WordPress Plugin Roadmap: One-Click Mining Without Code Edits",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 40
+  "nextTopicIndex": 41
 }
