@@ -292,7 +292,7 @@
       "slug": "wordpress-plugin-mining-integration",
       "category": "Technical",
       "description": "What a native WordPress plugin for Earnify would look like — settings-page wallet config, shortcode opt-in widget, and per-page throttling.",
-      "used": false
+      "used": true
     },
     {
       "title": "Monetizing Browser Game Portals: Idle-Lobby Mining That Protects Frame Rates",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 41
+  "nextTopicIndex": 42
 }

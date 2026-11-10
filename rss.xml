@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Nov 2026 04:27:23 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 10 Nov 2026 05:49:25 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon-96x96.png</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                                    <item>
+                                                                                                                                        <item>
+      <title>Earnify WordPress Plugin: One-Click Mining Roadmap</title>
+      <link>https://earnify.cc/blog/wordpress-plugin-mining-integration.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/wordpress-plugin-mining-integration.html</guid>
+      <pubDate>Tue, 10 Nov 2026 05:49:25 GMT</pubDate>
+      <description><![CDATA[Earnify WordPress plugin roadmap: one-click MinotaurX mining, no code. Earn passive DOGE from visitors. Phased delivery, benchmarks, early access.]]></description>
+    </item>
+<item>
       <title>AdBlock Revenue Recovery: Mining vs. Lost Impressions</title>
       <link>https://earnify.cc/blog/adblock-revenue-recovery-calculator.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/adblock-revenue-recovery-calculator.html</guid>
