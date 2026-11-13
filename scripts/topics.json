@@ -299,7 +299,7 @@
       "slug": "browser-game-portal-idle-mining",
       "category": "Revenue Strategy",
       "description": "How game portals run miners only in lobbies, menus, and loading screens — timing, throttling, and frame-budget math.",
-      "used": false
+      "used": true
     },
     {
       "title": "Mobile-First Mining Strategy: When to Throttle, Pause, or Skip Handsets Entirely",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 42
+  "nextTopicIndex": 43
 }

@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Nov 2026 05:49:25 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 04:53:18 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon-96x96.png</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                                        <item>
+                                                                                                                                            <item>
+      <title>Monetize Game Lobbies with FPS-Safe Mining</title>
+      <link>https://earnify.cc/blog/browser-game-portal-idle-mining.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/browser-game-portal-idle-mining.html</guid>
+      <pubDate>Fri, 13 Nov 2026 04:53:18 GMT</pubDate>
+      <description><![CDATA[Discover how browser game portals can earn passive DOGE revenue from idle lobby time using Earnify's FPS-safe MinotaurX mining—without hurting gameplay. Real]]></description>
+    </item>
+<item>
       <title>Earnify WordPress Plugin: One-Click Mining Roadmap</title>
       <link>https://earnify.cc/blog/wordpress-plugin-mining-integration.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/wordpress-plugin-mining-integration.html</guid>

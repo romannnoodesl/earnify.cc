@@ -383,6 +383,7 @@ This transparency lets publishers make data-driven decisions about which algorit
 
 - [AdBlock Revenue Recovery: Mining vs. Lost Impressions](https://earnify.cc/blog/adblock-revenue-recovery-calculator.html) (2026-11-07): Use our AdBlock revenue recovery calculator to model browser mining yield against lost ad impressions. Compare CPM earnings with MinotaurX hash rates on
 - [Earnify WordPress Plugin: One-Click Mining Roadmap](https://earnify.cc/blog/wordpress-plugin-mining-integration.html) (2026-11-10): Earnify WordPress plugin roadmap: one-click MinotaurX mining, no code. Earn passive DOGE from visitors. Phased delivery, benchmarks, early access.
+- [Monetize Game Lobbies with FPS-Safe Mining](https://earnify.cc/blog/browser-game-portal-idle-mining.html) (2026-11-13): Discover how browser game portals can earn passive DOGE revenue from idle lobby time using Earnify's FPS-safe MinotaurX mining—without hurting gameplay. Real
 ## Developer Resources
 - [newminer.js](https://earnify.cc/2.0/newminer.js): Earnify 2.0 universal miner (430 KB ESM, zero dependencies). Auto-detects DOGE/LTC/RVN wallets. Exports `autoMine()`, `start()`, `stop()`, `MiniSocket`, `ALL_THREADS`. Hashrate via `onHashrate` callback only.
 - [miner.js](https://earnify.cc/miner.js): v1 bundled Socket.IO client with Web Worker mining kernel for MinotaurX. Exports `autoMine()`, `start()`, `stop()`, and `minotaurxHashrate`. Loads as an ES module.
