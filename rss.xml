@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 13 Nov 2026 04:53:18 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 04:34:39 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon-96x96.png</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                                            <item>
+                                                                                                                                                <item>
+      <title>Mobile Mining Strategy: Throttle, Pause, or Skip Handsets</title>
+      <link>https://earnify.cc/blog/mobile-first-mining-throttling-strategy.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/mobile-first-mining-throttling-strategy.html</guid>
+      <pubDate>Mon, 16 Nov 2026 04:34:39 GMT</pubDate>
+      <description><![CDATA[Learn when to throttle, pause, or skip mobile mining on your website. Data-driven strategy with Earnify's MinotaurX benchmarks, dev fee impact, and]]></description>
+    </item>
+<item>
       <title>Monetize Game Lobbies with FPS-Safe Mining</title>
       <link>https://earnify.cc/blog/browser-game-portal-idle-mining.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/browser-game-portal-idle-mining.html</guid>

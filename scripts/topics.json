@@ -306,7 +306,7 @@
       "slug": "mobile-first-mining-throttling-strategy",
       "category": "Technical",
       "description": "A device-tier playbook for mobile traffic — battery budgets, thermal limits, and the session-value cutoff for disabling mining.",
-      "used": false
+      "used": true
     },
     {
       "title": "Pool Fees vs Payout Thresholds: Picking the Cheapest Path to Your First DOGE",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 43
+  "nextTopicIndex": 44
 }
