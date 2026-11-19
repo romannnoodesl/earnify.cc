@@ -313,7 +313,7 @@
       "slug": "pool-fee-payout-threshold-comparison",
       "category": "Technical",
       "description": "Comparing effective pool costs: fee percent, minimum payout, exchange spread, and time-to-first-payout for small publishers.",
-      "used": false
+      "used": true
     },
     {
       "title": "Session-Length Arbitrage: Why Long-Dwell Niches Earn More Per Visitor",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 44
+  "nextTopicIndex": 45
 }
