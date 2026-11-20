@@ -77,20 +77,22 @@ function updateSitemap(meta) {
   }
 
   const today = meta.date;
-  const newUrl = `
-  <url>
+  const newUrl = `  <url>
     <loc>${loc}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>`;
+  </url>
+`;
 
-  const insertBefore = "  <!-- HUB AND TRUST PAGES -->";
+  // Anchor on the first hub-page entry (stable real content — no XML comments,
+  // which keep sitemaps clean for strict parsers like Search Console).
+  const insertBefore = "  <url>\n    <loc>https://earnify.cc/about/</loc>";
   if (sitemap.includes(insertBefore)) {
-    sitemap = sitemap.replace(insertBefore, newUrl + "\n\n" + insertBefore);
+    sitemap = sitemap.replace(insertBefore, newUrl + insertBefore);
   } else {
     const closingTag = "</urlset>";
-    sitemap = sitemap.replace(closingTag, newUrl + "\n\n" + closingTag);
+    sitemap = sitemap.replace(closingTag, newUrl + closingTag);
   }
 
   const refreshLastmod = [

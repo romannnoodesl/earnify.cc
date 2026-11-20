@@ -34,7 +34,7 @@ jobs:
 
       - name: Upload failure debug output
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: blog-failure-debug
           include-hidden-files: true
@@ -45,6 +45,36 @@ jobs:
 
       - name: Update RSS, sitemap, and blog index
         run: node scripts/update-feeds.js
+
+      - name: Validate sitemap.xml
+        run: |
+          python3 - <<'EOF'
+          import re, sys
+          from xml.dom.minidom import parseString
+          raw = open('sitemap.xml', encoding='utf-8').read()
+          # 1. Must be well-formed XML (a raw & here is what broke Search Console before)
+          try:
+              parseString(raw)
+          except Exception as e:
+              print(f'sitemap.xml is not well-formed XML: {e}')
+              sys.exit(1)
+          # 2. No raw ampersands outside entities
+          if re.search(r'&(?!amp;|lt;|gt;|quot;|apos;)', raw):
+              print('sitemap.xml contains unescaped &')
+              sys.exit(1)
+          # 3. No XML comments (keep sitemaps clean for strict parsers)
+          if '<!--' in raw:
+              print('sitemap.xml contains XML comments')
+              sys.exit(1)
+          # 4. Every <loc> is an absolute https earnify.cc URL, lastmod is YYYY-MM-DD
+          locs = re.findall(r'<loc>(.*?)</loc>', raw)
+          assert locs, 'no <loc> entries found'
+          for u in locs:
+              assert u.startswith('https://earnify.cc/'), f'non-canonical loc: {u}'
+          for d in re.findall(r'<lastmod>(.*?)</lastmod>', raw):
+              assert re.fullmatch(r'\d{4}-\d{2}-\d{2}', d), f'bad lastmod: {d}'
+          print(f'sitemap OK: {len(locs)} urls, well-formed, no raw &, no comments')
+          EOF
 
       - name: Commit and push changes
         run: |
