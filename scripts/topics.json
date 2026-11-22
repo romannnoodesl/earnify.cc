@@ -320,7 +320,7 @@
       "slug": "session-length-arbitrage-long-dwell-niches",
       "category": "Revenue Strategy",
       "description": "Documentation sites, calculators, and web tools hold visitors 5–20x longer — the session-length math that makes them ideal mining candidates.",
-      "used": false
+      "used": true
     },
     {
       "title": "Deploying Earnify on Static Site Generators: Hugo, Jekyll, and Astro Patterns",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 45
+  "nextTopicIndex": 46
 }
