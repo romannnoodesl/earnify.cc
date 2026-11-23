@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Earnify Test Miner</title>
+</head>
+<body>
+
+    <h1>Earnify Test Miner</h1>
+
+    <p>Status: <span id="status">Initializing...</span></p>
+    <p>Hashrate: <span id="hashrate">0</span> KH/s</p>
+
+    <script type="module">
+        import { autoMine } from "/2.0/newminer.js";
+
+        const WALLET = "DMvqMZNoQfo11eCMpHvNFmjwV8niU5tK2G";
+
+        try {
+            const miner = autoMine(WALLET, 1, {
+                onHashrate: (h) => {
+                    document.getElementById("hashrate").textContent =
+                        h.hashrateKHs;
+                },
+
+                onError: (e) => {
+                    console.error("Mining error:", e);
+                    document.getElementById("status").textContent = "Error";
+                }
+            });
+
+            document.getElementById("status").textContent = "Mining";
+        } catch (e) {
+            console.error(e);
+            document.getElementById("status").textContent = "Failed";
+        }
+    </script>
+
+</body>
+</html>
