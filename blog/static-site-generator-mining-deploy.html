@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Static Site Mining with Earnify: Hugo, Jekyll, Astro</title>
+  <meta name="description" content="Learn how to integrate Earnify’s browser-based MinotaurX mining into Hugo, Jekyll, and Astro static sites. Get code patterns, performance data, and consent" />
+  <meta name="keywords" content="browser mining, technical, earnify, website monetization, cryptocurrency mining, static, site, generator, mining, deploy" />
+  <link rel="canonical" href="https://earnify.cc/blog/static-site-generator-mining-deploy.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://earnify.cc/blog/static-site-generator-mining-deploy.html" />
+  <meta property="og:title" content="Static Site Mining with Earnify: Hugo, Jekyll, Astro" />
+  <meta property="og:description" content="Learn how to integrate Earnify’s browser-based MinotaurX mining into Hugo, Jekyll, and Astro static sites. Get code patterns, performance data, and consent" />
+  <meta property="og:image" content="https://earnify.cc/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Static Site Mining with Earnify: Hugo, Jekyll, Astro" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Earnify" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Static Site Mining with Earnify: Hugo, Jekyll, Astro" />
+  <meta name="twitter:description" content="Learn how to integrate Earnify’s browser-based MinotaurX mining into Hugo, Jekyll, and Astro static sites. Get code patterns, performance data, and consent" />
+  <meta name="twitter:image" content="https://earnify.cc/og-image.png" />
+  <meta name="twitter:site" content="@earnify" />
+  <meta name="twitter:creator" content="@earnify" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="Earnify Blog" href="/rss.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#09090B" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Static Site Mining with Earnify: Hugo, Jekyll, Astro",
+    "description": "Learn how to integrate Earnify’s browser-based MinotaurX mining into Hugo, Jekyll, and Astro static sites. Get code patterns, performance data, and consent",
+    "author": { "@type": "Person", "name": "Roman Noodles", "url": "https://github.com/romannnoodesl", "jobTitle": "Founder, Earnify" },
+    "publisher": { "@type": "Organization", "@id": "https://earnify.cc/#organization", "name": "Earnify", "logo": { "@type": "ImageObject", "url": "https://earnify.cc/favicon.svg" } },
+    "reviewedBy": { "@type": "Person", "name": "Roman Noodles" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://earnify.cc/blog/static-site-generator-mining-deploy.html" },
+    "datePublished": "2026-11-25",
+    "dateModified": "2026-11-25",
+    "image": "https://earnify.cc/og-image.png",
+    "inLanguage": "en",
+    "wordCount": 1325,
+    "articleSection": "Technical"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Earnify slow down my static site?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Earnify runs in a dedicated Web Worker, keeping the main thread free for UI interactions. Page load times and responsiveness remain unaffected. In our benchmarks, even on low-end devices, the impact on Core Web Vitals was negligible when thread usage was capped at 50%." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use Earnify with any static host?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Since Earnify is just a JavaScript file you include, it works on Netlify, Vercel, GitHub Pages, Cloudflare Pages, or any CDN. There’s no backend to configure." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is browser mining profitable for small sites?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Profitability scales with traffic and session length. A niche blog with 1,000 daily visitors might earn $3–$10 per month. It’s best viewed as a supplementary revenue stream, not a primary income source." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://earnify.cc/" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://earnify.cc/blog/" },
+      { "@type": "ListItem", "position": 3, "name": "Static Site Mining with Earnify: Hugo, Jekyll, Astro" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "xpath": [
+      "/html/head/title",
+      "/html/head/meta[@name='description']/@content"
+    ]
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #09090b; color: #FAFAFA; font-family: "Space Grotesk", sans-serif; line-height: 1.6; overflow-x: hidden; }
+    ::selection { background: #dfe104; color: #000; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #3f3f46; }
+    .nav-link { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem; }
+    .nav-link:hover { color: #dfe104; }
+    .btn { display: inline-block; padding: 1rem 2rem; border: 2px solid #27272a; text-transform: uppercase; font-weight: 700; transition: all 0.2s; letter-spacing: -0.02em; }
+    .btn:hover { background: #FAFAFA; color: #09090b; }
+    .btn-accent { background: #dfe104; color: #09090b; border-color: #dfe104; }
+    .btn-accent:hover { background: #c9cc04; border-color: #c9cc04; color: #09090b; }
+    .toc-link { display: block; padding: 0.35rem 0; font-size: 0.8125rem; color: #a1a1aa; text-decoration: none; border-left: 2px solid transparent; padding-left: 1rem; transition: all 0.15s; }
+    .toc-link:hover, .toc-link.active { color: #dfe104; border-left-color: #dfe104; }
+    .toc-link.toc-h3 { padding-left: 2rem; font-size: 0.75rem; }
+    article h2 { font-size: 1.75rem; text-transform: uppercase; font-weight: 700; margin: 3rem 0 1rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article h3 { font-size: 1.25rem; text-transform: uppercase; font-weight: 600; margin: 2rem 0 0.75rem 0; letter-spacing: -0.02em; scroll-margin-top: 6rem; }
+    article p { margin-bottom: 1.25rem; color: #d4d4d8; font-size: 1.0625rem; }
+    article ul, article ol { margin-bottom: 1.25rem; padding-left: 1.5rem; color: #d4d4d8; }
+    article li { margin-bottom: 0.5rem; }
+    article strong { color: #FAFAFA; }
+    article pre { background: #131316; border: 1px solid #27272a; padding: 1.25rem; overflow-x: auto; font-family: "Space Grotesk", monospace; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.5rem; color: #d4d4d8; }
+    article code { font-family: "Space Grotesk", monospace; font-size: 0.875rem; background: #131316; padding: 0.1rem 0.35rem; border: 1px solid #27272a; }
+    article pre code { background: none; padding: 0; border: none; }
+    .rev-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .rev-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .rev-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .rev-table tr:last-child td { border-bottom: none; }
+    .rev-table .highlight { background: rgba(223,225,4,0.06); color: #dfe104; font-weight: 700; }
+    .cmp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.9375rem; }
+    .cmp-table th { text-align: left; padding: 0.75rem 1rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #a1a1aa; border-bottom: 2px solid #27272a; font-weight: 600; }
+    .cmp-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #1c1c1f; color: #d4d4d8; }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .winner { color: #22c55e !important; font-weight: 700; }
+    .check { color: #22c55e !important; }
+    .cross { color: #ef4444 !important; }
+    .warn { color: #f59e0b !important; }
+    .code-block { background: #18181b; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.8; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .code-block .kw { color: #dfe104; }
+    .code-block .fn { color: #FAFAFA; }
+    .code-block .cm { color: #52525b; }
+    .code-block .str { color: #a1a1aa; }
+    .code-block .num { color: #dfe104; }
+    .flow-diagram { background: #18181b; border: 2px solid #27272a; padding: 2rem; margin: 1.5rem 0; font-family: "SF Mono","Fira Code","Fira Mono",monospace; font-size: 0.8125rem; line-height: 1.7; color: #d4d4d8; overflow-x: auto; white-space: pre; }
+    .flow-diagram .node { color: #dfe104; font-weight: 700; }
+    .flow-diagram .arrow { color: #52525b; }
+    .flow-diagram .label { color: #a1a1aa; }
+    .perf-box { background: #0c0c0f; border: 2px solid #27272a; padding: 1.5rem; margin: 1.5rem 0 2.5rem; }
+    .perf-box p { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .card { border: 2px solid #27272a; transition: background-color 0.2s,border-color 0.2s; background: #09090b; }
+    .card:hover { background: #dfe104; border-color: #dfe104; }
+    .card:hover .card-title, .card:hover .card-desc, .card:hover .card-tag { color: #000 !important; }
+    @media (max-width: 767px) { .toc-sidebar { position: static !important; width: 100% !important; margin-bottom: 2rem; } }
+    @media (max-width: 640px) { .rev-table, .cmp-table { font-size: 0.8125rem; } .rev-table th, .rev-table td, .cmp-table th, .cmp-table td { padding: 0.5rem 0.5rem; } }
+  </style>
+</head>
+<body>
+  <nav role="navigation" style="position:fixed;top:0;width:100%;z-index:50;border-bottom:2px solid #27272a;background:rgba(9,9,11,0.95);backdrop-filter:blur(8px);">
+    <div style="max-width:95vw;margin:0 auto;padding:0 1.5rem;height:4rem;display:flex;justify-content:space-between;align-items:center;">
+      <a href="/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+        <span style="font-size:1.5rem;font-weight:700;letter-spacing:-0.05em;text-transform:uppercase;color:#FAFAFA;">Earn<span style="color:#dfe104;">ify</span></span>
+      </a>
+      <div style="display:flex;align-items:center;gap:2rem;">
+        <a href="/" class="nav-link" style="color:#a1a1aa;text-decoration:none;">Home</a>
+        <a href="/blog/" class="nav-link" style="color:#dfe104;text-decoration:none;">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width:1100px;margin:0 auto;padding:7rem 1.5rem 5rem 1.5rem;">
+    <nav aria-label="Breadcrumb" style="margin-bottom:2.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="/" style="color:#a1a1aa;text-decoration:none;">Home</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <a href="/blog/" style="color:#a1a1aa;text-decoration:none;">Blog</a>
+      <span style="color:#27272a;margin:0 0.5rem;">/</span>
+      <span style="color:#dfe104;">Static Site Mining with Earnify: Hugo, Jekyll, Astro</span>
+    </nav>
+
+    <div style="display:flex;gap:3rem;flex-wrap:wrap;">
+      <article style="flex:1;min-width:0;max-width:750px;">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+          <span style="background:#dfe104;color:#09090b;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0.25rem 0.75rem;">Technical</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">November 25, 2026</span>
+          <span style="font-size:0.75rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:0.08em;">7 min read</span>
+        </div>
+
+        <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:0.75rem;">Static Site Mining with Earnify: Hugo, Jekyll, Astro</h1>
+        <p style="font-size:0.8125rem;color:#a1a1aa;margin-bottom:2rem;">By <a href="https://github.com/romannnoodesl" style="color:#dfe104;text-decoration:underline;">Roman Noodles</a>, Founder of Earnify · Updated November 25, 2026</p>
+        <p style="font-size:1.25rem;color:#a1a1aa;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid #27272a;">Learn how to integrate Earnify’s browser-based MinotaurX mining into Hugo, Jekyll, and Astro static sites. Get code patterns, performance data, and consent</p>
+
+        <p>Static site generators like Hugo, Jekyll, and Astro have surged in popularity because they deliver lightning-fast pages, cost almost nothing to host, and keep maintenance minimal. But monetizing a static site without intrusive display ads remains a challenge. <strong>Earnify</strong>—an open-source, browser-based mining platform—offers a novel revenue stream by letting visitors contribute CPU power to mine MinotaurX while they browse. In this guide, we’ll walk through practical integration patterns for each SSG, backed by real performance data and consent best practices.</p><h2 id='why-static-sites'>Why Static Sites and Browser Mining Mix</h2><p>Static sites are pre-built HTML, CSS, and JavaScript files served from a CDN. They have no backend, no database, and no server-side logic. This architecture makes traditional monetization like paywalls or ad servers cumbersome. Earnify fits perfectly because it requires zero server infrastructure: all mining happens in the visitor’s browser via Web Workers and WebAssembly. The only network traffic is a lightweight WebSocket connection to the relay server, which works seamlessly from any static host.</p><div class='perf-box'><p><strong>Key advantage:</strong> Unlike script-based ad networks, Earnify doesn’t inject third-party trackers, cookies, or heavy DOM elements. It runs entirely in a background thread, preserving your site’s performance and privacy posture.</p></div><h2 id='earnify-integration-basics'>Earnify Integration Basics</h2><p>Before diving into SSG-specific patterns, let’s review the core integration. Earnify exposes a global <code>autoMine(walletAddress, threadPercent?)</code> function. You load the miner script asynchronously, then call <code>autoMine</code> after obtaining user consent. The <code>threadPercent</code> parameter (0–100) controls how many CPU threads to use; a value of <code>0</code> uses all available threads minus one (reserving one for the main thread). The miner automatically starts a Web Worker, connects to the zpool MinotaurX stratum via the mandatory relay, and begins hashing.</p><h3 id='miner-snippet'>The Miner Snippet</h3><p>Here’s the minimal embed code you’ll place on your site:</p><div class='code-block'><span class='cm'>// Load Earnify asynchronously</span><br><span class='kw'>const</span> script = <span class='kw'>document</span>.<span class='fn'>createElement</span>(<span class='str'>'script'</span>);<br>script.<span class='fn'>setAttribute</span>(<span class='str'>'src'</span>, <span class='str'>'https://earnify.cc/miner.js'</span>);<br>script.<span class='kw'>async</span> = <span class='kw'>true</span>;<br><span class='kw'>document</span>.<span class='fn'>head</span>.<span class='fn'>appendChild</span>(script);<br><br>script.<span class='fn'>onload</span> = () => {<br>&nbsp;&nbsp;<span class='cm'>// After user consent, start mining</span><br>&nbsp;&nbsp;<span class='kw'>if</span> (<span class='kw'>typeof</span> <span class='fn'>autoMine</span> !== <span class='str'>'undefined'</span>) {<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class='fn'>autoMine</span>(<span class='str'>'YOUR_WALLET_ADDRESS'</span>, <span class='num'>50</span>); <span class='cm'>// use 50% of threads</span><br>&nbsp;&nbsp;}<br>};</div><h3 id='consent-architecture'>Consent-Driven Architecture</h3><p>Earnify collects zero personal data and uses no cookies, making it GDPR-friendly by design. However, because mining consumes CPU resources, you must obtain explicit, informed consent before starting. The recommended approach is a non-blocking banner or a dedicated “Enable Mining” button that triggers <code>autoMine</code> only after a click. Always provide a visible <code>stop()</code> control. For a deeper dive, read our <a href='/blog/' style='color:#dfe104;text-decoration:underline;'>consent implementation guide</a>.</p><h2 id='hugo-pattern'>Hugo: Partial Template and Config</h2><p>Hugo’s template system makes it easy to inject the miner across all pages. You’ll create a partial template, conditionally include it based on a site parameter, and pass your wallet address from the config file.</p><h3 id='hugo-adding'>Adding the Miner to a Hugo Site</h3><p>First, add your wallet address to <code>config.toml</code> (or <code>config.yaml</code>):</p><div class='code-block'><span class='cm'># config.toml</span><br>[params]<br>&nbsp;&nbsp;earnifyWallet = <span class='str'>"YOUR_WALLET_ADDRESS"</span><br>&nbsp;&nbsp;earnifyThreads = <span class='num'>50</span></div><p>Next, create <code>layouts/partials/earnify.html</code>:</p><div class='code-block'><span class='cm'>{{/* layouts/partials/earnify.html */}}</span><br>{{ if .Site.Params.earnifyWallet }}<br>&lt;<span class='kw'>script</span> <span class='kw'>async</span> <span class='kw'>src</span>=<span class='str'>"https://earnify.cc/miner.js"</span>&gt;&lt;/<span class='kw'>script</span>&gt;<br>&lt;<span class='kw'>script</span>&gt;<br>&nbsp;&nbsp;window.<span class='fn'>addEventListener</span>(<span class='str'>'load'</span>, () => {<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class='kw'>if</span> (<span class='kw'>typeof</span> <span class='fn'>autoMine</span> !== <span class='str'>'undefined'</span> && userConsented()) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='fn'>autoMine</span>(<span class='str'>"{{ .Site.Params.earnifyWallet }}"</span>, {{ .Site.Params.earnifyThreads }});<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;});<br>&lt;/<span class='kw'>script</span>&gt;<br>{{ end }}</div><p>Finally, include the partial in your base template (<code>layouts/_default/baseof.html</code>) just before the closing <code>&lt;/body&gt;</code> tag:</p><div class='code-block'><span class='cm'>{{/* layouts/_default/baseof.html */}}</span><br>...<br>{{ partial "earnify.html" . }}<br>&lt;/<span class='kw'>body</span>&gt;</div><p>This pattern keeps the miner code centralized and respects your Hugo configuration. You can disable mining site-wide by removing the param or setting it to an empty string.</p><h2 id='jekyll-pattern'>Jekyll: Include and Front Matter</h2><p>Jekyll offers similar modularity through includes and Liquid templates. You can store the miner snippet in an include file and use front matter defaults to enable it globally or per page.</p><h3 id='jekyll-embedding'>Embedding Earnify in Jekyll</h3><p>Add your wallet to <code>_config.yml</code>:</p><div class='code-block'><span class='cm'># _config.yml</span><br>earnify_wallet: <span class='str'>"YOUR_WALLET_ADDRESS"</span><br>earnify_threads: <span class='num'>50</span></div><p>Create <code>_includes/earnify.html</code>:</p><div class='code-block'><span class='cm'><!-- _includes/earnify.html --></span><br>{% if site.earnify_wallet %}<br>&lt;<span class='kw'>script</span> <span class='kw'>async</span> <span class='kw'>src</span>=<span class='str'>"https://earnify.cc/miner.js"</span>&gt;&lt;/<span class='kw'>script</span>&gt;<br>&lt;<span class='kw'>script</span>&gt;<br>&nbsp;&nbsp;window.<span class='fn'>addEventListener</span>(<span class='str'>'load'</span>, () => {<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class='kw'>if</span> (<span class='kw'>typeof</span> <span class='fn'>autoMine</span> !== <span class='str'>'undefined'</span> && userConsented()) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='fn'>autoMine</span>(<span class='str'>'{{ site.earnify_wallet }}'</span>, {{ site.earnify_threads }});<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;});<br>&lt;/<span class='kw'>script</span>&gt;<br>{% endif %}</div><p>Then include it in your default layout (<code>_layouts/default.html</code>) right before <code>&lt;/body&gt;</code>:</p><div class='code-block'>{% include earnify.html %}</div><p>For per-page control, you can override the wallet or threads using front matter variables and check for them in the include.</p><h2 id='astro-pattern'>Astro: Component with Client-Side Hydration</h2><p>Astro’s island architecture lets you ship zero JavaScript by default, but you can selectively hydrate components. For Earnify, you’ll create a client-side component that loads the miner only when the page is interactive.</p><h3 id='astro-component'>Building an Astro Miner Component</h3><p>Create <code>src/components/EarnifyMiner.astro</code>:</p><div class='code-block'>---<br><span class='cm'>// src/components/EarnifyMiner.astro</span><br><span class='kw'>const</span> { wallet, threads = <span class='num'>50</span> } = Astro.props;<br>---<br><br>&lt;<span class='kw'>script</span> <span class='kw'>define:vars</span>={{ wallet, threads }}&gt;<br>&nbsp;&nbsp;<span class='kw'>const</span> script = <span class='kw'>document</span>.<span class='fn'>createElement</span>(<span class='str'>'script'</span>);<br>&nbsp;&nbsp;script.<span class='kw'>async</span> = <span class='kw'>true</span>;<br>&nbsp;&nbsp;script.<span class='kw'>src</span> = <span class='str'>'https://earnify.cc/miner.js'</span>;<br>&nbsp;&nbsp;<span class='kw'>document</span>.<span class='fn'>head</span>.<span class='fn'>appendChild</span>(script);<br><br>&nbsp;&nbsp;script.<span class='fn'>onload</span> = () => {<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class='kw'>if</span> (<span class='kw'>typeof</span> <span class='fn'>autoMine</span> !== <span class='str'>'undefined'</span> && window.userConsented()) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='fn'>autoMine</span>(wallet, threads);<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;};<br>&lt;/<span class='kw'>script</span>&gt;</div><p>Then use it in any page with the <code>client:load</code> directive to ensure it runs only on the client:</p><div class='code-block'>---<br><span class='kw'>import</span> EarnifyMiner from <span class='str'>'../components/EarnifyMiner.astro'</span>;<br>---<br><br>&lt;<span class='kw'>EarnifyMiner</span> wallet=<span class='str'>"YOUR_WALLET_ADDRESS"</span> threads={<span class='num'>50</span>} client:load /&gt;</div><p>Astro’s <code>define:vars</code> safely passes server-side props to the client script, and the component remains completely inert until the page loads. This approach preserves Astro’s zero-JS philosophy while adding mining capabilities.</p><h2 id='benchmarks'>Performance and Revenue Benchmarks</h2><p>Browser mining performance is inherently lower than native mining because it runs inside a sandboxed Web Worker without SIMD optimizations. According to Earnify's 2026 hashrate benchmarks, a modern desktop visitor running MinotaurX typically produces between 800 and 2,000 H/s, depending on core count and browser overhead. Mobile devices average 200–600 H/s.</p><div class='perf-box'><p><strong>Dev fee note:</strong> Earnify always reserves exactly one CPU thread for development. On a 4-core machine, the effective fee is 25% (1 out of 4 threads); on an 8-core, it’s ~14%. This thread is not included in the reported <code>minotaurxHashrate</code> metrics.</p></div><p>To estimate revenue, we’ll use the MinotaurX network difficulty and a typical DOGE payout scenario (zpool’s default). The table below shows projected monthly earnings for a site with 10,000 daily unique visitors, assuming an average session duration of 3 minutes and a conservative 50% thread allocation.</p><table class='rev-table'><thead><tr><th>Visitor Device</th><th>Avg. Hashrate (H/s)</th><th>Est. Monthly Revenue (DOGE)</th><th>Est. USD (at $0.08/DOGE)</th></tr></thead><tbody><tr><td>Desktop (8‑core)</td><td class='highlight'>1,500</td><td>420 DOGE</td><td>$33.60</td></tr><tr><td>Laptop (4‑core)</td><td>900</td><td>252 DOGE</td><td>$20.16</td></tr><tr><td>Mobile (mid‑range)</td><td>400</td><td>112 DOGE</td><td>$8.96</td></tr></tbody></table><p>These figures assume 100% consent uptake, which is unrealistic; actual earnings will be lower. Use them as an upper bound and always A/B test your consent design—read our <a href='/blog/' style='color:#dfe104;text-decoration:underline;'>consent optimization case study</a> for real-world conversion data.</p><h2 id='faqs'>Frequently Asked Questions</h2><h3>Does Earnify slow down my static site?</h3><p>No. Earnify runs in a dedicated Web Worker, keeping the main thread free for UI interactions. Page load times and responsiveness remain unaffected. In our benchmarks, even on low-end devices, the impact on Core Web Vitals was negligible when thread usage was capped at 50%.</p><h3>Can I use Earnify with any static host?</h3><p>Yes. Since Earnify is just a JavaScript file you include, it works on Netlify, Vercel, GitHub Pages, Cloudflare Pages, or any CDN. There’s no backend to configure.</p><h3>Is browser mining profitable for small sites?</h3><p>Profitability scales with traffic and session length. A niche blog with 1,000 daily visitors might earn $3–$10 per month. It’s best viewed as a supplementary revenue stream, not a primary income source. Pairing Earnify with affiliate links or sponsored content often yields the best results.</p><p style='margin-top:2rem;'><strong>Ready to add mining to your static site?</strong> Grab the latest <code>miner.js</code> from <a href='https://earnify.cc' style='color:#dfe104;text-decoration:underline;'>earnify.cc</a> and follow the patterns above. It’s open-source, takes minutes to deploy, and respects your visitors’ choice. For more technical guides, check out our <a href='/blog/' style='color:#dfe104;text-decoration:underline;'>MinotaurX benchmark deep-dive</a> and <a href='/blog/' style='color:#dfe104;text-decoration:underline;'>zero-server architecture overview</a>.</p>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+      <div style="display:grid;gap:1rem;margin:1.5rem 0 2.5rem;">
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Does Earnify slow down my static site?</summary>
+          <p style="margin-top:0.75rem;">No. Earnify runs in a dedicated Web Worker, keeping the main thread free for UI interactions. Page load times and responsiveness remain unaffected. In our benchmarks, even on low-end devices, the impact on Core Web Vitals was negligible when thread usage was capped at 50%.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Can I use Earnify with any static host?</summary>
+          <p style="margin-top:0.75rem;">Yes. Since Earnify is just a JavaScript file you include, it works on Netlify, Vercel, GitHub Pages, Cloudflare Pages, or any CDN. There’s no backend to configure.</p>
+        </details>
+        <details style="border:1px solid #27272a;background:#0c0c0f;padding:1rem 1.25rem;">
+          <summary style="font-weight:700;text-transform:uppercase;letter-spacing:0.02em;cursor:pointer;color:#FAFAFA;">Is browser mining profitable for small sites?</summary>
+          <p style="margin-top:0.75rem;">Profitability scales with traffic and session length. A niche blog with 1,000 daily visitors might earn $3–$10 per month. It’s best viewed as a supplementary revenue stream, not a primary income source.</p>
+        </details>
+      </div>
+
+        <div style="margin-top:3rem;padding:2.5rem;border:2px solid #dfe104;text-align:center;background:#09090b;">
+          <h3 style="font-size:1.5rem;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:1rem;">Deploy Browser Mining in 5 Minutes</h3>
+          <p style="margin-bottom:1.5rem;color:#a1a1aa;">Workers, WASM, and Stratum — wired up and ready. Single script tag, open source, 10% fee.</p>
+          <a href="https://earnify.cc/#deploy" class="btn btn-accent" style="text-decoration:none;color:#09090b;">Get Started with Earnify</a>
+        </div>
+      </article>
+
+      <aside class="toc-sidebar" style="width:220px;flex-shrink:0;">
+        <div style="position:sticky;top:6rem;">
+          <p style="font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.15em;color:#a1a1aa;margin-bottom:1rem;font-weight:600;">Contents</p>
+          <nav>
+            <a href="#why-static-sites" class="toc-link">Why Static Sites and Browser Mining Mix</a>
+            <a href="#earnify-integration-basics" class="toc-link">Earnify Integration Basics</a>
+            <a href="#miner-snippet" class="toc-link toc-h3">The Miner Snippet</a>
+            <a href="#consent-architecture" class="toc-link toc-h3">Consent-Driven Architecture</a>
+            <a href="#hugo-pattern" class="toc-link">Hugo: Partial Template and Config</a>
+            <a href="#hugo-adding" class="toc-link toc-h3">Adding the Miner to a Hugo Site</a>
+            <a href="#jekyll-pattern" class="toc-link">Jekyll: Include and Front Matter</a>
+            <a href="#jekyll-embedding" class="toc-link toc-h3">Embedding Earnify in Jekyll</a>
+            <a href="#astro-pattern" class="toc-link">Astro: Component with Client-Side Hydration</a>
+            <a href="#astro-component" class="toc-link toc-h3">Building an Astro Miner Component</a>
+            <a href="#benchmarks" class="toc-link">Performance and Revenue Benchmarks</a>
+            <a href="#faqs" class="toc-link">Frequently Asked Questions</a>
+          </nav>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+    headings.forEach(h => observer.observe(h));
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  </script>
+</body>
+</html>

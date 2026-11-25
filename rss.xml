@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Nov 2026 04:52:39 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 06:51:40 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon-96x96.png</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                                                        <item>
+                                                                                                                                                            <item>
+      <title>Static Site Mining with Earnify: Hugo, Jekyll, Astro</title>
+      <link>https://earnify.cc/blog/static-site-generator-mining-deploy.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/static-site-generator-mining-deploy.html</guid>
+      <pubDate>Wed, 25 Nov 2026 06:51:40 GMT</pubDate>
+      <description><![CDATA[Learn how to integrate Earnify’s browser-based MinotaurX mining into Hugo, Jekyll, and Astro static sites. Get code patterns, performance data, and consent]]></description>
+    </item>
+<item>
       <title>Session-Length Arbitrage: Earn More Per Visitor</title>
       <link>https://earnify.cc/blog/session-length-arbitrage-long-dwell-niches.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/session-length-arbitrage-long-dwell-niches.html</guid>

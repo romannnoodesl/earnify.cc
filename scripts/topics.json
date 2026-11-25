@@ -327,7 +327,7 @@
       "slug": "static-site-generator-mining-deploy",
       "category": "Technical",
       "description": "Copy-paste integration patterns for SSGs — partial templates, environment-keyed wallets, and build-time vs runtime config.",
-      "used": false
+      "used": true
     },
     {
       "title": "Privacy Policy Language for Mining Disclosure: Copy-Paste Templates",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 46
+  "nextTopicIndex": 47
 }
