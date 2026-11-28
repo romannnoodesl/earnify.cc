@@ -334,7 +334,7 @@
       "slug": "privacy-policy-mining-disclosure-templates",
       "category": "Legal",
       "description": "Ready-to-adapt disclosure paragraphs for Terms and Privacy pages — consent-first wording reviewed for GDPR/ePrivacy alignment.",
-      "used": false
+      "used": true
     },
     {
       "title": "Revenue Stacking: Running Mining Alongside Affiliate Links Without UX Clutter",
@@ -421,5 +421,5 @@
       "used": false
     }
   ],
-  "nextTopicIndex": 47
+  "nextTopicIndex": 48
 }

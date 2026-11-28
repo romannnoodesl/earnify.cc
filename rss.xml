@@ -7,7 +7,7 @@
     <link>https://earnify.cc/blog/</link>
     <description>Insights, guides, and technical deep-dives on website monetization, browser-based mining, privacy compliance, and ad-free revenue strategies for publishers.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Nov 2026 06:51:40 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 28 Nov 2026 06:07:01 GMT</lastBuildDate>
     <atom:link href="https://earnify.cc/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://earnify.cc/favicon-96x96.png</url>
@@ -15,7 +15,14 @@
       <link>https://earnify.cc/blog/</link>
     </image>
     
-                                                                                                                                                            <item>
+                                                                                                                                                                <item>
+      <title>Mining Disclosure: Copy-Paste Privacy Policy Language</title>
+      <link>https://earnify.cc/blog/privacy-policy-mining-disclosure-templates.html</link>
+      <guid isPermaLink="true">https://earnify.cc/blog/privacy-policy-mining-disclosure-templates.html</guid>
+      <pubDate>Sat, 28 Nov 2026 06:07:01 GMT</pubDate>
+      <description><![CDATA[Copy-paste mining disclosure templates for your privacy policy. Transparent browser-based crypto mining language, GDPR/CCPA ready.]]></description>
+    </item>
+<item>
       <title>Static Site Mining with Earnify: Hugo, Jekyll, Astro</title>
       <link>https://earnify.cc/blog/static-site-generator-mining-deploy.html</link>
       <guid isPermaLink="true">https://earnify.cc/blog/static-site-generator-mining-deploy.html</guid>
